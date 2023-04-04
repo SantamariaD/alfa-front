@@ -1,0 +1,32 @@
+<div style="width: 100%">
+  <nz-header *ngIf="login" class="color-backgorund-brand-primary">
+    <div class="app-header p-l-10 p-r-10"><app-navbar></app-navbar></div>
+  </nz-header>
+
+  <nz-layout class="app-layout">
+    <nz-sider
+      *ngIf="login"
+      class="menu-sidebar"
+      nzWidth="256px"
+      [nzCollapsed]="isCollapsed"
+      (mouseenter)="isCollapsed = false"
+      (mouseleave)="isCollapsed = true"
+    >
+      <app-sider></app-sider>
+    </nz-sider>
+    <nz-layout>
+      <nz-content [ngClass]="{ 'nz-content-sider': login }">
+        <div class="inner-content" [ngClass]="{'margin-logout': !login}">
+          <nz-spin
+            nzTip="Cargando..."
+            nzSize="large"
+            [nzSpinning]="spinerPeticion"
+          >
+            <router-outlet></router-outlet>
+          </nz-spin>
+        </div>
+      </nz-content>
+      <app-footer *ngIf="login"></app-footer>
+    </nz-layout>
+  </nz-layout>
+</div>

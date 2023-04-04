@@ -1,0 +1,60 @@
+<nz-sider
+  class="menu-sidebar"
+  nzWidth="256px"
+  [nzCollapsed]="isCollapsed"
+  (mouseenter)="isCollapsed = false"
+  (mouseleave)="isCollapsed = true"
+>
+  <div class="contenedor-sider" [ngClass]="{ 'sider-hover': !isCollapsed, 'sider-hover-off': isCollapsed }">
+    <div class="sidebar-logo">
+      <a routerLink="/home">
+        <h1 class="sider-logo">ꓷN</h1>
+      </a>
+    </div>
+    <ul
+      nz-menu
+      nzTheme="dark"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li nz-submenu nzOpen nzTitle="Mi contenedor" nzIcon="hdd">
+        <ul>
+          <li
+            nz-menu-item
+            routerLink="/contenedor/mis-cursos"
+          >
+            <a>Mis cursos</a>
+          </li>
+          <li
+            nz-menu-item
+            routerLink="/contenedor/mis-notas"
+          >
+            <a>Mis notas</a>
+          </li>
+          <li
+            nz-menu-item
+            routerLink="/contenedor/mis-archivos"
+          >
+            <a>Mis archivos</a>
+          </li>
+          <li
+            nz-menu-item
+            routerLink="/contenedor/mis-tareas"
+          >
+            <a>Mis tareas</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Biblioteca" nzIcon="bank">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a>Estante</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a>Recibidor</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nz-sider>

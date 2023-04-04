@@ -1,0 +1,89 @@
+@import "../../../../../styles.scss";
+
+.login {
+  position: relative;
+  background: rgb(0, 21, 41);
+  background: linear-gradient(
+    157deg,
+    rgba(0, 21, 41, 1) 13%,
+    rgba(13, 54, 93, 1) 31%,
+    rgba(159, 170, 179, 1) 75%
+  );
+  min-height: 100vh;
+  color: white;
+}
+
+.login-contenido {
+  position: absolute;
+  width: 20%;
+  margin: 7% 10% 10% 40%;
+  &__logo {
+    width: 130px;
+    height: 130px;
+    border: 4px solid white;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 70px;
+    color: white;
+    border-radius: 50%;
+  }
+}
+
+::placeholder {
+  color: white;
+}
+
+
+.item {
+  border: 2px solid;
+  border-radius: 20px;
+  font-size: 15px;
+  &:hover {
+    background: transparent;
+    border-color: $primary;
+    color: none;
+  }
+}
+
+.input {
+  height: 50px;
+  color: white;
+  &:hover {
+    color: $primary;
+    ::placeholder {
+      color: $primary;
+      transition: 0.2s;
+    }
+  }
+}
+
+.boton-login {
+  font-size: 15px;
+  width: 100%;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background-color: white;
+  border: none;
+  color: $color-dark-1;
+  &:hover {
+    background-color: $primary;
+    transition: 0.4s;
+    color: white;
+  }
+}
+
+.texto-login {
+  color: white;
+  text-align: end;
+  font-size: 15px;
+  &:hover{
+    color: $primary;
+    cursor: pointer;
+  }
+}
+
+input {
+  color: white!important;
+  background: none!important;
+}

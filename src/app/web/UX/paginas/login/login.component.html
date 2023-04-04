@@ -1,0 +1,36 @@
+<div class="login">
+  <div class="login-contenido">
+    <div class="login-contenido__logo">ꓷN</div>
+    <form nz-form [formGroup]="loginForm" (ngSubmit)="enviarForm()">
+      <nz-form-item class="cursor-pointer">
+        <nz-form-control nzErrorTip="Por favor ingrese un usuario!">
+          <nz-input-group nzPrefixIcon="user" class="input item">
+            <input
+              class="cursor-pointer item"
+              formControlName="email"
+              nz-input
+              type="email"
+              placeholder="Usuario"
+            />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="cursor-pointer">
+        <nz-form-control nzErrorTip="Por favor ingrese una contraseña!">
+          <nz-input-group nzPrefixIcon="lock" class="input item">
+            <input
+              class="cursor-pointer item"
+              formControlName="password"
+              nz-input
+              type="password"
+              placeholder="Contraseña"
+            />
+          </nz-input-group>
+          <p class="texto-login">¿Olvidate tu contraseña?</p>
+        </nz-form-control>
+      </nz-form-item>
+      <button class="boton-login" nz-button type="submit" [disabled]="!loginForm.valid">Iniciar sesión</button>
+    </form>
+    <p class="texto-login">Registrarse</p>
+  </div>
+</div>
