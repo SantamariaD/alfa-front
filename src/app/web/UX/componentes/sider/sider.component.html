@@ -5,7 +5,10 @@
   (mouseenter)="isCollapsed = false"
   (mouseleave)="isCollapsed = true"
 >
-  <div class="contenedor-sider" [ngClass]="{ 'sider-hover': !isCollapsed, 'sider-hover-off': isCollapsed }">
+  <div
+    class="contenedor-sider"
+    [ngClass]="{ 'sider-hover': !isCollapsed, 'sider-hover-off': isCollapsed }"
+  >
     <div class="sidebar-logo">
       <a routerLink="/home">
         <h1 class="sider-logo">ꓷN</h1>
@@ -17,44 +20,79 @@
       nzMode="inline"
       [nzInlineCollapsed]="isCollapsed"
     >
-      <li nz-submenu nzOpen nzTitle="Mi contenedor" nzIcon="hdd">
+      <li nz-submenu nzOpen nzTitle="Documentos" nzIcon="file-text">
         <ul>
-          <li
-            nz-menu-item
-            routerLink="/contenedor/mis-cursos"
-          >
-            <a>Mis cursos</a>
+          <li nz-menu-item routerLink="/documentos/administracion">
+            <a>Administración</a>
           </li>
-          <li
-            nz-menu-item
-            routerLink="/contenedor/mis-notas"
-          >
-            <a>Mis notas</a>
+          <li nz-menu-item routerLink="/documentos/contabilidad">
+            <a>Contabilidad</a>
           </li>
-          <li
-            nz-menu-item
-            routerLink="/contenedor/mis-archivos"
-          >
-            <a>Mis archivos</a>
+          <li nz-menu-item routerLink="/documentos/fiscal">
+            <a>Fiscal</a>
           </li>
-          <li
-            nz-menu-item
-            routerLink="/contenedor/mis-tareas"
-          >
-            <a>Mis tareas</a>
+          <li nz-menu-item routerLink="/documentos/sistemas">
+            <a>Sistemas</a>
+          </li>
+          <li nz-menu-item routerLink="/documentos/plantilla">
+            <a>Plantilla</a>
           </li>
         </ul>
       </li>
-      <li nz-submenu nzOpen nzTitle="Biblioteca" nzIcon="bank">
+      <li nz-submenu nzOpen nzTitle="Solicitudes" nzIcon="solution">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Estante</a>
+          <li nz-menu-item routerLink="/solicitudes/cartas">
+            <a>Cartas</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Recibidor</a>
+          <li nz-menu-item routerLink="/solicitudes/vacaciones">
+            <a>Vacaciones</a>
+          </li>
+          <li nz-menu-item routerLink="/solicitudes/viaticos">
+            <a>Viaticos</a>
+          </li>
+          <li nz-menu-item routerLink="/solicitudes/compras">
+            <a>Compras</a>
+          </li>
+          <li nz-menu-item routerLink="/solicitudes/tickets">
+            <a>Tickets</a>
           </li>
         </ul>
       </li>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/calendario"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+          nzSelected
+        >
+          <span nz-icon nzType="calendar"></span>
+          <span>Calendario</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+          nzSelected
+        >
+          <span nz-icon nzType="contacts"></span>
+          <span>Directorio</span>
+        </li>
+      </ul>
     </ul>
   </div>
 </nz-sider>

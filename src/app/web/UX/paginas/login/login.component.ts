@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('id', respuestalogin.payload.usuario.id.toString());
           localStorage.setItem(
             'username',
-            respuestalogin.payload.usuario.username
+            respuestalogin.payload.usuario.name
           );
           localStorage.setItem(
             'imagen',

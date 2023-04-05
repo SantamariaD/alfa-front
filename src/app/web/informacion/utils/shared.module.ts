@@ -34,6 +34,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 
 @NgModule({
   declarations: [],
@@ -72,7 +73,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzBadgeModule,
     NzTabsModule,
     NzUploadModule,
-    NzResultModule 
+    NzResultModule,
+    NzCalendarModule 
   ],
   exports: [
     NzMenuModule,
@@ -108,7 +110,8 @@ import { NzResultModule } from 'ng-zorro-antd/result';
     NzBadgeModule,
     NzTabsModule,
     NzUploadModule,
-    NzResultModule
+    NzResultModule,
+    NzCalendarModule
   ]
 })
 export class SharedModule { }

@@ -14,6 +14,27 @@ const routes: Routes = [
       import('./web/UX/paginas/home/home.module').then((m) => m.HomeModule),
     canActivate: [RutasGuard],
   },
+  {
+    path: 'calendario',
+    loadChildren: () =>
+      import('./web/UX/paginas/calendario/calendario.module').then(
+        (m) => m.CalendarioModule
+      ),
+  },
+  {
+    path: 'documentos',
+    loadChildren: () =>
+      import('./web/UX/paginas/documentos/documentos.module').then(
+        (m) => m.DocumentosModule
+      ),
+  },
+  {
+    path: 'solicitudes',
+    loadChildren: () =>
+      import('./web/UX/paginas/solicitudes/solicitudes.module').then(
+        (m) => m.SolicitudesModule
+      ),
+  },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'registro', component: RegistroComponent },
   {

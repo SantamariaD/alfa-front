@@ -7,7 +7,10 @@ import { SharedModule } from 'src/app/web/informacion/utils/shared.module';
 import { SeccionesCabeceraComponent } from './secciones-cabecera/secciones-cabecera.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FeedbackModule } from './feedback/feedback.module';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
+import { CalendarioRoutingModule } from '../paginas/calendario/calendario-routing.module';
+import { DocumentosRoutingModule } from '../paginas/documentos/documentos-routing.module';
+import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { QuillModule } from 'ngx-quill'
     FeedbackModule,
     FormsModule,
     ReactiveFormsModule,
-    QuillModule ,
+    QuillModule,
+    CalendarioRoutingModule,
+    DocumentosRoutingModule,
+    SolicitudesRoutingModule
   ],
   exports: [
     SiderComponent,
