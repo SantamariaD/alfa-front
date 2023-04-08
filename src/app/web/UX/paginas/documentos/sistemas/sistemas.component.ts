@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sistemas.component.scss']
 })
 export class SistemasComponent implements OnInit {
+  secciones = [
+    { texto: 'Documentos de Sistemas', seleccionado: true },
+  ];
 
   constructor() { }
 

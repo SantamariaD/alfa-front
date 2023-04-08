@@ -11,6 +11,7 @@ import { QuillModule } from 'ngx-quill';
 import { CalendarioRoutingModule } from '../paginas/calendario/calendario-routing.module';
 import { DocumentosRoutingModule } from '../paginas/documentos/documentos-routing.module';
 import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-routing.module';
+import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-rou
     FooterComponent,
     NavbarComponent,
     SeccionesCabeceraComponent,
+    IconoArchivoComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +37,7 @@ import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-rou
     FooterComponent,
     NavbarComponent,
     SeccionesCabeceraComponent,
+    IconoArchivoComponent
   ],
 })
 export class ComponentesModule {}

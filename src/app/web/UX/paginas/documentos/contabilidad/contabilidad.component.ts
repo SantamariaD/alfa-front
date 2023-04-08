@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contabilidad.component.scss']
 })
 export class ContabilidadComponent implements OnInit {
+  secciones = [
+    { texto: 'Documentos de Contabilidad', seleccionado: true },
+  ];
 
   constructor() { }
 

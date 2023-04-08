@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./plantilla.component.scss']
 })
 export class PlantillaComponent implements OnInit {
+  secciones = [
+    { texto: 'Documentos de Plantilla', seleccionado: true },
+  ];
 
   constructor() { }
 

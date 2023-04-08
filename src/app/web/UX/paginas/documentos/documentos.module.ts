@@ -6,6 +6,9 @@ import { FiscalComponent } from './fiscal/fiscal.component';
 import { SistemasComponent } from './sistemas/sistemas.component';
 import { PlantillaComponent } from './plantilla/plantilla.component';
 import { DocumentosRoutingModule } from './documentos-routing.module';
+import { ComponentesModule } from '../../componentes/componentes.module';
+import { SharedModule } from 'src/app/web/informacion/utils/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,7 +22,11 @@ import { DocumentosRoutingModule } from './documentos-routing.module';
   ],
   imports: [
     CommonModule,
-    DocumentosRoutingModule
+    DocumentosRoutingModule,
+    ComponentesModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     AdministracionComponent,

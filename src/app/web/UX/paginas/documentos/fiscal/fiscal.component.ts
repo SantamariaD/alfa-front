@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fiscal.component.scss']
 })
 export class FiscalComponent implements OnInit {
+  secciones = [
+    { texto: 'Documentos Fiscales', seleccionado: true },
+  ];
 
   constructor() { }
 

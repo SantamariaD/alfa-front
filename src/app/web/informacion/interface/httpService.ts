@@ -1,13 +1,16 @@
 export interface HttpClientServiceInterface<T> {
-  code: number;
-  message: string;
+  codigo: number;
+  mensaje: string;
+  error?: any
   payload: T;
 }
 
 export interface HttpClientServiceInterfaceNoPayload {
-  code: number;
-  message: string;
+  codigo: number;
+  mensaje: string;
+  error?: any
 }
+
 
 export interface CargandoPeticionInterface {
   cargandoPeticion: boolean;
