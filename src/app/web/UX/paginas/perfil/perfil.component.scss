@@ -1,0 +1,61 @@
+@import "../../../../../styles.scss";
+
+
+.contenedorPrincipal{
+    position: relative;
+}
+
+.contImagen{
+    position: relative;
+    justify-content: center;
+    
+}
+
+.contImagen img{
+width: 300px;
+height: 300px;
+position: relative;
+}
+
+span[nz-icon]{
+    font-size: 70px;
+    }
+
+.contStatus{
+    position:absolute;
+    bottom:11px;
+    top: 225px;
+    margin-left: 200px;
+}
+
+.item{
+    width: 200px;
+}
+
+.item:hover {
+background-color:#C0C0C0;
+}
+
+
+.contInformacion{
+    text-align:center;
+}
+
+.contInformacion button{
+    margin-left:70px ;
+    top: 50px;
+}
+
+button:hover{
+    background-color: #015D8B;
+}
+
+button{
+    font-size:25px;
+    height: max-content;
+}
+
+button:focus{
+    background-color: #015D8B;
+}
+    
