@@ -1,5 +1,6 @@
-<div class="contenedorPrincipal">
-  <div class="contImagen">
+<div class="contenedor-principal-pagina" nz-row>
+  <div class="contSuper" nz-col nzSpan="8">
+
     <img src="/assets/imagenes/user.png" alt="Perfil" />
     <div class="contStatus">
       <a
@@ -28,8 +29,11 @@
         >
         </span>
       </a>
+    <div class="editNombre m-t-20 m-r-50" nz-row>
+      <a href=""  nz-col nzSpan="3" nzOffset="6"><span nz-icon nzType="camera" nzTheme="outline"></span></a>
+      <h3 class="m-r-5"  nz-col nzSpan="12">Luis Felipe Juarez Ortega</h3><br>
     </div>
-
+    </div>
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul class="m-t-10" nz-menu nzSelectable>
         <li class="item" (click)="cambioStatus('En línea')" nz-menu-item>
@@ -76,15 +80,29 @@
       </ul>
     </nz-dropdown-menu>
   </div>
-  <br />
-  <hr />
-  <br />
-  <div class="contInformacion">
-    <button class="botones" nz-button nzType="primary" nzShape="round">
-      Información General
-    </button>
-    <button nz-button nzType="primary" nzShape="round">Seguridad</button>
-    <button nz-button nzType="primary" nzShape="round">Acciones</button>
-    <button nz-button nzType="primary" nzShape="round">Registros</button>
+  <div nz-col nzSpan="16">
+    <app-domicilio-form ></app-domicilio-form>
+  </div>
+  <div class="contInformacion" nz-col nzSpan="24">
+    <hr>
+    <app-secciones-cabecera
+      [secciones]="secciones"
+      (seleccionadoClick)="seleccionado($event)"
+    ></app-secciones-cabecera>
+
+    <div class="contFormularios">
+
+    </div>
+
+    <nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="The first Modal"
+      (nzOnCancel)="cancelar()"
+      (nzOnOk)="enviar()"
+    >
+      <ng-container *nzModalContent>
+       
+      </ng-container>
+    </nz-modal>
   </div>
 </div>

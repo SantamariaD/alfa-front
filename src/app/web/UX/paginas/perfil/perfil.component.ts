@@ -10,6 +10,15 @@ export class PerfilComponent implements OnInit {
   openModal: boolean = false;
   claseStatus: string = 'check-circle';
   colorStatus: string = '#7FFF00';
+  isVisible:boolean = false;
+  pantalla:string='';
+
+    secciones = [
+    { texto: 'Información General', seleccionado: true },
+    { texto: 'Seguridad', seleccionado: false },
+    { texto: 'Acciones', seleccionado: false }
+  ];
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -43,5 +52,21 @@ export class PerfilComponent implements OnInit {
       default:
         return this.claseStatus, this.colorStatus;
     }
+  }
+
+
+  seleccionado(value:string){
+    if(value === 'Información General' ){
+      this.pantalla = 'info';
+    }
+    
+  }
+
+  cancelar(){
+    this.isVisible = false;
+  }
+
+  enviar(){
+
   }
 }

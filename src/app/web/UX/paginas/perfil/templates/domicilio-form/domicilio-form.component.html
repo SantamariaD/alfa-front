@@ -1,0 +1,68 @@
+<form [formGroup]="usuarioForm" (ngSubmit)="enviarForm()" nz-form nz-row>
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="nombre">Nombres</nz-form-label>
+      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Este campo no puede estar vacio">
+        <input nz-input formControlName="nombre" id="nombre" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="primerApellido">Primer Apellido</nz-form-label>
+      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Este campo no puede estar vacio!">
+        <input nz-input formControlName="primerApellido" id="primerApellido" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="18" [nzXs]="24" nzRequired nzFor="segundoApellido">Segundo Apellido</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Este campo no puede estar vacio!">
+        <input nz-input formControlName="segundoApellido" id="segundoApellido" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="email">Correo Electrónico</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="El campo ingresado no es un correo electrónico">
+        <input nz-input formControlName="email" id="email" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="curp">CURP</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="El campo ingresado no es un correo electrónico">
+        <input nz-input formControlName="curp" id="curp" />
+      </nz-form-control>
+    </nz-form-item>
+    
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="rfc">RFC</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="El campo ingresado no es un correo electrónico">
+        <input nz-input formControlName="rfc" id="rfc" />
+      </nz-form-control>
+    </nz-form-item>
+    <div nz-col nzSpan="5"></div>
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzFor="telefono" nzRequired>Número de teléfono</nz-form-label>
+      <nz-form-control
+        [nzSm]="14"
+        [nzXs]="24"
+        nzErrorTip="Por favor ingresa un número telefonico!"
+      >
+        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+          <ng-template #addOnBeforeTemplate>
+            <nz-select formControlName="telefonoPrefix" class="phone-select">
+              <nz-option nzLabel="+86" nzValue="+86"></nz-option>
+              <nz-option nzLabel="+87" nzValue="+87"></nz-option>
+            </nz-select>
+          </ng-template>
+          <input formControlName="telefono" id="'telefono'" nz-input />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzFor="fechaNac" nzRequired>Fecha de nacimiento</nz-form-label>
+      <nz-form-control    [nzSm]="24" [nzXs]="24" nzErrorTip="Este campo no puede estar vacio!">
+        <nz-date-picker nzSpan="24"  nzPlaceHolder="seleccione una fecha" formControlName="fechaNac" id="'fechaNac'"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    
+  </form>
+  <button nz-button nzType="primary" type="submit" nzShape="round" [disabled]="!usuarioForm.valid">Guardar</button>
+ 
+  

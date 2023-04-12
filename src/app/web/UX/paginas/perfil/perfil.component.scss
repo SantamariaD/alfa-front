@@ -1,31 +1,30 @@
 @import "../../../../../styles.scss";
 
 
-.contenedorPrincipal{
-    position: relative;
-}
 
-.contImagen{
+
+.contSuper{
     position: relative;
+    text-align: center;
     justify-content: center;
+    display: flex;
     
 }
 
-.contImagen img{
-width: 300px;
-height: 300px;
-position: relative;
+ img{
+width: 150px;
+height: 150px;
 }
 
 span[nz-icon]{
-    font-size: 70px;
+    font-size: 35px;
     }
 
 .contStatus{
     position:absolute;
     bottom:11px;
-    top: 225px;
-    margin-left: 200px;
+    top: 110px;
+    margin-left: 110px;
 }
 
 .item{
@@ -46,16 +45,13 @@ background-color:#C0C0C0;
     top: 50px;
 }
 
-button:hover{
-    background-color: #015D8B;
+.editNombre a h3{
+    position: absolute;
+    left: 50px;
 }
 
-button{
-    font-size:25px;
-    height: max-content;
+.editNombre{
+    width: 400px;
+    height: 400px;
 }
 
-button:focus{
-    background-color: #015D8B;
-}
-    
