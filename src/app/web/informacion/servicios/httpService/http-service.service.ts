@@ -15,7 +15,7 @@ import {
 export class HttpclientService {
   constructor(private http: HttpClient, private store: Store) {}
 
-  post<T>(url: string, body?: any, spin = true): Observable<T> {
+  post<T>(url: string, body?: any, headers?: any, spin = true): Observable<T> {
     const urlBase = environment.production
       ? environment.urls.backProduction
       : environment.urls.backDevelop;
@@ -23,6 +23,7 @@ export class HttpclientService {
     return this.http
       .post<T>(urlBase + url, body || {}, {
         headers: {
+          ...headers,
           Authorization: `Bearer ${token}`,
         },
       })

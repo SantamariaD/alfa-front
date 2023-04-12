@@ -9,7 +9,7 @@
 
 <span
   class="icono-archivo"
-  *ngIf="tipoArchivo == 'word'"
+  *ngIf="tipoArchivo == 'docx'"
   nz-icon
   nzType="file-word"
   nzTheme="outline"
@@ -18,7 +18,7 @@
 
 <span
   class="icono-archivo"
-  *ngIf="tipoArchivo == 'excel'"
+  *ngIf="tipoArchivo == 'xlsx'"
   nz-icon
   nzType="file-excel"
   nzTheme="outline"
@@ -36,7 +36,9 @@
 
 <span
   class="icono-archivo"
-  *ngIf="tipoArchivo == 'imagen'"
+  *ngIf="
+    tipoArchivo == 'imagen' || tipoArchivo == 'jpg' || tipoArchivo == 'png'
+  "
   nz-icon
   nzType="file-image"
   nzTheme="outline"
@@ -54,7 +56,7 @@
 
 <span
   class="icono-archivo"
-  *ngIf="tipoArchivo == 'file'"
+  *ngIf="tipoArchivo == 'file' || tipoArchivo == 'sql'"
   nz-icon
   nzType="file"
   nzTheme="outline"
