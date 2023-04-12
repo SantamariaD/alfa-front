@@ -35,6 +35,13 @@ const routes: Routes = [
         (m) => m.SolicitudesModule
       ),
   },
+  {
+    path: 'perfil',
+    loadChildren: () =>
+      import('./web/UX/paginas/perfil/perfil.module').then(
+        (m) => m.PerfilModule
+      ),
+  },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'registro', component: RegistroComponent },
   {

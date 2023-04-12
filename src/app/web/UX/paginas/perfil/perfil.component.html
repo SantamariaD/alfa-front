@@ -1,0 +1,108 @@
+<div class="contenedor-principal-pagina" nz-row>
+  <div class="contSuper" nz-col nzSpan="8">
+
+    <img src="/assets/imagenes/user.png" alt="Perfil" />
+    <div class="contStatus">
+      <a
+        nz-dropdown
+        [nzDropdownMenu]="menu"
+        [nzClickHide]="false"
+        [(nzVisible)]="openModal"
+      >
+        <span
+          *ngIf="openModal === false"
+          class="fijo"
+          nz-icon
+          [nzType]="claseStatus"
+          [nzTheme]="'twotone'"
+          [nzTwotoneColor]="colorStatus"
+          (click)="selccionar()"
+        >
+        </span>
+        <span
+          *ngIf="openModal === true"
+          nz-icon
+          [nzType]="'down-circle'"
+          [nzTheme]="'twotone'"
+          nzTwotoneColor="#001529"
+          (mouseEvent)="selccionar()"
+        >
+        </span>
+      </a>
+    <div class="editNombre m-t-20 m-r-50" nz-row>
+      <a href=""  nz-col nzSpan="3" nzOffset="6"><span nz-icon nzType="camera" nzTheme="outline"></span></a>
+      <h3 class="m-r-5"  nz-col nzSpan="12">Luis Felipe Juarez Ortega</h3><br>
+    </div>
+    </div>
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul class="m-t-10" nz-menu nzSelectable>
+        <li class="item" (click)="cambioStatus('En línea')" nz-menu-item>
+          <i
+            class="m-r-5"
+            nz-icon
+            nzType="check-circle"
+            nzTheme="twotone"
+            nzTwotoneColor="#7FFF00"
+          ></i>
+          En línea
+        </li>
+        <li class="item" (click)="cambioStatus('Ausente')" nz-menu-item>
+          <i
+            class="m-r-5"
+            nz-icon
+            nzType="clock-circle"
+            nzTheme="twotone"
+            nzTwotoneColor="#FFA500"
+          ></i>
+          Ausente
+        </li>
+        <li class="item" (click)="cambioStatus('No molestar')" nz-menu-item>
+          <i
+            class="m-r-5"
+            nz-icon
+            nzType="info-circle"
+            nzTheme="twotone"
+            nzTwotoneColor="#FF0000"
+          ></i>
+          No molestar
+        </li>
+        <hr />
+        <li class="item" nz-menu-item (click)="cambioStatus('Desconectado')">
+          <i
+            class="m-r-5"
+            nz-icon
+            nzType="minus-circle"
+            nzTheme="twotone"
+            nzTwotoneColor="#C0C0C0"
+          ></i
+          >Desconectado
+        </li>
+      </ul>
+    </nz-dropdown-menu>
+  </div>
+  <div nz-col nzSpan="16">
+    <app-domicilio-form ></app-domicilio-form>
+  </div>
+  <div class="contInformacion" nz-col nzSpan="24">
+    <hr>
+    <app-secciones-cabecera
+      [secciones]="secciones"
+      (seleccionadoClick)="seleccionado($event)"
+    ></app-secciones-cabecera>
+
+    <div class="contFormularios">
+
+    </div>
+
+    <nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="The first Modal"
+      (nzOnCancel)="cancelar()"
+      (nzOnOk)="enviar()"
+    >
+      <ng-container *nzModalContent>
+       
+      </ng-container>
+    </nz-modal>
+  </div>
+</div>
