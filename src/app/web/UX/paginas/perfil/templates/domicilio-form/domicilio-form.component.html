@@ -1,68 +1,180 @@
-<form [formGroup]="usuarioForm" (ngSubmit)="enviarForm()" nz-form nz-row>
+<form [formGroup]="usuarioForm" class="form" (ngSubmit)="enviarForm()" nz-form nz-row>
     <nz-form-item nz-col nzSpan="8">
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="nombre">Nombres</nz-form-label>
-      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Este campo no puede estar vacio">
-        <input nz-input formControlName="nombre" id="nombre" />
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="nombres">Nombres</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="nombres" id="nombres" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col nzSpan="8">
-      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="primerApellido">Primer Apellido</nz-form-label>
-      <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Este campo no puede estar vacio!">
-        <input nz-input formControlName="primerApellido" id="primerApellido" />
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="apellidoPaterno">Primer Apellido</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="apellidoPaterno" id="apellidoPaterno" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col nzSpan="8">
-      <nz-form-label [nzSm]="18" [nzXs]="24" nzRequired nzFor="segundoApellido">Segundo Apellido</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Este campo no puede estar vacio!">
-        <input nz-input formControlName="segundoApellido" id="segundoApellido" />
+      <nz-form-label [nzSm]="18" [nzXs]="24" nzRequired nzFor="apellidoMaterno">Segundo Apellido</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="apellidoMaterno" id="apellidoMaterno" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col nzSpan="8">
       <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="email">Correo Electrónico</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="El campo ingresado no es un correo electrónico">
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
         <input nz-input formControlName="email" id="email" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="genero">Género</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecciona un género" formControlName="genero" id="'genero'">
+          <nz-option nzLabel="Hombre" nzValue="hombre"></nz-option>
+      <nz-option nzLabel="Mujer" nzValue="mujer"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="edad">Edad</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="edad" id="edad" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col nzSpan="8">
       <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="curp">CURP</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="El campo ingresado no es un correo electrónico">
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
         <input nz-input formControlName="curp" id="curp" />
       </nz-form-control>
     </nz-form-item>
     
     <nz-form-item nz-col nzSpan="8">
       <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="rfc">RFC</nz-form-label>
-      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="El campo ingresado no es un correo electrónico">
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
         <input nz-input formControlName="rfc" id="rfc" />
       </nz-form-control>
     </nz-form-item>
-    <div nz-col nzSpan="5"></div>
+    
     <nz-form-item nz-col nzSpan="8">
-      <nz-form-label [nzSm]="24" [nzXs]="24" nzFor="telefono" nzRequired>Número de teléfono</nz-form-label>
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzFor="numeroTelefonico" nzRequired>Número de Teléfono</nz-form-label>
       <nz-form-control
-        [nzSm]="14"
+        [nzSm]="20"
         [nzXs]="24"
-        nzErrorTip="Por favor ingresa un número telefonico!"
+        nzErrorTip="El número telefonico debe tener 10 digitos!"
       >
-        <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-          <ng-template #addOnBeforeTemplate>
-            <nz-select formControlName="telefonoPrefix" class="phone-select">
-              <nz-option nzLabel="+86" nzValue="+86"></nz-option>
-              <nz-option nzLabel="+87" nzValue="+87"></nz-option>
-            </nz-select>
-          </ng-template>
-          <input formControlName="telefono" id="'telefono'" nz-input />
-        </nz-input-group>
+          <input [readOnly]="number" minlength="10" maxlength="10" formControlName="numeroTelefonico" id="'numeroTelefonico'" nz-input />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col nzSpan="8">
-      <nz-form-label [nzSm]="24" [nzXs]="24" nzFor="fechaNac" nzRequired>Fecha de nacimiento</nz-form-label>
-      <nz-form-control    [nzSm]="24" [nzXs]="24" nzErrorTip="Este campo no puede estar vacio!">
-        <nz-date-picker nzSpan="24"  nzPlaceHolder="seleccione una fecha" formControlName="fechaNac" id="'fechaNac'"></nz-date-picker>
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzFor="fechaNacimiento" nzRequired>Fecha de Nacimiento</nz-form-label>
+      <nz-form-control    [nzSm]="24" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <nz-date-picker   nzPlaceHolder="seleccione una fecha" formControlName="fechaNacimiento" id="'fechaNacimiento'"></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="nss">Número de Seguridad Social</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo debe de contener 11 dígitos!">
+        <input [maxlength]="11" [minlength]="11" nz-input formControlName="nss" id="nss" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="numeroEmpleado">Número de Empleado</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="numeroEmpleado" id="numeroEmpleado" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="area">Área</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="area" id="area" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="salario">Salario</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="salario" id="salario" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="puesto">Puesto</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="puesto" id="puesto" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="jefeDirecto">Jefe Directo</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="jefeDirecto" id="jefeDirecto" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="regimenFiscal">Regimen Fiscal</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="regimenFiscal" id="regimenFiscal" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="municipio">Municipio</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="municipio" id="municipio" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="colonia">Colonia</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="colonia" id="colonia" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="estado">Estado</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="estado" id="estado" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="numeroExterior">Número Exterior</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="numeroExterior" id="numeroExterior" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="numeroInterior">Número Interior</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="numeroInterior" id="numeroInterior" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="codigoPostal">Código Postal</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="codigoPostal" id="codigoPostal" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item nz-col nzSpan="8">
+      <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="calle">Calle</nz-form-label>
+      <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
+        <input nz-input formControlName="calle" id="calle" />
+      </nz-form-control>
+    </nz-form-item>
+
+    
+    <div class="contenedor-btn" nz-row>
+      <button class="btn-enviar" nz-col nzSpan="8" nz-button nzType="primary" type="submit"  [disabled]="!usuarioForm.valid">Guardar</button>
+      <button class="btn-cancelar" nz-col nzSpan="8" nz-button nzType="primary" type="submit" (click)="cancelar($event)">Cancelar</button>
+    </div>
+      
     
   </form>
-  <button nz-button nzType="primary" type="submit" nzShape="round" [disabled]="!usuarioForm.valid">Guardar</button>
+  
  
   

@@ -1,8 +1,49 @@
-button{
+
+.form{
     position: relative;
-    right: 100px;
-    float: right;
-    top: 20px;
+    left: 2%;
+}
+
+input,nz-date-picker{
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 4px;
+    border-bottom: 2px solid;
+} 
+
+input:focus{
+    
+  box-shadow: none;
+}
+
+nz-select{
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 2px solid;
+}
+
+nz-date-picker {
+    width: 83%;
+  }
+
+.contenedor-btn{
+    position: relative;
+    left: 60%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.btn-enviar{
+    margin-right: 50px;
+    margin-top: 50px;
     width: 100px;
+    
+}
+
+.btn-cancelar{
+    margin-top: 50px;
+    width: 300px;
     
 }

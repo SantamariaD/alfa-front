@@ -1,0 +1,41 @@
+
+<div *ngIf="usuario.numeroTelefonico === undefined">
+    <h1>Completa tu información de usuario para poder visualizarla.</h1><br><br>
+    <nz-empty></nz-empty> 
+</div>
+
+<div *ngIf="usuario.numeroTelefonico !== undefined" class="contenedor-info" nz-row>
+
+    <div nz-col nzSpan="8">
+        <p>
+            <b>Número Telefonico :</b><br />{{ usuario.numeroTelefonico  }}<br />
+            <b>CURP :</b><br />{{ usuario.curp  }}<br />
+            <b>NSS :</b><br />{{ usuario.nss  }}<br />
+            <b>Edad :</b><br />{{ usuario.edad  }}<br />
+            <b>Genero :</b><br />{{ usuario.genero  }}<br />
+            <b>RFC :</b><br />{{ usuario.rfc  }}<br />
+            <b>Fecha de Nacimiento :</b><br />{{ usuario.fechaNacimiento | date: 'dd/mm/yy' }}<br />
+          </p>
+</div>
+<div nz-col nzSpan="8">
+    <p>
+        <b>Área :</b><br />{{ usuario.area  }}<br />
+        <b>Numero de Empleado :</b><br />{{ usuario.numeroEmpleado  }}<br />
+        <b>Salario :</b><br />{{ usuario.salario  }}<br />
+        <b>Puesto :</b><br />{{ usuario.puesto  }}<br />
+        <b>Jefe Directo :</b><br />{{ usuario.jefeDirecto  }}<br />
+        <b>Regimen Fiscal :</b><br />{{ usuario.regimenFiscal  }}<br />
+        <b>Calle :</b><br />{{ usuario.calle  }}<br />
+      </p>
+</div>
+<div nz-col nzSpan="8">
+    <p>
+      <b>Número Exterior:</b><br />{{ usuario.numeroExterior  }}<br />
+      <b>Número Interior :</b><br />{{ usuario.numeroInterior  }}<br />
+      <b>Colonia :</b><br />{{ usuario.colonia  }}<br />
+      <b>Municipio :</b><br />{{ usuario.municipio  }}<br />
+      <b>Estado :</b><br />{{ usuario.estado  }}<br />
+      <b>Código Postal :</b><br />{{ usuario.codigoPostal  }}<br />
+    </p>
+</div>
+</div>

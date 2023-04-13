@@ -24,6 +24,9 @@ export const selectCargandoPeticion = createFeatureSelector<CargandoPeticionInte
 // Login
 export const selectLoginPeticion = createFeatureSelector<UsuarioInterface>('login');
 
+//usuario
+export const selectUsuarioPeticion = createFeatureSelector<UsuarioInterface>('usuario');
+
 
 
 
@@ -37,5 +40,10 @@ export const selectBanderaCargandoPeticion = createSelector(
 export const selectBanderaLoginPeticion = createSelector(
   selectLoginPeticion,
   (state: UsuarioInterface) => state.login
+); 
+
+export const selectInfoUsuarioPeticion = createSelector(
+  selectUsuarioPeticion,
+  (state: UsuarioInterface) => state
 ); 
 
