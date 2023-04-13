@@ -3,7 +3,10 @@
     <app-secciones-cabecera [secciones]="secciones"></app-secciones-cabecera>
   </div>
 
-  <div class="notas__documento" *ngFor="let documento of documentos; let i = index">
+  <div
+    class="notas__documento"
+    *ngFor="let documento of documentos; let i = index"
+  >
     <div class="notas__documento--icono">
       <app-icono-archivo
         [tipoArchivo]="documento.extension || ''"
@@ -30,21 +33,25 @@
       <label [for]="'input-file'+documento.id" class="custom-file-upload"
         >Modificar archivo</label
       > -->
-      <button
-        class="notas__documento--boton--ver"
-        nz-button
-        nzType="primary"
-        nzGhost
-        (click)="verArchivo()"
+      <a
+        [href]="urlDescarga + '/' + documento.uuid + '/' + documento.extension"
+        download="nombre_imagen.png"
+        ><button
+          class="notas__documento--boton--ver"
+          nz-button
+          nzType="primary"
+          nzGhost
+        >
+          Decargar archivo
+        </button></a
       >
-        Ver archivo
-      </button>
+
       <button
         class="notas__documento--boton--eliminar"
         nz-button
         nzType="default"
         nzDanger
-        (click)="eliminarArchivo()"
+        (click)="modalBorrar(documento)"
       >
         Eliminar
       </button>

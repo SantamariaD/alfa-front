@@ -23,8 +23,8 @@ export class HttpclientService {
     return this.http
       .post<T>(urlBase + url, body || {}, {
         headers: {
-          ...headers,
           Authorization: `Bearer ${token}`,
+          ...headers,
         },
       })
 

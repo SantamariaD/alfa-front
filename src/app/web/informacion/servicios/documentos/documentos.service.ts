@@ -40,4 +40,13 @@ export class DocumentosService {
       documento
     );
   }
+
+  // Método para actualizar el archivo de un documento
+  descargarArchivoDocumento(
+    documento: any
+  ) {
+    return this.http.get<Blob>(
+      ENDPOINTS.documentos.descargarDocumento+'/'+documento.uuid+'/ '+documento.extension
+    );
+  }
 }
