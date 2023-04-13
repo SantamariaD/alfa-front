@@ -10,7 +10,7 @@ export class IconoArchivoComponent implements OnInit {
   /**
    * @entrada tipoArchivo: Indica el icono para el tipo de archivo que corresponde
    */
-  @Input()tipoArchivo: TiposArchivo = 'file';
+  @Input()tipoArchivo: string = 'file';
 
   /**
    * @entrada tamanoIcono: Indica el tamaño del icono en px

@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { secciones } from './fixture';
-import { NzModalService } from 'ng-zorro-antd/modal';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { DocumentosBackService } from 'src/app/web/informacion/servicios-back/documentos-back/documentos-back.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/documentos.service';
+import { Documento } from 'src/app/web/informacion/interface/documentos';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
-import { Documentos } from 'src/app/web/informacion/interface/documentos';
-import { DocumentosLogica } from 'src/app/web/informacion/servicios/documentos/DocumentodLogica';
+import { finalize } from 'rxjs';
+import { saveAs } from 'file-saver';
+import { ENDPOINTS } from 'src/app/web/informacion/utils/endpoint';
+import { environment } from 'src/environments/environment';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-administracion',
@@ -24,11 +22,6 @@ export class AdministracionComponent implements OnInit {
   secciones = secciones;
 
   /**
-   * @formulario formArchivo: contiene el archivo
-   */
-  archivoForm: FormGroup;
-
-  /**
    * @variable isVisible: Variable que abre y cierra el modal
    */
   isVisible = false;
@@ -39,44 +32,89 @@ export class AdministracionComponent implements OnInit {
   textoArchivo = '';
 
   /**
+   * @variable documentos: Array de documentos de administración
+   */
+  documentos: Array<Documento> = [];
+
+  /**
+   * @variable mostarDocumentos: Muestro documentos si es que hay
+   */
+  mostarDocumentos = false;
+
+  /**
+   * @variable modificarDocumentoVisible: Muestra el modal para modificar el documento
+   */
+  modificarDocumentoVisible = false;
+
+  /**
+   * @variable urlDescarga: contiene la url de descarga
+   */
+  urlDescarga = '';
+
+  /**
    * @formulario documentoForm: Formulario para guardar un documento nuevo
    */
   documentoForm: FormGroup = new FormGroup({
     nombre_archivo: new FormControl('', [Validators.required]),
     file0: new FormControl('', [Validators.required]),
+    id: new FormControl(0),
   });
 
-  
+  /**
+   * @formulario documentoForm: Formulario para guardar un documento nuevo
+   */
+  documentoActualizarForm: FormGroup = new FormGroup({
+    nombre_archivo: new FormControl(''),
+    file0: new FormControl(''),
+    id: new FormControl(0),
+    id_user: new FormControl(0),
+    uuid: new FormControl(''),
+    extension: new FormControl(''),
+    area: new FormControl(''),
+    posicion: new FormControl(''),
+  });
+
+  /**
+   * @formulario formArchivo: contiene el archivo
+   */
+  archivoForm = new FormData();
+
+  /**
+   * @formulario documentoFormData: Formulario para guardar un documento nuevo formData
+   */
+  documentoFormData = new FormData();
+
   constructor(
-    private logica: DocumentosLogica,
-    private formBuilder: FormBuilder
+    private documentosService: DocumentosService,
+    private modal: NzModalService
   ) {
-    this.archivoForm = this.formBuilder.group({
-      archivo: [''],
-    });
+    const urlBase = environment.production
+      ? environment.urls.backProduction
+      : environment.urls.backDevelop;
+    this.urlDescarga = urlBase + ENDPOINTS.documentos.descargarDocumento;
   }
 
   ngOnInit(): void {
     this.traerDocumentos();
   }
 
-  // Método para modificar el archivo de un documento
-  archivoCargado(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.archivoForm.get('archivo')?.setValue(file);
-      console.log(this.archivoForm.value.archivo);
-    }
-  }
-
   // Método para ver un archivo de un documento
-  verArchivo(): void {
-    console.log('ver archivo');
+  descargarArchivo(documento: Documento): void {
+    this.documentosService
+      .descargarArchivoDocumento(documento)
+      .subscribe((respuestaDocumentos: Blob) => {
+        const url = URL.createObjectURL(respuestaDocumentos);
+        window.open(url);
+      });
   }
 
   // Método para eliminar un archivo de un documento
-  eliminarArchivo(): void {
-    console.log('eliminar archivo');
+  eliminarArchivo(documento: Documento): void {
+    this.documentosService
+      .actualizarArchivoDocumento({ id: documento.id, activo: false })
+      .subscribe((respuestaActualizar: HttpClientServiceInterface<Documento>) =>
+        this.traerDocumentos()
+      );
   }
 
   // Método para abrir un modal
@@ -84,12 +122,43 @@ export class AdministracionComponent implements OnInit {
     this.isVisible = true;
   }
 
+  // Método para abrir un modal
+  cerrarModal(): void {
+    this.isVisible = false;
+    this.modificarDocumentoVisible = false;
+    this.documentoForm.reset();
+    this.documentoActualizarForm.reset();
+    this.textoArchivo = '';
+  }
+
   // Método para guardar un documento
   guardarDocumento(): void {
-    this.isVisible = false;
-    this.documentoForm.reset();
-    this.textoArchivo = '';
-    console.log(this.documentoForm.value);
+    this.documentoForm.patchValue({
+      id: parseInt(localStorage.getItem('id') || ''),
+    });
+    this.documentoFormData.append('file0', this.documentoForm.value.file0);
+    this.documentoFormData.append('area', 'administracion');
+    this.documentoFormData.append(
+      'nombre_archivo',
+      this.documentoForm.value.nombre_archivo
+    );
+    this.documentoFormData.append('id_user', this.documentoForm.value.id);
+
+    this.documentosService
+      .guardarDocumento(this.documentoFormData)
+      .pipe(
+        finalize(() => {
+          this.mostarDocumentos = false;
+          this.isVisible = false;
+          this.documentoForm.reset();
+          this.textoArchivo = '';
+          this.mostarDocumentos = true;
+        })
+      )
+      .subscribe(
+        (respuestaGuardarArchivo: HttpClientServiceInterface<Documento>) =>
+          this.documentos.push(respuestaGuardarArchivo.payload)
+      );
   }
 
   // Método para guardar un archivo en el formulario de agregar documento
@@ -102,13 +171,98 @@ export class AdministracionComponent implements OnInit {
     }
   }
 
-  // Método para traer los documentos
-  private async traerDocumentos() {
-    try {
-      const documentos = await this.logica.traerDocumentos();
-      console.log(documentos);
-    } catch (error) {
-      console.error(error);
+  // Método para guardar un archivo en el formulario de agregar documento para actualizar
+  archivoDocumentoModificar(event: any): void {
+    const archivo = event.target.files[0];
+
+    if (archivo) {
+      this.documentoActualizarForm.patchValue({ file0: archivo });
+      this.textoArchivo = archivo.name;
     }
+  }
+
+  // Método para abrir el modal de modificar documento
+  modalModificarArchivo(documento: Documento, posicion: number): void {
+    this.modificarDocumentoVisible = true;
+    this.documentoActualizarForm.patchValue({
+      id: documento.id,
+      nombre_archivo: documento.nombre_archivo,
+      uuid: documento.uuid,
+      extension: documento.extension,
+      area: documento.area,
+      posicion: posicion,
+    });
+  }
+
+  // Método para modificar el archivo de un documento
+  archivoCargado(documento: any): void {
+    if (documento.file0) this.archivoForm.append('file0', documento.file0);
+
+    this.archivoForm.append('id', documento.id);
+    this.archivoForm.append('id_user', documento.id_user);
+    this.archivoForm.append('nombre_archivo', documento.nombre_archivo);
+    this.archivoForm.append('uuid', documento.uuid);
+    this.archivoForm.append('extension', documento.extension);
+    this.archivoForm.append('area', documento.area);
+
+    this.documentosService
+      .actualizarArchivoDocumento(this.archivoForm)
+      .pipe(
+        finalize(() => {
+          this.archivoForm.forEach((value, key) => {
+            this.archivoForm.delete(key);
+          });
+          this.mostarDocumentos = true;
+          this.modificarDocumentoVisible = false;
+        })
+      )
+      .subscribe(
+        (respuestaActualizar: HttpClientServiceInterface<Documento>) => {
+          console.log(respuestaActualizar);
+          this.mostarDocumentos = false;
+          this.documentos.splice(
+            documento.posicion,
+            1,
+            respuestaActualizar.payload
+          );
+        }
+      );
+  }
+
+  // Metodo para mandar a actualizar un documento
+  actualizarDocumento(): void {
+    this.documentoActualizarForm.patchValue({
+      id_user: parseInt(localStorage.getItem('id') || ''),
+    });
+
+    this.archivoCargado(this.documentoActualizarForm.value);
+  }
+
+  // Modal borrar
+  modalBorrar(documento: Documento): void {
+    this.modal.confirm({
+      nzTitle: '¿Está seguro que desea borrar el documento?',
+      nzContent:
+        '<b style="color: red;"Este documento se ira a la papelera de resiclaje</b>',
+      nzOkText: 'Si',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => this.eliminarArchivo(documento),
+      nzCancelText: 'No',
+    });
+  }
+
+  // Método para traer los documentos
+  private traerDocumentos() {
+    this.documentosService
+      .traerDocumentos()
+      .subscribe(
+        (respuestaDocumentos: HttpClientServiceInterface<Array<Documento>>) => {
+          if (respuestaDocumentos.payload.length > 0)
+            this.mostarDocumentos = true;
+
+          this.documentos = respuestaDocumentos.payload;
+        }
+      );
   }
 }
