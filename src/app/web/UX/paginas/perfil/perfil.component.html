@@ -29,80 +29,89 @@
         >
         </span>
       </a>
-    <div class="editNombre m-t-20 m-r-50" nz-row>
-      <a href=""  nz-col nzSpan="3" nzOffset="6"><span nz-icon nzType="camera" nzTheme="outline"></span></a>
+    <div *ngIf="estado === 'Información general'" class="editNombre m-t-20 m-r-50" nz-row>
+      <a  nz-col nzSpan="3" nzOffset="6"><span nz-icon nzType="camera" nzTheme="outline"></span></a>
       <h3 class="m-r-5"  nz-col nzSpan="12">Luis Felipe Juarez Ortega</h3><br>
+      <a  (click)="editInfo()"><span nz-icon nzType="edit" nzTheme="outline"></span></a>
+    </div>
+    <div *ngIf="estado !== 'Información general'" class="onlyNombre m-t-20 m-r-50" nz-row>
+      <h3 class="m-r-5"  nz-col nzSpan="17">Luis Felipe Juarez Ortega</h3><br>
     </div>
     </div>
-    <nz-dropdown-menu #menu="nzDropdownMenu">
-      <ul class="m-t-10" nz-menu nzSelectable>
-        <li class="item" (click)="cambioStatus('En línea')" nz-menu-item>
-          <i
-            class="m-r-5"
-            nz-icon
-            nzType="check-circle"
-            nzTheme="twotone"
-            nzTwotoneColor="#7FFF00"
-          ></i>
-          En línea
-        </li>
-        <li class="item" (click)="cambioStatus('Ausente')" nz-menu-item>
-          <i
-            class="m-r-5"
-            nz-icon
-            nzType="clock-circle"
-            nzTheme="twotone"
-            nzTwotoneColor="#FFA500"
-          ></i>
-          Ausente
-        </li>
-        <li class="item" (click)="cambioStatus('No molestar')" nz-menu-item>
-          <i
-            class="m-r-5"
-            nz-icon
-            nzType="info-circle"
-            nzTheme="twotone"
-            nzTwotoneColor="#FF0000"
-          ></i>
-          No molestar
-        </li>
-        <hr />
-        <li class="item" nz-menu-item (click)="cambioStatus('Desconectado')">
-          <i
-            class="m-r-5"
-            nz-icon
-            nzType="minus-circle"
-            nzTheme="twotone"
-            nzTwotoneColor="#C0C0C0"
-          ></i
-          >Desconectado
-        </li>
-      </ul>
-    </nz-dropdown-menu>
   </div>
-  <div nz-col nzSpan="16">
-    <app-domicilio-form ></app-domicilio-form>
+  <div class="incono-edit" nz-col nzSpan="16">
+    <app-info-usuario ></app-info-usuario>
+    
   </div>
-  <div class="contInformacion" nz-col nzSpan="24">
+  <div class="contInferior" nz-col nzSpan="24">
     <hr>
     <app-secciones-cabecera
       [secciones]="secciones"
       (seleccionadoClick)="seleccionado($event)"
     ></app-secciones-cabecera>
-
-    <div class="contFormularios">
-
-    </div>
-
-    <nz-modal
-      [(nzVisible)]="isVisible"
-      nzTitle="The first Modal"
-      (nzOnCancel)="cancelar()"
-      (nzOnOk)="enviar()"
-    >
-      <ng-container *nzModalContent>
-       
-      </ng-container>
-    </nz-modal>
+    
+  </div>
+  <div nz-col nzSpan="24">
+    <app-usuario-form *ngIf="estado === 'seguridad'"></app-usuario-form>
+    <nz-empty *ngIf="estado === 'acciones'"></nz-empty> 
   </div>
 </div>
+
+<nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="Editar Información"
+      (nzOnCancel)="cancelar()"
+      nzWidth="80%"
+      [nzBodyStyle]="{ 'height': '900px' }"
+      [nzStyle]="{ 'top': '5%'}"
+    >
+      <ng-container *nzModalContent class="contenedor-form-info">
+        <app-domicilio-form (setCancelar)="recibeCancelar($event)"></app-domicilio-form>
+      </ng-container>
+    </nz-modal>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul class="m-t-10" nz-menu nzSelectable>
+    <li class="item" (click)="cambioStatus('En línea')" nz-menu-item>
+      <i
+        class="m-r-5"
+        nz-icon
+        nzType="check-circle"
+        nzTheme="twotone"
+        nzTwotoneColor="#7FFF00"
+      ></i>
+      En línea
+    </li>
+    <li class="item" (click)="cambioStatus('Ausente')" nz-menu-item>
+      <i
+        class="m-r-5"
+        nz-icon
+        nzType="clock-circle"
+        nzTheme="twotone"
+        nzTwotoneColor="#FFA500"
+      ></i>
+      Ausente
+    </li>
+    <li class="item" (click)="cambioStatus('No molestar')" nz-menu-item>
+      <i
+        class="m-r-5"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="twotone"
+        nzTwotoneColor="#FF0000"
+      ></i>
+      No molestar
+    </li>
+    <hr />
+    <li class="item" nz-menu-item (click)="cambioStatus('Desconectado')">
+      <i
+        class="m-r-5"
+        nz-icon
+        nzType="minus-circle"
+        nzTheme="twotone"
+        nzTwotoneColor="#C0C0C0"
+      ></i
+      >Desconectado
+    </li>
+  </ul>
+</nz-dropdown-menu>

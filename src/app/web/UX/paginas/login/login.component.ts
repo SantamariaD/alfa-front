@@ -34,14 +34,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', respuestalogin.payload.token);
           localStorage.setItem('rol', respuestalogin.payload.usuario.rol);
           localStorage.setItem('id', respuestalogin.payload.usuario.id.toString());
-          localStorage.setItem(
-            'username',
-            respuestalogin.payload.usuario.name
-          );
-          localStorage.setItem(
-            'imagen',
-            respuestalogin.payload.usuario.imagen
-          );
+         
            this.store.dispatch(
             guardarUsuario({ usuario: respuestalogin.payload.usuario })
           );
