@@ -5,6 +5,7 @@ import { RutasGuard } from './web/informacion/guards/rutasGuard/rutas.guard';
 import { LoginComponent } from './web/UX/paginas/login/login.component';
 import { PaginaErrorComponent } from './web/UX/paginas/pagina-error/pagina-error.component';
 import { RegistroComponent } from './web/UX/paginas/registro/registro.component';
+import { CalendarioComponent } from './web/UX/paginas/calendario/calendario.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -16,10 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'calendario',
-    loadChildren: () =>
-      import('./web/UX/paginas/calendario/calendario.module').then(
-        (m) => m.CalendarioModule
-      ),
+    component: CalendarioComponent,
   },
   {
     path: 'documentos',

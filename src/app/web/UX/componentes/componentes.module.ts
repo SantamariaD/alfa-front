@@ -8,7 +8,6 @@ import { SeccionesCabeceraComponent } from './secciones-cabecera/secciones-cabec
 import { NavbarComponent } from './navbar/navbar.component';
 import { FeedbackModule } from './feedback/feedback.module';
 import { QuillModule } from 'ngx-quill';
-import { CalendarioRoutingModule } from '../paginas/calendario/calendario-routing.module';
 import { DocumentosRoutingModule } from '../paginas/documentos/documentos-routing.module';
 import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-routing.module';
 import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
@@ -28,7 +27,6 @@ import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
     FormsModule,
     ReactiveFormsModule,
     QuillModule,
-    CalendarioRoutingModule,
     DocumentosRoutingModule,
     SolicitudesRoutingModule
   ],

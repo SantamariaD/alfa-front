@@ -1,26 +1,14 @@
-<div class="contenedor-principal-pagina">
+<div class="contenedor-principal-pagina calendario">
+  <div class="calendario__secciones-cabecera">
+    <app-secciones-cabecera [secciones]="secciones"></app-secciones-cabecera>
+  </div>
+
   <div class="calendario">
-    <nz-calendar>
+    <nz-calendar (nzSelectChange)="diaSeleccionado($event)">
       <ul *nzDateCell="let date" class="events">
         <ng-container [ngSwitch]="date.getDate()">
           <ng-container *ngSwitchCase="8">
             <li *ngFor="let item of listDataMap.eight">
-              <nz-badge
-                [nzStatus]="item.type"
-                [nzText]="item.content"
-              ></nz-badge>
-            </li>
-          </ng-container>
-          <ng-container *ngSwitchCase="10">
-            <li *ngFor="let item of listDataMap.ten">
-              <nz-badge
-                [nzStatus]="item.type"
-                [nzText]="item.content"
-              ></nz-badge>
-            </li>
-          </ng-container>
-          <ng-container *ngSwitchCase="11">
-            <li *ngFor="let item of listDataMap.eleven">
               <nz-badge
                 [nzStatus]="item.type"
                 [nzText]="item.content"

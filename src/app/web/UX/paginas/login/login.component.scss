@@ -35,8 +35,6 @@
 
 
 .item {
-  border: 2px solid;
-  border-radius: 20px;
   font-size: 15px;
   &:hover {
     background: transparent;
@@ -46,8 +44,11 @@
 }
 
 .input {
+  border: none;
+  border-bottom: 2px solid white;
   height: 50px;
   color: white;
+  background: transparent;
   &:hover {
     color: $primary;
     ::placeholder {
@@ -62,21 +63,15 @@
   width: 100%;
   height: 50px;
   margin: 0 auto;
-  border-radius: 20px;
-  background-color: white;
   border: none;
-  color: $color-dark-1;
-  &:hover {
-    background-color: $primary;
-    transition: 0.4s;
-    color: white;
-  }
+  color: rgb(203, 203, 203);
 }
 
 .texto-login {
   color: white;
   text-align: end;
   font-size: 15px;
+  margin-bottom: 10px;
   &:hover{
     color: $primary;
     cursor: pointer;
