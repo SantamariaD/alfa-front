@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DomicilioFormComponent } from './templates/domicilio-form/domicilio-form.component';
 import { EventEmitter } from 'stream';
+import { InfoUsuarioService } from 'src/app/web/informacion/servicios/infoUsuario/info-usuario.service';
+import { UsuarioInterface } from 'src/app/web/informacion/interface/usuario';
 
 @Component({
   selector: 'app-perfil',
@@ -10,7 +12,7 @@ import { EventEmitter } from 'stream';
 })
 export class PerfilComponent implements OnInit {
 
-  recibeCancelar!:any;
+  usuario!:UsuarioInterface;
 estado:string ='Información general';
   estados: string[] = ['ocupado', 'activo', 'ausente'];
   openModal: boolean = false;
@@ -25,7 +27,7 @@ estado:string ='Información general';
     { texto: 'Acciones', seleccionado: false }
   ];
 
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient, private servicio:InfoUsuarioService) {}
 
   ngOnInit(): void {
     
@@ -79,8 +81,13 @@ estado:string ='Información general';
     this.isVisible = !this.isVisible
   }
 
-  cancelar(){
-    this.isVisible = false;
+  recibeEnviarForm(data:any){
+    this.usuario = data;
+console.log(this.usuario);
+  }
+
+  enviar(){
+this.servicio.guardarInfo(this.usuario);
   }
 
 }

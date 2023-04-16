@@ -174,6 +174,7 @@ export class AdministracionComponent implements OnInit {
   // Método para guardar un archivo en el formulario de agregar documento para actualizar
   archivoDocumentoModificar(event: any): void {
     const archivo = event.target.files[0];
+    console.log(archivo);
 
     if (archivo) {
       this.documentoActualizarForm.patchValue({ file0: archivo });

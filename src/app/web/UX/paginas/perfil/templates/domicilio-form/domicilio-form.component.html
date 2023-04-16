@@ -1,4 +1,4 @@
-<form [formGroup]="usuarioForm" class="form" (ngSubmit)="enviarForm()" nz-form nz-row>
+<form [formGroup]="usuarioForm" class="form" nz-form nz-row>
     <nz-form-item nz-col nzSpan="8">
       <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="nombres">Nombres</nz-form-label>
       <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
@@ -163,15 +163,15 @@
     <nz-form-item nz-col nzSpan="8">
       <nz-form-label [nzSm]="24" [nzXs]="24" nzRequired nzFor="calle">Calle</nz-form-label>
       <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Este campo es obligatorio!">
-        <input nz-input formControlName="calle" id="calle" />
+        <input  nz-input formControlName="calle" id="calle" />
       </nz-form-control>
     </nz-form-item>
 
     
-    <div class="contenedor-btn" nz-row>
+    <!-- <div class="contenedor-btn" nz-row>
       <button class="btn-enviar" nz-col nzSpan="8" nz-button nzType="primary" type="submit"  [disabled]="!usuarioForm.valid">Guardar</button>
       <button class="btn-cancelar" nz-col nzSpan="8" nz-button nzType="primary" type="submit" (click)="cancelar($event)">Cancelar</button>
-    </div>
+    </div> -->
       
     
   </form>

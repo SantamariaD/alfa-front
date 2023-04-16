@@ -21,7 +21,7 @@ usuario:any;
     .subscribe(
       (usuarioResp: UsuarioInterface) => (this.usuario = usuarioResp)
     );
-    console.log(this.usuario.numeroTelefonico)
+    
   }
 
   

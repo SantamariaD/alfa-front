@@ -11,7 +11,7 @@ import { selectInfoUsuarioPeticion } from 'src/app/web/informacion/state';
   styleUrls: ['./domicilio-form.component.scss']
 })
 export class DomicilioFormComponent implements OnInit {
-  @Output() setCancelar = new EventEmitter();
+  @Output() setformInfo = new EventEmitter();
   number!:number;
   usuario:any;
 
@@ -43,7 +43,12 @@ export class DomicilioFormComponent implements OnInit {
   });
   store: any;
 
-  constructor(private servicio:InfoUsuarioService, private http:HttpClient) { }
+  constructor( private http:HttpClient) {
+
+    this.usuarioForm?.valueChanges.subscribe(datosForm =>{
+      this.setformInfo.emit(datosForm)
+    })
+   }
 
   ngOnInit(): void {
     this.store
@@ -51,16 +56,11 @@ export class DomicilioFormComponent implements OnInit {
     .subscribe(
       (usuarioResp: UsuarioInterface) => (this.usuario = usuarioResp)
     );
-
-    this.usuarioForm.value.calle = this.usuario.calle;
+    
   }
 
-  enviarForm(){
-     this.servicio.guardarInfo(this.usuarioForm.value);
-  }
-
-  cancelar(value:any){
-    this.setCancelar = value; 
-  }
+  // cancelar(value:any){
+  //   this.setCancelar = value; 
+  // }
 
 }

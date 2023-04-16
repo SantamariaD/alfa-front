@@ -60,13 +60,14 @@
 <nz-modal
       [(nzVisible)]="isVisible"
       nzTitle="Editar Información"
-      (nzOnCancel)="cancelar()"
+      (nzOnCancel)="editInfo()"
+      (nzOnOk)="enviar()"
       nzWidth="80%"
-      [nzBodyStyle]="{ 'height': '900px' }"
+      [nzBodyStyle]="{ 'height': 'auto' }"
       [nzStyle]="{ 'top': '5%'}"
     >
       <ng-container *nzModalContent class="contenedor-form-info">
-        <app-domicilio-form (setCancelar)="recibeCancelar($event)"></app-domicilio-form>
+        <app-domicilio-form (setformInfo)="recibeEnviarForm($event)"></app-domicilio-form>
       </ng-container>
     </nz-modal>
 

@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { UsuarioInterface, infoUsuarioInterface } from "src/app/web/informacion/interface/usuario";
-import { guardarUsuario } from "./usuario.action";
+import { guardarUsuario,borraUsuario } from "./usuario.action";
+import { state } from "@angular/animations";
 
 
 const estadoInicial: UsuarioInterface = {
@@ -22,6 +23,12 @@ const usuarioReducer = createReducer(
             
         };
     }),
+    // on(borraUsuario, (state , {}) =>{
+    //     return {
+    //         ...state,
+    //         {}
+    //     }
+    // })
 )
 
 export function reducer(state: UsuarioInterface | undefined, action: Action): UsuarioInterface {

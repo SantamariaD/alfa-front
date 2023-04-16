@@ -1,10 +1,10 @@
 
-<div *ngIf="usuario.numeroTelefonico === undefined">
+<div class="sinInformacion" *ngIf="usuario.id === 0">
     <h1>Completa tu información de usuario para poder visualizarla.</h1><br><br>
     <nz-empty></nz-empty> 
 </div>
 
-<div *ngIf="usuario.numeroTelefonico !== undefined" class="contenedor-info" nz-row>
+<div *ngIf="usuario.id !== 0" class="contenedor-info" nz-row>
 
     <div nz-col nzSpan="8">
         <p>
