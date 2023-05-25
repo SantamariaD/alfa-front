@@ -4,8 +4,8 @@ import { RutasGuard } from 'src/app/web/informacion/guards/rutasGuard/rutas.guar
 import { AdministracionComponent } from './administracion/administracion.component';
 import { ContabilidadComponent } from './contabilidad/contabilidad.component';
 import { FiscalComponent } from './fiscal/fiscal.component';
-import { PlantillaComponent } from './plantilla/plantilla.component';
 import { SistemasComponent } from './sistemas/sistemas.component';
+import { EmpleadosComponent } from './empleados/empleados.component';
 
 
 const routes: Routes = [
@@ -33,8 +33,8 @@ const routes: Routes = [
         canActivate: [RutasGuard],
       },
       {
-        path: 'plantilla',
-        component: PlantillaComponent,
+        path: 'empleados',
+        component: EmpleadosComponent,
         canActivate: [RutasGuard],
       },
     ],
