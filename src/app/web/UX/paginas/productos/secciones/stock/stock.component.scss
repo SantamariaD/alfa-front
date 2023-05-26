@@ -1,0 +1,27 @@
+@import "../../../../../../../styles.scss";
+
+.productos {
+  width: 90%;
+  margin: 20px auto;
+  &__descripcion {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    margin-bottom: 15px;
+    &--info-stock {
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid black;
+      &--llave {
+        background: $color-brand-primary;
+        color: white;
+        padding: 10px;
+        width: 250px;
+      }
+      &--valor {
+        width: 250px;
+        margin: auto; text-align: center;
+      }
+    }
+  }
+}

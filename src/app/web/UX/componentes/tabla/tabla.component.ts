@@ -12,227 +12,13 @@ export class TablaComponent implements OnInit {
    * @Input columnasTabla: Array que contiene las columnas de la tabla.
    * Con el parametro "busqueda" en true se pone un filtrador en dicha columna
    */
-  @Input() columnasTabla: Array<ColumnaTabla> = [
-    {
-      columna: 'nombre',
-      busqueda: true,
-    },
-    {
-      columna: 'edad',
-      busqueda: true,
-    },
-    {
-      columna: 'sexo',
-      busqueda: true,
-    },
-  ];
+  @Input() columnasTabla: Array<ColumnaTabla> = [];
 
   /**
    * @Input filasTabla: Array que contiene las filas de la tabla que deben ir
    * en orden con respecto a las columnas
    */
-  @Input() filasTabla: readonly any[] = [
-    {
-      nombre: 'diego',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'fgdf',
-      edad: '15',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'bgfsdf b',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diegfbsfgo',
-      edad: '25',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'bfgb',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dibfdbego',
-      edad: '45',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diegfbfdbo',
-      edad: '26',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diebvfadbgo',
-      edad: '26',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diegsayjsrtjso',
-      edad: '25',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'ditjtjtrego',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dijstrkmego',
-      edad: '32',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dijstrjego',
-      edad: '32',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'ntrgn',
-      edad: '30',
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dieytntngo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'nytneyt',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diegonytn',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dientyneytgo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dielktykygo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dieytkgo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dieytksgo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diego',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'fgdf',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'bgfsdf b',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diegfbsfgo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'bfgb',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dibfdbego',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diegfbfdbo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diebvfadbgo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diegsayjsrtjso',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'ditjtjtrego',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dijstrkmego',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dijstrjego',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'ntrgn',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dieytntngo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'nytneyt',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'diegonytn',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dientyneytgo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dielktykygo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dieytkgo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-    {
-      nombre: 'dieytksgo',
-      edad: 20,
-      sexo: 'Masculino',
-    },
-  ];
+  @Input() filasTabla: readonly any[] = [];
 
   /**
    * @Output clickFila: Captura el evento click de una fila devolviendo la info de la fila
@@ -240,10 +26,10 @@ export class TablaComponent implements OnInit {
   @Output() clickFila = new EventEmitter<any>();
 
   /**
-   * @variable filasBusqueda: Copia que contiene las filas de la tabla que deben
+   * @Input filasBusqueda: Copia que contiene las filas de la tabla que deben
    * ir en orden con respecto a las columnas
    */
-  filasBusqueda: readonly any[] = [];
+  @Input() filasBusqueda: readonly any[] = [];
 
   /**
    * @variable currentPage: Pagina actual
@@ -265,10 +51,9 @@ export class TablaComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.filasBusqueda = this.filasTabla;
     this.filasTabla.map((fila) => {
       this.columnasTabla.map(
-        (columna) => (fila[columna.columna] = fila[columna.columna].toString())
+        (columna) => (fila[columna.llave] = fila[columna.llave].toString())
       );
     });
   }

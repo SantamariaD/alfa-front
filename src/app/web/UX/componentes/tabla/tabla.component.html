@@ -1,7 +1,7 @@
 <nz-table [nzData]="paginadorFilasTabla" [nzFrontPagination]="false">
   <thead>
     <tr>
-      <th [nzColumnKey]="columna.columna" *ngFor="let columna of columnasTabla">
+      <th [nzColumnKey]="columna.llave" *ngFor="let columna of columnasTabla">
         <div class="columna">
           <p class="columna__texto">{{ columna.columna }}</p>
           <div
@@ -35,7 +35,7 @@
               <div class="columna__botones">
                 <button
                   class="columna__botones--buscar cursor-pointer"
-                  (click)="buscar(columna.columna)"
+                  (click)="buscar(columna.llave)"
                 >
                   Buscar
                 </button>
@@ -58,7 +58,7 @@
       *ngFor="let fila of paginadorFilasTabla"
       (click)="clickFilaEmit(fila)"
     >
-      <td *ngFor="let columna of columnasTabla">{{ fila[columna.columna] }}</td>
+      <td *ngFor="let columna of columnasTabla">{{ fila[columna.llave] }}</td>
     </tr>
   </tbody>
 </nz-table>

@@ -1,0 +1,36 @@
+<section class="productos">
+  <div class="productos__descripcion">
+    <div class="productos__descripcion--info-stock">
+      <p class="productos__descripcion--info-stock--llave">
+        Total de productos:&nbsp;
+      </p>
+      <p class="productos__descripcion--info-stock--valor">{{totalProductos}}</p>
+    </div>
+    <div class="productos__descripcion--info-stock">
+      <p class="productos__descripcion--info-stock--llave">
+        Valor del inventario:&nbsp;
+      </p>
+      <p class="productos__descripcion--info-stock--valor">${{valorProductos.toFixed(2)}}</p>
+    </div>
+  </div>
+  <div class="productos__descripcion">
+    <div class="productos__descripcion--info-stock">
+      <p class="productos__descripcion--info-stock--llave">
+        Producto más vendido:&nbsp;
+      </p>
+      <p class="productos__descripcion--info-stock--valor">Chamarra</p>
+    </div>
+    <div class="productos__descripcion--info-stock">
+      <p class="productos__descripcion--info-stock--llave">
+        Productos agotados:&nbsp;
+      </p>
+      <p class="productos__descripcion--info-stock--valor">Playeras</p>
+    </div>
+  </div>
+  <app-tabla
+    [columnasTabla]="columnasTabla"
+    [filasTabla]="datosTabla"
+    [filasBusqueda]="datosTabla"
+    (clickFila)="clickFila($event)"
+  ></app-tabla>
+</section>
