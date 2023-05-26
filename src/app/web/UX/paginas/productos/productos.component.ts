@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {secciones} from './fixture'
 
 @Component({
   selector: 'app-productos',
