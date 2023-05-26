@@ -1,0 +1,40 @@
+@import "../../../../../styles.scss";
+
+.columna {
+  display: flex;
+  justify-content: space-between;
+  &__texto {
+    width: 90%;
+  }
+  &__icono {
+    width: 13px;
+  }
+  &__botones {
+    width: 100%;
+    button {
+        border: none;
+        height: 30px;
+        width: 100px;
+        margin-right: 5px;
+        margin-top: 8px;
+    }
+    &--buscar {
+        background-color: $color-brand-primary;
+        color: white;
+    }
+    &--reset {
+        background: rgb(237, 237, 237);
+        color: black;
+    }
+  }
+}
+
+.input-pop {
+  border: none;
+  border-bottom: 1px solid rgb(184, 184, 184);
+}
+
+.paginacion {
+  width: 25%;
+  margin: 10px 0px 5px auto;
+}

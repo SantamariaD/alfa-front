@@ -40,6 +40,13 @@ const routes: Routes = [
         (m) => m.PerfilModule
       ),
   },
+  {
+    path: 'productos',
+    loadChildren: () =>
+      import('./web/UX/paginas/productos/productos.module').then(
+        (m) => m.ProductosModule
+      ),
+  },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'registro', component: RegistroComponent },
   {

@@ -11,6 +11,7 @@ import { QuillModule } from 'ngx-quill';
 import { DocumentosRoutingModule } from '../paginas/documentos/documentos-routing.module';
 import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-routing.module';
 import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
+import { TablaComponent } from './tabla/tabla.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
     NavbarComponent,
     SeccionesCabeceraComponent,
     IconoArchivoComponent,
+    TablaComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
     FooterComponent,
     NavbarComponent,
     SeccionesCabeceraComponent,
-    IconoArchivoComponent
+    IconoArchivoComponent, 
+    TablaComponent
   ],
 })
 export class ComponentesModule {}

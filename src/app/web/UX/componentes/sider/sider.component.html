@@ -70,7 +70,6 @@
           nz-tooltip
           nzTooltipPlacement="right"
           [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
-          
         >
           <span nz-icon nzType="calendar"></span>
           <span>Calendario</span>
@@ -87,10 +86,26 @@
           nz-tooltip
           nzTooltipPlacement="right"
           [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
-          
         >
           <span nz-icon nzType="contacts"></span>
           <span>Directorio</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/productos"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="shop"></span>
+          <span>Productos</span>
         </li>
       </ul>
     </ul>

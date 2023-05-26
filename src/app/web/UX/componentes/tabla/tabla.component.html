@@ -1,0 +1,73 @@
+<nz-table [nzData]="paginadorFilasTabla" [nzFrontPagination]="false">
+  <thead>
+    <tr>
+      <th [nzColumnKey]="columna.columna" *ngFor="let columna of columnasTabla">
+        <div class="columna">
+          <p class="columna__texto">{{ columna.columna }}</p>
+          <div
+            *ngIf="columna.busqueda"
+            nz-popover
+            nzPopoverTitle="Buscar en tabla"
+            nzPopoverTrigger="click"
+            [nzPopoverContent]="contentTemplate"
+          >
+            <span
+              class="columna__icono cursor-pointer"
+              nz-icon
+              nzType="search"
+              nzTheme="outline"
+            ></span>
+            <ng-template #contentTemplate>
+              <form nz-form [formGroup]="tablaForm" [nzLayout]="'inline'">
+                <nz-form-item>
+                  <nz-form-control>
+                    <nz-input-group>
+                      <input
+                        class="input-pop"
+                        formControlName="busqueda"
+                        nz-input
+                        placeholder="Ingresa tu busqueda"
+                      />
+                    </nz-input-group>
+                  </nz-form-control>
+                </nz-form-item>
+              </form>
+              <div class="columna__botones">
+                <button
+                  class="columna__botones--buscar cursor-pointer"
+                  (click)="buscar(columna.columna)"
+                >
+                  Buscar
+                </button>
+                <button
+                  class="columna__botones--reset cursor-pointer"
+                  (click)="reset()"
+                >
+                  Reset
+                </button>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      class="cursor-pointer"
+      *ngFor="let fila of paginadorFilasTabla"
+      (click)="clickFilaEmit(fila)"
+    >
+      <td *ngFor="let columna of columnasTabla">{{ fila[columna.columna] }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<div class="paginacion">
+  <nz-pagination
+    [nzPageIndex]="currentPage"
+    [nzTotal]="filasTabla.length"
+    [nzPageSize]="pageSize"
+    (nzPageIndexChange)="currentPage = $event"
+  ></nz-pagination>
+</div>
