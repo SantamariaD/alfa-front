@@ -1,0 +1,28 @@
+<div class="contenedor-principal" nz-row [nzGutter]="16">
+    <div nz-col class="gutter-row" [nzSpan]="24" [nzXs]="{ span: 24 }" [nzSm]="{ span: 12 }" [nzMd]="{ span: 8 }" [nzLg]="{ span: 6 }" *ngFor="let producto of productos">
+      <nz-card style="width:300px;" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+        <div class="contenedor-detalles">
+          <h2>{{producto.nombre}}</h2>
+          <p class="price">Precio: {{ producto.precio }}</p>
+          <p class="category">Categoría: {{ producto.categoria }}</p>
+          <p class="description">{{ producto.descripcion }}</p>
+        </div>
+      </nz-card>
+  
+      <ng-template #coverTemplate>
+        <img alt="example" [src]="producto.imagen" />
+      </ng-template>
+  
+      <ng-template #actionSetting>
+        <span nz-icon nzType="setting"></span>
+      </ng-template>
+  
+      <ng-template #actionEdit>
+        <span nz-icon nzType="edit"></span>
+      </ng-template>
+  
+      <ng-template #actionEllipsis>
+        <span nz-icon nzType="ellipsis"></span>
+      </ng-template>
+    </div>
+  </div>

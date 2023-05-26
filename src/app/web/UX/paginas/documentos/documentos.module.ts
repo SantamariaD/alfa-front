@@ -9,6 +9,7 @@ import { ComponentesModule } from '../../componentes/componentes.module';
 import { SharedModule } from 'src/app/web/informacion/utils/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmpleadosComponent } from './empleados/empleados.component';
+import { DocumentosComponent } from './documentos.component';
 
 
 
@@ -19,6 +20,7 @@ import { EmpleadosComponent } from './empleados/empleados.component';
     FiscalComponent,
     SistemasComponent,
     EmpleadosComponent,
+    DocumentosComponent,
   ],
   imports: [
     CommonModule,

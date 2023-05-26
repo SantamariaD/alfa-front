@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { secciones } from './fixture';
+import { secciones } from '../fixture';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/documentos.service';
 import { Documento } from 'src/app/web/informacion/interface/documentos';
@@ -16,11 +16,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./administracion.component.scss'],
 })
 export class AdministracionComponent implements OnInit {
-  /**
-   * @variable secciones: Contiene la información del encabezado de la sección.
-   */
-  secciones = secciones;
-
+ 
   /**
    * @variable isVisible: Variable que abre y cierra el modal
    */
@@ -265,4 +261,6 @@ export class AdministracionComponent implements OnInit {
         }
       );
   }
+
+ 
 }

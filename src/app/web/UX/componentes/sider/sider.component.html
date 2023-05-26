@@ -20,25 +20,23 @@
       nzMode="inline"
       [nzInlineCollapsed]="isCollapsed"
     >
-      <li nz-submenu nzOpen nzTitle="Documentos" nzIcon="file-text">
-        <ul>
-          <li nz-menu-item routerLink="/documentos/administracion">
-            <a>Administración</a>
-          </li>
-          <li nz-menu-item routerLink="/documentos/contabilidad">
-            <a>Contabilidad</a>
-          </li>
-          <li nz-menu-item routerLink="/documentos/fiscal">
-            <a>Fiscal</a>
-          </li>
-          <li nz-menu-item routerLink="/documentos/sistemas">
-            <a>Sistemas</a>
-          </li>
-          <li nz-menu-item routerLink="/documentos/empleados">
-            <a>Empleados</a>
-          </li>
-        </ul>
-      </li>
+    <ul
+    nz-menu
+    nzMode="inline"
+    nzTheme="dark"
+    [nzInlineCollapsed]="isCollapsed"
+    routerLink="/documentos"
+  >
+    <li
+      nz-menu-item
+      nz-tooltip
+      nzTooltipPlacement="right"
+      [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+    >
+      <span nz-icon nzType="file-text"></span>
+      <span>Documentos</span>
+    </li>
+  </ul>
       <li nz-submenu nzOpen nzTitle="Solicitudes" nzIcon="solution">
         <ul>
           <li nz-menu-item routerLink="/solicitudes/cartas">

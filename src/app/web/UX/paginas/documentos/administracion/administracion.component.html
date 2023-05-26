@@ -1,75 +1,74 @@
-<div class="contenedor-principal-pagina notas">
-  <div class="notas__secciones-cabecera">
-    <app-secciones-cabecera [secciones]="secciones"></app-secciones-cabecera>
-  </div>
 
+<div>
   <div
-    class="notas__documento"
-    *ngFor="let documento of documentos; let i = index"
-  >
-    <div class="notas__documento--icono">
-      <app-icono-archivo
-        [tipoArchivo]="documento.extension || ''"
-        tamanoIcono="30"
-      ></app-icono-archivo>
-      {{ documento.nombre_archivo }}
-    </div>
-    <div class="notas__documento--boton">
-      <button
+  class="notas__documento"
+  *ngFor="let documento of documentos; let i = index"
+>
+  <div class="notas__documento--icono">
+    <app-icono-archivo
+      [tipoArchivo]="documento.extension || ''"
+      tamanoIcono="30"
+    ></app-icono-archivo>
+    {{ documento.nombre_archivo }}
+  </div>
+  <div class="notas__documento--boton">
+    <button
+      class="notas__documento--boton--ver"
+      nz-button
+      nzType="primary"
+      nzGhost
+      (click)="modalModificarArchivo(documento, i)"
+    >
+      Actualizar documento
+    </button>
+    <!-- <input
+      type="file"
+      [id]="'input-file'+documento.id"
+      (change)="archivoCargado($event, documento, i)"
+      class="input-file"
+    />
+    <label [for]="'input-file'+documento.id" class="custom-file-upload"
+      >Modificar archivo</label
+    > -->
+    <a
+      [href]="urlDescarga + '/' + documento.uuid + '/' + documento.extension"
+      download="nombre_imagen.png"
+      ><button
         class="notas__documento--boton--ver"
         nz-button
         nzType="primary"
         nzGhost
-        (click)="modalModificarArchivo(documento, i)"
       >
-        Actualizar documento
-      </button>
-      <!-- <input
-        type="file"
-        [id]="'input-file'+documento.id"
-        (change)="archivoCargado($event, documento, i)"
-        class="input-file"
-      />
-      <label [for]="'input-file'+documento.id" class="custom-file-upload"
-        >Modificar archivo</label
-      > -->
-      <a
-        [href]="urlDescarga + '/' + documento.uuid + '/' + documento.extension"
-        download="nombre_imagen.png"
-        ><button
-          class="notas__documento--boton--ver"
-          nz-button
-          nzType="primary"
-          nzGhost
-        >
-          Decargar archivo
-        </button></a
-      >
-
-      <button
-        class="notas__documento--boton--eliminar"
-        nz-button
-        nzType="default"
-        nzDanger
-        (click)="modalBorrar(documento)"
-      >
-        Eliminar
-      </button>
-    </div>
-  </div>
-
-  <div class="notas__boton-agregar" (click)="showModal()">
-    <button
-      class="notas__boton-agregar--boton"
-      nz-button
-      nzType="primary"
-      nzGhost
+        Decargar archivo
+      </button></a
     >
-      Agregar documento
+
+    <button
+      class="notas__documento--boton--eliminar"
+      nz-button
+      nzType="default"
+      nzDanger
+      (click)="modalBorrar(documento)"
+    >
+      Eliminar
     </button>
   </div>
+
+</div>
+ 
+<div class="notas__boton-agregar" (click)="showModal()">
+  <button
+    class="notas__boton-agregar--boton"
+    nz-button
+    nzType="primary"
+    nzGhost
+  >
+    Agregar documento
+  </button>
+</div>
 </div>
 
+ 
 <nz-modal
   [nzClosable]="false"
   [nzMaskClosable]="false"
