@@ -4,11 +4,12 @@
   </header>
 <div  class="procutos__contenido">
   <div *ngIf="cabecera === 'Lista de productos'" class="procutos__contenido--tabla">
-    <app-tabla></app-tabla>
+    <app-tabla (clickFila)="traerFila($event)"></app-tabla>
   </div>
-
-  <div *ngIf="cabecera === 'vista de tarjetas'" class="procutos__contenido--tabla">
-    <app-tarjetas></app-tarjetas>
+  <div class="modal" id="ModalProducto">
+    <div class="modal-content">
+      <app-tarjetas [producto]="producto" ></app-tarjetas>
+    </div>
   </div>
 </div>
 
