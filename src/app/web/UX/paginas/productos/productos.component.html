@@ -1,6 +1,9 @@
 <section class="contenedor-principal-pagina productos">
   <header class="productos__secciones-cabecera">
-    <app-secciones-cabecera [secciones]="secciones" (seleccionadoClick)="seleccionarCabecera($event)"></app-secciones-cabecera>
+    <app-secciones-cabecera
+      [secciones]="secciones"
+      (seleccionadoClick)="selectSeccion($event)"
+    ></app-secciones-cabecera>
   </header>
 <div  class="procutos__contenido">
   <div *ngIf="cabecera === 'Lista de productos'" class="procutos__contenido--tabla">
@@ -13,4 +16,36 @@
   </div>
 </div>
 
+  <div class="procutos__contenido">
+    <div
+      class="procutos__contenido--seccion"
+      *ngIf="seccion == 'Gestión de productos'"
+    >
+      <app-stock></app-stock>
+    </div>
+    <div
+      class="procutos__contenido--seccion"
+      *ngIf="seccion == 'Gestión de proveedores'"
+    >
+      <app-proveedores></app-proveedores>
+    </div>
+    <div
+      class="procutos__contenido--seccion"
+      *ngIf="seccion == 'Gestión de compras'"
+    >
+      <app-compras></app-compras>
+    </div>
+    <div
+      class="procutos__contenido--seccion"
+      *ngIf="seccion == 'Gestión de ventas'"
+    >
+      <app-ventas></app-ventas>
+    </div>
+    <div
+      class="procutos__contenido--seccion"
+      *ngIf="seccion == 'Informes y análisis'"
+    >
+      <app-analisis></app-analisis>
+    </div>
+  </div>
 </section>

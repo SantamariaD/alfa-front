@@ -7,6 +7,11 @@ import { ComponentesModule } from '../../componentes/componentes.module';
 import { TarjetasComponent } from './tarjetas/tarjetas.component';
 import { FormularioProductosComponent } from './formulario-productos/formulario-productos.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { ProveedoresComponent } from './secciones/proveedores/proveedores.component';
+import { ComprasComponent } from './secciones/compras/compras.component';
+import { VentasComponent } from './secciones/ventas/ventas.component';
+import { AnalisisComponent } from './secciones/analisis/analisis.component';
+import { StockComponent } from './secciones/stock/stock.component';
 
 
 
@@ -16,6 +21,11 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     TarjetasComponent,
     FormularioProductosComponent,
     
+    ProveedoresComponent,
+    ComprasComponent,
+    VentasComponent,
+    AnalisisComponent,
+    StockComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +36,12 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   exports: [
-    ProductosComponent
+    ProductosComponent,
+    ProveedoresComponent,
+    ComprasComponent,
+    VentasComponent,
+    AnalisisComponent,
+    StockComponent
   ]
 })
 export class ProductosModule { }
