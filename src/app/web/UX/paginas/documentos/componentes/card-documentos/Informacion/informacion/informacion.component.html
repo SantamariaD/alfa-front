@@ -1,0 +1,71 @@
+<div class="informacion">
+    <h2 class="informacion--titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span>
+      Información del documento
+    </h2>
+    <div class="informacion--imagen">
+        <app-icono-archivo
+        [tipoArchivo]="documento.extension  || ''"
+        tamanoIcono="180"
+      ></app-icono-archivo>
+    </div>
+  
+    <div class="informacion--datos">
+      <h4 class="informacion--datos__nombre">{{ documento.nombre_archivo }}</h4>
+      <div class="informacion--descripcion">
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">Área:</p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{ documento.area }}
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">Fecha de creación:</p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{ documento.created_at | date}}
+          </p>
+        </div>
+      </div>
+      <div class="informacion--descripcion">
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Fecha de modificación:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{ documento.updated_at | date}}
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Páginas:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            
+          </p>
+        </div>
+      </div>
+      <div class="informacion--descripcion">
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Clasificación:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Permisos:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            
+          </p>
+        </div>
+    </div>
+  </div>
+  

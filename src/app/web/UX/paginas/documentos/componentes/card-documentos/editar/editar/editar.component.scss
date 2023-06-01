@@ -1,0 +1,23 @@
+@import "../../../../../../../../../styles.scss";
+
+.contenedor-principal{
+margin: 5%;
+}
+
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 4px 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid $color-brand-primary;
+    font-size: 14px;
+    color: $color-brand-primary;
+    margin: auto 0px auto auto;
+  }
+  
+  .custom-file-upload:hover {
+    transition: 0.4s;
+    background-color: $color-brand-primary;
+    color: white;
+  }

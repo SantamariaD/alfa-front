@@ -1,0 +1,20 @@
+
+
+<app-tabla
+[columnasTabla]="columnasTabla"
+[filasTabla]="documentos"
+[filasBusqueda]="documentos"
+(clickFila)="clickFila($event)"
+></app-tabla>
+ 
+
+
+<app-card-documentos
+*ngIf="seleccionado.area"
+  [mostrarCardDocumento]="mostrarCardDocumento"
+  [documento]="seleccionado"
+  (clickCerrar)="clickCerrarModal($event)"
+>
+</app-card-documentos>
+
+
