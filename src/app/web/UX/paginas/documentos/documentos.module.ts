@@ -7,7 +7,7 @@ import { SharedModule } from 'src/app/web/informacion/utils/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DocumentosComponent } from './documentos.component';
 import { CardDocumentosComponent } from './componentes/card-documentos/card-documentos.component';
-import { EditarComponent } from './componentes/card-documentos/editar/editar/editar.component';
+import { EditarComponent } from './componentes/editar/editar.component';
 import { InformacionComponent } from './componentes/card-documentos/Informacion/informacion/informacion.component';
 import { CrearComponent } from './componentes/crear/crear/crear.component';
 

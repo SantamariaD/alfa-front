@@ -16,7 +16,7 @@
           class="modal__contenido--secciones__editar"
           *ngIf="seccionModal === 'editar'"
         >
-          <app-editar [documento]="documento"></app-editar>
+          <app-editar [documento]="documento" (docActualizados)="ActualizaDatos()"></app-editar>
         </div>
       </div>
       <div class="modal__contenido--footer">

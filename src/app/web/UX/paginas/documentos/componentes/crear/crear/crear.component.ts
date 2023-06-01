@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { finalize } from 'rxjs';
@@ -12,6 +12,11 @@ import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/
   styleUrls: ['./crear.component.scss']
 })
 export class CrearComponent implements OnInit {
+
+  /**
+   * @Output docCreado: Evento cuando se crea nvo documento y actualizar vista
+   */
+  @Output() docCreado= new EventEmitter<any>();;
 
   /**
    * @variable documentos: Array de documentos de administración
@@ -118,6 +123,7 @@ export class CrearComponent implements OnInit {
         (respuestaGuardarArchivo: any) =>
           this.documentos.push(respuestaGuardarArchivo.payload)
       );
+      this.docCreado.emit();
   }
 
   // Método para guardar un archivo en el formulario de agregar documento

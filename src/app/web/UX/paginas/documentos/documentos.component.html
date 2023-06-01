@@ -1,14 +1,5 @@
-
 <div class="contenedor-principal-pagina notas">
-
-    <h1 class="titulo">Tabla de documentos</h1>
-
-    <app-crear class="modal-crear"></app-crear>
-
-
-    <app-administracion ></app-administracion>
-
-
-
-
+  <h1 class="titulo">Tabla de documentos</h1>
+  <app-crear class="modal-crear" (docCreado)="actualizaDatos()"></app-crear>
+  <app-administracion [docCreado]="docCreado"></app-administracion>
 </div>
