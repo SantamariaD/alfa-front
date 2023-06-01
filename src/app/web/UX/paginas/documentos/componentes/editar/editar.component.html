@@ -1,8 +1,8 @@
 
 <div class="contenedor-principal">
     
-        <form nz-form [formGroup]="documentoActualizarForm" class="login-form">
-          <nz-form-item>
+        <form nz-form [formGroup]="documentoActualizarForm" class="login-form" nz-row [nzGutter]="16">
+          <nz-form-item nz-col class="gutter-row" [nzSpan]="10">
             <nz-form-control nzErrorTip="Ingrese el nombre del documento!">
               <nz-input-group nzPrefixIcon="file">
                 <input
@@ -14,7 +14,57 @@
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
-          <nz-form-item>
+
+          <nz-form-item nz-col class="gutter-row" [nzSpan]="10">
+            <nz-form-control nz-col nzErrorTip="Ingrese el área del documento!">
+              <nz-input-group nzPrefixIcon="apartment">
+                <input
+                  type="text"
+                  nz-input
+                  
+                  placeholder="Nombre del área"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item nz-col class="gutter-row" [nzSpan]="10">
+            <nz-form-control nz-col nzErrorTip="Ingrese el número de páginas!">
+              <nz-input-group nzPrefixIcon="block">
+                <input
+                  type="text"
+                  nz-input
+                  
+                  placeholder="Número de páginas"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item nz-col class="gutter-row" [nzSpan]="10">
+            <nz-form-control nz-col nzErrorTip="Ingrese una clasificación!">
+              <nz-input-group nzPrefixIcon="appstore">
+                <input
+                  type="text"
+                  nz-input
+                  
+                  placeholder="Ingrese la clasificación"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item nz-col class="gutter-row" [nzSpan]="21">
+            <nz-form-control nz-col nzErrorTip="Ingrese una clasificación!">
+              <nz-select nzPrefixIcon="appstore" nzAllowClear nzPlaceHolder="Asigna permisos al documento." >
+                <nz-option nzLabel="Windows" nzValue="windows"></nz-option>
+                <nz-option nzLabel="Apple" nzValue="apple"></nz-option>
+                <nz-option nzLabel="Android" nzValue="android"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item  nz-col class="gutter-row" [nzSpan]="21">
             <nz-form-control nzErrorTip="Please input your Password!">
               <nz-input-group nzPrefixIcon="upload">
                 <span class="texto-archivo"></span>
