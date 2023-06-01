@@ -11,6 +11,10 @@ import { ProductosService } from 'src/app/web/informacion/servicios/productos/pr
 })
 export class StockComponent implements OnInit {
   /**
+   * @variable producto: información del producto
+   */
+  producto: Producto = {} as Producto;
+  /**
    * @variable totalProductos: total de todos los productos del stock
    */
   totalProductos = 0;
@@ -25,8 +29,8 @@ export class StockComponent implements OnInit {
    */
   columnasTabla: Array<ColumnaTabla> = [
     { columna: 'Nombre', llave: 'nombre', busqueda: true },
-    { columna: 'Descripción', llave: 'descripcion', busqueda: true },
-    { columna: 'Código', llave: 'codigo', busqueda: true },
+    { columna: 'Descripción', llave: 'descripcion', busqueda: true, class: 'limitar' },
+    { columna: 'Código', llave: 'codigoBarras', busqueda: true },
     { columna: 'Categoría', llave: 'categoria', busqueda: true },
     { columna: 'Proveedor', llave: 'proveedor', busqueda: true },
     { columna: 'Precio de compra', llave: 'precioCompra', busqueda: true },
@@ -41,6 +45,11 @@ export class StockComponent implements OnInit {
    */
   datosTabla: Array<Producto> = [];
 
+  /**
+   * @variable datosTabla: Datos que contiene la tabla
+   */
+  mostrarCardProducto = false;
+
   constructor(private productosService: ProductosService) {}
 
   ngOnInit(): void {
@@ -51,7 +60,15 @@ export class StockComponent implements OnInit {
    * @Metodo Captura el evento cuando se da click a la fila y muestra el producto
    */
   clickFila(producto: Producto): void {
-    console.log(producto);
+    this.producto = producto;
+    this.mostrarCardProducto = true;
+  }
+
+  /**
+   * @Metodo Captura el evento cuando se da click a la fila y muestra el producto
+   */
+  clickCerrarModal(cerrar: boolean): void {
+    this.mostrarCardProducto = cerrar;
   }
 
   /**

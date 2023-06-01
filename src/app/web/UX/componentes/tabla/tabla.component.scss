@@ -5,26 +5,28 @@
   justify-content: space-between;
   &__texto {
     width: 90%;
+    font-size: 12px;
+    font-weight: 700;
   }
   &__icono {
-    width: 13px;
+    width: 10px;
   }
   &__botones {
     width: 100%;
     button {
-        border: none;
-        height: 30px;
-        width: 100px;
-        margin-right: 5px;
-        margin-top: 8px;
+      border: none;
+      height: 30px;
+      width: 100px;
+      margin-right: 5px;
+      margin-top: 8px;
     }
     &--buscar {
-        background-color: $color-brand-primary;
-        color: white;
+      background-color: $color-brand-primary;
+      color: white;
     }
     &--reset {
-        background: rgb(237, 237, 237);
-        color: black;
+      background: rgb(237, 237, 237);
+      color: black;
     }
   }
 }

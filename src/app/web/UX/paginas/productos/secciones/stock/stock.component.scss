@@ -11,10 +11,10 @@
     &--info-stock {
       display: flex;
       justify-content: space-between;
-      border: 1px solid black;
+      border: 1px solid rgb(231, 231, 231);
       &--llave {
-        background: $color-brand-primary;
-        color: white;
+        background: rgb(243, 243, 243);
+        color: black;
         padding: 10px;
         width: 250px;
       }

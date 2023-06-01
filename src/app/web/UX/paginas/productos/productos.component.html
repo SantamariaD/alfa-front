@@ -5,17 +5,6 @@
       (seleccionadoClick)="selectSeccion($event)"
     ></app-secciones-cabecera>
   </header>
-<div  class="procutos__contenido">
-  <div *ngIf="cabecera === 'Lista de productos'" class="procutos__contenido--tabla">
-    <app-tabla (clickFila)="traerFila($event)"></app-tabla>
-  </div>
-  <div class="modal" id="ModalProducto">
-    <div class="modal-content">
-      <app-tarjetas [producto]="producto" ></app-tarjetas>
-    </div>
-  </div>
-</div>
-
   <div class="procutos__contenido">
     <div
       class="procutos__contenido--seccion"

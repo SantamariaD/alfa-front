@@ -58,7 +58,9 @@
       *ngFor="let fila of paginadorFilasTabla"
       (click)="clickFilaEmit(fila)"
     >
-      <td *ngFor="let columna of columnasTabla">{{ fila[columna.llave] }}</td>
+      <td [class]="columna.class" *ngFor="let columna of columnasTabla">
+        {{ fila[columna.llave] }}
+      </td>
     </tr>
   </tbody>
 </nz-table>

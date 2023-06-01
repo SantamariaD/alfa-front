@@ -40,3 +40,9 @@ div {
   font-size: 18px;
 }
 
+.limitar {
+  max-width: 100px!important;
+  overflow: hidden!important;
+  text-overflow: ellipsis!important;
+  white-space: nowrap!important;
+}

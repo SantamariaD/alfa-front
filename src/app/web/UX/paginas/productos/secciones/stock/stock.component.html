@@ -2,27 +2,31 @@
   <div class="productos__descripcion">
     <div class="productos__descripcion--info-stock">
       <p class="productos__descripcion--info-stock--llave">
-        Total de productos:&nbsp;
+        Total de productos:
       </p>
-      <p class="productos__descripcion--info-stock--valor">{{totalProductos}}</p>
+      <p class="productos__descripcion--info-stock--valor">
+        {{ totalProductos }}
+      </p>
     </div>
     <div class="productos__descripcion--info-stock">
       <p class="productos__descripcion--info-stock--llave">
-        Valor del inventario:&nbsp;
+        Valor del inventario:
       </p>
-      <p class="productos__descripcion--info-stock--valor">${{valorProductos.toFixed(2)}}</p>
+      <p class="productos__descripcion--info-stock--valor">
+        ${{ valorProductos.toFixed(2) }}
+      </p>
     </div>
   </div>
   <div class="productos__descripcion">
     <div class="productos__descripcion--info-stock">
       <p class="productos__descripcion--info-stock--llave">
-        Producto más vendido:&nbsp;
+        Producto más vendido:
       </p>
       <p class="productos__descripcion--info-stock--valor">Chamarra</p>
     </div>
     <div class="productos__descripcion--info-stock">
       <p class="productos__descripcion--info-stock--llave">
-        Productos agotados:&nbsp;
+        Productos agotados:
       </p>
       <p class="productos__descripcion--info-stock--valor">Playeras</p>
     </div>
@@ -34,3 +38,10 @@
     (clickFila)="clickFila($event)"
   ></app-tabla>
 </section>
+
+<app-card-producto
+  *ngIf="producto.nombre"
+  [mostrarCardProducto]="mostrarCardProducto"
+  [producto]="producto"
+  (clickCerrar)="clickCerrarModal($event)"
+></app-card-producto>
