@@ -1,17 +1,14 @@
 
 <div class="contenedor-principal-pagina notas">
-<div class="documentos__secciones-cabecera">
-    <app-secciones-cabecera [secciones]="secciones" (seleccionadoClick)="sleccionarCabecera($event)"></app-secciones-cabecera>
-</div>
-<div class="contenedor-paginas ">
-    <app-administracion *ngIf="cabecera === 'Administración'"></app-administracion>
-    <app-contabilidad *ngIf="cabecera === 'Contabilidad'"></app-contabilidad>
-    <app-empleados *ngIf="cabecera === 'Empleados'"></app-empleados>
-    <app-fiscal *ngIf="cabecera === 'Fiscales'"></app-fiscal>
-    <app-sistemas *ngIf="cabecera === 'Sistemas'"></app-sistemas> 
-</div>
 
-<app-crear></app-crear>
+    <h1 class="titulo">Tabla de documentos</h1>
+
+    <app-crear class="modal-crear"></app-crear>
+
+
+    <app-administracion ></app-administracion>
+
+
 
 
 </div>

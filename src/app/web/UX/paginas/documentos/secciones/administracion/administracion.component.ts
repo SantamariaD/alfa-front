@@ -34,6 +34,7 @@ export class AdministracionComponent implements OnInit {
    */
   columnasTabla: Array<ColumnaTabla> = [
     { columna: 'Nombre', llave: 'nombre_archivo', busqueda: true },
+    { columna: 'Área', llave: 'area', busqueda: true },
     { columna: 'Tipo de archivo', llave: 'extension', busqueda: true},
     { columna: 'Fecha de creación', llave: 'created_at', busqueda: true },
     { columna: 'Fecha de Modificación', llave: 'updated_at', busqueda: true },
@@ -67,12 +68,7 @@ export class AdministracionComponent implements OnInit {
         (respuestaDocumentos: HttpClientServiceInterface<Array<Documento>>) => {
           if (respuestaDocumentos.payload.length > 0)
             this.mostarDocumentos = true;
-            respuestaDocumentos.payload.forEach(documento =>{
-              if(documento.area === 'administracion'){
-                 this.documentos.push(documento);
-              }
-            })
-          
+            this.documentos = respuestaDocumentos.payload
         }
       );
   }
