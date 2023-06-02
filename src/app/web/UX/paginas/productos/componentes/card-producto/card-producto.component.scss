@@ -1,4 +1,4 @@
-@import'../../../../../../../styles.scss';
+@import "../../../../../../../styles.scss";
 
 .modal {
   position: fixed;
@@ -17,6 +17,7 @@
     padding: 10px 20px;
     border-radius: 5px;
     position: relative;
+    z-index: 10000;
     &--cerrar {
       position: absolute;
       top: 0px;
@@ -26,39 +27,46 @@
       cursor: pointer;
     }
     &--footer {
-        font-size: 20px;
-        &__contenedor-iconos {
-            width: 160px;
-            margin: 10px auto 0px auto;
-            &--icono{
-                color: rgb(119, 119, 119);
-                margin-right: 20px;
-                cursor: pointer;
-                &:hover {
-                    color: $color-brand-primary;
-                }
-            }
+      font-size: 20px;
+
+      &__contenedor-iconos {
+        width: 160px;
+        margin: 10px auto 0px auto;
+
+        &--icono {
+          color: rgb(119, 119, 119);
+          margin-right: 20px;
+          cursor: pointer;
+
+          &:hover {
+            color: $color-brand-primary;
+          }
         }
+      }
     }
   }
 }
 
-.icono-info {
-    color: #3B71CA;
-}
-
 .no-seleccionada {
-    color: rgb(119, 119, 119);
+  color: rgb(119, 119, 119);
 }
 
 .seleccionada {
-    color: $color-brand-primary;
+  color: $color-brand-primary;
 }
 
 .eliminar {
-    color: #DC4C64;
-    &:hover {
-        color: #ca0727;
-    }
+  color: #dc4c64;
+  &:hover {
+    color: #ca0727;
+  }
 }
 
+.eliminarSelect {
+  color: #ca0727;
+}
+
+.icono-info {
+  color: #3b71ca;
+  font-size: 22px;
+}

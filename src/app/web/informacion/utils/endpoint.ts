@@ -12,5 +12,9 @@ export const ENDPOINTS = {
         guardarProductos: '/producto/guardar-productos',
         actualizarProductos: '/producto/actualizar-productos',
         eliminarProductos: '/producto/eliminar-productos',
-    }
-}
+    },
+
+  categorias: {
+    consultarCategorias: '/categorias/consultar-categorias',
+  },
+};

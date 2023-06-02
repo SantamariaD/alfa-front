@@ -20,8 +20,30 @@
       }
       &--valor {
         width: 250px;
-        margin: auto; text-align: center;
+        margin: auto;
+        text-align: center;
       }
+    }
+  }
+  &__agregar {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    width: 150px;
+    margin: 20px 0px 20px auto;
+    cursor: pointer;
+    &:hover {
+      .productos__agregar--icono,
+      .productos__agregar--texto {
+        color: rgb(179, 179, 179);
+      }
+    }
+    &--icono {
+      margin-right: 10px;
+      padding-top: 5px;
+      font-size: 20px;
+    }
+    &--texto {
+      margin-top: 3px;
     }
   }
 }

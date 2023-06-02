@@ -12,8 +12,9 @@ import { AnalisisComponent } from './secciones/analisis/analisis.component';
 import { StockComponent } from './secciones/stock/stock.component';
 import { CardProductoComponent } from './componentes/card-producto/card-producto.component';
 import { InformacionComponent } from './componentes/card-producto/informacion/informacion.component';
-import { AgregarComponent } from './componentes/card-producto/agregar/agregar.component';
+import { AgregarComponent } from './componentes/agregar/agregar.component';
 import { EditarComponent } from './componentes/card-producto/editar/editar.component';
+import { EliminarComponent } from './componentes/card-producto/eliminar/eliminar.component';
 
 
 
@@ -28,7 +29,8 @@ import { EditarComponent } from './componentes/card-producto/editar/editar.compo
     CardProductoComponent,
     InformacionComponent,
     AgregarComponent,
-    EditarComponent
+    EditarComponent,
+    EliminarComponent
   ],
   imports: [
     CommonModule,

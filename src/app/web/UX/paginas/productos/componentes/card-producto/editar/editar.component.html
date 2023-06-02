@@ -1,1 +1,87 @@
-<p>editar works!</p>
+<div class="editar">
+  <h2 class="editar__titulo">
+    <span
+      class="icono-info"
+      nz-icon
+      nzType="info-circle"
+      nzTheme="outline"
+    ></span
+    >Editar producto
+  </h2>
+  <form class="editar__form" [formGroup]="editarForm">
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Nombre</label>
+        <input nz-input type="text" formControlName="nombre" />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Categoría</label>
+        <select class="select" formControlName="categoria">
+          <option *ngFor="let categoria of categorias" [value]="categoria.id">
+            {{ categoria.categoria }}
+          </option>
+        </select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Cantidad en stock</label>
+        <input nz-input type="text" formControlName="cantidadStock" />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Proveedor</label>
+        <input nz-input type="text" formControlName="proveedor" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Precio de compra</label>
+        <input nz-input type="text" formControlName="precioCompra" />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Precio de venta</label>
+        <input nz-input type="text" formControlName="precioVenta" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Código de barras</label>
+        <input nz-input formControlName="codigoBarras" />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">SKU</label>
+        <input nz-input type="text" formControlName="sku" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Ventas</label>
+        <input nz-input type="text" formControlName="ventas" />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Agotado</label>
+        <select class="select" formControlName="agotado">
+          <option [value]="1">Si</option>
+          <option [value]="0">No</option>
+        </select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form">
+      <nz-form-control>
+        <label class="label">Descripción</label>
+        <textarea rows="2" nz-input formControlName="descripcion"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-alert
+      *ngIf="mostrarNotificacion"
+      nzType="success"
+      nzMessage="Actualización de producto correcta"
+      class="notificacion"
+    ></nz-alert>
+    <div class="editar__form--boton" (click)="actualizarProducto()">
+      <button nz-button nzType="primary" [disabled]="!editarForm.dirty">
+        Actualizar producto
+      </button>
+    </div>
+  </form>
+</div>

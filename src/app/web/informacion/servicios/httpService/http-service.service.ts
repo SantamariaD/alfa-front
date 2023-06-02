@@ -83,4 +83,26 @@ export class HttpclientService {
         })
       );
   }
+
+  delete<T>(url: string, body?: any, spin = true): Observable<T> {
+    const urlBase = environment.production
+      ? environment.urls.backProduction
+      : environment.urls.backDevelop;
+    const token = localStorage.getItem('token') as string;
+    return this.http
+      .delete<T>(urlBase + url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      .pipe(
+        finalize(() => {
+          if (spin) this.store.dispatch(peticionActivaAction());
+          setTimeout(() => {
+            if (spin) this.store.dispatch(peticionInactivaAction());
+          }, 1000);
+        })
+      );
+  }
 }

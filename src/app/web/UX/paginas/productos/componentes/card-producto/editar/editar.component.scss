@@ -1,0 +1,73 @@
+.editar {
+  position: relative;
+  z-index: 1000;
+  &__titulo {
+    border-top: 1px solid #d2d2d2;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+    color: black;
+    margin-left: 8px;
+  }
+  &__form {
+    &--seccion {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 15px;
+    }
+    &--boton {
+        width: 152px;
+        margin: 0px 0px 0px auto;
+    }
+  }
+}
+
+.icono-info {
+  color: #3b71ca;
+  margin-right: 5px;
+  font-size: 22px;
+}
+
+select:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+input,
+select {
+  border: none;
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+.select {
+  background-color: transparent;
+  width: 100%;
+  height: 32px;
+}
+
+input:focus {
+  outline: none;
+  border: none!important;
+}
+
+option {
+  background-color: rgb(255, 255, 255);
+  border: none !important;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.label {
+    color: rgb(168, 168, 168);
+    font-size: 12px;
+}
+
+.ant-form-item {
+    margin-bottom: 10px;
+}
+
+.notificacion {
+    margin: 10px auto;
+}

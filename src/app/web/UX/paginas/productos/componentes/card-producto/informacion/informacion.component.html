@@ -24,7 +24,7 @@
       <div class="informacion--descripcion--info-stock">
         <p class="informacion--descripcion--info-stock--llave">SKU:</p>
         <p class="informacion--descripcion--info-stock--valor">
-          ${{ producto.sku }}
+          {{ producto.sku }}
         </p>
       </div>
     </div>
@@ -34,7 +34,7 @@
           Precio de compra:
         </p>
         <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.precioCompra }}
+          ${{ producto.precioCompra }}
         </p>
       </div>
       <div class="informacion--descripcion--info-stock">
@@ -42,25 +42,7 @@
           Precio de venta:
         </p>
         <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.precioVenta }}
-        </p>
-      </div>
-    </div>
-    <div class="informacion--descripcion">
-      <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">
-          Precio de compra:
-        </p>
-        <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.precioCompra }}
-        </p>
-      </div>
-      <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">
-          Precio de venta:
-        </p>
-        <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.precioVenta }}
+          ${{ producto.precioVenta }}
         </p>
       </div>
     </div>
