@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 import { Documento } from 'src/app/web/informacion/interface/documentos';
@@ -12,7 +12,18 @@ import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/
 })
 export class EditarComponent implements OnInit {
 
+   /**
+   * @variable documento: Objeto de un documento seleccionado
+   */
+
   @Input() documento:Documento = {} as Documento
+
+  /**
+   * @variable docActualizados: Array de documentos de despues de actualizar un documento
+   */
+  
+  @Output() docActualizados = new EventEmitter<Documento[]>();
+
 
   /**
    * @variable documentos: Array de documentos de administración
@@ -53,7 +64,6 @@ export class EditarComponent implements OnInit {
     this.traerDocumentos()
 
   }
-
   
   // Método para guardar un archivo en el formulario de agregar documento para actualizar
   archivoDocumentoModificar(event: any): void {
@@ -104,6 +114,7 @@ export class EditarComponent implements OnInit {
     });
 
     this.archivoCargado(this.documentoActualizarForm.value);
+    this.docActualizados.emit();
   }
 
   // Método para traer los documentos
@@ -112,7 +123,7 @@ export class EditarComponent implements OnInit {
       .traerDocumentos()
       .subscribe(
         (respuestaDocumentos: HttpClientServiceInterface<Array<Documento>>) => {
-          this.documentos = respuestaDocumentos.payload;
+          console.log(respuestaDocumentos);
           
         }
       );

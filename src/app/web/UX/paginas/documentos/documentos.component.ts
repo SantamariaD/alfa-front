@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {secciones} from './fixture'
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-documentos',
@@ -14,9 +15,19 @@ export class DocumentosComponent implements OnInit {
    secciones = secciones;
    cabecera:string ='Administración';
 
+    /**
+   * @variable secciones: Contiene la información del encabezado de la sección.
+   */
+docCreado = '';
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  actualizaDatos(){
+    this.docCreado = 'se ha creado';
+    console.log(this.docCreado);
   }
 
    //Metodo para seleccionar cabeceras
@@ -24,5 +35,7 @@ export class DocumentosComponent implements OnInit {
     this.cabecera = cabecera;
     console.log(this.cabecera)
     }
+
+
 
 }

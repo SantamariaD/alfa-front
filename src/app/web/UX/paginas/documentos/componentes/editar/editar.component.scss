@@ -1,9 +1,12 @@
-@import "../../../../../../../../../styles.scss";
+@import "../../../../../../../styles.scss";
 
 .contenedor-principal{
 margin: 5%;
 }
 
+nz-form-item{
+  margin-left: 5%;
+}
 
 .custom-file-upload {
     display: inline-block;

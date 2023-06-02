@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Documento } from 'src/app/web/informacion/interface/documentos';
 import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/documentos.service';
 import { ENDPOINTS } from 'src/app/web/informacion/utils/endpoint';
@@ -30,6 +30,12 @@ export class CardDocumentosComponent implements OnInit {
  @Output() clickCerrar = new EventEmitter<any>();
 
  /**
+   * @variable docActualizados: Array de documentos de despues de actualizar un documento
+   */
+  
+@Output() docActualizados = new EventEmitter<Documento[]>();
+
+ /**
   * @Variable seccionModal: Controla la sección que se muestra en el modal
   */
  seccionModal = 'informacion'
@@ -59,6 +65,10 @@ this.urlDescarga = urlBase + ENDPOINTS.documentos.descargarDocumento;
       });
   }
 
+  ActualizaDatos(){
+this.docActualizados.emit();
+  }
+
   
   // Método para eliminar un archivo de un documento
   eliminarArchivo(documento: Documento): void {
@@ -79,7 +89,7 @@ this.urlDescarga = urlBase + ENDPOINTS.documentos.descargarDocumento;
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => {this.eliminarArchivo(documento),this.mostrarCardDocumento = true},
+      nzOnOk: () => {this.eliminarArchivo(documento),this.mostrarCardDocumento = true, this.docActualizados.emit()},
       nzOnCancel: () => this.mostrarCardDocumento = true,
     });
   }

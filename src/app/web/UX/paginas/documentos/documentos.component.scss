@@ -3,3 +3,17 @@
       margin-bottom: 50px;
     }
 }
+
+.titulo{
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.modal-crear{
+  position: fixed; /* Establece la posición fija para que se mantenga en su lugar */
+  top: 90%; /* Posiciona el elemento en la mitad de la pantalla verticalmente */
+  left: 93%; /* Posiciona el elemento en la mitad de la pantalla horizontalmente */
+  transform: translate(-50%, -50%); /* Centra el elemento correctamente */
+  z-index: 9999; /* Asegura que el elemento esté encima de todos los demás elementos */
+
+}

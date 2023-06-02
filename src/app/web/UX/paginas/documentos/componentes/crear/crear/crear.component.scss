@@ -1,0 +1,27 @@
+@import "../../../../../../../../styles.scss";
+
+.green-icon {
+    color: rgb(17, 213, 17); /* Aplica el color verde al icono */
+    font-size: 80px; /* Ajusta el tamaño del icono a 24 píxeles */
+  }
+
+  nz-form-item{
+    margin-left: 5%;
+  }
+
+  .custom-file-upload {
+    display: inline-block;
+    padding: 4px 10px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid $color-brand-primary;
+    font-size: 14px;
+    color: $color-brand-primary;
+    margin: auto 0px auto auto;
+  }
+  
+  .custom-file-upload:hover {
+    transition: 0.4s;
+    background-color: $color-brand-primary;
+    color: white;
+  }
