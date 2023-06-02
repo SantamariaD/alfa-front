@@ -17,7 +17,7 @@ export class DocumentosService {
   // Método para traer documentos
   traerDocumentos(): Observable<HttpClientServiceInterface<Documento[]>> {
     return this.http.get<HttpClientServiceInterface<Documento[]>>(
-      ENDPOINTS.documentos.traerDocumentosArea
+      ENDPOINTS.documentos.traerTodosDocumentos
     );
   }
 
