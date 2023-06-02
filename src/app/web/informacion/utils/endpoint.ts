@@ -1,6 +1,7 @@
 export const ENDPOINTS = {
     documentos: {
         traerDocumentosArea: '/documentos/traer-documentos-area/administracion',
+        traerTodosDocumentos: '/documentos/traer-documentos',
         guardarDocumentos: '/documentos/guardar-documento',
         actualizarDocumento: '/documentos/actualizar-documento',
         descargarDocumento: '/documentos/descargar-documento',
