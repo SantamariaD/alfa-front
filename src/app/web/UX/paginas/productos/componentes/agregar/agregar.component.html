@@ -1,1 +1,14 @@
-<p>agregar works!</p>
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="cerrarModal()">&times;</span>
+    <h2 class="modal__contenido--titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span>
+      Agregar producto
+    </h2>
+  </div>
+</div>

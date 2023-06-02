@@ -54,9 +54,14 @@ export class StockComponent implements OnInit {
   datosTabla: Array<Producto> = [];
 
   /**
-   * @variable datosTabla: Datos que contiene la tabla
+   * @variable mostrarCardProducto: Muestra la card del producto
    */
   mostrarCardProducto = false;
+
+  /**
+   * @variable mostrarAgregarProducto: Muestra el modal de agregar producto
+   */
+  mostrarAgregarProducto = false;
 
   /**
    * @variable categorias: contiene las categorias
@@ -90,6 +95,13 @@ export class StockComponent implements OnInit {
   }
 
   /**
+   * @Metodo Captura el evento cuando se da click a la fila y muestra el producto
+   */
+  clickCerrarModalAgregarProducto(cerrar: boolean): void {
+    this.mostrarAgregarProducto = cerrar;
+  }
+
+  /**
    * @Metodo captura el evento de actualizar un producto y consulta todos los productos
    */
   actualizacionProducto(): void {
@@ -103,6 +115,13 @@ export class StockComponent implements OnInit {
     this.mostrarCardProducto = false;
     this.consultarProductos();
     this.message.success(`Se elimino correctamente el producto.`);
+  }
+
+  /**
+   * @Metodo Muestra el modal para agregar un producto
+   */
+  agregarProducto(): void {
+    this.mostrarAgregarProducto = true;
   }
 
   /**

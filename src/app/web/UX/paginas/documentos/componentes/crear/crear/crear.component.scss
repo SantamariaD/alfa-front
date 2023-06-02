@@ -1,8 +1,8 @@
 @import "../../../../../../../../styles.scss";
 
 .green-icon {
-    color: rgb(17, 213, 17); /* Aplica el color verde al icono */
-    font-size: 80px; /* Ajusta el tamaño del icono a 24 píxeles */
+    color: $color-brand-primary; /* Aplica el color verde al icono */
+    font-size: 40px; /* Ajusta el tamaño del icono a 24 píxeles */
   }
 
   nz-form-item{

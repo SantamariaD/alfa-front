@@ -28,7 +28,7 @@
   &__agregar {
     display: grid;
     grid-template-columns: 20% 80%;
-    width: 150px;
+    width: 250px;
     margin: 20px 0px 20px auto;
     cursor: pointer;
     &:hover {
@@ -38,12 +38,13 @@
       }
     }
     &--icono {
-      margin-right: 10px;
+      margin-right: 5px;
       padding-top: 5px;
-      font-size: 20px;
+      font-size: 24px;
     }
     &--texto {
       margin-top: 3px;
+      font-size: 20px;
     }
   }
 }

@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="productos__agregar">
+  <div class="productos__agregar" (click)="agregarProducto()">
     <span
       class="productos__agregar--icono"
       nz-icon
@@ -58,3 +58,8 @@
   (actualizarProductoEmit)="actualizacionProducto()"
   (eliminarProductoEmit)="eliminarProducto()"
 ></app-card-producto>
+
+<app-agregar
+  [mostrarModal]="mostrarAgregarProducto"
+  (clickCerrar)="clickCerrarModalAgregarProducto($event)"
+></app-agregar>
