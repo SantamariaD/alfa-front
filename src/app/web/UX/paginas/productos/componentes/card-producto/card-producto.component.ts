@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Categoria } from 'src/app/web/informacion/interface/categorias';
 import { Producto } from 'src/app/web/informacion/interface/productos';
 
 @Component({
@@ -13,6 +14,11 @@ export class CardProductoComponent implements OnInit {
   @Input() producto: Producto = {} as Producto;
 
   /**
+   * @Input categorias: contiene las categorias
+   */
+  @Input() categorias: Array<Categoria> = [];
+
+  /**
    * @Input mostrarCardProducto: Controla si se muestra o no la card
    */
   @Input() mostrarCardProducto = false;
@@ -23,14 +29,23 @@ export class CardProductoComponent implements OnInit {
   @Output() clickCerrar = new EventEmitter<any>();
 
   /**
+   * @Output actualizarProducto: emite el evento de actualizar producto
+   */
+  @Output() actualizarProductoEmit = new EventEmitter<any>();
+
+  /**
+   * @Output eliminarProducto: emite el evento de eliminar producto
+   */
+  @Output() eliminarProductoEmit = new EventEmitter<any>();
+
+  /**
    * @Variable seccionModal: Controla la sección que se muestra en el modal
    */
   seccionModal = 'informacion'
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.producto)}
+  ngOnInit(): void {}
 
   /**
    * @Metodo cambia a la seccion informacion
@@ -54,9 +69,30 @@ export class CardProductoComponent implements OnInit {
   }
 
   /**
+   * @Metodo cambia a la seccion eliminar
+   */
+  clickEliminar(): void {
+    this.seccionModal = 'eliminar';
+  }
+
+  /**
    * @Metodo cerrar modal
    */
   clickCerrarModal(): void {
     this.clickCerrar.emit(false);
+  }
+  
+  /**
+   * @Metodo captura el evento de actualizar un producto y consulta todos los productos
+   */
+  actualizacionProducto(): void {
+    this.actualizarProductoEmit.emit(true);
+  }
+
+  /**
+   * @Metodo captura el evento de eliminar un producto y consulta todos los productos
+   */
+  eliminarProducto(): void {
+    this.eliminarProductoEmit.emit(true);
   }
 }

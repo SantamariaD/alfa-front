@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Categoria } from 'src/app/web/informacion/interface/categorias';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { Producto } from 'src/app/web/informacion/interface/productos';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
+import { CategoriasService } from 'src/app/web/informacion/servicios/categorias/categorias.service';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 
 @Component({
@@ -29,7 +32,12 @@ export class StockComponent implements OnInit {
    */
   columnasTabla: Array<ColumnaTabla> = [
     { columna: 'Nombre', llave: 'nombre', busqueda: true },
-    { columna: 'Descripción', llave: 'descripcion', busqueda: true, class: 'limitar' },
+    {
+      columna: 'Descripción',
+      llave: 'descripcion',
+      busqueda: true,
+      class: 'limitar',
+    },
     { columna: 'Código', llave: 'codigoBarras', busqueda: true },
     { columna: 'Categoría', llave: 'categoria', busqueda: true },
     { columna: 'Proveedor', llave: 'proveedor', busqueda: true },
@@ -50,10 +58,20 @@ export class StockComponent implements OnInit {
    */
   mostrarCardProducto = false;
 
-  constructor(private productosService: ProductosService) {}
+  /**
+   * @variable categorias: contiene las categorias
+   */
+  categorias: Array<Categoria> = [];
+
+  constructor(
+    private message: NzMessageService,
+    private productosService: ProductosService,
+    private categoriasService: CategoriasService
+  ) {}
 
   ngOnInit(): void {
     this.consultarProductos();
+    this.consultarCategorias();
   }
 
   /**
@@ -69,6 +87,32 @@ export class StockComponent implements OnInit {
    */
   clickCerrarModal(cerrar: boolean): void {
     this.mostrarCardProducto = cerrar;
+  }
+
+  /**
+   * @Metodo captura el evento de actualizar un producto y consulta todos los productos
+   */
+  actualizacionProducto(): void {
+    this.consultarProductos();
+  }
+
+  /**
+   * @Metodo captura el evento de actualizar un producto y consulta todos los productos
+   */
+  eliminarProducto(): void {
+    this.mostrarCardProducto = false;
+    this.consultarProductos();
+    this.message.success(`Se elimino correctamente el producto.`);
+  }
+
+  /**
+   * @Metodo llama a la api para consultar las categorias
+   */
+  private consultarCategorias(): void {
+    this.categoriasService.traerCategorias().subscribe({
+      next: (respuestaCategorias: HttpClientServiceInterface<Categoria[]>) =>
+        (this.categorias = respuestaCategorias.payload),
+    });
   }
 
   /**

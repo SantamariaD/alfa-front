@@ -31,6 +31,16 @@
       <p class="productos__descripcion--info-stock--valor">Playeras</p>
     </div>
   </div>
+
+  <div class="productos__agregar">
+    <span
+      class="productos__agregar--icono"
+      nz-icon
+      nzType="plus-circle"
+      nzTheme="outline"
+    ></span>
+    <p class="productos__agregar--texto">Agregar producto</p>
+  </div>
   <app-tabla
     [columnasTabla]="columnasTabla"
     [filasTabla]="datosTabla"
@@ -43,5 +53,8 @@
   *ngIf="producto.nombre"
   [mostrarCardProducto]="mostrarCardProducto"
   [producto]="producto"
+  [categorias]="categorias"
   (clickCerrar)="clickCerrarModal($event)"
+  (actualizarProductoEmit)="actualizacionProducto()"
+  (eliminarProductoEmit)="eliminarProducto()"
 ></app-card-producto>

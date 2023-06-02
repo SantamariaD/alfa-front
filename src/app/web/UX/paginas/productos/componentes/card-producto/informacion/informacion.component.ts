@@ -15,7 +15,7 @@ export class InformacionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.producto)
+    
   }
 
 }
