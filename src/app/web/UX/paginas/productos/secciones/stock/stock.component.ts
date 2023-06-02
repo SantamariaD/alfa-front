@@ -32,20 +32,9 @@ export class StockComponent implements OnInit {
    */
   columnasTabla: Array<ColumnaTabla> = [
     { columna: 'Nombre', llave: 'nombre', busqueda: true },
-    {
-      columna: 'Descripción',
-      llave: 'descripcion',
-      busqueda: true,
-      class: 'limitar',
-    },
-    { columna: 'Código', llave: 'codigoBarras', busqueda: true },
+    { columna: 'SKU', llave: 'sku', busqueda: true },
     { columna: 'Categoría', llave: 'categoria', busqueda: true },
-    { columna: 'Proveedor', llave: 'proveedor', busqueda: true },
-    { columna: 'Precio de compra', llave: 'precioCompra', busqueda: true },
     { columna: 'Precio de venta', llave: 'precioVenta', busqueda: true },
-    { columna: 'Cantidad en stock', llave: 'cantidadStock', busqueda: true },
-    { columna: 'Fecha de compra', llave: 'fechaCompra', busqueda: true },
-    { columna: 'Vendidos', llave: 'ventas', busqueda: true },
   ];
 
   /**
@@ -102,10 +91,19 @@ export class StockComponent implements OnInit {
   }
 
   /**
+   * @Metodo Captura el evento cuando se agrega un producto
+   */
+  clickGuardarProducto(): void {
+    this.mostrarAgregarProducto = false;
+    this.message.success(`Se guardo correctamente el producto.`);
+  }
+
+  /**
    * @Metodo captura el evento de actualizar un producto y consulta todos los productos
    */
   actualizacionProducto(): void {
     this.consultarProductos();
+    this.consultarCategorias();
   }
 
   /**

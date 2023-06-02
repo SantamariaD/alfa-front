@@ -10,8 +10,8 @@ export interface Producto {
   precioCompra: string;
   precioVenta: string;
   cantidadStock: string;
-  ventas: number;
+  ventas?: number;
   fechaCompra: string;
-  imagen: string;
-  agotado: boolean;
+  imagen?: string;
+  agotado?: boolean;
 }

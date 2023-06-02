@@ -47,4 +47,16 @@ export class ProductosService {
       ENDPOINTS.productos.eliminarProductos + '/' + id
     );
   }
+
+  /**
+   * @Servicio elimina un producto
+   */
+  guarderProducto(
+    producto: any
+  ): Observable<HttpClientServiceInterfaceNoPayload> {
+    return this.http.post<HttpClientServiceInterfaceNoPayload>(
+      ENDPOINTS.productos.guardarProductos,
+      producto
+    );
+  }
 }

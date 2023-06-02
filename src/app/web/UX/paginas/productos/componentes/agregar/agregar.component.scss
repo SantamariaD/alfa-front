@@ -9,6 +9,17 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  &__form {
+    &--seccion {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 15px;
+    }
+    &--boton {
+        width: 152px;
+        margin: 0px 0px 0px auto;
+    }
+  }
   &__contenido {
     width: 700px;
     background-color: #fff;
@@ -39,4 +50,60 @@
 .icono-info {
   color: #3b71ca;
   font-size: 24px;
+}
+
+select:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+input,
+select {
+  border: none;
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+.select {
+  background-color: transparent;
+  width: 100%;
+  height: 32px;
+}
+
+input:focus {
+  outline: none;
+  border: none!important;
+}
+
+option {
+  background-color: rgb(255, 255, 255);
+  border: none !important;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.label {
+    color: rgb(168, 168, 168);
+    font-size: 12px;
+}
+
+.ant-form-item {
+    margin-bottom: 10px;
+}
+
+.notificacion {
+    margin: 10px auto;
+}
+
+.fecha {
+  width: 100%;
+}
+
+.green-icon {
+  font-size: 30px;
+  position: fixed; /* Establece la posición fija para que se mantenga en su lugar */
+  top: 95%; /* Posiciona el elemento en la mitad de la pantalla verticalmente */
+  left: 95%; /* Posiciona el elemento en la mitad de la pantalla horizontalmente */
+  transform: translate(-50%, -50%); /* Centra el elemento correctamente */
+  z-index: 9999; /* Asegura que el elemento esté encima de todos los demás elementos */
 }

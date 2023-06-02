@@ -61,5 +61,7 @@
 
 <app-agregar
   [mostrarModal]="mostrarAgregarProducto"
+  [categorias]="categorias"
+  (clickGuardarProducto)="clickGuardarProducto()"
   (clickCerrar)="clickCerrarModalAgregarProducto($event)"
 ></app-agregar>
