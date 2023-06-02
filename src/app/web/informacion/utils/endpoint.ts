@@ -16,5 +16,7 @@ export const ENDPOINTS = {
 
   categorias: {
     consultarCategorias: '/categorias/consultar-categorias',
+    crearCategorias: '/categorias/guardar-categoria',
+    eliminarCategorias: '/categorias/eliminar-categoria',
   },
 };

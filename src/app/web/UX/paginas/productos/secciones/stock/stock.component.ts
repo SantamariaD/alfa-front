@@ -53,6 +53,16 @@ export class StockComponent implements OnInit {
   mostrarAgregarProducto = false;
 
   /**
+   * @variable mostrarAgregarCategoria: Muestra el modal de agregar categoria
+   */
+  mostrarAgregarCategoria = false;
+
+  /**
+   * @variable mostrarTabla: Muestra la tabla de productos
+   */
+  mostrarTabla = false;
+
+  /**
    * @variable categorias: contiene las categorias
    */
   categorias: Array<Categoria> = [];
@@ -84,7 +94,7 @@ export class StockComponent implements OnInit {
   }
 
   /**
-   * @Metodo Captura el evento cuando se da click a la fila y muestra el producto
+   * @Metodo Captura el evento cuando se da click en cerrar en modal 
    */
   clickCerrarModalAgregarProducto(cerrar: boolean): void {
     this.mostrarAgregarProducto = cerrar;
@@ -96,6 +106,31 @@ export class StockComponent implements OnInit {
   clickGuardarProducto(): void {
     this.mostrarAgregarProducto = false;
     this.message.success(`Se guardo correctamente el producto.`);
+  }
+
+  /**
+   * @Metodo Captura el evento cuando se da click en cerrar en modal categoria
+   */
+  clickCerrarModalAgregarCategoria(cerrar: boolean): void {
+    this.mostrarAgregarCategoria = cerrar;
+  }
+
+  /**
+   * @Metodo Captura el evento cuando se agrega una categoría
+   */
+  clickGuardarCategoria(): void {
+    this.mostrarAgregarCategoria = false;
+    this.message.success(`Se guardo correctamente la categoría.`);
+    this.consultarCategorias();
+  }
+
+  /**
+   * @Metodo Captura el evento cuando se agrega una categoría
+   */
+  clickEliminarCategoria(): void {
+    this.mostrarAgregarCategoria = false;
+    this.message.success(`Se elimino correctamente la categoría.`);
+    this.consultarCategorias();
   }
 
   /**
@@ -123,6 +158,13 @@ export class StockComponent implements OnInit {
   }
 
   /**
+   * @Metodo Muestra el modal para agregar un producto
+   */
+  agregarCategoria(): void {
+    this.mostrarAgregarCategoria = true;
+  }
+
+  /**
    * @Metodo llama a la api para consultar las categorias
    */
   private consultarCategorias(): void {
@@ -136,12 +178,14 @@ export class StockComponent implements OnInit {
    * @Metodo Consulta todos los productos
    */
   private consultarProductos(): void {
+    this.mostrarTabla = false;
     this.productosService.consultarProductos().subscribe({
       next: (
         respuestaProductos: HttpClientServiceInterface<Array<Producto>>
       ) => {
         this.datosTabla = respuestaProductos.payload;
         this.informacionStock();
+        this.mostrarTabla = true;
       },
       error: (error) => console.log(error),
     });
