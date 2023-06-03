@@ -15,6 +15,7 @@ import { InformacionComponent } from './componentes/card-producto/informacion/in
 import { AgregarComponent } from './componentes/agregar/agregar.component';
 import { EditarComponent } from './componentes/card-producto/editar/editar.component';
 import { EliminarComponent } from './componentes/card-producto/eliminar/eliminar.component';
+import { AgregarCategoriaComponent } from './componentes/agregar-categoria/agregar-categoria.component';
 
 
 
@@ -30,7 +31,8 @@ import { EliminarComponent } from './componentes/card-producto/eliminar/eliminar
     InformacionComponent,
     AgregarComponent,
     EditarComponent,
-    EliminarComponent
+    EliminarComponent,
+    AgregarCategoriaComponent
   ],
   imports: [
     CommonModule,

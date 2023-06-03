@@ -9,13 +9,15 @@ export const ENDPOINTS = {
     productos: {
         consultarProductos: '/producto/consultar-productos',
         consultarProducto: '/producto/consultar-producto',
-        guardarProductos: '/producto/guardar-productos',
+        guardarProductos: '/producto/guardar-producto',
         actualizarProductos: '/producto/actualizar-productos',
         eliminarProductos: '/producto/eliminar-productos',
     },
 
   categorias: {
     consultarCategorias: '/categorias/consultar-categorias',
+    crearCategorias: '/categorias/guardar-categoria',
+    eliminarCategorias: '/categorias/eliminar-categoria',
   },
 empleados: {
   traerEmpleados:'/empleados/consultar-empleados',

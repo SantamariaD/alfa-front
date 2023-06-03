@@ -1,0 +1,94 @@
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="cerrarModal()"
+      >&times;</span
+    >
+    <div class="modal__contenido--agregar" *ngIf="seccionModal === 'guardar'">
+      <h2 class="modal__contenido--titulo">
+        <span
+          class="icono-info"
+          nz-icon
+          nzType="info-circle"
+          nzTheme="outline"
+        ></span>
+        Crear categoría
+      </h2>
+
+      <form class="modal__form">
+        <nz-form-item class="modal__form--seccion">
+          <nz-form-control>
+            <label class="label">Nombre</label>
+            <input nz-input type="text" [formControl]="categoriaForm" />
+          </nz-form-control>
+        </nz-form-item>
+        <div class="modal__form--boton">
+          <button
+            nz-button
+            nzType="primary"
+            [disabled]="!categoriaForm.valid"
+            (click)="guardarCategoria()"
+          >
+            Guardar Categoría
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="modal__contenido--eliminar" *ngIf="seccionModal === 'eliminar'">
+      <h2 class="modal__contenido--titulo">
+        <span
+          class="icono-info-eliminar"
+          nz-icon
+          nzType="info-circle"
+          nzTheme="outline"
+        ></span>
+        Eliminar categoría
+      </h2>
+      <form class="modal__form">
+        <nz-form-item class="modal__form--seccion">
+          <nz-form-control>
+            <label class="label">Categoría</label>
+            <select class="select" [formControl]="idCategoriaForm">
+              <option
+                *ngFor="let categoria of categorias"
+                [value]="categoria.id"
+              >
+                {{ categoria.categoria }}
+              </option>
+            </select>
+          </nz-form-control>
+        </nz-form-item>
+        <div class="modal__form--boton">
+          <button
+            class="boton-eliminar"
+            nz-button
+            [disabled]="!idCategoriaForm.valid"
+            [ngClass]="{desactivadoBoton: !idCategoriaForm.valid}"
+            (click)="eliminarCategoria()"
+          >
+            Eliminar Categoría
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="modal__contenido--footer">
+      <div class="modal__contenido--footer__contenedor-iconos">
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono"
+          nz-icon
+          nzType="plus-circle"
+          nzTheme="outline"
+          [ngClass]="{ seleccionada: seccionModal === 'guardar' }"
+          (click)="clickGuardar()"
+        ></span>
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono eliminar"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          [ngClass]="{ eliminarSelect: seccionModal === 'eliminar' }"
+          (click)="clickEliminar()"
+        ></span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,20 +32,9 @@ export class StockComponent implements OnInit {
    */
   columnasTabla: Array<ColumnaTabla> = [
     { columna: 'Nombre', llave: 'nombre', busqueda: true },
-    {
-      columna: 'Descripción',
-      llave: 'descripcion',
-      busqueda: true,
-      class: 'limitar',
-    },
-    { columna: 'Código', llave: 'codigoBarras', busqueda: true },
+    { columna: 'SKU', llave: 'sku', busqueda: true },
     { columna: 'Categoría', llave: 'categoria', busqueda: true },
-    { columna: 'Proveedor', llave: 'proveedor', busqueda: true },
-    { columna: 'Precio de compra', llave: 'precioCompra', busqueda: true },
     { columna: 'Precio de venta', llave: 'precioVenta', busqueda: true },
-    { columna: 'Cantidad en stock', llave: 'cantidadStock', busqueda: true },
-    { columna: 'Fecha de compra', llave: 'fechaCompra', busqueda: true },
-    { columna: 'Vendidos', llave: 'ventas', busqueda: true },
   ];
 
   /**
@@ -54,9 +43,24 @@ export class StockComponent implements OnInit {
   datosTabla: Array<Producto> = [];
 
   /**
-   * @variable datosTabla: Datos que contiene la tabla
+   * @variable mostrarCardProducto: Muestra la card del producto
    */
   mostrarCardProducto = false;
+
+  /**
+   * @variable mostrarAgregarProducto: Muestra el modal de agregar producto
+   */
+  mostrarAgregarProducto = false;
+
+  /**
+   * @variable mostrarAgregarCategoria: Muestra el modal de agregar categoria
+   */
+  mostrarAgregarCategoria = false;
+
+  /**
+   * @variable mostrarTabla: Muestra la tabla de productos
+   */
+  mostrarTabla = false;
 
   /**
    * @variable categorias: contiene las categorias
@@ -90,10 +94,51 @@ export class StockComponent implements OnInit {
   }
 
   /**
+   * @Metodo Captura el evento cuando se da click en cerrar en modal 
+   */
+  clickCerrarModalAgregarProducto(cerrar: boolean): void {
+    this.mostrarAgregarProducto = cerrar;
+  }
+
+  /**
+   * @Metodo Captura el evento cuando se agrega un producto
+   */
+  clickGuardarProducto(): void {
+    this.mostrarAgregarProducto = false;
+    this.message.success(`Se guardo correctamente el producto.`);
+  }
+
+  /**
+   * @Metodo Captura el evento cuando se da click en cerrar en modal categoria
+   */
+  clickCerrarModalAgregarCategoria(cerrar: boolean): void {
+    this.mostrarAgregarCategoria = cerrar;
+  }
+
+  /**
+   * @Metodo Captura el evento cuando se agrega una categoría
+   */
+  clickGuardarCategoria(): void {
+    this.mostrarAgregarCategoria = false;
+    this.message.success(`Se guardo correctamente la categoría.`);
+    this.consultarCategorias();
+  }
+
+  /**
+   * @Metodo Captura el evento cuando se agrega una categoría
+   */
+  clickEliminarCategoria(): void {
+    this.mostrarAgregarCategoria = false;
+    this.message.success(`Se elimino correctamente la categoría.`);
+    this.consultarCategorias();
+  }
+
+  /**
    * @Metodo captura el evento de actualizar un producto y consulta todos los productos
    */
   actualizacionProducto(): void {
     this.consultarProductos();
+    this.consultarCategorias();
   }
 
   /**
@@ -103,6 +148,20 @@ export class StockComponent implements OnInit {
     this.mostrarCardProducto = false;
     this.consultarProductos();
     this.message.success(`Se elimino correctamente el producto.`);
+  }
+
+  /**
+   * @Metodo Muestra el modal para agregar un producto
+   */
+  agregarProducto(): void {
+    this.mostrarAgregarProducto = true;
+  }
+
+  /**
+   * @Metodo Muestra el modal para agregar un producto
+   */
+  agregarCategoria(): void {
+    this.mostrarAgregarCategoria = true;
   }
 
   /**
@@ -119,12 +178,14 @@ export class StockComponent implements OnInit {
    * @Metodo Consulta todos los productos
    */
   private consultarProductos(): void {
+    this.mostrarTabla = false;
     this.productosService.consultarProductos().subscribe({
       next: (
         respuestaProductos: HttpClientServiceInterface<Array<Producto>>
       ) => {
         this.datosTabla = respuestaProductos.payload;
         this.informacionStock();
+        this.mostrarTabla = true;
       },
       error: (error) => console.log(error),
     });

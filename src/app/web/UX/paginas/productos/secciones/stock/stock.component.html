@@ -31,15 +31,25 @@
       <p class="productos__descripcion--info-stock--valor">Playeras</p>
     </div>
   </div>
-
-  <div class="productos__agregar">
-    <span
-      class="productos__agregar--icono"
-      nz-icon
-      nzType="plus-circle"
-      nzTheme="outline"
-    ></span>
-    <p class="productos__agregar--texto">Agregar producto</p>
+  <div class="productos__botones">
+    <button
+      class="productos__botones--boton"
+      nz-button
+      nzType="default"
+      (click)="agregarProducto()"
+    >
+      <span nz-icon nzType="plus-circle"></span>
+      Agregar producto
+    </button>
+    <button
+      class="productos__botones--boton"
+      nz-button
+      nzType="default"
+      (click)="agregarCategoria()"
+    >
+      <span nz-icon nzType="group"></span>
+      Gestión de categorías
+    </button>
   </div>
   <app-tabla
     [columnasTabla]="columnasTabla"
@@ -58,3 +68,18 @@
   (actualizarProductoEmit)="actualizacionProducto()"
   (eliminarProductoEmit)="eliminarProducto()"
 ></app-card-producto>
+
+<app-agregar
+  [mostrarModal]="mostrarAgregarProducto"
+  [categorias]="categorias"
+  (clickGuardarProducto)="clickGuardarProducto()"
+  (clickCerrar)="clickCerrarModalAgregarProducto($event)"
+></app-agregar>
+
+<app-agregar-categoria
+  [mostrarModal]="mostrarAgregarCategoria"
+  [categorias]="categorias"
+  (clickGuardarCategoria)="clickGuardarCategoria()"
+  (clickEliminarCategoria)="clickEliminarCategoria()"
+  (clickCerrar)="clickCerrarModalAgregarCategoria($event)"
+></app-agregar-categoria>

@@ -1,1 +1,90 @@
-<p>agregar works!</p>
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="cerrarModal()"
+      >&times;</span
+    >
+    <h2 class="modal__contenido--titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span>
+      Agregar producto
+    </h2>
+
+    <form class="modal__form" [formGroup]="guardarForm">
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Nombre</label>
+          <input nz-input type="text" formControlName="nombre" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Categoría</label>
+          <select class="select" formControlName="categoria">
+            <option *ngFor="let categoria of categorias" [value]="categoria.id">
+              {{ categoria.categoria }}
+            </option>
+          </select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Cantidad en stock</label>
+          <input nz-input type="text" formControlName="cantidadStock" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Proveedor</label>
+          <input nz-input type="text" formControlName="proveedor" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Precio de compra</label>
+          <input nz-input type="text" formControlName="precioCompra" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Precio de venta</label>
+          <input nz-input type="text" formControlName="precioVenta" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Código de barras</label>
+          <input nz-input formControlName="codigoBarras" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">SKU</label>
+          <input nz-input type="text" formControlName="sku" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <p class="label">Fecha de compra</p>
+          <input
+            type="date"
+            class="fecha"
+            [formControl]="fechaHtml"
+            (ngModelChange)="onChange($event)"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form">
+        <nz-form-control>
+          <label class="label">Descripción</label>
+          <textarea rows="2" nz-input formControlName="descripcion"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <div class="modal__form--boton">
+        <button
+          nz-button
+          nzType="primary"
+          [disabled]="!guardarForm.valid"
+          (click)="guardarProducto()"
+        >
+          Actualizar producto
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
