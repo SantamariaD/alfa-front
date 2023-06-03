@@ -90,6 +90,23 @@
         </li>
       </ul>
       <ul
+      nz-menu
+      nzMode="inline"
+      nzTheme="dark"
+      [nzInlineCollapsed]="isCollapsed"
+      routerLink="/empleados"
+    >
+      <li
+        nz-menu-item
+        nz-tooltip
+        nzTooltipPlacement="right"
+        [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+      >
+        <span nz-icon nzType="usergroup-add"></span>
+        <span>Empleados</span>
+      </li>
+    </ul>
+      <ul
         nz-menu
         nzMode="inline"
         nzTheme="dark"

@@ -17,4 +17,11 @@ export const ENDPOINTS = {
   categorias: {
     consultarCategorias: '/categorias/consultar-categorias',
   },
+empleados: {
+  traerEmpleados:'/empleados/consultar-empleados',
+  traerEmpleado:'/empleados/consultar-empleado',
+  guardarEmpleado:'/empleados/guardar-empleado',
+  actualizarEmpleado:'/empleados/actualizar-empleado',
+  eliminarEmpleado:'empleados/eliminar-empleado'
+}
 };
