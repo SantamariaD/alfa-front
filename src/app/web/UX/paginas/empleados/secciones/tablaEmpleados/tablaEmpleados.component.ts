@@ -57,6 +57,7 @@ this.empleadoServise.traerTodosEmpleados().subscribe({
 //Metodo para traer al empleado seleccionado en la fila
 clickFila(empleado:Empleados){
 this.empleado = empleado;
+this.mostrarCardEmpleado = true;
 }
 
 

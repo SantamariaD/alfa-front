@@ -11,6 +11,7 @@ import { SolicitudesComponent } from './secciones/solicitudes/solicitudes.compon
 import { ModalEditarComponent } from './componentes/modal-editar/modal-editar.component';
 import { ModalCrearComponent } from './componentes/modal-crear/modal-crear.component';
 import { CardEmpleadosComponent } from './componentes/card-empleados/card-empleados.component';
+import { InformacionComponent } from './componentes/informacion/informacion.component';
 
 
 
@@ -22,7 +23,8 @@ import { CardEmpleadosComponent } from './componentes/card-empleados/card-emplea
     SolicitudesComponent,
     ModalEditarComponent,
     ModalCrearComponent,
-    CardEmpleadosComponent
+    CardEmpleadosComponent,
+    InformacionComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
 
-<!-- <div class="modal" *ngIf="mostrarCardEmpleado">
+<div class="modal" *ngIf="mostrarCardEmpleado">
     <div class="modal__contenido">
       <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
         >&times;</span
@@ -9,14 +9,14 @@
           class="modal__contenido--secciones__informacion"
           *ngIf="seccionModal === 'informacion'"
         >
-          <app-informacion [documento]="documento"></app-informacion>
+          <app-informacion [empleado]="empleado"></app-informacion>
         </div>
         
         <div
           class="modal__contenido--secciones__editar"
           *ngIf="seccionModal === 'editar'"
         >
-          <app-editar [documento]="documento" (docActualizados)="ActualizaDatos()"></app-editar>
+          <app-modal-editar [empleado]="empleado" (empActualizados)="ActualizaDatos()"></app-modal-editar>
         </div>
       </div>
       <div class="modal__contenido--footer">
@@ -29,7 +29,7 @@
             [ngClass]="{ seleccionada: seccionModal === 'informacion' }"
             (click)="clickInformacion()"
           ></span>
-         <a  [href]="urlDescarga + '/' + documento.uuid + '/' + documento.extension"
+         <!-- <a  [href]="urlDescarga + '/' + documento.uuid + '/' + documento.extension"
          download="nombre_imagen.png">
          <span
          
@@ -40,7 +40,7 @@
          [ngClass]="{ seleccionada: seccionModal === 'agregar' }"
          (click)="clickAgregar()"
        ></span>
-        </a>
+        </a> -->
           
           <span
             class="modal__contenido--footer__contenedor-iconos--icono"
@@ -51,7 +51,7 @@
             (click)="clickEditar()"
           ></span>
           <span
-          (click)="modalBorrar(documento)"
+          (click)="modalBorrar(empleado)"
             class="modal__contenido--footer__contenedor-iconos--icono eliminar"
             nz-icon
             nzType="delete"
@@ -63,4 +63,3 @@
 
 
   </div>
-   -->

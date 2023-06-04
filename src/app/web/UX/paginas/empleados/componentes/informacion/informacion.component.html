@@ -1,0 +1,68 @@
+<div class="informacion">
+    <h2 class="informacion--titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span>
+      Información del Empleado
+    </h2>
+    <div class="informacion--imagen">
+        <img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fconcepto.de%2Fwp-content%2Fuploads%2F2018%2F08%2Fpersona-e1533759204552.jpg&tbnid=_-V5YPAy__WIQM&vet=12ahUKEwiJ576xraj_AhWuKN4AHXvlD0wQMygAegUIARDjAQ..i&imgrefurl=https%3A%2F%2Fconcepto.de%2Fpersona-2%2F&docid=EHJp84ONIRvaFM&w=800&h=400&q=persona&ved=2ahUKEwiJ576xraj_AhWuKN4AHXvlD0wQMygAegUIARDjAQ" alt="">
+    </div>
+  
+    <div class="informacion--datos">
+      <h4 class="informacion--datos__nombre">{{ empleado.nombres + ' ' + empleado.apellido_paterno + ' ' + empleado.apellido_materno }}</h4>
+      <div class="informacion--descripcion">
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">Puesto de trabajo:</p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{ empleado.puesto }}
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">Domicilio:</p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{ empleado.direccion }}
+          </p>
+        </div>
+      </div>
+      <div class="informacion--descripcion">
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Departamento:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{ empleado.departamento}}
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Teléfono:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{empleado.telefono}}
+          </p>
+        </div>
+      </div>
+      <div class="informacion--descripcion">
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Clasificación:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Permisos:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            
+          </p>
+        </div>
+    </div>
+  </div>
+  

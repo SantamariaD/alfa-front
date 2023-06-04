@@ -4,7 +4,9 @@
       (seleccionadoClick)="selectSeccion($event)"
     ></app-secciones-cabecera>
 
-    <app-tablatablaEmpleados></app-tablatablaEmpleados>
+    <app-tablatablaEmpleados *ngIf="seccion === 'Lista de empleados'"></app-tablatablaEmpleados>
+    <app-documentos *ngIf="seccion === 'Documentos de empleado'"></app-documentos>
+    <app-solicitudes *ngIf="seccion === 'Solicitudes de empleado'"></app-solicitudes>
   </div>
 
  
