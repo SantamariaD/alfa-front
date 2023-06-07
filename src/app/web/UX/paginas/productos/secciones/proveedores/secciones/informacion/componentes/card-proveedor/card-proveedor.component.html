@@ -1,0 +1,63 @@
+<div class="modal" *ngIf="mostrarCardProveedor">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
+      >&times;</span
+    >
+    <div class="modal__contenido--secciones">
+      <div
+        class="modal__contenido--secciones__informacion"
+        *ngIf="seccionModal === 'informacion'"
+      >
+        <app-informacion-proveedor
+          [proveedor]="proveedor"
+        ></app-informacion-proveedor>
+      </div>
+      <div
+        class="modal__contenido--secciones__editar"
+        *ngIf="seccionModal === 'editar'"
+      >
+        <app-editar-proveedor
+          [proveedor]="proveedor"
+          (actualizarProveedorEmit)="actualizacionProveedor()"
+        ></app-editar-proveedor>
+      </div>
+      <div
+        class="modal__contenido--secciones__editar"
+        *ngIf="seccionModal === 'eliminar'"
+      >
+        <app-eliminar-proveedor
+          [proveedor]="proveedor"
+          (eliminarProveedorEmit)="eliminarProveedor()"
+        ></app-eliminar-proveedor>
+      </div>
+    </div>
+    <div class="modal__contenido--footer">
+      <div class="modal__contenido--footer__contenedor-iconos">
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono"
+          nz-icon
+          nzType="container"
+          nzTheme="outline"
+          [ngClass]="{ seleccionada: seccionModal === 'informacion' }"
+          (click)="clickInformacion()"
+        ></span>
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono"
+          nz-icon
+          nzType="edit"
+          nzTheme="outline"
+          [ngClass]="{ seleccionada: seccionModal === 'editar' }"
+          (click)="clickEditar()"
+        ></span>
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono eliminar"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          [ngClass]="{ eliminarSelect: seccionModal === 'eliminar' }"
+          (click)="clickEliminar()"
+        ></span>
+      </div>
+    </div>
+  </div>
+</div>

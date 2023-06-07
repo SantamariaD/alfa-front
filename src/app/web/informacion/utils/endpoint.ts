@@ -18,11 +18,18 @@ export const ENDPOINTS = {
     crearCategorias: '/categorias/guardar-categoria',
     eliminarCategorias: '/categorias/eliminar-categoria',
   },
-empleados: {
-  traerEmpleados:'/empleados/consultar-empleados',
-  traerEmpleado:'/empleados/consultar-empleado',
-  guardarEmpleado:'/empleados/guardar-empleado',
-  actualizarEmpleado:'/empleados/actualizar-empleado',
-  eliminarEmpleado:'empleados/eliminar-empleado'
-}
+  empleados: {
+    traerEmpleados: '/empleados/consultar-empleados',
+    traerEmpleado: '/empleados/consultar-empleado',
+    guardarEmpleado: '/empleados/guardar-empleado',
+    actualizarEmpleado: '/empleados/actualizar-empleado',
+    eliminarEmpleado: 'empleados/eliminar-empleado',
+  },
+  proveedores: {
+    consultarProveedores: '/proveedores/consultar-proveedores',
+    consultarProveedor: '/proveedores/consultar-proveedor',
+    guardarProveedor: '/proveedores/guardar-proveedor',
+    actualizarProveedor: '/proveedores/actualizar-proveedor',
+    eliminarProveedor: '/proveedores/eliminar-proveedor',
+  },
 };

@@ -8,6 +8,11 @@ import { ProveedoresComponent } from './proveedores.component';
 import { InformacionProveedoresComponent } from './secciones/informacion/informacion.component';
 import { CatalogoComponent } from './secciones/catalogo/catalogo.component';
 import { HistorialComponent } from './secciones/historial/historial.component';
+import { CardProveedorComponent } from './secciones/informacion/componentes/card-proveedor/card-proveedor.component';
+import { EditarComponent } from './secciones/informacion/componentes/card-proveedor/editar/editar.component';
+import { EliminarComponent } from './secciones/informacion/componentes/card-proveedor/eliminar/eliminar.component';
+import { InformacionComponent } from './secciones/informacion/componentes/card-proveedor/informacion/informacion.component';
+import { AgregarProveedorComponent } from './secciones/informacion/componentes/agregar-proveedor/agregar-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +20,11 @@ import { HistorialComponent } from './secciones/historial/historial.component';
     InformacionProveedoresComponent,
     CatalogoComponent,
     HistorialComponent,
+    CardProveedorComponent,
+    EditarComponent,
+    EliminarComponent,
+    InformacionComponent,
+    AgregarProveedorComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +39,11 @@ import { HistorialComponent } from './secciones/historial/historial.component';
     InformacionProveedoresComponent,
     CatalogoComponent,
     HistorialComponent,
+    CardProveedorComponent,
+    EditarComponent,
+    EliminarComponent,
+    InformacionComponent,
+    AgregarProveedorComponent,
   ]
 })
 export class ProveedoresModule {}

@@ -23,16 +23,6 @@ export class ProveedoresComponent implements OnInit {
     { texto: 'Análisis', seleccionado: false },
   ];
 
-  /**
-   * @variable columnasTabla: Columnas que contiene la tabla
-   */
-  columnasTabla: Array<ColumnaTabla> = [
-    { columna: 'Nombre', llave: 'nombre', busqueda: true },
-    { columna: 'SKU', llave: 'sku', busqueda: true },
-    { columna: 'Categoría', llave: 'categoria', busqueda: true },
-    { columna: 'Precio de venta', llave: 'precioVenta', busqueda: true },
-  ];
-
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
@@ -54,9 +44,6 @@ export class ProveedoresComponent implements OnInit {
         break;
       case 'Análisis':
         //this.router.navigate(['/home']);
-        break;
-
-      default:
         break;
     }
   }
