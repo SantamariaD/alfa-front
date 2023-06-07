@@ -28,6 +28,11 @@ export class StockComponent implements OnInit {
   valorProductos = 0;
 
   /**
+   * @variable secciones: Contiene las secciones de la página
+   */
+  secciones = [{ texto: 'Stock de productos', seleccionado: true }];
+
+  /**
    * @variable columnasTabla: Columnas que contiene la tabla
    */
   columnasTabla: Array<ColumnaTabla> = [
@@ -62,6 +67,11 @@ export class StockComponent implements OnInit {
    */
   categorias: Array<Categoria> = [];
 
+  /**
+   * @variable seccion: Contiene la seccione actual
+   */
+  seccion = 'Stock de productos';
+
   constructor(
     private message: NzMessageService,
     private productosService: ProductosService,
@@ -82,6 +92,13 @@ export class StockComponent implements OnInit {
   }
 
   /**
+   * @Metodo Asigna la sección en la que nos encontramos
+   */
+  selectSeccion(seccion: string): void {
+    this.seccion = seccion;
+  }
+
+  /**
    * @Metodo Captura el evento cuando se da click a la fila y muestra el producto
    */
   clickCerrarModal(cerrar: boolean): void {
@@ -89,7 +106,7 @@ export class StockComponent implements OnInit {
   }
 
   /**
-   * @Metodo Captura el evento cuando se da click en cerrar en modal 
+   * @Metodo Captura el evento cuando se da click en cerrar en modal
    */
   clickCerrarModalAgregarProducto(cerrar: boolean): void {
     this.mostrarAgregarProducto = cerrar;

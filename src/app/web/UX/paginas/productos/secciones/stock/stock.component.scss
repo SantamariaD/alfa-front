@@ -3,6 +3,9 @@
 .productos {
   width: 90%;
   margin: 20px auto;
+  &__secciones-cabecera {
+    margin-bottom: 30px;
+  }
   &__descripcion {
     display: flex;
     justify-content: space-between;
