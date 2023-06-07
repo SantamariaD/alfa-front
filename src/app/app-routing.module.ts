@@ -6,6 +6,7 @@ import { LoginComponent } from './web/UX/paginas/login/login.component';
 import { PaginaErrorComponent } from './web/UX/paginas/pagina-error/pagina-error.component';
 import { RegistroComponent } from './web/UX/paginas/registro/registro.component';
 import { CalendarioComponent } from './web/UX/paginas/calendario/calendario.component';
+import { EmpleadosModule } from './web/UX/paginas/empleados/empleados.module'
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -45,6 +46,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./web/UX/paginas/productos/productos.module').then(
         (m) => m.ProductosModule
+      ),
+  },
+  {
+    path: 'empleados',
+    loadChildren: () =>
+      import('./web/UX/paginas/empleados/empleados.module').then(
+        (m) => m.EmpleadosModule
       ),
   },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },

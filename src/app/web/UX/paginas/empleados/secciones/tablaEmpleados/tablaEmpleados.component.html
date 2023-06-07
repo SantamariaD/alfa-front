@@ -1,0 +1,21 @@
+
+<app-tabla
+[columnasTabla]="columnasTabla"
+[filasTabla]="empleados"
+[filasBusqueda]="empleados"
+(clickFila)="clickFila($event)"
+></app-tabla>
+ 
+
+
+<app-card-empleados
+*ngIf="empleado.curp"
+  [mostrarCardEmpleado]="mostrarCardEmpleado"
+  [empleado]="empleado"
+  (clickCerrar)="clickCerrarModal($event)"
+  (docActualizados)="ActualizaDatos()"
+>
+</app-card-empleados>
+
+
+
