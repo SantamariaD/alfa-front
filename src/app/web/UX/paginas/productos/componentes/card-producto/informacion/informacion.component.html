@@ -8,10 +8,16 @@
     ></span>
     Información del producto
   </h2>
-  <div class="informacion--imagen">
+  <div *ngIf="producto.imagen" class="informacion--imagen">
     <img [src]="producto.imagen" alt="" />
   </div>
-
+  <div *ngIf="!producto.imagen" class="informacion--imagen-icono">
+    <span
+      class="informacion--imagen-icono--icono"
+      nz-icon
+      nzType="file-image"
+    ></span>
+  </div>
   <div class="informacion--datos">
     <h4 class="informacion--datos__nombre">{{ producto.nombre }}</h4>
     <div class="informacion--descripcion">
@@ -79,14 +85,12 @@
       </div>
     </div>
     <div class="informacion">
-        <div class="informacion--info-stock">
-          <p class="informacion--info-stock--llave">
-            Descripcón:
-          </p>
-          <p class="informacion--info-stock--descripcion">
-            {{ producto.descripcion }}
-          </p>
-        </div>
+      <div class="informacion--info-stock">
+        <p class="informacion--info-stock--llave">Descripcón:</p>
+        <p class="informacion--info-stock--descripcion">
+          {{ producto.descripcion }}
+        </p>
       </div>
+    </div>
   </div>
 </div>

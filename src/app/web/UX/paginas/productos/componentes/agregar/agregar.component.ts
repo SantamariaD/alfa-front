@@ -93,7 +93,6 @@ export class AgregarComponent implements OnInit {
 
       var fechaFormateada = dia + '-' + mes + '-' + anio;
       this.guardarForm.patchValue({ fechaCompra: fechaFormateada });
-      console.log(this.guardarForm.value);
     }
   }
 }

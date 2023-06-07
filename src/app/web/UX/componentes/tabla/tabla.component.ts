@@ -39,7 +39,7 @@ export class TablaComponent implements OnInit {
   /**
    * @variable pageSize: Tamaño de la pagina
    */
-  pageSize = 8;
+  pageSize = 5;
 
   /**
    * @formulario tablaForm: Formularia para filtrar datos de la tabla
@@ -48,15 +48,10 @@ export class TablaComponent implements OnInit {
     busqueda: new FormControl(''),
   });
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.filasTabla.map((fila) => {
-      this.columnasTabla.map(
-        (columna) => (fila[columna.llave] = fila[columna.llave].toString())
-      );
-    });
+  constructor() {
   }
+
+  ngOnInit(): void { }
 
   /**
    * @Metodo filtra las filas de la tabla que contengan caracteres que se ingresan en el input
