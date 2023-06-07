@@ -1,21 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StockComponent } from './secciones/stock/stock.component';
-import { ProveedoresComponent } from './secciones/proveedores/proveedores.component';
 import { ComprasComponent } from './secciones/compras/compras.component';
 import { VentasComponent } from './secciones/ventas/ventas.component';
 import { AnalisisComponent } from './secciones/analisis/analisis.component';
 
 const routes: Routes = [
-  { path: 'stock', component: StockComponent },
-  { path: 'proveedores', component: ProveedoresComponent },
+  {
+    path: 'stock',
+    loadChildren: () =>
+      import('./secciones/stock/stock.module').then((m) => m.StockModule),
+  },
+  {
+    path: 'proveedores',
+    loadChildren: () =>
+      import('./secciones/proveedores/proveedores.module').then(
+        (m) => m.ProveedoresModule
+      ),
+  },
   { path: 'compras', component: ComprasComponent },
   { path: 'ventas', component: VentasComponent },
-  { path: 'analisis', component: AnalisisComponent }
+  { path: 'analisis', component: AnalisisComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ProductosRoutingModule { }
+export class ProductosRoutingModule {}

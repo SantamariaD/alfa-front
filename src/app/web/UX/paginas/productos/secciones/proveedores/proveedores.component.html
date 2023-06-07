@@ -1,1 +1,9 @@
-<p>proveedores works!</p>
+<section class="proveedores contenedor-principal-pagina">
+    <header class="productos__secciones-cabecera">
+        <app-secciones-cabecera
+          [secciones]="secciones"
+          (seleccionadoClick)="selectSeccion($event)"
+        ></app-secciones-cabecera>
+      </header>
+      <router-outlet></router-outlet>
+</section>
