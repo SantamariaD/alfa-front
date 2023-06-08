@@ -36,6 +36,12 @@ export class CardEmpleadosComponent implements OnInit {
    */
 seccionModal = 'informacion';
 
+/**
+ * 
+ * @variable switchValue 
+ */
+switchValue = false;
+
   constructor( private modal: NzModalService, private empleadoServise:EmpleadosService) { }
 
   ngOnInit(): void {

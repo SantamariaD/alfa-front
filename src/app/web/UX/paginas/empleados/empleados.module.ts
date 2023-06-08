@@ -12,6 +12,7 @@ import { ModalEditarComponent } from './componentes/modal-editar/modal-editar.co
 import { ModalCrearComponent } from './componentes/modal-crear/modal-crear.component';
 import { CardEmpleadosComponent } from './componentes/card-empleados/card-empleados.component';
 import { InformacionComponent } from './componentes/informacion/informacion.component';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 
 
@@ -24,7 +25,7 @@ import { InformacionComponent } from './componentes/informacion/informacion.comp
     ModalEditarComponent,
     ModalCrearComponent,
     CardEmpleadosComponent,
-    InformacionComponent
+    InformacionComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +33,8 @@ import { InformacionComponent } from './componentes/informacion/informacion.comp
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentesModule
+    ComponentesModule,
+    NzToolTipModule
   ]
 })
 export class EmpleadosModule { }

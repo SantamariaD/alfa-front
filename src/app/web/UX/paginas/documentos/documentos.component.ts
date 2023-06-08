@@ -13,7 +13,7 @@ export class DocumentosComponent implements OnInit {
    * @variable secciones: Contiene la información del encabezado de la sección.
    */
    secciones = secciones;
-   cabecera:string ='Administración';
+   cabecera:string ='Tabla de Documentos';
 
     /**
    * @variable secciones: Contiene la información del encabezado de la sección.
@@ -31,7 +31,7 @@ docCreado = '';
   }
 
    //Metodo para seleccionar cabeceras
-   sleccionarCabecera(cabecera:string){
+   selectSeccion(cabecera:string){
     this.cabecera = cabecera;
     console.log(this.cabecera)
     }

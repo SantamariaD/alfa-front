@@ -21,6 +21,7 @@
       </div>
       <div class="modal__contenido--footer">
         <div class="modal__contenido--footer__contenedor-iconos">
+          <div class="icon-container">
           <span
             class="modal__contenido--footer__contenedor-iconos--icono"
             nz-icon
@@ -29,6 +30,8 @@
             [ngClass]="{ seleccionada: seccionModal === 'informacion' }"
             (click)="clickInformacion()"
           ></span>
+          <span *ngIf="seccionModal !== 'informacion'" class="tooltip">Vista Card</span>
+        </div>
          <!-- <a  [href]="urlDescarga + '/' + documento.uuid + '/' + documento.extension"
          download="nombre_imagen.png">
          <span
@@ -41,7 +44,7 @@
          (click)="clickAgregar()"
        ></span>
         </a> -->
-          
+        <div class="icon-container">
           <span
             class="modal__contenido--footer__contenedor-iconos--icono"
             nz-icon
@@ -50,6 +53,9 @@
             [ngClass]="{ seleccionada: seccionModal === 'editar' }"
             (click)="clickEditar()"
           ></span>
+          <span *ngIf="seccionModal !== 'editar'" class="tooltip">Editar Empleado</span>
+          </div>
+          <div class="icon-container">
           <span
           (click)="modalBorrar(empleado)"
             class="modal__contenido--footer__contenedor-iconos--icono eliminar"
@@ -57,6 +63,12 @@
             nzType="delete"
             nzTheme="outline"
           ></span>
+          <span  class="tooltip">Eliminar Empleado</span>
+        </div>
+          <div class="icon-container">
+            <nz-switch  [(ngModel)]="switchValue"></nz-switch>
+            <span *ngIf="!switchValue" class="tooltip">Activar Empleado</span>
+          </div>
         </div>
       </div>
     </div>

@@ -28,7 +28,8 @@
     &--footer {
         font-size: 20px;
         &__contenedor-iconos {
-            width: 160px;
+            width: 100%;
+            text-align: center;
             margin: 10px auto 0px auto;
             &--icono{
                 color: rgb(119, 119, 119);
@@ -62,3 +63,27 @@
     }
 }
 
+.icon-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip {
+    position: absolute;
+    bottom: calc(100% + 5px); /* Ajusta la posición vertical del tooltip */
+    left: 50%; /* Ajusta la posición horizontal del tooltip */
+    transform: translateX(-50%); /* Centra el tooltip horizontalmente */
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  
+  .icon-container:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }

@@ -1,5 +1,14 @@
 <div class="contenedor-principal-pagina notas">
-  <h1 class="titulo">Tabla de documentos</h1>
-  <app-crear class="modal-crear" (docCreado)="actualizaDatos()"></app-crear>
-  <app-administracion [docCreado]="docCreado"></app-administracion>
+
+  <app-secciones-cabecera
+  [secciones]="secciones"
+  (seleccionadoClick)="selectSeccion($event)"
+></app-secciones-cabecera>
+  
+  <app-crear nz-tooltip nzTooltipTitle="Agrega un documento" class="modal-crear" (docCreado)="actualizaDatos()"></app-crear>
+
+  <div  class="contenedor-central">
+    <app-administracion *ngIf="cabecera === 'Tabla de Documentos'" [docCreado]="docCreado"></app-administracion>
+  </div>
+ 
 </div>

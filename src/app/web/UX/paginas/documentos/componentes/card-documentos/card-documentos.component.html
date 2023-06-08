@@ -1,66 +1,79 @@
-
 <div class="modal" *ngIf="mostrarCardDocumento">
-    <div class="modal__contenido">
-      <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
-        >&times;</span
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
+      >&times;</span
+    >
+    <div class="modal__contenido--secciones">
+      <div
+        class="modal__contenido--secciones__informacion"
+        *ngIf="seccionModal === 'informacion'"
       >
-      <div class="modal__contenido--secciones">
-        <div
-          class="modal__contenido--secciones__informacion"
-          *ngIf="seccionModal === 'informacion'"
-        >
-          <app-informacion [documento]="documento"></app-informacion>
-        </div>
-        
-        <div
-          class="modal__contenido--secciones__editar"
-          *ngIf="seccionModal === 'editar'"
-        >
-          <app-editar [documento]="documento" (docActualizados)="ActualizaDatos()"></app-editar>
-        </div>
+        <app-informacion [documento]="documento"></app-informacion>
       </div>
-      <div class="modal__contenido--footer">
-        <div class="modal__contenido--footer__contenedor-iconos">
-          <span
-            class="modal__contenido--footer__contenedor-iconos--icono"
-            nz-icon
-            nzType="container"
-            nzTheme="outline"
-            [ngClass]="{ seleccionada: seccionModal === 'informacion' }"
-            (click)="clickInformacion()"
-          ></span>
-         <a  [href]="urlDescarga + '/' + documento.uuid + '/' + documento.extension"
-         download="nombre_imagen.png">
-         <span
-         
-         class="modal__contenido--footer__contenedor-iconos--icono"
-         nz-icon
-         nzType="arrow-down"
-         nzTheme="outline"
-         [ngClass]="{ seleccionada: seccionModal === 'agregar' }"
-         (click)="clickAgregar()"
-       ></span>
-        </a>
-          
-          <span
-            class="modal__contenido--footer__contenedor-iconos--icono"
-            nz-icon
-            nzType="edit"
-            nzTheme="outline"
-            [ngClass]="{ seleccionada: seccionModal === 'editar' }"
-            (click)="clickEditar()"
-          ></span>
-          <span
-          (click)="modalBorrar(documento)"
-            class="modal__contenido--footer__contenedor-iconos--icono eliminar"
-            nz-icon
-            nzType="delete"
-            nzTheme="outline"
-          ></span>
-        </div>
+
+      <div
+        class="modal__contenido--secciones__editar"
+        *ngIf="seccionModal === 'editar'"
+      >
+        <app-editar
+          [documento]="documento"
+          (docActualizados)="ActualizaDatos()"
+        ></app-editar>
       </div>
     </div>
-
-
+    <div class="modal__contenido--footer">
+      <div class="modal__contenido--footer__contenedor-iconos">
+        <div class="icon-container">
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono"
+          nz-icon
+          nzType="container"
+          nzTheme="outline"
+          [ngClass]="{ seleccionada: seccionModal === 'informacion' }"
+          (click)="clickInformacion()"
+        ></span>
+        <span *ngIf="seccionModal !== 'informacion'" class="tooltip">Vista Información</span>
+      </div>
+      <div class="icon-container">
+        <a
+          [href]="
+            urlDescarga + '/' + documento.uuid + '/' + documento.extension
+          "
+          download="nombre_imagen.png"
+        >
+          <span
+            class="modal__contenido--footer__contenedor-iconos--icono"
+            nz-icon
+            nzType="arrow-down"
+            nzTheme="outline"
+            [ngClass]="{ seleccionada: seccionModal === 'agregar' }"
+            (click)="clickAgregar()"
+          ></span>
+        </a>
+        <span  class="tooltip">Descargar Documento</span>
+      </div>
+        <div class="icon-container">
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono"
+          nz-icon
+          nzType="edit"
+          nzTheme="outline"
+          [ngClass]="{ seleccionada: seccionModal === 'editar' }"
+          (click)="clickEditar()"
+        ></span>
+        <span *ngIf="seccionModal !== 'editar'" class="tooltip">Editar Documento</span>
+        </div>
+        <div class="icon-container">
+        <span
+          (click)="modalBorrar(documento)"
+          class="modal__contenido--footer__contenedor-iconos--icono eliminar"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+        ></span>
+        <span class="tooltip">Eliminar Documento</span>
+      </div>
+      </div>
+    </div>
   </div>
-  
+</div>

@@ -37,7 +37,7 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
-
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @NgModule({
   declarations: [],
@@ -79,7 +79,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     NzResultModule,
     NzCalendarModule,
     NzDatePickerModule,
-    NzEmptyModule
+    NzEmptyModule,
+    NzSwitchModule
   ],
   exports: [
     NzMenuModule,
@@ -118,7 +119,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     NzResultModule,
     NzCalendarModule,
     NzDatePickerModule,
-    NzEmptyModule
+    NzEmptyModule,
+    NzSwitchModule
   ],
 })
 export class SharedModule {}
