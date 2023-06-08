@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpclientService } from '../httpService/http-service.service';
 import { Observable } from 'rxjs';
 import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from '../../interface/httpService';
-import { Proveedor } from '../../interface/proveedores';
+import { Proveedor, RespuestaProveedores } from '../../interface/proveedores';
 import { ENDPOINTS } from '../../utils/endpoint';
 
 @Injectable({
@@ -16,9 +16,9 @@ export class ProveedoresService {
    * @Servicio consulta todos los proveedores de la base
    */
   consultarProveedores(): Observable<
-    HttpClientServiceInterface<Array<Proveedor>>
+    HttpClientServiceInterface<RespuestaProveedores>
   > {
-    return this.http.get<HttpClientServiceInterface<Array<Proveedor>>>(
+    return this.http.get<HttpClientServiceInterface<RespuestaProveedores>>(
       ENDPOINTS.proveedores.consultarProveedores
     );
   }
