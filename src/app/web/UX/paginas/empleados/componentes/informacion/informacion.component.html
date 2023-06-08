@@ -49,18 +49,42 @@
       <div class="informacion--descripcion">
         <div class="informacion--descripcion--info-stock">
           <p class="informacion--descripcion--info-stock--llave">
-            Clasificación:
+            Sueldo:
           </p>
           <p class="informacion--descripcion--info-stock--valor">
-            
+            {{empleado.salario | currency}}
           </p>
         </div>
         <div class="informacion--descripcion--info-stock">
           <p class="informacion--descripcion--info-stock--llave">
-            Permisos:
+            Curp:
           </p>
           <p class="informacion--descripcion--info-stock--valor">
-            
+            {{empleado.curp}}
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Rfc:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{empleado.rfc}}
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Fecha de nacimiento:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{empleado.fecha_nacimiento | date}}
+          </p>
+        </div>
+        <div class="informacion--descripcion--info-stock">
+          <p class="informacion--descripcion--info-stock--llave">
+            Tipo de contrato:
+          </p>
+          <p class="informacion--descripcion--info-stock--valor">
+            {{empleado.tipo_contrato}}
           </p>
         </div>
     </div>

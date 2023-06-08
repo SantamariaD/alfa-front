@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { Empleados } from 'src/app/web/informacion/interface/empleados';
+import { HttpClientServiceInterfaceNoPayload } from 'src/app/web/informacion/interface/httpService';
+import { EmpleadosService } from 'src/app/web/informacion/servicios/empleados/empleados.service';
 
 @Component({
   selector: 'app-card-empleados',
@@ -33,15 +36,15 @@ export class CardEmpleadosComponent implements OnInit {
    */
 seccionModal = 'informacion';
 
-  constructor() { }
+  constructor( private modal: NzModalService, private empleadoServise:EmpleadosService) { }
 
   ngOnInit(): void {
   }
 
   //Metodo que manda la actualización del empleado a la vista para que se muestre
 
-  ActualizaDatos(){
-    this.empActualizados.emit();
+  ActualizaDatos(actualiza:boolean){
+    this.empActualizados.emit(actualiza);
   }
 
 
@@ -57,17 +60,36 @@ seccionModal = 'informacion';
 
   //Metodo que cambia el valor de la seccion para que se muestre la de información.
   clickAgregar(){
-    this.seccionModal = 'editar';
+    this.seccionModal = 'agregar';
   }
 
   //Metodo que cambia el valor de la seccion para que se muestre la de información.
   clickEditar(){
-    this.seccionModal = 'eliminar';
+    this.seccionModal = 'editar';
   }
 
-  //Metodo que cambia el valor de la seccion para que se muestre la de información.
-  modalBorrar(empleado:any){
+  // Modal borrar
+   modalBorrar(empleado: Empleados): void {
+    this.mostrarCardEmpleado = false;
+    this.modal.confirm({
+      nzTitle: '¿Está seguro que desea borrar al empleado ' +  empleado.nombreCompleto + '?',
+      nzContent:
+        '<b style="color: red;"Este documento se ira a la papelera de resiclaje</b>',
+      nzOkText: 'Si',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {this.borrarEmpleado(), this.empActualizados.emit()},
+      nzOnCancel: () => this.mostrarCardEmpleado = true,
+    });
+  }
 
+  borrarEmpleado(){
+    const id = parseInt(this.empleado.id, 10);
+this.empleadoServise.eliminarEmpleado(id).subscribe({
+  next:( empleado: HttpClientServiceInterfaceNoPayload)=>{
+    console.log(empleado)
+  }, error: error => console.log(error)
+})
   }
 
 }

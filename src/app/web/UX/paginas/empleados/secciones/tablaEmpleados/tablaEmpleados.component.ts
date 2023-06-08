@@ -31,11 +31,12 @@ export class TablaEmpleadosComponent implements OnInit {
    * @variable columnasTabla: Columnas que contiene la tabla
    */
   columnasTabla: Array<ColumnaTabla> = [
-    { columna: 'Nombre', llave: 'nombres', busqueda: true },
-    { columna: 'Fecha de creación', llave: 'fecha_nacimiento', busqueda: true },
-    { columna: 'Fecha de Modificación', llave: 'genero', busqueda: true },
-    { columna: 'Páginas', llave: 'estado_civil', busqueda: true },
-    { columna: 'Clasificación', llave: 'curp', busqueda: true },
+    { columna: 'Nombre', llave: 'nombreCompleto', busqueda: true },
+    { columna: 'Curp', llave: 'curp', busqueda: true },
+    { columna: 'Departamento', llave: 'departamento', busqueda: true },
+    { columna: 'Domicilio', llave: 'direccion', busqueda: true },
+    { columna: 'Teléfono', llave: 'telefono', busqueda: true },
+    { columna: 'Sueldo', llave: 'salario', busqueda: true }
 
   ];
 
@@ -50,6 +51,9 @@ traerTodosEmpleados(){
 this.empleadoServise.traerTodosEmpleados().subscribe({
     next:( empleados: HttpClientServiceInterface<Array<Empleados>>) => {
     this.empleados = empleados.payload
+    this.empleados.forEach(element => {
+      element.nombreCompleto = element.nombres + ' ' + element.apellido_materno + ' ' + element.apellido_paterno;
+    });
     }, error: error => console.log(error)
 })
 }
@@ -65,8 +69,9 @@ clickCerrarModal(cerrar:any){
   this.mostrarCardEmpleado = cerrar;
 }
 
-ActualizaDatos(){
+ActualizaDatos(actualiza:boolean){
   this.traerTodosEmpleados();
+  this.mostrarCardEmpleado = false;
 }
 
 }

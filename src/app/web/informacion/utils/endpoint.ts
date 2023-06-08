@@ -24,6 +24,6 @@ empleados: {
   traerEmpleado:'/empleados/consultar-empleado',
   guardarEmpleado:'/empleados/guardar-empleado',
   actualizarEmpleado:'/empleados/actualizar-empleado',
-  eliminarEmpleado:'empleados/eliminar-empleado'
+  eliminarEmpleado:'/empleados/eliminar-empleado'
 }
 };

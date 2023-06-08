@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Empleados } from 'src/app/web/informacion/interface/empleados';
 import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from 'src/app/web/informacion/interface/httpService';
@@ -17,46 +17,55 @@ export class ModalEditarComponent implements OnInit {
   @Input() empleado: Empleados = {} as Empleados
 
   /**
+   * @Output actEmpleado: este output envia un true que indica que se actualizo el epmleado y actualizar la vista.
+   */
+  @Output() actEmpleado= new EventEmitter<boolean>()
+
+  /**
    *@FormularioEmpleado empleadoActualizaForm: este formulario se usa para actualizar los datos de un empleado
    */
    empleadoActualizaForm: FormGroup = new FormGroup({
-
-    id: new FormControl(0),
-  nombres:  new FormControl(''),
-  apellido_paterno: new FormControl(''),
-  apellido_materno: new FormControl(''),
-  fecha_nacimiento:new FormControl(''),
-  genero:new FormControl(''),
-  estado_civil:new FormControl(''),
-  curp:new FormControl(''),
-  rfc:new FormControl(''),
-  nss:new FormControl(''),
-  direccion:new FormControl(''),
-  telefono:new FormControl(''),
-  correo_electronico:new FormControl(''),
+    id:new FormControl(0),
   puesto:new FormControl(''),
   departamento:new FormControl(''),
-  fecha_inicio:new FormControl(''),
   salario:new FormControl(''),
-  horas_laborales:new FormControl(''),
+  horas_laborales:new FormControl(0),
   tipo_contrato:new FormControl(''),
-  fecha_alta:new FormControl(''),
-  fecha_baja:new FormControl(''),
    })
+
+   /**
+   *@MostrarNotificacion regresa un booleano para mostrar modal en caso que la actualización sea correcta
+   */
+   mostrarNotificacion = false;
+
+   //contratos regresa el array de tipos de contratos que existen
+   contratos:any = [{id:0,nombre:'indefinido'},{id:1,nombre:'extendido'},{id:2,nombre:'temporal'},{id:3,nombre:'comisión'}]
 
   constructor(private empleadoServise:EmpleadosService) { }
 
+  
+
   ngOnInit(): void {
+    this.empleadoActualizaForm.patchValue({
+      id: this.empleado.id,
+      puesto: this.empleado.puesto,
+      departamento: this.empleado.departamento,
+      salario: this.empleado.salario,
+      horas_laborales: this.empleado.horas_laborales,
+      tipo_contrato: this.empleado.tipo_contrato,
+    });
   }
 
-  //Metodo para actualizar el emploeado
+  //Metodo para actualizar el empleado
   actualizaEmpleado(){
-this.empleadoServise.actualizarEmpleado(this.empleado).subscribe({
+this.empleadoServise.actualizarEmpleado(this.empleadoActualizaForm.value).subscribe({
   next:( empleado: HttpClientServiceInterfaceNoPayload)=>{
-console.log(empleado.mensaje)
+    this.mostrarNotificacion = true;
+    this.actEmpleado.emit(true);
+    setTimeout(() => (this.mostrarNotificacion = false), 5000);
   }, error: error => console.log(error)
 })
-
-
 }
+
+
 }

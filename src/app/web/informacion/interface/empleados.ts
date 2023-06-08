@@ -3,6 +3,7 @@ export interface Empleados {
   nombres: string;
   apellido_paterno: string;
   apellido_materno: string;
+  nombreCompleto:string;
   fecha_nacimiento: string;
   genero: string;
   estado_civil: string;
@@ -16,7 +17,7 @@ export interface Empleados {
   departamento: string;
   fecha_inicio: string;
   salario: string;
-  horas_laborales: string;
+  horas_laborales: number;
   tipo_contrato: string;
   fecha_alta: string;
   fecha_baja: string;

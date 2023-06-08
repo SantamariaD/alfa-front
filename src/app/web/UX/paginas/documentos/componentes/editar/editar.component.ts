@@ -54,6 +54,11 @@ export class EditarComponent implements OnInit {
     posicion: new FormControl(''),
   });
 
+  /**
+   * 
+   * @variable mostrarNotificacion 
+   */
+  mostrarNotificacion = false;
 
   constructor(private documentosService:DocumentosService) { }
 

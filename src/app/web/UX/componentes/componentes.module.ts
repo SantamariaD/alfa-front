@@ -12,6 +12,7 @@ import { DocumentosRoutingModule } from '../paginas/documentos/documentos-routin
 import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-routing.module';
 import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
 import { TablaComponent } from './tabla/tabla.component';
+import { CurrencyPipe } from './pipes/currencyPipe/currency.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TablaComponent } from './tabla/tabla.component';
     SeccionesCabeceraComponent,
     IconoArchivoComponent,
     TablaComponent,
+    CurrencyPipe,
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { TablaComponent } from './tabla/tabla.component';
     NavbarComponent,
     SeccionesCabeceraComponent,
     IconoArchivoComponent, 
-    TablaComponent
+    TablaComponent,
+    CurrencyPipe
   ],
 })
 export class ComponentesModule {}

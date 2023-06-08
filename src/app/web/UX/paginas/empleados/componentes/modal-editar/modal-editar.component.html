@@ -1,0 +1,55 @@
+<div class="editar">
+    <h2 class="editar__titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span
+      >Editar Empleado
+    </h2>
+    <form class="editar__form" [formGroup]="empleadoActualizaForm">
+      <nz-form-item class="editar__form--seccion">
+        <nz-form-control>
+          <label class="label">Departamento</label>
+          <input nz-input type="text" formControlName="departamento" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Tipo de contrato</label>
+          <select class="select" formControlName="tipo_contrato">
+            <option *ngFor="let contrato of contratos" [value]="contrato.id">
+              {{ contrato.nombre }}
+            </option>
+          </select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="editar__form--seccion">
+        <nz-form-control>
+          <label class="label">Sueldo</label>
+          <input nz-input type="text" formControlName="salario" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Puesto</label>
+          <input nz-input type="text" formControlName="puesto" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="editar__form--seccion">
+        <nz-form-control>
+          <label class="label">Horas laborales</label>
+          <input nz-input type="number" formControlName="horas_laborales" />
+        </nz-form-control>
+    </nz-form-item>
+      <nz-alert
+        *ngIf="mostrarNotificacion"
+        nzType="success"
+        nzMessage="Actualización del empleado correcta"
+        class="notificacion"
+      ></nz-alert>
+      <div class="editar__form--boton" (click)="actualizaEmpleado()">
+        <button nz-button nzType="primary" [disabled]="!empleadoActualizaForm.dirty">
+          Actualizar empleado
+        </button>
+      </div>
+    </form>
+  </div>
+  

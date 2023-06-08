@@ -89,7 +89,7 @@ this.docActualizados.emit();
       nzOkText: 'Si',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => {this.eliminarArchivo(documento),this.mostrarCardDocumento = true, this.docActualizados.emit()},
+      nzOnOk: () => {this.eliminarArchivo(documento), this.docActualizados.emit()},
       nzOnCancel: () => this.mostrarCardDocumento = true,
     });
   }

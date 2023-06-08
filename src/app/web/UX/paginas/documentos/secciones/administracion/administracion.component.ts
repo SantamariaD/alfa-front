@@ -47,9 +47,6 @@ export class AdministracionComponent implements OnInit, OnChanges {
     { columna: 'Tipo de archivo', llave: 'extension', busqueda: true },
     { columna: 'Fecha de creación', llave: 'created_at', busqueda: true },
     { columna: 'Fecha de Modificación', llave: 'updated_at', busqueda: true },
-    { columna: 'Páginas', llave: 'paginas', busqueda: true },
-    { columna: 'Clasificación', llave: 'clasificacion', busqueda: true },
-    { columna: 'Permisos', llave: 'permisos', busqueda: true },
   ];
 
   /**
