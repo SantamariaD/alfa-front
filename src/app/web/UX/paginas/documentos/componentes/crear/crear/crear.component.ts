@@ -28,6 +28,11 @@ export class CrearComponent implements OnInit {
    */
   mostarDocumentos = false;
 
+    /**
+   * @variable mostarNotificacion: Muestro notificacion de que se creo un nuevo doc con éxito
+   */
+    mostarNotificacion = false;
+
   /**
    * @variable modificarDocumentoVisible: Muestra el modal para modificar el documento
    */
@@ -58,6 +63,7 @@ export class CrearComponent implements OnInit {
    */
   documentoForm: FormGroup = new FormGroup({
     nombre_archivo: new FormControl('', [Validators.required]),
+    area: new FormControl('',[Validators.required]),
     file0: new FormControl('', [Validators.required]),
     id: new FormControl(0),
   });
@@ -123,7 +129,7 @@ export class CrearComponent implements OnInit {
         (respuestaGuardarArchivo: any) =>
           this.documentos.push(respuestaGuardarArchivo.payload)
       );
-      this.docCreado.emit();
+      this.docCreado.emit(true);
   }
 
   // Método para guardar un archivo en el formulario de agregar documento

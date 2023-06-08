@@ -18,16 +18,15 @@ export class DocumentosComponent implements OnInit {
     /**
    * @variable secciones: Contiene la información del encabezado de la sección.
    */
-docCreado = '';
+docCreado = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  actualizaDatos(){
-    this.docCreado = 'se ha creado';
-    console.log(this.docCreado);
+  actualizaDatos(actualiza:boolean){
+    this.docCreado = actualiza;
   }
 
    //Metodo para seleccionar cabeceras

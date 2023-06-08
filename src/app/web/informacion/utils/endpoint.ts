@@ -19,6 +19,7 @@ export const ENDPOINTS = {
     eliminarCategorias: '/categorias/eliminar-categoria',
   },
   empleados: {
+    crearEmpleado:'/empleados/guardar-empleado',
     traerEmpleados: '/empleados/consultar-empleados',
     traerEmpleado: '/empleados/consultar-empleado',
     guardarEmpleado: '/empleados/guardar-empleado',

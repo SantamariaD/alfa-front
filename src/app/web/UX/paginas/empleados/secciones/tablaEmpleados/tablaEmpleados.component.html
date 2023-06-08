@@ -6,7 +6,7 @@
 (clickFila)="clickFila($event)"
 ></app-tabla>
  
-
+<app-modal-crear class="modal-crear" (actEmpleado)="ActualizaDatos($event)" ></app-modal-crear>
 
 <app-card-empleados
 *ngIf="empleado.curp"

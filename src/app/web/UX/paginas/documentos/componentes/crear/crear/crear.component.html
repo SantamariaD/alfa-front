@@ -15,85 +15,44 @@
     nzTitle="Agregar documento"
   >
     <ng-container *nzModalContent>
-      <form nz-form [formGroup]="documentoForm" class="login-form" nz-row [nzGutter]="16">
-        <nz-form-item nz-col class="gutter-row" [nzSpan]="10"> 
-          <nz-form-control nzErrorTip="Ingrese el nombre del documento!">
-            <nz-input-group nzPrefixIcon="file">
-              <input
-                type="text"
-                nz-input
-                formControlName="nombre_archivo"
-                placeholder="Nombre del documento"
-              />
-            </nz-input-group>
+      <form class="editar__form" [formGroup]="documentoForm">
+        <nz-form-item class="editar__form--seccion">
+          <nz-form-control>
+            <label class="label">Nombre</label>
+            <input nz-input type="text" formControlName="nombre_archivo" />
+          </nz-form-control>
+          <nz-form-control>
+            <label class="label">Área</label>
+            <input nz-input type="text" formControlName="area" />
           </nz-form-control>
         </nz-form-item>
-        
-          <nz-form-item nz-col class="gutter-row" [nzSpan]="10">
-            <nz-form-control nz-col nzErrorTip="Ingrese el área del documento!">
-              <nz-input-group nzPrefixIcon="apartment">
-                <input
-                  type="text"
-                  nz-input
-                  
-                  placeholder="Nombre del área"
-                />
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item nz-col class="gutter-row" [nzSpan]="10">
-            <nz-form-control nz-col nzErrorTip="Ingrese el número de páginas!">
-              <nz-input-group nzPrefixIcon="block">
-                <input
-                  type="text"
-                  nz-input
-                  
-                  placeholder="Número de páginas"
-                />
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item nz-col class="gutter-row" [nzSpan]="10">
-            <nz-form-control nz-col nzErrorTip="Ingrese una clasificación!">
-              <nz-input-group nzPrefixIcon="appstore">
-                <input
-                  type="text"
-                  nz-input
-                  
-                  placeholder="Ingrese la clasificación"
-                />
-              </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item nz-col class="gutter-row" [nzSpan]="21">
-            <nz-form-control nz-col nzErrorTip="Ingrese una clasificación!">
-              <nz-select nzPrefixIcon="appstore" nzAllowClear nzPlaceHolder="Asigna permisos al documento." >
-                <nz-option nzLabel="Windows" nzValue="windows"></nz-option>
-                <nz-option nzLabel="Apple" nzValue="apple"></nz-option>
-                <nz-option nzLabel="Android" nzValue="android"></nz-option>
-              </nz-select>
-            </nz-form-control>
-          </nz-form-item>
-
-          <nz-form-item nz-col class="gutter-row" [nzSpan]="21">
-          <nz-form-control nzErrorTip="Please input your Password!">
-            <nz-input-group nzPrefixIcon="upload">
-              <span class="texto-archivo">{{ textoArchivo }}</span>
-              <input
-                type="file"
-                id="input-files"
-                class="input-file"
-                (change)="archivoDocumento($event)"
-              />
-              <label for="input-files" class="custom-file-upload"
-                >Subir archivo</label
-              >
-            </nz-input-group>
+        <nz-form-item class="editar__form--seccion">
+          <nz-form-control>
+            <label class="label">No de páginas</label>
+            <input nz-input type="text"  />
+          </nz-form-control>
+          <nz-form-control>
+            <label class="label">Clasificación</label>
+            <input nz-input type="text"  />
           </nz-form-control>
         </nz-form-item>
+        <nz-form-item class="editar__form--seccion">
+          <nz-form-control>
+            <label class="label">Cargar Archivo</label>
+            <input
+                      type="file"
+                      id="input-files"
+                      class="input-file"
+                      (change)="archivoDocumento($event)"
+                    />
+          </nz-form-control>
+      </nz-form-item>
+        <nz-alert
+          *ngIf="mostarNotificacion"
+          nzType="success"
+          nzMessage="Actualización del empleado correcta"
+          class="notificacion"
+        ></nz-alert>
       </form>
     </ng-container>
     <div *nzModalFooter>
