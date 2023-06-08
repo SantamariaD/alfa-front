@@ -1,0 +1,13 @@
+<app-tabla
+  [columnasTabla]="columnasTabla"
+  [filasTabla]="datosTabla"
+  [filasBusqueda]="datosTabla"
+  (clickFila)="clickFila($event)"
+></app-tabla>
+<app-card-proveedor
+  [mostrarCardProveedor]="mostrarCardProveedor"
+  [proveedor]="proveedor"
+  (clickCerrar)="clickCerrarModal($event)"
+  (actualizarProveedorEmit)="actualizacionProveedor()"
+  (eliminarProveedorEmit)="eliminarProveedor()"
+></app-card-proveedor>

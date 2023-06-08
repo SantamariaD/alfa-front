@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { Categoria } from 'src/app/web/informacion/interface/categorias';
 import { CategoriasService } from 'src/app/web/informacion/servicios/categorias/categorias.service';
 

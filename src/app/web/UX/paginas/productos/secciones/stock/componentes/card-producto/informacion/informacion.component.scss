@@ -14,6 +14,13 @@
     height: 170px;
     margin: 0px auto;
   }
+  &--imagen-icono {
+    height: 200px;
+    text-align: center;
+    &--icono {
+      font-size: 200px;
+    }
+  }
   &--descripcion {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

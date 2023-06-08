@@ -36,7 +36,7 @@
   border-bottom: 1px solid rgb(184, 184, 184);
 }
 
-.paginacion {
-  width: 25%;
-  margin: 10px 0px 5px auto;
+.paginacion, nz-pagination {
+  max-width: 65%;
+  margin: 10px auto;
 }

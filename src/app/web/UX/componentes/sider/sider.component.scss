@@ -1,10 +1,10 @@
 @import "../../../../../styles.scss";
 
 .menu-sidebar {
-  position: relative;
   z-index: 10;
   min-height: 100vh;
   box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+  overflow: auto;
 }
 
 .header-trigger {
@@ -47,7 +47,6 @@
 }
 
 .contenedor-sider {
-  position: fixed;
   width: 80px;
 }
 
@@ -66,3 +65,65 @@
   width: 80px;
   transition: 0.2s;
 }
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.layout {
+  min-height: 100vh;
+}
+
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+}
+
+.right-layout {
+  margin-left: 200px;
+}
+
+nz-header {
+  background: #fff;
+  padding: 0;
+}
+
+nz-content {
+  margin: 24px 16px 0;
+  overflow: initial;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  text-align: center;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.menu-sidebar {
+  scrollbar-width: 3px; /* Ancho de la barra de desplazamiento */
+  scrollbar-color: #003e78 #dddddd!important; /* Color de la barra y del fondo */
+
+}
+
+/* Personalización de la barra de desplazamiento en WebKit (Safari, Chrome) */
+.menu-sidebar::-webkit-scrollbar {
+  width: 3px; /* Ancho de la barra de desplazamiento */
+  border-radius: 2px;
+}
+
+.menu-sidebar::-webkit-scrollbar-track {
+  background-color: #dddddd; /* Color del fondo */
+}
+
+.menu-sidebar::-webkit-scrollbar-thumb {
+  background-color: #003e78; /* Color de la barra */
+}
+

@@ -28,6 +28,11 @@ export class StockComponent implements OnInit {
   valorProductos = 0;
 
   /**
+   * @variable secciones: Contiene las secciones de la página
+   */
+  secciones = [{ texto: 'Stock de productos', seleccionado: true }];
+
+  /**
    * @variable columnasTabla: Columnas que contiene la tabla
    */
   columnasTabla: Array<ColumnaTabla> = [
@@ -58,14 +63,14 @@ export class StockComponent implements OnInit {
   mostrarAgregarCategoria = false;
 
   /**
-   * @variable mostrarTabla: Muestra la tabla de productos
-   */
-  mostrarTabla = false;
-
-  /**
    * @variable categorias: contiene las categorias
    */
   categorias: Array<Categoria> = [];
+
+  /**
+   * @variable seccion: Contiene la seccione actual
+   */
+  seccion = 'Stock de productos';
 
   constructor(
     private message: NzMessageService,
@@ -87,6 +92,13 @@ export class StockComponent implements OnInit {
   }
 
   /**
+   * @Metodo Asigna la sección en la que nos encontramos
+   */
+  selectSeccion(seccion: string): void {
+    this.seccion = seccion;
+  }
+
+  /**
    * @Metodo Captura el evento cuando se da click a la fila y muestra el producto
    */
   clickCerrarModal(cerrar: boolean): void {
@@ -94,7 +106,7 @@ export class StockComponent implements OnInit {
   }
 
   /**
-   * @Metodo Captura el evento cuando se da click en cerrar en modal 
+   * @Metodo Captura el evento cuando se da click en cerrar en modal
    */
   clickCerrarModalAgregarProducto(cerrar: boolean): void {
     this.mostrarAgregarProducto = cerrar;
@@ -122,6 +134,7 @@ export class StockComponent implements OnInit {
     this.mostrarAgregarCategoria = false;
     this.message.success(`Se guardo correctamente la categoría.`);
     this.consultarCategorias();
+    this.consultarProductos();
   }
 
   /**
@@ -131,14 +144,17 @@ export class StockComponent implements OnInit {
     this.mostrarAgregarCategoria = false;
     this.message.success(`Se elimino correctamente la categoría.`);
     this.consultarCategorias();
+    this.consultarProductos();
   }
 
   /**
    * @Metodo captura el evento de actualizar un producto y consulta todos los productos
    */
   actualizacionProducto(): void {
+    this.mostrarCardProducto = false;
     this.consultarProductos();
     this.consultarCategorias();
+    this.message.success(`Se actualizo correctamente el producto.`);
   }
 
   /**
@@ -178,14 +194,12 @@ export class StockComponent implements OnInit {
    * @Metodo Consulta todos los productos
    */
   private consultarProductos(): void {
-    this.mostrarTabla = false;
     this.productosService.consultarProductos().subscribe({
       next: (
         respuestaProductos: HttpClientServiceInterface<Array<Producto>>
       ) => {
         this.datosTabla = respuestaProductos.payload;
         this.informacionStock();
-        this.mostrarTabla = true;
       },
       error: (error) => console.log(error),
     });
