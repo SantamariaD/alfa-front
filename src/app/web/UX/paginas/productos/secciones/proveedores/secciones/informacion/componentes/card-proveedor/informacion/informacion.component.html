@@ -1,1 +1,45 @@
-<p>informacion works!</p>
+<div class="informacion">
+  <h2 class="informacion--titulo">
+    <span
+      class="icono-info"
+      nz-icon
+      nzType="info-circle"
+      nzTheme="outline"
+    ></span>
+    Información del proveedor
+  </h2>
+  <div class="informacion--imagen-icono">
+    <span class="informacion--imagen-icono--icono" nz-icon nzType="team"></span>
+  </div>
+  <div class="informacion--datos">
+    <h4 class="informacion--datos__nombre">{{ proveedor.nombre }}</h4>
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">Teléfono:</p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ proveedor.telefono }}
+        </p>
+      </div>
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">Domicilio:</p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ proveedor.domicilio }}
+        </p>
+      </div>
+    </div>
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">Correo:</p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ proveedor.correo }}
+        </p>
+      </div>
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">Sitio web:</p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ proveedor.sitioWeb }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

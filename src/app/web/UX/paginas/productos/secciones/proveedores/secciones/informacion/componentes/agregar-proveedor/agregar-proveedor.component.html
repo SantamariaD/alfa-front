@@ -1,1 +1,57 @@
-<p>agregar-proveedor works!</p>
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="cerrarModal()"
+      >&times;</span
+    >
+    <h2 class="modal__contenido--titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span>
+      Agregar proveedor
+    </h2>
+
+    <form class="modal__form" [formGroup]="guardarForm">
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Nombre</label>
+          <input nz-input type="text" formControlName="nombre" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Teléfono</label>
+          <input nz-input type="text" formControlName="telefono" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Correo</label>
+          <input nz-input type="text" formControlName="correo" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Sitio web</label>
+          <input nz-input type="text" formControlName="sitioWeb" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <label class="label">Domicilio</label>
+          <nz-textarea-count [nzMaxCharacterCount]="700">
+            <textarea formControlName="domicilio" nz-input rows="2"></textarea>
+          </nz-textarea-count>
+        </nz-form-control>
+      </nz-form-item>
+      <div class="modal__form--boton">
+        <button
+          nz-button
+          nzType="primary"
+          [disabled]="!guardarForm.valid"
+          (click)="guardarProveedor()"
+        >
+          Guardar proveedor
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

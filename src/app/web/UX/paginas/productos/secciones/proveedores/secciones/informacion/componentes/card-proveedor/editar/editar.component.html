@@ -1,1 +1,51 @@
-<p>editar works!</p>
+<div class="editar">
+  <h2 class="editar__titulo">
+    <span
+      class="icono-info"
+      nz-icon
+      nzType="info-circle"
+      nzTheme="outline"
+    ></span
+    >Editar producto
+  </h2>
+  <form class="editar__form" [formGroup]="editarForm">
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Nombre</label>
+        <input nz-input type="text" formControlName="nombre" />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Teléfono</label>
+        <input nz-input type="text" formControlName="telefono" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Correo</label>
+        <input nz-input type="text" formControlName="correo" />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Sitio web</label>
+        <input nz-input type="text" formControlName="sitioWeb" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <label class="label">Domicilio</label>
+        <nz-textarea-count [nzMaxCharacterCount]="700">
+          <textarea formControlName="domicilio" nz-input rows="2"></textarea>
+        </nz-textarea-count>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="editar__form--boton">
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="!editarForm.dirty"
+        (click)="actualizarProveedor()"
+      >
+        Actualizar producto
+      </button>
+    </div>
+  </form>
+</div>

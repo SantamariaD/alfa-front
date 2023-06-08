@@ -1,1 +1,23 @@
-<p>eliminar works!</p>
+<div class="eliminar">
+  <h2 class="eliminar__titulo">
+    <span
+      class="icono-info"
+      nz-icon
+      nzType="exclamation-circle"
+      nzTheme="outline"
+    ></span
+    >Eliminar proveedor
+  </h2>
+  <div class="eliminar__contenido">
+    <p class="eliminar__contenido--texto">
+      ¿Estás seguro de eliminar el proveedor?
+    </p>
+    <button
+      class="eliminar__contenido--boton"
+      nz-button
+      (click)="clickEliminar()"
+    >
+      Eliminar proveedor
+    </button>
+  </div>
+</div>
