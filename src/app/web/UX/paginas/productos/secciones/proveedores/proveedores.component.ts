@@ -17,9 +17,9 @@ export class ProveedoresComponent implements OnInit {
    * @variable secciones: Contiene las secciones de la página
    */
   secciones = [
-    { texto: 'Información', seleccionado: true },
-    { texto: 'Catálogo', seleccionado: false },
-    { texto: 'Historial', seleccionado: false },
+    { texto: 'Información de proveedores', seleccionado: true },
+    { texto: 'Catálogo de productos', seleccionado: false },
+    { texto: 'Historial de pedidos', seleccionado: false },
     { texto: 'Análisis', seleccionado: false },
   ];
 
@@ -33,13 +33,13 @@ export class ProveedoresComponent implements OnInit {
   selectSeccion(seccion: string): void {
     this.seccion = seccion;
     switch (seccion) {
-      case 'Información':
+      case 'Información de proveedores':
         this.router.navigate(['/productos/proveedores/informacion']);
         break;
-      case 'Catálogo':
+      case 'Catálogo de productos':
         this.router.navigate(['/productos/proveedores/catalogo']);
         break;
-      case 'Historial':
+      case 'Historial de pedidos':
         this.router.navigate(['/productos/proveedores/historial']);
         break;
       case 'Análisis':

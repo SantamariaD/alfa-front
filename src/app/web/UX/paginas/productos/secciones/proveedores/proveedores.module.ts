@@ -13,6 +13,7 @@ import { EditarComponent } from './secciones/informacion/componentes/card-provee
 import { EliminarComponent } from './secciones/informacion/componentes/card-proveedor/eliminar/eliminar.component';
 import { InformacionComponent } from './secciones/informacion/componentes/card-proveedor/informacion/informacion.component';
 import { AgregarProveedorComponent } from './secciones/informacion/componentes/agregar-proveedor/agregar-proveedor.component';
+import { CardEditarComponent } from './secciones/catalogo/componentes/card-editar/card-editar.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AgregarProveedorComponent } from './secciones/informacion/componentes/a
     EliminarComponent,
     InformacionComponent,
     AgregarProveedorComponent,
+    CardEditarComponent,
   ],
   imports: [
     CommonModule,

@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpclientService } from '../httpService/http-service.service';
 import { Observable } from 'rxjs';
-import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from '../../interface/httpService';
+import {
+  HttpClientServiceInterface,
+  HttpClientServiceInterfaceNoPayload,
+} from '../../interface/httpService';
 import { Proveedor, RespuestaProveedores } from '../../interface/proveedores';
 import { ENDPOINTS } from '../../utils/endpoint';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProveedoresService {
-
   constructor(private http: HttpclientService) {}
 
   /**
@@ -20,6 +22,17 @@ export class ProveedoresService {
   > {
     return this.http.get<HttpClientServiceInterface<RespuestaProveedores>>(
       ENDPOINTS.proveedores.consultarProveedores
+    );
+  }
+
+  /**
+   * @Servicio consulta todos los proveedores de la base
+   */
+  consultarProveedor(
+    id: number
+  ): Observable<HttpClientServiceInterface<Proveedor>> {
+    return this.http.get<HttpClientServiceInterface<Proveedor>>(
+      ENDPOINTS.proveedores.consultarProveedor + '/' + id
     );
   }
 
