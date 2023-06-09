@@ -70,6 +70,7 @@ this.empleadoServise.crearEmpleado(this.empleadoForm.value).subscribe({
   }
 
   cerrarModal(){
+    this.empleadoForm.reset();
     this.isVisible = false;
   }
 

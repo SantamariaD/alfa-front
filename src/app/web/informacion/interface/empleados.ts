@@ -21,4 +21,6 @@ export interface Empleados {
   tipo_contrato: string;
   fecha_alta: string;
   fecha_baja: string;
+  baja:number;
+  fecha_reingreso:string;
 }

@@ -1,4 +1,37 @@
 
+<div class="productos__descripcion">
+  <div class="productos__descripcion--info-stock">
+    <p class="productos__descripcion--info-stock--llave">
+      Total de Empleados:
+    </p>
+    <p class="productos__descripcion--info-stock--valor">
+      {{ empleados.length }}
+    </p>
+  </div>
+  <div class="productos__descripcion--info-stock">
+    <p class="productos__descripcion--info-stock--llave">
+      Altas empleados:
+    </p>
+    <p class="productos__descripcion--info-stock--valor">
+      {{  empleados.length }}
+    </p>
+  </div>
+</div>
+<div class="productos__descripcion">
+  <div class="productos__descripcion--info-stock">
+    <p class="productos__descripcion--info-stock--llave">
+      Bajas Empleados:
+    </p>
+    <p class="productos__descripcion--info-stock--valor"> {{  empleados.length }}</p>
+  </div>
+  <div class="productos__descripcion--info-stock">
+    <p class="productos__descripcion--info-stock--llave">
+      Empleados Ausentes:
+    </p>
+    <p class="productos__descripcion--info-stock--valor">{{  empleados.length }}</p>
+  </div>
+</div>
+
 <app-tabla
 [columnasTabla]="columnasTabla"
 [filasTabla]="empleados"
@@ -10,6 +43,7 @@
 
 <app-card-empleados
 *ngIf="empleado.curp"
+[switchValue] = switchValue
   [mostrarCardEmpleado]="mostrarCardEmpleado"
   [empleado]="empleado"
   (clickCerrar)="clickCerrarModal($event)"
