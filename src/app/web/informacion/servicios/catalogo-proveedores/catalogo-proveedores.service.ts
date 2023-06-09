@@ -35,4 +35,28 @@ export class CatalogoProveedoresService {
       ENDPOINTS.catalogoProveedores.eliminarCatalogo + '/' + id
     );
   }
+
+  /**
+   * @Servicio Actualiza un producto del catálogo del proveedor
+   */
+  actualizarProductoCatalogo(
+    producto: any
+  ): Observable<HttpClientServiceInterfaceNoPayload> {
+    return this.http.put<HttpClientServiceInterfaceNoPayload>(
+      ENDPOINTS.catalogoProveedores.actualizarCatalogo,
+      producto
+    );
+  }
+
+  /**
+   * @Servicio GUarda un producto del catálogo del proveedor
+   */
+  guardarProductoCatalogo(
+    producto: any
+  ): Observable<HttpClientServiceInterface<CatalogoProveedor>> {
+    return this.http.post<HttpClientServiceInterface<CatalogoProveedor>>(
+      ENDPOINTS.catalogoProveedores.guardarCatalogo,
+      producto
+    );
+  }
 }

@@ -84,8 +84,8 @@
         <form class="catalogo__form-agregar" [formGroup]="catalogoForm">
           <nz-form-item class="catalogo__form-agregar--seccion">
             <nz-form-control>
-              <label class="label">Nombre</label>
-              <input nz-input type="text" formControlName="nombre" />
+              <label class="label">Proveedor</label>
+              <input nz-input type="text" formControlName="nombreProveedor" />
             </nz-form-control>
             <nz-form-control>
               <p class="catalogo__form-agregar--seccion__label">Producto</p>
@@ -141,6 +141,9 @@
 </section>
 
 <app-card-editar
+  *ngIf="clickCerrar"
   [mostrarCardEditar]="clickCerrar"
+  [productoEditar]="productoEditar"
   (clickCerrar)="clickCerrarModal()"
+  (clickActualizar)="actualizarProducto()"
 ></app-card-editar>

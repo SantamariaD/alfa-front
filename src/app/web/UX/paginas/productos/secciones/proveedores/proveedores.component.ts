@@ -20,7 +20,6 @@ export class ProveedoresComponent implements OnInit {
     { texto: 'Información de proveedores', seleccionado: true },
     { texto: 'Catálogo de productos', seleccionado: false },
     { texto: 'Historial de pedidos', seleccionado: false },
-    { texto: 'Análisis', seleccionado: false },
   ];
 
   constructor(private router: Router) {}

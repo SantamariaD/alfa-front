@@ -69,9 +69,19 @@ select:focus {
   outline: none;
 }
 
+select {
+  font-size: 18px;
+  margin-top: 7px;
+}
+
 input {
   border: none;
   border-bottom: 1px solid rgb(196, 196, 196);
+  font-size: 18px;
+}
+
+.ant-input[disabled] {
+  background-color: transparent;
 }
 
 nz-avatar {

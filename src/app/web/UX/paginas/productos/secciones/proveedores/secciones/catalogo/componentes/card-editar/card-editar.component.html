@@ -3,5 +3,58 @@
     <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
       >&times;</span
     >
+    <div class="modal__contenido--secciones">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span
+      ><span class="text-icono">Editar producto del catálogo</span>
+      <form class="modal__contenido--secciones__form" [formGroup]="editarForm">
+        <nz-form-item class="modal__contenido--secciones__form--seccion">
+          <nz-form-control>
+            <label class="label">Proveedor</label>
+            <input nz-input type="text" formControlName="proveedor" />
+          </nz-form-control>
+          <nz-form-control>
+            <label class="label">Producto</label>
+            <input nz-input type="text" formControlName="producto" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="modal__contenido--secciones__form--seccion">
+          <nz-form-control>
+            <label class="label">Precio de compra</label>
+            <input nz-input type="text" formControlName="precioCompra" />
+          </nz-form-control>
+          <nz-form-control>
+            <label class="label">Precio máximo de venta</label>
+            <input nz-input type="text" formControlName="precioMaximoVenta" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <label class="label">Políticas de venta</label>
+            <nz-textarea-count [nzMaxCharacterCount]="700">
+              <textarea
+                formControlName="politicasVenta"
+                nz-input
+                rows="2"
+              ></textarea>
+            </nz-textarea-count>
+          </nz-form-control>
+        </nz-form-item>
+        <div class="modal__contenido--secciones__form--boton">
+          <button
+            nz-button
+            nzType="primary"
+            [disabled]="!editarForm.dirty"
+            (click)="editarProducto()"
+          >
+            Editar producto
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

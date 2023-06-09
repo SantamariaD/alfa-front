@@ -43,6 +43,11 @@ export class CatalogoComponent implements OnInit {
   productos: Array<Producto> = [];
 
   /**
+   * @variable productos: Contine el producto a editar
+   */
+  productoEditar: CatalogoProveedor = {} as CatalogoProveedor;
+
+  /**
    * @variable mostrarCollapse: Muestra los collapse cuando se busca un proveedor
    */
   mostrarCollapse = false;
@@ -61,7 +66,7 @@ export class CatalogoComponent implements OnInit {
    * @Form catalogoForm: Id del proveedor que se buscara el catalógo
    */
   catalogoForm: FormGroup = new FormGroup({
-    nombre: new FormControl('', [Validators.required]),
+    nombreProveedor: new FormControl({value: '', disabled: true}),
     idProveedor: new FormControl(null, [Validators.required]),
     idProducto: new FormControl(null, [Validators.required]),
     precioCompra: new FormControl('', [Validators.required]),
@@ -105,7 +110,12 @@ export class CatalogoComponent implements OnInit {
       .subscribe({
         next: (
           respuestaConsulta: HttpClientServiceInterface<CatalogoProveedor[]>
-        ) => (this.catalogoProveedores = respuestaConsulta.payload),
+        ) => {
+          this.catalogoForm.patchValue({
+            nombreProveedor: respuestaConsulta.payload[0].nombreProveedor,
+          });
+          this.catalogoProveedores = respuestaConsulta.payload;
+        },
       });
   }
 
@@ -119,14 +129,35 @@ export class CatalogoComponent implements OnInit {
     this.catalogoForm.value.idProveedor = parseInt(
       this.catalogoForm.value.idProveedor
     );
-    console.log(this.catalogoForm.value);
+
+    this.catalogoProveedoresService
+      .guardarProductoCatalogo(this.catalogoForm.value)
+      .subscribe({
+        next: (
+          respuestaConsulta: HttpClientServiceInterface<CatalogoProveedor>
+        ) => {
+          this.message.success('Se guardo correctamente el producto');
+          this.buscarCatalogo();
+
+        },
+      });
   }
 
   /**
    * @Meotod edita un producto del catálogo de proveedores
    */
   editar(catalogo: CatalogoProveedor): void {
+    this.productoEditar = catalogo;
     this.clickCerrar = true;
+  }
+
+  /**
+   * @Meotod click de la card al actualizar un producto del catálogo de proveedores
+   */
+  actualizarProducto(): void {
+    this.clickCerrar = false;
+    this.message.success('Se actualizó correctamente el producto');
+    this.buscarCatalogo();
   }
 
   /**
