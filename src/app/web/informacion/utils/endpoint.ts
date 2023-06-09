@@ -33,4 +33,11 @@ export const ENDPOINTS = {
     actualizarProveedor: '/proveedores/actualizar-proveedor',
     eliminarProveedor: '/proveedores/eliminar-proveedor',
   },
+  catalogoProveedores: {
+    consultarCatalogos: '/catalogo-proveedores/consultar-catalogos',
+    consultarCatalogo: '/catalogo-proveedores/consultar-catalogo',
+    guardarCatalogo: '/catalogo-proveedores/guardar-catalogo',
+    actualizarCatalogo: '/catalogo-proveedores/actualizar-catalogo',
+    eliminarCatalogo: '/catalogo-proveedores/eliminar-catalogo',
+  },
 };

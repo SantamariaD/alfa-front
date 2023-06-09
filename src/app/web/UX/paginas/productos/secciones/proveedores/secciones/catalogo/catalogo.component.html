@@ -1,1 +1,146 @@
-<p>catalogo works!</p>
+<section class="catalogo">
+  <form class="catalogo__form">
+    <nz-form-item class="catalogo__form--seccion">
+      <nz-form-control>
+        <p class="catalogo__form--seccion__label">
+          Buscar catálogo de proveedor
+        </p>
+        <div>
+          <select
+            class="catalogo__form--seccion__select"
+            [formControl]="idProveedor"
+          >
+            <option
+              *ngFor="let proveedor of proveedores"
+              [value]="proveedor.id"
+            >
+              {{ proveedor.nombre }}
+            </option>
+          </select>
+          <button
+            class="catalogo__form--seccion__boton"
+            nz-button
+            nzType="primary"
+            [disabled]="!idProveedor.valid"
+            (click)="buscarCatalogo()"
+          >
+            Buscar catálogo
+          </button>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div class="catalogo__collapse" *ngIf="mostrarCollapse">
+    <nz-collapse nzAccordion>
+      <nz-collapse-panel
+        nzHeader="Mostrar catálogo de productos"
+        [nzActive]="true"
+      >
+        <div
+          class="catalogo__collapse--lista"
+          *ngFor="let catalogo of catalogoProveedores"
+        >
+          <div class="catalogo__collapse--lista__info imagen">
+            <nz-avatar [nzSize]="50" [nzSrc]="catalogo.imagen"></nz-avatar>
+            <p class="catalogo__collapse--lista__info--nombre">
+              <span class="tex">{{ catalogo.nombreProducto }}</span>
+            </p>
+          </div>
+          <div class="catalogo__collapse--lista__info">
+            <p class="catalogo__collapse--lista__info--precio">
+              <span class="tex">Precio de compra:</span> ${{
+                catalogo.precioCompra
+              }}
+            </p>
+            <p class="catalogo__collapse--lista__info--precio">
+              <span class="tex">Precio máximo de venta:</span> ${{
+                catalogo.precioMaximoVenta
+              }}
+            </p>
+          </div>
+          <div class="catalogo__collapse--lista__info">
+            <p class="catalogo__collapse--lista__info--politica">
+              <span class="tex">Políticas de venta:</span>
+              {{ catalogo.politicasVenta }}
+            </p>
+          </div>
+          <div class="catalogo__collapse--lista__info">
+            <p class="editar cursor-pointer" (click)="editar(catalogo)">
+              <span nz-icon nzType="edit" nzTheme="outline"></span>
+            </p>
+            <p
+              class="eliminar cursor-pointer"
+              (click)="eliminarModal(catalogo)"
+            >
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </p>
+          </div>
+        </div>
+      </nz-collapse-panel>
+      <nz-collapse-panel
+        nzHeader="Agregar producto a catálogo"
+        [nzActive]="false"
+      >
+        <form class="catalogo__form-agregar" [formGroup]="catalogoForm">
+          <nz-form-item class="catalogo__form-agregar--seccion">
+            <nz-form-control>
+              <label class="label">Nombre</label>
+              <input nz-input type="text" formControlName="nombre" />
+            </nz-form-control>
+            <nz-form-control>
+              <p class="catalogo__form-agregar--seccion__label">Producto</p>
+              <select
+                class="catalogo__form-agregar--seccion__select"
+                formControlName="idProducto"
+              >
+                <option
+                  *ngFor="let producto of productos"
+                  [value]="producto.id"
+                >
+                  {{ producto.nombre }}
+                </option>
+              </select>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="catalogo__form-agregar--seccion">
+            <nz-form-control>
+              <label class="label">Precio de compra</label>
+              <input nz-input type="text" formControlName="precioCompra" />
+            </nz-form-control>
+            <nz-form-control>
+              <label class="label">Precio máximo de venta</label>
+              <input nz-input type="text" formControlName="precioMaximoVenta" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <label class="label">Politicas de venta</label>
+              <nz-textarea-count [nzMaxCharacterCount]="700">
+                <textarea
+                  formControlName="politicasVenta"
+                  nz-input
+                  rows="2"
+                ></textarea>
+              </nz-textarea-count>
+            </nz-form-control>
+          </nz-form-item>
+          <div class="catalogo__form-agregar--seccion__boton">
+            <button
+              nz-button
+              nzType="primary"
+              [disabled]="!catalogoForm.valid"
+              (click)="guardarProductoCatalogo()"
+            >
+              Agregar producto a catálogo
+            </button>
+          </div>
+        </form>
+      </nz-collapse-panel>
+    </nz-collapse>
+  </div>
+</section>
+
+<app-card-editar
+  [mostrarCardEditar]="clickCerrar"
+  (clickCerrar)="clickCerrarModal()"
+></app-card-editar>
