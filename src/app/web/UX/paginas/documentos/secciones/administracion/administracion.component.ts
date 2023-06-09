@@ -22,7 +22,7 @@ export class AdministracionComponent implements OnInit, OnChanges {
   /**
    * @Input docCreado: Cambia su valos para actualizar la vista de docs creados
    */
-  @Input() docCreado = '';
+  @Input() docCreado = false;
 
   /**
    * @variable documentos: Array de documentos de administración
@@ -64,7 +64,7 @@ export class AdministracionComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this['docCreado'] !== '') {
+    if (this['docCreado'] !== false) {
       console.log('actualizado');
       this.traerDocumentos();
     }

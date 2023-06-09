@@ -5,7 +5,7 @@
   (seleccionadoClick)="selectSeccion($event)"
 ></app-secciones-cabecera>
   
-  <app-crear nz-tooltip nzTooltipTitle="Agrega un documento" class="modal-crear" (docCreado)="actualizaDatos()"></app-crear>
+  <app-crear nz-tooltip nzTooltipTitle="Agrega un documento" class="modal-crear" (docCreado)="actualizaDatos($event)"></app-crear>
 
   <div  class="contenedor-central">
     <app-administracion *ngIf="cabecera === 'Tabla de Documentos'" [docCreado]="docCreado"></app-administracion>

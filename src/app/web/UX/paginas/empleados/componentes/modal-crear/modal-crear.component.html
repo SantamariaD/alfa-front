@@ -1,1 +1,100 @@
-<p>modal-crear works!</p>
+<div class="notas__boton-agregar" (click)="showModal()">
+  
+  <a>
+    <span class="green-icon" nz-icon nzType="plus-circle" nzTheme="fill"></span>
+  </a>
+    
+    
+  </div>
+  
+   
+  <nz-modal
+    [nzClosable]="false"
+    [nzMaskClosable]="false"
+    [(nzVisible)]="isVisible"
+    nzTitle="Agregar empleado"
+  >
+    <ng-container *nzModalContent>
+      <form class="editar__form" [formGroup]="empleadoForm">
+        <nz-form-item class="editar__form--seccion">
+          <nz-form-control>
+            <label class="label">Nombre:</label>
+            <input nz-input type="text" formControlName="nombres"/>
+          </nz-form-control>
+          <nz-form-control>
+            <label class="label">Apellido Paterno:</label>
+            <input nz-input formControlName="apellido_paterno" type="text"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="editar__form--seccion">
+          <nz-form-control>
+            <label class="label">Apellido Materno:</label>
+            <input nz-input formControlName="apellido_materno" type="text"  />
+          </nz-form-control>
+          <nz-form-control>
+            <label class="label">Curp:</label>
+            <input nz-input formControlName="curp" type="text"  />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="editar__form--seccion">
+          <nz-form-control>
+            <label class="label">RFC:</label>
+            <input
+            nz-input formControlName="rfc" type="text" 
+                    />
+          </nz-form-control>
+          <nz-form-control>
+            <label class="label">Puesto:</label>
+            <input
+            nz-input formControlName="puesto" type="text" 
+                    />
+          </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="editar__form--seccion">
+        <nz-form-control>
+          <label class="label">Departamento:</label>
+          <input
+          nz-input formControlName="departamento" type="text" 
+                  />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Sueldo:</label>
+          <input
+          nz-input formControlName="salario" type="number" 
+                  />
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Horas laborales:</label>
+        <input
+        nz-input formControlName="horas_laborales" type="text" 
+                />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Tipo de contrato:</label>
+        <input
+        nz-input formControlName="tipo_contrato" type="text" 
+                />
+      </nz-form-control>
+  </nz-form-item>
+        <nz-alert
+          *ngIf="mostrarNotificacion"
+          nzType="success"
+          nzMessage="Creación del empleado correcta"
+          class="notificacion"
+        ></nz-alert>
+      </form>
+    </ng-container>
+    <div *nzModalFooter>
+      <button nz-button (click)="cerrarModal()">Cerrar</button>
+      <button
+        [disabled]="!empleadoForm.valid"
+        nz-button
+        nzType="primary"
+        (click)="crearEmpleado()"
+      >
+        Crear Empleado
+      </button>
+    </div>
+  </nz-modal>

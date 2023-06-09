@@ -59,5 +59,14 @@ export class EmpleadosService {
     );
   }
 
+  crearEmpleado(
+    empleado: any
+  ): Observable<HttpClientServiceInterfaceNoPayload> {
+    return this.http.post<HttpClientServiceInterfaceNoPayload>(
+      ENDPOINTS.empleados.crearEmpleado,
+      empleado
+    );
+  }
+
 
 }
