@@ -6,7 +6,7 @@
       nzType="info-circle"
       nzTheme="outline"
     ></span
-    >Editar Archivo
+    >Editar Documento
   </h2>
   <form class="editar__form" [formGroup]="documentoActualizarForm">
     <nz-form-item class="editar__form--seccion">
@@ -21,34 +21,31 @@
     </nz-form-item>
     <nz-form-item class="editar__form--seccion">
       <nz-form-control>
-        <label class="label">No de páginas</label>
-        <input nz-input type="text"  />
+        <p class="label">Activo</p>
+        <select class="select" formControlName="activo">
+          <option [value]="1">Si</option>
+          <option [value]="0">No</option>
+        </select>
       </nz-form-control>
       <nz-form-control>
-        <label class="label">Clasificación</label>
-        <input nz-input type="text"  />
+        <p class="label">Archivo</p>
+        <div class="custom-file">
+          <input
+            type="file"
+            class="custom-file-input"
+            formControlName="file0"
+          />
+          <label class="custom-file-label">Seleccionar archivo</label>
+        </div>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="editar__form--seccion">
-      <nz-form-control>
-        <label class="label">Modificar archivo</label>
-        <input
-                  type="file"
-                  id="input-files"
-                  class="input-file"
-                  (change)="archivoDocumentoModificar($event)"
-                />
-      </nz-form-control>
-  </nz-form-item>
-    <nz-alert
-      *ngIf="mostrarNotificacion"
-      nzType="success"
-      nzMessage="Actualización del empleado correcta"
-      class="notificacion"
-    ></nz-alert>
     <div class="editar__form--boton" (click)="actualizarDocumento()">
-      <button nz-button nzType="primary" [disabled]="!documentoActualizarForm.dirty">
-        Actualizar empleado
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="!documentoActualizarForm.dirty"
+      >
+        Actualizar Documento
       </button>
     </div>
   </form>

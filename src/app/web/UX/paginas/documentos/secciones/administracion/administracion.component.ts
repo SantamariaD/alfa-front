@@ -5,12 +5,9 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { secciones } from '../../fixture';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/documentos.service';
 import { Documento } from 'src/app/web/informacion/interface/documentos';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
 
 @Component({
@@ -54,10 +51,7 @@ export class AdministracionComponent implements OnInit, OnChanges {
    */
   mostarDocumentos = false;
 
-  constructor(
-    private documentosService: DocumentosService,
-    private modal: NzModalService
-  ) {}
+  constructor(private documentosService: DocumentosService) {}
 
   ngOnInit(): void {
     this.traerDocumentos();
@@ -65,7 +59,6 @@ export class AdministracionComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this['docCreado'] !== false) {
-      console.log('actualizado');
       this.traerDocumentos();
     }
   }
@@ -85,7 +78,6 @@ export class AdministracionComponent implements OnInit, OnChanges {
 
   //Metodo para actualizar la vista de los documentos al editar
   ActualizaDatos() {
-    console.log('se manda');
     this.traerDocumentos();
     this.mostrarCardDocumento = false;
   }
@@ -94,7 +86,6 @@ export class AdministracionComponent implements OnInit, OnChanges {
   clickFila(data: any) {
     this.seleccionado = data;
     this.mostrarCardDocumento = true;
-    console.log(data);
   }
 
   //

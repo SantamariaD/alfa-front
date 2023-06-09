@@ -8,22 +8,20 @@ import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',
-  styleUrls: ['./editar.component.scss']
+  styleUrls: ['./editar.component.scss'],
 })
 export class EditarComponent implements OnInit {
-
-   /**
+  /**
    * @variable documento: Objeto de un documento seleccionado
    */
 
-  @Input() documento:Documento = {} as Documento
+  @Input() documento: Documento = {} as Documento;
 
   /**
    * @variable docActualizados: Array de documentos de despues de actualizar un documento
    */
-  
-  @Output() docActualizados = new EventEmitter<Documento[]>();
 
+  @Output() docActualizados = new EventEmitter<Documento[]>();
 
   /**
    * @variable documentos: Array de documentos de administración
@@ -44,32 +42,33 @@ export class EditarComponent implements OnInit {
    * @formulario documentoForm: Formulario para guardar un documento nuevo
    */
   documentoActualizarForm: FormGroup = new FormGroup({
-    nombre_archivo: new FormControl(''),
-    file0: new FormControl(''),
     id: new FormControl(0),
     id_user: new FormControl(0),
-    uuid: new FormControl(''),
-    extension: new FormControl(''),
+    nombre_archivo: new FormControl(''),
     area: new FormControl(''),
-    posicion: new FormControl(''),
+    activo: new FormControl(''),
+    file0: new FormControl(''),
   });
 
   /**
-   * 
-   * @variable mostrarNotificacion 
+   *
+   * @variable mostrarNotificacion
    */
   mostrarNotificacion = false;
 
-  constructor(private documentosService:DocumentosService) { }
+  constructor(private documentosService: DocumentosService) {}
 
   ngOnInit(): void {
-    this.modalModificarArchivo(this.documento)
-    
-    console.log(this.documento)
-    this.traerDocumentos()
-
+    this.modalModificarArchivo(this.documento);
+    this.documentoActualizarForm.patchValue({
+      id: this.documento.id,
+      id_user: this.documento.id_user,
+      nombre_archivo: this.documento.nombre_archivo,
+      area: this.documento.area,
+      activo: this.documento.activo
+    })
   }
-  
+
   // Método para guardar un archivo en el formulario de agregar documento para actualizar
   archivoDocumentoModificar(event: any): void {
     const archivo = event.target.files[0];
@@ -114,12 +113,9 @@ export class EditarComponent implements OnInit {
 
   // Metodo para mandar a actualizar un documento
   actualizarDocumento(): void {
-    this.documentoActualizarForm.patchValue({
-      id_user: parseInt(localStorage.getItem('id') || ''),
-    });
-
-    this.archivoCargado(this.documentoActualizarForm.value);
-    this.docActualizados.emit();
+    //this.archivoCargado(this.documentoActualizarForm.value);
+    //this.docActualizados.emit();
+    console.log(this.documentoActualizarForm.value)
   }
 
   // Método para traer los documentos
@@ -129,7 +125,6 @@ export class EditarComponent implements OnInit {
       .subscribe(
         (respuestaDocumentos: HttpClientServiceInterface<Array<Documento>>) => {
           console.log(respuestaDocumentos);
-          
         }
       );
   }
@@ -145,5 +140,4 @@ export class EditarComponent implements OnInit {
       posicion: '',
     });
   }
-
 }
