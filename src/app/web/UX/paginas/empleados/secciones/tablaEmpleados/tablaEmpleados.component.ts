@@ -28,6 +28,12 @@ export class TablaEmpleadosComponent implements OnInit {
   empleados:Empleados[] = [];
 
   /**
+ * 
+ * @variable switchValue 
+ */
+switchValue = false;
+
+  /**
    * @variable columnasTabla: Columnas que contiene la tabla
    */
   columnasTabla: Array<ColumnaTabla> = [
@@ -43,6 +49,12 @@ export class TablaEmpleadosComponent implements OnInit {
   constructor(private empleadoServise:EmpleadosService) { }
 
   ngOnInit(): void {
+    const fecha = '2023-06-01T17:26:07.000000Z';
+const fechaObjeto = new Date(fecha);
+const dia = fechaObjeto.getDate();
+const mes = fechaObjeto.getMonth() + 1;
+const anio = fechaObjeto.getFullYear();
+console.log(dia, mes,anio);
     this.traerTodosEmpleados();
   }
 
@@ -62,6 +74,11 @@ this.empleadoServise.traerTodosEmpleados().subscribe({
 clickFila(empleado:Empleados){
 this.empleado = empleado;
 this.mostrarCardEmpleado = true;
+    if(empleado.baja !== 1){
+      this.switchValue = true;
+    }else{
+      this.switchValue = false;
+    }
 }
 
 

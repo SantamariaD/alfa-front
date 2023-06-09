@@ -66,8 +66,9 @@
           <span  class="tooltip">Eliminar Empleado</span>
         </div>
           <div class="icon-container">
-            <nz-switch  [(ngModel)]="switchValue"></nz-switch>
-            <span *ngIf="!switchValue" class="tooltip">Activar Empleado</span>
+            <nz-switch (click)="modalBajaAlta(empleado)" [(ngModel)]="switchValue"></nz-switch>
+            <span *ngIf="!switchValue" class="tooltip">Alta de Empleado</span>
+            <span *ngIf="switchValue" class="tooltip">Baja de Empleado</span>
           </div>
         </div>
       </div>
