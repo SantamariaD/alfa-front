@@ -1,21 +1,48 @@
-
-
-<app-tabla
-[columnasTabla]="columnasTabla"
-[filasTabla]="documentos"
-[filasBusqueda]="documentos"
-(clickFila)="clickFila($event)"
-></app-tabla>
- 
-
-
+<section class="documentos">
+  <div class="documentos__descripcion">
+    <div class="documentos__descripcion--info-stock">
+      <p class="documentos__descripcion--info-stock--llave">
+        Total de productos:
+      </p>
+      <p class="documentos__descripcion--info-stock--valor">
+        
+      </p>
+    </div>
+    <div class="documentos__descripcion--info-stock">
+      <p class="documentos__descripcion--info-stock--llave">
+        Valor del inventario:
+      </p>
+      <p class="documentos__descripcion--info-stock--valor">
+        
+      </p>
+    </div>
+  </div>
+  <div class="documentos__descripcion">
+    <div class="documentos__descripcion--info-stock">
+      <p class="documentos__descripcion--info-stock--llave">
+        Producto más vendido:
+      </p>
+      <p class="documentos__descripcion--info-stock--valor">Chamarra</p>
+    </div>
+    <div class="documentos__descripcion--info-stock">
+      <p class="documentos__descripcion--info-stock--llave">
+        Productos agotados:
+      </p>
+      <p class="documentos__descripcion--info-stock--valor">Playeras</p>
+    </div>
+  </div>
+  <app-tabla
+    [columnasTabla]="columnasTabla"
+    [filasTabla]="documentos"
+    [filasBusqueda]="documentos"
+    (clickFila)="clickFila($event)"
+  ></app-tabla>
+</section>
 <app-card-documentos
-*ngIf="seleccionado.area"
+  *ngIf="seleccionado.area"
   [mostrarCardDocumento]="mostrarCardDocumento"
   [documento]="seleccionado"
   (clickCerrar)="clickCerrarModal($event)"
   (docActualizados)="ActualizaDatos()"
 >
 </app-card-documentos>
-
-

@@ -31,7 +31,7 @@ export class EditarComponent implements OnInit {
   /**
    * @variable textoArchivo: contiene el nombre del archivo cargado
    */
-  textoArchivo = '';
+  textoArchivo = 'Seleccionar archivo';
 
   /**
    * @formulario formArchivo: contiene el archivo
@@ -50,29 +50,15 @@ export class EditarComponent implements OnInit {
     file0: new FormControl(''),
   });
 
-  /**
-   *
-   * @variable mostrarNotificacion
-   */
-  mostrarNotificacion = false;
-
   constructor(private documentosService: DocumentosService) {}
 
   ngOnInit(): void {
     this.modalModificarArchivo(this.documento);
-    this.documentoActualizarForm.patchValue({
-      id: this.documento.id,
-      id_user: this.documento.id_user,
-      nombre_archivo: this.documento.nombre_archivo,
-      area: this.documento.area,
-      activo: this.documento.activo
-    })
   }
 
-  // Método para guardar un archivo en el formulario de agregar documento para actualizar
-  archivoDocumentoModificar(event: any): void {
+  // Método para guardar la nueva información del archivo en el formulario
+  modificarDatosDocumentoFormulario(event: any): void {
     const archivo = event.target.files[0];
-
     if (archivo) {
       this.documentoActualizarForm.patchValue({ file0: archivo });
       this.textoArchivo = archivo.name;
@@ -113,31 +99,20 @@ export class EditarComponent implements OnInit {
 
   // Metodo para mandar a actualizar un documento
   actualizarDocumento(): void {
-    //this.archivoCargado(this.documentoActualizarForm.value);
-    //this.docActualizados.emit();
-    console.log(this.documentoActualizarForm.value)
-  }
-
-  // Método para traer los documentos
-  private traerDocumentos() {
-    this.documentosService
-      .traerDocumentos()
-      .subscribe(
-        (respuestaDocumentos: HttpClientServiceInterface<Array<Documento>>) => {
-          console.log(respuestaDocumentos);
-        }
-      );
+    this.archivoCargado(this.documentoActualizarForm.value);
+    this.docActualizados.emit();
   }
 
   //Método para llenar los campos del formulario
   modalModificarArchivo(documento: Documento): void {
     this.documentoActualizarForm.patchValue({
       id: documento.id,
+      id_user: documento.id_user,
       nombre_archivo: documento.nombre_archivo,
-      uuid: documento.uuid,
-      extension: documento.extension,
       area: documento.area,
-      posicion: '',
+      activo: documento.activo,
+      extension: documento.extension,
+      uuid: documento.uuid,
     });
   }
 }

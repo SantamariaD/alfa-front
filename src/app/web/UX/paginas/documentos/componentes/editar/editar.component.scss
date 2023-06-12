@@ -1,3 +1,5 @@
+@import "../../../../../../../styles.scss";
+
 .editar {
   position: relative;
   z-index: 1000;
@@ -17,8 +19,8 @@
       column-gap: 15px;
     }
     &--boton {
-        width: 152px;
-        margin: 0px 0px 0px auto;
+      width: 152px;
+      margin: 0px 0px 0px auto;
     }
   }
 }
@@ -49,7 +51,7 @@ select {
 
 input:focus {
   outline: none;
-  border: none!important;
+  border: none !important;
 }
 
 option {
@@ -60,22 +62,22 @@ option {
 }
 
 .label {
-    color: rgb(168, 168, 168);
-    font-size: 12px;
+  color: rgb(168, 168, 168);
+  font-size: 12px;
 }
 
 .ant-form-item {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .notificacion {
-    margin: 10px auto;
+  margin: 10px auto;
 }
 
 .custom-file {
   position: relative;
   display: inline-block;
-  width: 100%;
+  width: auto;
 }
 
 .custom-file-input {
@@ -90,10 +92,9 @@ option {
 
 .custom-file-label {
   display: block;
-  padding: 8px 12px;
+  padding: 5px 12px;
   background-color: transparent;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  border: 1px solid rgb(188, 188, 188);
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;

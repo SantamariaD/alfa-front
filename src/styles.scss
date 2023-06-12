@@ -46,3 +46,15 @@ div {
   text-overflow: ellipsis!important;
   white-space: nowrap!important;
 }
+
+
+.icono-flotante {
+  color: $color-brand-primary;
+  position: fixed; 
+  top: 90%; 
+  left: 95%; 
+  transform: translate(-50%, -50%);
+  z-index: 9999; 
+  font-size: 40px;
+  cursor: pointer;
+}
