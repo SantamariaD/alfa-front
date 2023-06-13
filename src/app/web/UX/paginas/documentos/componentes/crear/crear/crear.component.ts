@@ -113,7 +113,7 @@ export class CrearComponent implements OnInit {
       this.documentoForm.value.nombre_archivo
     );
     this.documentoFormData.append('id_user', this.documentoForm.value.id);
-
+console.log(this.documentoForm.value.file0);
     this.documentosService
       .guardarDocumento(this.documentoFormData)
       .pipe(
