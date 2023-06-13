@@ -11,6 +11,7 @@ export type TiposArchivo =
 
 export interface Documento extends InformacionFecha {
   id: number;
+  id_area: number;
   id_user?: number;
   nombre_archivo?: string;
   uuid?: string;
@@ -18,5 +19,10 @@ export interface Documento extends InformacionFecha {
   extension?: string;
   activo?: number;
   file0?: any;
+  nombreUsuario?: string;
 }
 
+export interface RespuestaDocumetosConsulta {
+  documentos: Array<Documento>;
+  ultimaActualizacion: Documento;
+}

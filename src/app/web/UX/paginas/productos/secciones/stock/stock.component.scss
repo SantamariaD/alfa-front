@@ -43,3 +43,18 @@
     }
   }
 }
+
+.tooltip {
+  position: absolute;
+  top: 90%; 
+  left: 95%; 
+  transform: translateX(-50%); /* Centra el tooltip horizontalmente */
+  background-color: #000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+

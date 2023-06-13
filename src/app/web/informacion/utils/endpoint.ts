@@ -45,4 +45,7 @@ export const ENDPOINTS = {
     actualizarCatalogo: '/catalogo-proveedores/actualizar-catalogo',
     eliminarCatalogo: '/catalogo-proveedores/eliminar-catalogo',
   },
+  areas: {
+    consultarAreas: '/areas/consultar-areas',
+  },
 };

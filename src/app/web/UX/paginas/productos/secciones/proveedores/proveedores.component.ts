@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
 
 @Component({
   selector: 'app-proveedores',
@@ -18,8 +17,8 @@ export class ProveedoresComponent implements OnInit {
    */
   secciones = [
     { texto: 'Información de proveedores', seleccionado: true },
-    { texto: 'Catálogo de productos', seleccionado: false },
     { texto: 'Historial de pedidos', seleccionado: false },
+    { texto: 'Catálogo de productos', seleccionado: false },
   ];
 
   constructor(private router: Router) {}

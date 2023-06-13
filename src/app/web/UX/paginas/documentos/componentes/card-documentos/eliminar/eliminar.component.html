@@ -1,0 +1,25 @@
+<div class="eliminar">
+  <h2 class="eliminar__titulo">
+    <span
+      class="icono-info"
+      nz-icon
+      nzType="exclamation-circle"
+      nzTheme="outline"
+    ></span
+    ><strong>Eliminar documento</strong>
+  </h2>
+  <div class="eliminar__contenido">
+    <p class="eliminar__contenido--texto">
+      El documento se moverá a la papelera de reciclaje.  
+    </p>
+  </div>
+  <div class="eliminar__contenido--contenedor-boton">
+    <button
+      class="eliminar__contenido--contenedor-boton--boton"
+      nz-button
+      (click)="clickEliminar()"
+    >
+      Eliminar
+    </button>
+  </div>
+</div>

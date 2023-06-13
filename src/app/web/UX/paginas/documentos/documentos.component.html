@@ -1,19 +1,80 @@
-<div class="contenedor-principal-pagina notas">
+<section class="contenedor-principal-pagina documentos">
   <app-secciones-cabecera
     [secciones]="secciones"
     (seleccionadoClick)="selectSeccion($event)"
   ></app-secciones-cabecera>
-  <app-crear
-    nz-tooltip
-    nzTooltipTitle="Agrega un documento"
-    class="modal-crear"
-    (docCreado)="actualizaDatos($event)"
-  ></app-crear>
-
-  <div class="contenedor-central">
-    <app-administracion
-      *ngIf="cabecera === 'Tabla de Documentos'"
-      [docCreado]="docCreado"
-    ></app-administracion>
+  <div class="documentos__descripcion">
+    <div class="documentos__descripcion--info-stock">
+      <p class="documentos__descripcion--info-stock--llave">
+        Total de documentos:
+      </p>
+      <p class="documentos__descripcion--info-stock--valor">
+        {{ documentos.length }}
+      </p>
+    </div>
+    <div class="documentos__descripcion--info-stock">
+      <p class="documentos__descripcion--info-stock--llave">
+        Fecha de última actualización:
+      </p>
+      <p class="documentos__descripcion--info-stock--valor">
+        {{ ultimaActualizacion.updated_at | date : "dd-MM-yyyy" }}
+      </p>
+    </div>
   </div>
-</div>
+  <div class="documentos__descripcion">
+    <div class="documentos__descripcion--info-stock">
+      <p class="documentos__descripcion--info-stock--llave">
+        Documento actualizado:
+      </p>
+      <p class="documentos__descripcion--info-stock--valor">
+        {{ ultimaActualizacion.nombre_archivo }}
+      </p>
+    </div>
+    <div class="documentos__descripcion--info-stock">
+      <p class="documentos__descripcion--info-stock--llave">
+        Usuario que actualizó:
+      </p>
+      <p class="documentos__descripcion--info-stock--valor">
+        {{ ultimaActualizacion.nombreUsuario }}
+      </p>
+    </div>
+  </div>
+  <app-tabla
+    [columnasTabla]="columnasTabla"
+    [filasTabla]="documentos"
+    [filasBusqueda]="documentos"
+    (clickFila)="clickFila($event)"
+  ></app-tabla>
+</section>
+<app-card-documentos
+  *ngIf="seleccionado.area"
+  [mostrarCardDocumento]="mostrarCardDocumento"
+  [documento]="seleccionado"
+  [areas]="areas"
+  (clickCerrar)="clickCerrarModal($event)"
+  (docActualizados)="ActualizaDatos()"
+  (clickVerDocumento)="clickVerDocumento()"
+>
+</app-card-documentos>
+
+<span
+  class="icono-flotante"
+  nz-icon
+  nzType="file-add"
+  nzTheme="fill"
+  (click)="modalAgregar()"
+></span>
+
+<app-agregar
+  *ngIf="mostrarModalAgregar"
+  [areas]="areas"
+  (clickCerrar)="cerrarModalAgregar()"
+  (clickGuardarDocumento)="guardarDocumento()"
+></app-agregar>
+
+<app-visor-pdf
+*ngIf="mostrarVisor"
+[path]="urlDescarga"
+(clickCerrar)="cerrarVisor()"
+
+></app-visor-pdf>
