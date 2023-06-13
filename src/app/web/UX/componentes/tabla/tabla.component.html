@@ -65,9 +65,11 @@
       >
         <div *ngIf="columna.llave === 'extension'">
           <app-icono-archivo
+            class="m-r-5"
             [tipoArchivo]="fila[columna.llave] || ''"
             tamanoIcono="30"
-          ></app-icono-archivo>
+          ></app-icono-archivo
+          >{{ fila.extension }}
         </div>
         <div
           *ngIf="

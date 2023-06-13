@@ -50,8 +50,10 @@
   *ngIf="seleccionado.area"
   [mostrarCardDocumento]="mostrarCardDocumento"
   [documento]="seleccionado"
+  [areas]="areas"
   (clickCerrar)="clickCerrarModal($event)"
   (docActualizados)="ActualizaDatos()"
+  (clickVerDocumento)="clickVerDocumento()"
 >
 </app-card-documentos>
 
@@ -69,3 +71,10 @@
   (clickCerrar)="cerrarModalAgregar()"
   (clickGuardarDocumento)="guardarDocumento()"
 ></app-agregar>
+
+<app-visor-pdf
+*ngIf="mostrarVisor"
+[path]="urlDescarga"
+(clickCerrar)="cerrarVisor()"
+
+></app-visor-pdf>

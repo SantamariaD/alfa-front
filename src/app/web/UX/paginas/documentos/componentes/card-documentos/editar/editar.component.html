@@ -16,7 +16,11 @@
       </nz-form-control>
       <nz-form-control>
         <label class="label">Área</label>
-        <input nz-input type="text" formControlName="area" />
+        <select class="select" formControlName="areaNueva">
+          <option *ngFor="let area of areas" [value]="area.id">
+            {{ area.area }}
+          </option>
+        </select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="editar__form--seccion">

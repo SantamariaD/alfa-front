@@ -9,6 +9,8 @@ import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/ht
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
 import { AreasService } from 'src/app/web/informacion/servicios/areas/areas.service';
 import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/documentos.service';
+import { ENDPOINTS } from 'src/app/web/informacion/utils/endpoint';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-documentos',
@@ -40,6 +42,10 @@ export class DocumentosComponent implements OnInit {
    * @variable mostrarModalAgregar: muestra el modal para agregar
    */
   mostrarModalAgregar = false;
+  /**
+   * @variable mostrarVisor: muestra el visor de pdf
+   */
+  mostrarVisor = false;
 
   /**
    * @variable secciones: Contiene la información del encabezado de la sección.
@@ -66,6 +72,8 @@ export class DocumentosComponent implements OnInit {
     { columna: 'Fecha de creación', llave: 'created_at', busqueda: true },
     { columna: 'Fecha de Modificación', llave: 'updated_at', busqueda: true },
   ];
+
+  urlDescarga: string = '';
 
   constructor(
     private documentosService: DocumentosService,
@@ -102,6 +110,13 @@ export class DocumentosComponent implements OnInit {
   }
 
   /**
+   * @Metodo Cierra el modal de documentos
+   */
+  cerrarVisor() {
+    this.mostrarVisor = false;
+  }
+
+  /**
    * @Metodo para seleccionar cabeceras
    */
   selectSeccion(cabecera: string) {
@@ -120,6 +135,27 @@ export class DocumentosComponent implements OnInit {
    */
   cerrarModalAgregar(): void {
     this.mostrarModalAgregar = false;
+  }
+
+  /**
+   * @Metodo muestra el visor para el documento
+   */
+  clickVerDocumento(): void {
+    this.mostrarCardDocumento = false;
+    this.mostrarVisor = true;
+
+    const urlBase = environment.production
+      ? environment.urls.backProduction
+      : environment.urls.backDevelop;
+    this.urlDescarga =
+      urlBase +
+      ENDPOINTS.documentos.descargarDocumento +
+      '/' +
+      this.seleccionado.area +
+      '/' +
+      this.seleccionado.uuid +
+      '/' +
+      this.seleccionado.extension;
   }
 
   /**

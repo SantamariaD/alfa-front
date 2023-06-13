@@ -37,26 +37,6 @@
       <p class="productos__descripcion--info-stock--valor">Playeras</p>
     </div>
   </div>
-  <div class="productos__botones">
-    <button
-      class="productos__botones--boton"
-      nz-button
-      nzType="default"
-      (click)="agregarProducto()"
-    >
-      <span nz-icon nzType="plus-circle"></span>
-      Agregar producto
-    </button>
-    <button
-      class="productos__botones--boton"
-      nz-button
-      nzType="default"
-      (click)="agregarCategoria()"
-    >
-      <span nz-icon nzType="group"></span>
-      Gestión de categorías
-    </button>
-  </div>
   <app-tabla
     [columnasTabla]="columnasTabla"
     [filasTabla]="datosTabla"
@@ -93,8 +73,21 @@
 <span
   class="icono-flotante"
   nz-icon
-  nzType="file-add"
-  nzTheme="fill"
+  nzType="shopping"
+  nzTheme="outline"
+  nzTooltipTitle="Agregar producto"
+  nzTooltipPlacement="leftTop"
+  nz-tooltip
   (click)="agregarProducto()"
 ></span>
 
+<span
+  class="icono-flotante-2"
+  nz-icon
+  nzType="apartment"
+  nzTheme="outline"
+  nzTooltipTitle="Agregar categoría"
+  nzTooltipPlacement="leftTop"
+  nz-tooltip
+  (click)="agregarCategoria()"
+></span>

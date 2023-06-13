@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { Area } from 'src/app/web/informacion/interface/areas';
 import { Documento } from 'src/app/web/informacion/interface/documentos';
 import { ENDPOINTS } from 'src/app/web/informacion/utils/endpoint';
 import { environment } from 'src/environments/environment';
@@ -16,6 +17,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./card-documentos.component.scss'],
 })
 export class CardDocumentosComponent implements OnInit {
+  /**
+   * @Input areas: contiene las areas
+   */
+  @Input() areas: Array<Area> = [];
+  
   /**
    * @Input documento: Información del documento mostrado en la card
    */
@@ -36,6 +42,12 @@ export class CardDocumentosComponent implements OnInit {
    */
 
   @Output() docActualizados = new EventEmitter<Documento[]>();
+
+  /**
+   * @variable clickVerDocumento: Emite el evento cuando se da click en ver documento
+   */
+
+  @Output() clickVerDocumento = new EventEmitter<boolean>();
 
   /**
    * @Variable seccionModal: Controla la sección que se muestra en el modal
@@ -84,6 +96,14 @@ export class CardDocumentosComponent implements OnInit {
    */
   clickEditar(): void {
     this.seccionModal = 'editar';
+  }
+
+  /**
+   * @Metodo cambia a la seccion editar
+   */
+  clickVer(): void {
+    this.seccionModal = 'informacion';
+    this.clickVerDocumento.emit(false);
   }
 
   /**

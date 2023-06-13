@@ -116,7 +116,6 @@ export class InformacionProveedoresComponent implements OnInit {
    */
   clickCerrarModalAgregarProveedor(): void {
     this.mostrarAgregarProveedor = false;
-    this.consultarProveedores();
   }
 
   /**

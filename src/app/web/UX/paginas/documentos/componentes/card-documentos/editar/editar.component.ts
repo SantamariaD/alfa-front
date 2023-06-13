@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
+import { Area } from 'src/app/web/informacion/interface/areas';
 import { Documento } from 'src/app/web/informacion/interface/documentos';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/documentos.service';
@@ -11,6 +12,11 @@ import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/
   styleUrls: ['./editar.component.scss'],
 })
 export class EditarComponent implements OnInit {
+  /**
+   * @Input areas: contiene las areas
+   */
+  @Input() areas: Array<Area> = [];
+
   /**
    * @variable documento: Objeto de un documento seleccionado
    */
@@ -45,9 +51,11 @@ export class EditarComponent implements OnInit {
     id: new FormControl(0),
     id_user: new FormControl(0),
     nombre_archivo: new FormControl(''),
-    area: new FormControl(''),
+    areaNueva: new FormControl(''),
     activo: new FormControl(''),
     file0: new FormControl(''),
+    extension: new FormControl(''),
+    uuid: new FormControl(''),
   });
 
   constructor(private documentosService: DocumentosService) {}
@@ -69,12 +77,29 @@ export class EditarComponent implements OnInit {
   archivoCargado(documento: any): void {
     if (documento.file0) this.archivoForm.append('file0', documento.file0);
 
+    if (
+      this.documentoActualizarForm.value.areaNueva !== this.documento.id_area
+    ) {
+      const area = this.areas.filter(
+        (area: Area) => area.id == this.documentoActualizarForm.value.areaNueva
+      )[0];
+
+      this.archivoForm.append(
+        'areaNueva',
+        this.documentoActualizarForm.value.areaNueva
+      );
+      this.archivoForm.append('areaAnterior', this.documento.area as string);
+      this.archivoForm.append('area', area.area);
+    } else {
+      this.archivoForm.append('id_area', this.documento.id_area.toString());
+      this.archivoForm.append('area', this.documento.area as string);
+    }
+
     this.archivoForm.append('id', documento.id);
     this.archivoForm.append('id_user', documento.id_user);
     this.archivoForm.append('nombre_archivo', documento.nombre_archivo);
     this.archivoForm.append('uuid', documento.uuid);
     this.archivoForm.append('extension', documento.extension);
-    this.archivoForm.append('area', documento.area);
 
     this.documentosService
       .actualizarArchivoDocumento(this.archivoForm)
@@ -87,7 +112,6 @@ export class EditarComponent implements OnInit {
       )
       .subscribe(
         (respuestaActualizar: HttpClientServiceInterface<Documento>) => {
-          console.log(respuestaActualizar);
           this.documentos.splice(
             documento.posicion,
             1,
@@ -109,7 +133,7 @@ export class EditarComponent implements OnInit {
       id: documento.id,
       id_user: documento.id_user,
       nombre_archivo: documento.nombre_archivo,
-      area: documento.area,
+      areaNueva: documento.id_area,
       activo: documento.activo,
       extension: documento.extension,
       uuid: documento.uuid,

@@ -17,17 +17,6 @@
       </p>
     </div>
   </div>
-  <div class="proveedores__botones">
-    <button
-      class="proveedores__botones--boton"
-      nz-button
-      nzType="default"
-      (click)="agregarProveedor()"
-    >
-      <span nz-icon nzType="plus-circle"></span>
-      Agregar proveedor
-    </button>
-  </div>
   <app-tabla
     [columnasTabla]="columnasTabla"
     [filasTabla]="datosTabla"
@@ -49,3 +38,14 @@
   (clickGuardarProveedor)="clickGuardarProveedor()"
   (clickCerrar)="clickCerrarModalAgregarProveedor()"
 ></app-agregar-proveedor>
+
+<span
+  class="icono-flotante"
+  nz-icon
+  nzType="user-add"
+  nzTheme="outline"
+  nzTooltipTitle="Agregar proveedor"
+  nzTooltipPlacement="leftTop"
+  nz-tooltip
+  (click)="agregarProveedor()"
+></span>

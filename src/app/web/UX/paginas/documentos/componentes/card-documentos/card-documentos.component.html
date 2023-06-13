@@ -17,6 +17,7 @@
       >
         <app-editar
           [documento]="documento"
+          [areas]="areas"
           (docActualizados)="ActualizaDatos()"
         ></app-editar>
       </div>
@@ -44,6 +45,19 @@
           ></span>
           <span *ngIf="seccionModal !== 'informacion'" class="tooltip"
             >Información</span
+          >
+        </div>
+        <div *ngIf="documento.extension == 'pdf'" class="icon-container">
+          <span
+            class="modal__contenido--footer__contenedor-iconos--icono"
+            nz-icon
+            nzType="file-search"
+            nzTheme="outline"
+            [ngClass]="{ seleccionada: seccionModal === 'ver' }"
+            (click)="clickVer()"
+          ></span>
+          <span *ngIf="seccionModal !== 'ver'" class="tooltip"
+            >Mostrar</span
           >
         </div>
         <div class="icon-container">

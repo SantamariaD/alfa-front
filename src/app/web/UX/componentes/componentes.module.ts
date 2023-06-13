@@ -13,6 +13,8 @@ import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-rou
 import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
 import { TablaComponent } from './tabla/tabla.component';
 import { CurrencyPipe } from './pipes/currencyPipe/currency.pipe';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { VisorPdfComponent } from './visor-pdf/visor-pdf.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { CurrencyPipe } from './pipes/currencyPipe/currency.pipe';
     IconoArchivoComponent,
     TablaComponent,
     CurrencyPipe,
+    VisorPdfComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,8 @@ import { CurrencyPipe } from './pipes/currencyPipe/currency.pipe';
     ReactiveFormsModule,
     QuillModule,
     DocumentosRoutingModule,
-    SolicitudesRoutingModule
+    SolicitudesRoutingModule,
+    PdfViewerModule
   ],
   exports: [
     SiderComponent,
@@ -41,7 +45,8 @@ import { CurrencyPipe } from './pipes/currencyPipe/currency.pipe';
     SeccionesCabeceraComponent,
     IconoArchivoComponent, 
     TablaComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    VisorPdfComponent
   ],
 })
 export class ComponentesModule {}
