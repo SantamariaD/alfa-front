@@ -1,0 +1,43 @@
+<div class="modal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="cerrarModal()"
+      >&times;</span
+    >
+    <h2 class="modal__contenido--titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span>
+      Agregar documento
+    </h2>
+
+    <form class="modal__form" [formGroup]="documentoForm">
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Nombre</label>
+          <input nz-input type="text" formControlName="nombre" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Área</label>
+          <select class="select" formControlName="id_area">
+            <option *ngFor="let area of areas" [value]="area.id">
+              {{ area.area }}
+            </option>
+          </select>
+        </nz-form-control>
+      </nz-form-item>
+      <div class="modal__form--boton">
+        <button
+          nz-button
+          nzType="primary"
+          [disabled]="!documentoForm.valid"
+          (click)="guardarDocumento()"
+        >
+          Guardar documento
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

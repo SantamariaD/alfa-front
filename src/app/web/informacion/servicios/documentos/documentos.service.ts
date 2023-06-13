@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpclientService } from '../httpService/http-service.service';
+import { HttpClientServiceInterface } from '../../interface/httpService';
 import {
-  HttpClientServiceInterface,
-  HttpClientServiceInterfaceNoPayload,
-} from '../../interface/httpService';
-import { Documento } from '../../interface/documentos';
+  Documento,
+  RespuestaDocumetosConsulta,
+} from '../../interface/documentos';
 import { ENDPOINTS } from '../../utils/endpoint';
 import { Observable } from 'rxjs';
 
@@ -15,10 +15,12 @@ export class DocumentosService {
   constructor(private http: HttpclientService) {}
 
   // Método para traer documentos
-  traerDocumentos(): Observable<HttpClientServiceInterface<Documento[]>> {
-    return this.http.get<HttpClientServiceInterface<Documento[]>>(
-      ENDPOINTS.documentos.traerTodosDocumentos
-    );
+  traerDocumentos(): Observable<
+    HttpClientServiceInterface<RespuestaDocumetosConsulta>
+  > {
+    return this.http.get<
+      HttpClientServiceInterface<RespuestaDocumetosConsulta>
+    >(ENDPOINTS.documentos.traerTodosDocumentos);
   }
 
   // Método para guardar un documento
@@ -42,11 +44,13 @@ export class DocumentosService {
   }
 
   // Método para actualizar el archivo de un documento
-  descargarArchivoDocumento(
-    documento: any
-  ) {
+  descargarArchivoDocumento(documento: any) {
     return this.http.get<Blob>(
-      ENDPOINTS.documentos.descargarDocumento+'/'+documento.uuid+'/ '+documento.extension
+      ENDPOINTS.documentos.descargarDocumento +
+        '/' +
+        documento.uuid +
+        '/ ' +
+        documento.extension
     );
   }
 }

@@ -51,10 +51,10 @@ export class CardDocumentosComponent implements OnInit {
    * @variable urlDescarga: contiene la url de descarga
    */
   urlDescarga = '';
+  
 
   constructor(
     private documentosService: DocumentosService,
-    private modal: NzModalService
   ) {
     const urlBase = environment.production
       ? environment.urls.backProduction
@@ -76,35 +76,12 @@ export class CardDocumentosComponent implements OnInit {
 
   ActualizaDatos() {
     this.docActualizados.emit();
-  }
-
-  // Método para eliminar un archivo de un documento
-  eliminarArchivo(documento: Documento): void {
-    this.documentosService
-      .actualizarArchivoDocumento({ id: documento.id, activo: false })
-      .subscribe((respuestaActualizar: HttpClientServiceInterface<Documento>) =>
-        this.traerDocumentos()
-      );
+    this.seccionModal = 'informacion';
   }
 
   // Modal borrar
-  modalBorrar(documento: Documento): void {
-    this.mostrarCardDocumento = false;
-    this.modal.confirm({
-      nzTitle:
-        '¿Está seguro que desea borrar el documento ' +
-        documento.nombre_archivo +
-        '?',
-      nzContent:
-        '<b style="color: red;"Este documento se ira a la papelera de resiclaje</b>',
-      nzOkText: 'Si',
-      nzOkType: 'primary',
-      nzOkDanger: true,
-      nzOnOk: () => {
-        this.eliminarArchivo(documento), this.docActualizados.emit();
-      },
-      nzOnCancel: () => (this.mostrarCardDocumento = true),
-    });
+  modalBorrar(): void {
+    this.seccionModal = 'eliminar';
   }
 
   /**
@@ -131,16 +108,6 @@ export class CardDocumentosComponent implements OnInit {
    */
   clickCerrarModal(): void {
     this.clickCerrar.emit(false);
-  }
-
-  // Método para traer los documentos
-  private traerDocumentos() {
-    this.documentosService
-      .traerDocumentos()
-      .subscribe(
-        (respuestaDocumentos: HttpClientServiceInterface<Array<Documento>>) => {
-          console.log(respuestaDocumentos);
-        }
-      );
+    this.seccionModal = 'informacion';
   }
 }
