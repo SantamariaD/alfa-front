@@ -16,8 +16,8 @@
     <form class="modal__form" [formGroup]="documentoForm">
       <nz-form-item class="modal__form--seccion">
         <nz-form-control>
-          <label class="label">Nombre</label>
-          <input nz-input type="text" formControlName="nombre" />
+          <label class="label">Nombre del documento</label>
+          <input nz-input type="text" formControlName="nombre_archivo" />
         </nz-form-control>
         <nz-form-control>
           <label class="label">Área</label>
@@ -27,12 +27,26 @@
             </option>
           </select>
         </nz-form-control>
+        <nz-form-control class="m-t-10">
+          <p class="label">Archivo</p>
+          <div class="custom-file">
+            <input
+              type="file"
+              class="custom-file-input"
+              (change)="archivoDocumento($event)"
+            />
+            <label class="custom-file-label">
+              <span nz-icon nzType="upload" nzTheme="outline"></span>
+              &nbsp;{{ textoArchivo }}
+            </label>
+          </div>
+        </nz-form-control>
       </nz-form-item>
       <div class="modal__form--boton">
         <button
           nz-button
           nzType="primary"
-          [disabled]="!documentoForm.valid"
+          [disabled]="!documentoForm.dirty"
           (click)="guardarDocumento()"
         >
           Guardar documento

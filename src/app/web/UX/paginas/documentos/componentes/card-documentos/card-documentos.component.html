@@ -49,9 +49,14 @@
         <div class="icon-container">
           <a
             [href]="
-              urlDescarga + '/' + documento.uuid + '/' + documento.extension
+              urlDescarga +
+              '/' +
+              documento.area +
+              '/' +
+              documento.uuid +
+              '/' +
+              documento.extension
             "
-            download="nombre_imagen.png"
           >
             <span
               class="modal__contenido--footer__contenedor-iconos--icono"
@@ -59,7 +64,6 @@
               nzType="arrow-down"
               nzTheme="outline"
               [ngClass]="{ seleccionada: seccionModal === 'agregar' }"
-              (click)="clickAgregar()"
             ></span>
           </a>
           <span class="tooltip">Descargar</span>

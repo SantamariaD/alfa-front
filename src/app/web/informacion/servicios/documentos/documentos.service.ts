@@ -45,7 +45,7 @@ export class DocumentosService {
 
   // Método para actualizar el archivo de un documento
   descargarArchivoDocumento(documento: any) {
-    return this.http.get<Blob>(
+    return this.http.post<Blob>(
       ENDPOINTS.documentos.descargarDocumento +
         '/' +
         documento.uuid +

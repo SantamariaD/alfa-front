@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Area } from 'src/app/web/informacion/interface/areas';
 import {
   Documento,
   RespuestaDocumetosConsulta,
 } from 'src/app/web/informacion/interface/documentos';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
+import { AreasService } from 'src/app/web/informacion/servicios/areas/areas.service';
 import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/documentos.service';
 
 @Component({
@@ -49,6 +52,11 @@ export class DocumentosComponent implements OnInit {
   cabecera: string = 'Tabla de Documentos';
 
   /**
+   * @Variable areas: contiene las areas
+   */
+  areas: Array<Area> = [];
+
+  /**
    * @variable columnasTabla: Columnas que contiene la tabla
    */
   columnasTabla: Array<ColumnaTabla> = [
@@ -59,10 +67,15 @@ export class DocumentosComponent implements OnInit {
     { columna: 'Fecha de Modificación', llave: 'updated_at', busqueda: true },
   ];
 
-  constructor(private documentosService: DocumentosService) {}
+  constructor(
+    private documentosService: DocumentosService,
+    private message: NzMessageService,
+    private areasService: AreasService
+  ) {}
 
   ngOnInit(): void {
     this.traerDocumentos();
+    this.consultarAreas();
   }
 
   /**
@@ -110,6 +123,15 @@ export class DocumentosComponent implements OnInit {
   }
 
   /**
+   * @Metodo evento cuando se guarda un documento
+   */
+  guardarDocumento(): void {
+    this.mostrarModalAgregar = false;
+    this.message.success('Se guardó correctamente el documento');
+    this.traerDocumentos();
+  }
+
+  /**
    * @Método para traer los documentos
    */
   private traerDocumentos() {
@@ -124,5 +146,15 @@ export class DocumentosComponent implements OnInit {
             respuestaDocumentos.payload.ultimaActualizacion;
         }
       );
+  }
+
+  /**
+   * @Metodo consulta las áreas de la empresa
+   */
+  private consultarAreas(): void {
+    this.areasService.consultarAreas().subscribe({
+      next: (respuestAreas: HttpClientServiceInterface<Area[]>) =>
+        (this.areas = respuestAreas.payload),
+    });
   }
 }

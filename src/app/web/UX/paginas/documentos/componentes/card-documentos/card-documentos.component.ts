@@ -2,18 +2,13 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { Documento } from 'src/app/web/informacion/interface/documentos';
-import { DocumentosService } from 'src/app/web/informacion/servicios/documentos/documentos.service';
 import { ENDPOINTS } from 'src/app/web/informacion/utils/endpoint';
 import { environment } from 'src/environments/environment';
 
-import { NzModalService } from 'ng-zorro-antd/modal';
-import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 
 @Component({
   selector: 'app-card-documentos',
@@ -53,9 +48,7 @@ export class CardDocumentosComponent implements OnInit {
   urlDescarga = '';
   
 
-  constructor(
-    private documentosService: DocumentosService,
-  ) {
+  constructor() {
     const urlBase = environment.production
       ? environment.urls.backProduction
       : environment.urls.backDevelop;
@@ -64,22 +57,17 @@ export class CardDocumentosComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Método para ver un archivo de un documento
-  descargarArchivo(documento: Documento): void {
-    this.documentosService
-      .descargarArchivoDocumento(documento)
-      .subscribe((respuestaDocumentos: Blob) => {
-        const url = URL.createObjectURL(respuestaDocumentos);
-        window.open(url);
-      });
-  }
-
+  /**
+   * @Modal Actualiza los datos del documento
+   */
   ActualizaDatos() {
     this.docActualizados.emit();
     this.seccionModal = 'informacion';
   }
 
-  // Modal borrar
+  /**
+   * @Modal Muestra la sección de eliminar documento
+   */
   modalBorrar(): void {
     this.seccionModal = 'eliminar';
   }
@@ -90,11 +78,6 @@ export class CardDocumentosComponent implements OnInit {
   clickInformacion(): void {
     this.seccionModal = 'informacion';
   }
-
-  /**
-   * @Metodo cambia a la seccion agregar
-   */
-  clickAgregar(): void {}
 
   /**
    * @Metodo cambia a la seccion editar

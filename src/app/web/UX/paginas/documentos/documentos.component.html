@@ -64,5 +64,8 @@
 ></span>
 
 <app-agregar
-*ngIf="mostrarModalAgregar"
-(clickCerrar)="cerrarModalAgregar()"></app-agregar>
+  *ngIf="mostrarModalAgregar"
+  [areas]="areas"
+  (clickCerrar)="cerrarModalAgregar()"
+  (clickGuardarDocumento)="guardarDocumento()"
+></app-agregar>
