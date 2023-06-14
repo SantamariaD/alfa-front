@@ -1,1 +1,16 @@
-<p>documentos works!</p>
+<div class="contenedor-principal">
+  <nz-card nzTitle="Documentos del empleado ">
+    <div nz-card-grid [ngStyle]="gridStyle">INE</div>
+    <button nz-button nzType="primary" [nzSize]="'large'" nzShape="round">
+      <span nz-icon nzType="check" nzTheme="outline"></span>
+    </button>
+    <div nz-card-grid [ngStyle]="gridStyle">RFC</div>
+    <div nz-card-grid [ngStyle]="gridStyle">ACTA DE NACIMIENTO</div>
+    <div nz-card-grid [ngStyle]="gridStyle">COMPROBANTE DOMICILIO</div>
+    <div nz-card-grid [ngStyle]="gridStyle">COMPROBANTE ESTUDIOS</div>
+    <div nz-card-grid [ngStyle]="gridStyle">CURRICULUM VITAE</div>
+    <div nz-card-grid [ngStyle]="gridStyle">
+      COMPROBANTE BANCARIO CON CUENTA CLABE
+    </div>
+  </nz-card>
+</div>

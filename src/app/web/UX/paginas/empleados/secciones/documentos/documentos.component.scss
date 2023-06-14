@@ -1,0 +1,30 @@
+.box-documentos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid gray;
+    padding: 10px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .icon-check,
+  .icon-close {
+    font-size: 30px;
+    margin: 0 10px;
+    background-color: green;
+  }
+  
+  a {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }

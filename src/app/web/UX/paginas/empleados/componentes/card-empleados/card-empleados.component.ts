@@ -146,13 +146,13 @@ export class CardEmpleadosComponent implements OnInit {
     if (this.switchValue === true) {
       dataActualizacion ={
         fecha_baja:fechaFormateada,
-        baja: true,
+        baja: 1,
         id: this.empleado.id
     }
   }else{
     dataActualizacion={
       fecha_reingreso:fechaFormateada,
-      baja: false,
+      baja: 0,
       id: this.empleado.id
   }
     }

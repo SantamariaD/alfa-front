@@ -25,6 +25,11 @@ export const ENDPOINTS = {
     guardarEmpleado: '/empleados/guardar-empleado',
     actualizarEmpleado: '/empleados/actualizar-empleado',
     eliminarEmpleado: '/empleados/eliminar-empleado',
+    traerDocumentosArea: '/empleados/traer-documentos-area/administracion',
+    traerTodosDocumentos: '/empleados/traer-documentos',
+    guardarDocumentos: '/empleados/guardar-documento',
+    actualizarDocumento: '/empleados/actualizar-documento',
+    descargarDocumento: '/empleados/descargar-documento',
   },
   proveedores: {
     consultarProveedores: '/proveedores/consultar-proveedores',
