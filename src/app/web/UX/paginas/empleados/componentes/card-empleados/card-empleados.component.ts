@@ -36,6 +36,11 @@ export class CardEmpleadosComponent implements OnInit {
    */
   @Output() empActualizados = new EventEmitter<any>();
 
+   /**
+   * @Output docEmpleado envia el string que cierra el modal y redirige a documentosEmpleado
+   */
+   @Output() docEmpleado = new EventEmitter<any>();
+
   /**
    * @Variable seccionModal: contiene la seccion de la card que se mostrara en pantalla
    */
@@ -164,5 +169,14 @@ export class CardEmpleadosComponent implements OnInit {
         },
         error: (error) => console.log(error),
       });
+  }
+
+
+  //este metodo envia el string para ambio de pantalla a documentos y el objeto del empleado
+  verDocumentos(pantalla:string){
+    const dataDocumentos={
+      pantalla:pantalla,empleado:this.empleado
+    }
+    this.docEmpleado.emit(dataDocumentos);
   }
 }

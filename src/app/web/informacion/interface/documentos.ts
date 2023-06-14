@@ -20,6 +20,7 @@ export interface Documento extends InformacionFecha {
   activo?: number;
   file0?: any;
   nombreUsuario?: string;
+  estatus?:string;
 }
 
 export interface RespuestaDocumetosConsulta {

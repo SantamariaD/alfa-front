@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from '../../interface/httpService';
 import { ENDPOINTS } from '../../utils/endpoint';
 import { Producto } from '../../interface/productos';
+import { RespuestaDocumetosConsulta } from '../../interface/documentos';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,15 @@ export class EmpleadosService {
       empleado
     );
   }
+
+  traerTodosDocumentos(): Observable<
+  HttpClientServiceInterface<RespuestaDocumetosConsulta>
+> {
+  return this.http.get<
+    HttpClientServiceInterface<RespuestaDocumetosConsulta>
+  >(ENDPOINTS.empleados.traerTodosDocumentos);
+}
+
 
 
 }

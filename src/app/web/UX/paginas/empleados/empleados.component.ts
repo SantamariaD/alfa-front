@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Empleados } from 'src/app/web/informacion/interface/empleados';
 
 @Component({
   selector: 'app-empleados',
@@ -12,6 +13,10 @@ export class EmpleadosComponent implements OnInit {
    */
   seccion = 'Lista de empleados';
 
+  /**
+   * @variable empleado:contiene el objeto de empleado que viene desde la card
+   */
+empleado:Empleados = {} as Empleados
 
 /**
    * @variable secciones: Contiene las secciones de empleados
@@ -29,6 +34,11 @@ export class EmpleadosComponent implements OnInit {
 
   selectSeccion(cabecera:string){
     this.seccion = cabecera;
+  }
+
+  verDocumentos(empleadoPantalla:any){
+this.empleado = empleadoPantalla.empleado;
+this.seccion = empleadoPantalla.pantalla;
   }
 
 }

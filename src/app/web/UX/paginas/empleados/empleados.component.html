@@ -4,8 +4,8 @@
       (seleccionadoClick)="selectSeccion($event)"
     ></app-secciones-cabecera>
 
-    <app-tablatablaEmpleados *ngIf="seccion === 'Lista de empleados'"></app-tablatablaEmpleados>
-    <app-documentos *ngIf="seccion === 'Documentos de empleado'"></app-documentos>
+    <app-tablatablaEmpleados (documentos)="verDocumentos($event)" *ngIf="seccion === 'Lista de empleados'"></app-tablatablaEmpleados>
+    <app-documentos [empleado]="empleado" *ngIf="seccion === 'Documentos de empleado'"></app-documentos>
     <app-solicitudes *ngIf="seccion === 'Solicitudes de empleado'"></app-solicitudes>
   </div>
 

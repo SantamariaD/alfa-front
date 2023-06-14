@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { error } from 'console';
 import { Empleados } from 'src/app/web/informacion/interface/empleados';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
@@ -11,6 +11,11 @@ import { EmpleadosService } from 'src/app/web/informacion/servicios/empleados/em
   styleUrls: ['./tablaEmpleados.component.scss']
 })
 export class TablaEmpleadosComponent implements OnInit {
+
+   /**
+   * @Output documentos envia el string que cierra el modal y redirige a documentosEmpleado
+   */
+   @Output() documentos = new EventEmitter<any>();
 
   /**
    * @variable mostrarCardEmpleados: es un booleano para abrir y cerrar el modal de la card de empleados
@@ -89,6 +94,10 @@ clickCerrarModal(cerrar:any){
 ActualizaDatos(actualiza:boolean){
   this.traerTodosEmpleados();
   this.mostrarCardEmpleado = false;
+}
+
+docEmpleado(docEmpleados:object){
+this.documentos.emit(docEmpleados);
 }
 
 }

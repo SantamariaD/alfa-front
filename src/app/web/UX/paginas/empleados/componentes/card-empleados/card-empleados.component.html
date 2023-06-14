@@ -70,6 +70,10 @@
             <span *ngIf="!switchValue" class="tooltip">Alta de Empleado</span>
             <span *ngIf="switchValue" class="tooltip">Baja de Empleado</span>
           </div>
+          <div class="icon-container">
+            <span class="modal__contenido--footer__contenedor-iconos--icono" (click)="verDocumentos('Documentos de empleado')" nz-icon nzType="file-search" nzTheme="outline"></span>
+            <span  class="tooltip">Ver Documentos</span>
+          </div>
         </div>
       </div>
     </div>

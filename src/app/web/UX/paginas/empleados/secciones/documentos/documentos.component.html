@@ -1,16 +1,40 @@
 <div class="contenedor-principal">
-  <nz-card nzTitle="Documentos del empleado ">
-    <div nz-card-grid [ngStyle]="gridStyle">INE</div>
-    <button nz-button nzType="primary" [nzSize]="'large'" nzShape="round">
-      <span nz-icon nzType="check" nzTheme="outline"></span>
+  <div [formGroup]="formBusqueda" class="buscador">
+    <input type="text" placeholder="Buscar Empleados" formControlName="buscador" /><button
+      (click)="buscar()"
+      class="btn btn-primary"
+    >
+      Buscar
     </button>
-    <div nz-card-grid [ngStyle]="gridStyle">RFC</div>
-    <div nz-card-grid [ngStyle]="gridStyle">ACTA DE NACIMIENTO</div>
-    <div nz-card-grid [ngStyle]="gridStyle">COMPROBANTE DOMICILIO</div>
-    <div nz-card-grid [ngStyle]="gridStyle">COMPROBANTE ESTUDIOS</div>
-    <div nz-card-grid [ngStyle]="gridStyle">CURRICULUM VITAE</div>
-    <div nz-card-grid [ngStyle]="gridStyle">
-      COMPROBANTE BANCARIO CON CUENTA CLABE
+  </div>
+
+
+  <div *ngIf="listaBusqueda !== []" class="listaEmpleados">
+    <span *ngFor="let lista of listaBusqueda"></span>
+  </div>
+
+  <div class="info-empleado">
+    <h2>{{empleado.nombreCompleto}}</h2>
+    
+      <h5 nz-col nzSpan="12">{{empleado.telefono}}</h5>
+      <h5 nz-col nzSpan="12">{{empleado.correo_electronico}}</h5>
+    
+  </div>
+
+
+  <div class="contenedor-documentos">
+    <h1>Documentos</h1>
+    <div class="contenedor-cards">
+      
+      <div *ngFor="let documento of documentos" class="card-documentos">
+        <span class="text-card">{{documento.nombre_archivo}}</span><br />
+        <span  class="icon-ojo cursor-pointer" nz-icon nzType="eye" nzTheme="outline"></span>
+        <div  class="icons-interactive">
+          <span  class="icon-check cursor-pointer" nz-icon nzType="check-circle" nzTheme="outline"></span>
+          <span  class="icon-close cursor-pointer" nz-icon nzType="close-circle" nzTheme="outline"></span>
+        </div>
+      </div>
     </div>
-  </nz-card>
+    </div>
+   
 </div>
