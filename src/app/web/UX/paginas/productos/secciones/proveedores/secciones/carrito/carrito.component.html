@@ -1,0 +1,43 @@
+<section class="carrito">
+  <nz-result
+    *ngIf="carrito.length == 0"
+    [nzIcon]="'shopping'"
+    nzTheme="outline"
+    [nzTitle]="'No hay ningún producto en el carrito'"
+  >
+  </nz-result>
+  <div *ngIf="carrito.length > 0" class="carrito__contenedor">
+    <div class="carrito__contenedor__producto">
+      <div
+        class="carrito__contenedor__producto--lista"
+        *ngFor="let producto of carrito"
+      >
+        <div class="carrito__contenedor__producto--lista--imagen">
+          <img [src]="producto.imagen" alt="imagen producto" />
+        </div>
+        <div class="carrito__contenedor__producto--lista--informacion">
+          <div
+            class="carrito__contenedor__producto--lista--informacion--nombre"
+          >
+            {{ producto.nombreProducto }}
+          </div>
+          <div
+            class="carrito__contenedor__producto--lista--informacion--eliminar"
+          >
+            Eliminar
+          </div>
+        </div>
+        <div class="carrito__contenedor__producto--lista--agregar">-1+</div>
+        <div class="carrito__contenedor__producto--lista--precio">
+          {{ producto.precioCompra }}
+        </div>
+      </div>
+    </div>
+    <div class="carrito__contenedor__resumen-compra">
+      <div class="carrito__contenedor__resumen-compra--productos">
+        Productos (3)
+      </div>
+      <div class="carrito__contenedor__resumen-compra--total">1000</div>
+    </div>
+  </div>
+</section>

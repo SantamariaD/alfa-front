@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
@@ -15,6 +16,7 @@ import {
 import { CatalogoProveedoresService } from 'src/app/web/informacion/servicios/catalogo-proveedores/catalogo-proveedores.service';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
+import { guardarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
 
 @Component({
   selector: 'app-catalogo',
@@ -63,6 +65,21 @@ export class CatalogoComponent implements OnInit {
   clickCerrar = false;
 
   /**
+   * @variable switchValue
+   */
+  switchValue = false;
+
+  /**
+   * @variable comprarProducto: Si se quiere o no hacer una comora
+   */
+  comprarProducto = false;
+
+  /**
+   * @variable botonCarrito: muestra u oculta el boton de agregar a carrito
+   */
+  botonCarrito = [''];
+
+  /**
    * @Form catalogoForm: Id del proveedor que se buscara el catalógo
    */
   catalogoForm: FormGroup = new FormGroup({
@@ -79,7 +96,8 @@ export class CatalogoComponent implements OnInit {
     private productosService: ProductosService,
     private catalogoProveedoresService: CatalogoProveedoresService,
     private modal: NzModalService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -195,6 +213,21 @@ export class CatalogoComponent implements OnInit {
    */
   clickCerrarModal(): void {
     this.clickCerrar = false;
+  }
+
+  /**
+   * @Metodo Cambio del switch
+   */
+  switch(valor: any): void {
+    this.comprarProducto = valor;
+  }
+
+  /**
+   * @Metodo Agrega producto al carrito
+   */
+  agregarCarrito(catalogo: CatalogoProveedor): void {
+    this.store.dispatch(guardarProductoCarrito({producto: catalogo}));
+    this.botonCarrito.push(catalogo.nombreProducto)
   }
 
   /**

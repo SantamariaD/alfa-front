@@ -19,6 +19,7 @@ export class ProveedoresComponent implements OnInit {
     { texto: 'Información de proveedores', seleccionado: true },
     { texto: 'Historial de pedidos', seleccionado: false },
     { texto: 'Catálogo de productos', seleccionado: false },
+    { texto: 'Carrito', seleccionado: false },
   ];
 
   constructor(private router: Router) {}
@@ -39,6 +40,9 @@ export class ProveedoresComponent implements OnInit {
         break;
       case 'Historial de pedidos':
         this.router.navigate(['/productos/proveedores/historial']);
+        break;
+      case 'Carrito':
+        this.router.navigate(['/productos/proveedores/carrito']);
         break;
       case 'Análisis':
         //this.router.navigate(['/home']);
