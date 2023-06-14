@@ -14,6 +14,7 @@ import { EliminarComponent } from './secciones/informacion/componentes/card-prov
 import { InformacionComponent } from './secciones/informacion/componentes/card-proveedor/informacion/informacion.component';
 import { AgregarProveedorComponent } from './secciones/informacion/componentes/agregar-proveedor/agregar-proveedor.component';
 import { CardEditarComponent } from './secciones/catalogo/componentes/card-editar/card-editar.component';
+import { CarritoComponent } from './secciones/carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CardEditarComponent } from './secciones/catalogo/componentes/card-edita
     InformacionComponent,
     AgregarProveedorComponent,
     CardEditarComponent,
+    CarritoComponent,
   ],
   imports: [
     CommonModule,

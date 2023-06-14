@@ -28,6 +28,16 @@
           </button>
         </div>
       </nz-form-control>
+      <div class="catalogo__form--seccion__switch" *ngIf="mostrarCollapse">
+        <nz-switch
+          (ngModelChange)="switch($event)"
+          [(ngModel)]="switchValue"
+          name="switch"
+        ></nz-switch>
+        <span class="catalogo__form--seccion__switch--texto"
+          >Comprar productos</span
+        >
+      </div>
     </nz-form-item>
   </form>
   <div class="catalogo__collapse" *ngIf="mostrarCollapse">
@@ -65,11 +75,37 @@
             </p>
           </div>
           <div class="catalogo__collapse--lista__info">
-            <p class="editar cursor-pointer" (click)="editar(catalogo)">
+            <div
+              class="agregar cursor-pointer"
+              nzTooltipTitle="Agregar al carrito"
+              nzTooltipPlacement="leftTop"
+              nz-tooltip
+              *ngIf="
+                comprarProducto &&
+                !botonCarrito.includes(catalogo.nombreProducto)
+              "
+            >
+              <span
+                (click)="agregarCarrito(catalogo)"
+                nz-icon
+                nzType="plus"
+                nzTheme="outline"
+              ></span>
+            </div>
+            <p
+              class="editar cursor-pointer"
+              nzTooltipTitle="Editar producto"
+              nzTooltipPlacement="leftTop"
+              nz-tooltip
+              (click)="editar(catalogo)"
+            >
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </p>
             <p
               class="eliminar cursor-pointer"
+              nzTooltipTitle="Eliminar producto"
+              nzTooltipPlacement="leftTop"
+              nz-tooltip
               (click)="eliminarModal(catalogo)"
             >
               <span nz-icon nzType="delete" nzTheme="outline"></span>

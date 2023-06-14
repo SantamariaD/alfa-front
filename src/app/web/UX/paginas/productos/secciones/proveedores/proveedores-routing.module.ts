@@ -4,6 +4,7 @@ import { ProveedoresComponent } from './proveedores.component';
 import { InformacionProveedoresComponent } from './secciones/informacion/informacion.component';
 import { CatalogoComponent } from './secciones/catalogo/catalogo.component';
 import { HistorialComponent } from './secciones/historial/historial.component';
+import { CarritoComponent } from './secciones/carrito/carrito.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
       { path: 'informacion', component: InformacionProveedoresComponent },
       { path: 'catalogo', component: CatalogoComponent },
       { path: 'historial', component: HistorialComponent },
+      { path: 'carrito', component: CarritoComponent },
     ],
   },
 ];

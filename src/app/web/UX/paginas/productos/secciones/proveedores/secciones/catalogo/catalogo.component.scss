@@ -2,6 +2,15 @@
 
 .catalogo {
   &__form--seccion {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    &__switch {
+      margin: auto 0px 0px auto;
+      &--texto {
+        margin: auto 10px;
+        font-size: 18px;
+      }
+    }
     &__label {
       font-size: 18px;
       margin-bottom: 5px;
@@ -93,6 +102,14 @@ nz-avatar {
   font-size: 20px;
   &:hover{
     color: #E4A11B;
+  }
+}
+
+.agregar {
+  color: rgb(130, 130, 130);
+  font-size: 20px;
+  &:hover{
+    color: $color-brand-primary;
   }
 }
 
