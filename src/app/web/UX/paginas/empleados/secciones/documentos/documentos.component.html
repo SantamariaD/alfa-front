@@ -1,40 +1,122 @@
 <div class="contenedor-principal">
-  <div [formGroup]="formBusqueda" class="buscador">
-    <input type="text" placeholder="Buscar Empleados" formControlName="buscador" /><button
-      (click)="buscar()"
-      class="btn btn-primary"
-    >
-      Buscar
-    </button>
+  <div class="contenedor-filtros" nz-row>
+    <div [formGroup]="formBusqueda" nz-col="8" class="buscador">
+      <input
+        type="text"
+        placeholder="Busqueda por nombre"
+        formControlName="buscador"
+      /><span
+        class="cursor-pointer"
+        (click)="buscar()"
+        nz-icon
+        nzType="search"
+        nzTheme="outline"
+      ></span>
+    </div>
+
+    <div class="listaEmpleados">
+      <select name="buscados" #selectElement (change)="seleccionarArea($event)">
+        <option disabled selected>Buscar por área</option>
+        <option
+          *ngFor="let lista of areas" [ngValue]="lista.area"
+        >
+          {{ lista.area }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="listaBusqueda.length > 0" #selectEmpleado (change)="seleccionarEmpleado($event)" nz-col="8" class="listaEmpleados">
+      <select name="buscados" [(ngModel)]="empleadoSeleccionado" id="">
+        <option [ngValue]="null" disabled selected>selecciona un empleado</option>
+        <option *ngFor="let lista of listaBusqueda">
+          {{ lista.nombreCompleto }}
+        </option>
+      </select>
+    </div>
   </div>
 
+  <div *ngIf="empleado.nombreCompleto" class="info-empleado">
+    <div class="titulo">Semblanza</div>
+    <div nz-row>
+      <div nz-col nzSpan="12" class="principal">
+        <img src="/assets/imagenes/user.png" alt="Perfil" />
+        <h2>{{ empleado.nombreCompleto }}</h2>
+      </div>
+      <div nz-col nzSpan="8" class="descripcion">
+        <p>
+          Empleado del área de {{ empleado.departamento }} quien desempeña el
+          puesto actualmente de {{ empleado.puesto }}, ha desempeñado esta labor
+          desde el dia {{ empleado.fecha_inicio }} a la fecha, cuenta con un
+          contrato de tipo {{ empleado.tipo_contrato }} y labora un total de
+          {{ empleado.horas_laborales }} horas por semana.
+        </p>
 
-  <div *ngIf="listaBusqueda !== []" class="listaEmpleados">
-    <span *ngFor="let lista of listaBusqueda"></span>
+        <h5>
+          <span nz-icon nzType="mail" nzTheme="outline"></span>
+          {{ empleado.correo_electronico }}
+        </h5>
+
+        <h5>
+          <span nz-icon nzType="number" nzTheme="outline"></span>
+          {{ empleado.telefono }}
+        </h5>
+      </div>
+    </div>
+    <p>''</p>
   </div>
 
-  <div class="info-empleado">
-    <h2>{{empleado.nombreCompleto}}</h2>
-    
-      <h5 nz-col nzSpan="12">{{empleado.telefono}}</h5>
-      <h5 nz-col nzSpan="12">{{empleado.correo_electronico}}</h5>
-    
-  </div>
-
-
-  <div class="contenedor-documentos">
+  <div *ngIf="empleado.nombreCompleto" class="contenedor-documentos">
     <h1>Documentos</h1>
     <div class="contenedor-cards">
-      
       <div *ngFor="let documento of documentos" class="card-documentos">
-        <span class="text-card">{{documento.nombre_archivo}}</span><br />
-        <span  class="icon-ojo cursor-pointer" nz-icon nzType="eye" nzTheme="outline"></span>
-        <div  class="icons-interactive">
-          <span  class="icon-check cursor-pointer" nz-icon nzType="check-circle" nzTheme="outline"></span>
-          <span  class="icon-close cursor-pointer" nz-icon nzType="close-circle" nzTheme="outline"></span>
+        <span class="text-card">{{ documento.nombre_archivo }}</span
+        ><br />
+        <span
+          (click)="abrirVisor(documento)"
+          class="icon-ojo cursor-pointer"
+          nz-icon
+          nzType="eye"
+          nzTheme="outline"
+        ></span>
+        <div class="icons-interactive">
+          <span
+            class="rechazado"
+            *ngIf="
+              documento.estatus !== null && documento.estatus === 'rechazado'
+            "
+            >Rechazado</span
+          >
+          <span
+            class="aceptado"
+            *ngIf="
+              documento.estatus !== null && documento.estatus === 'aceptado'
+            "
+            >Aceptado</span
+          >
+          <span
+            *ngIf="documento.estatus === null"
+            (click)="modalRevision('aceptado', documento)"
+            class="icon-check cursor-pointer"
+            nz-icon
+            nzType="check-circle"
+            nzTheme="outline"
+          ></span>
+          <span
+            *ngIf="documento.estatus === null"
+            (click)="modalRevision('rechazado', documento)"
+            class="icon-close cursor-pointer"
+            nz-icon
+            nzType="close-circle"
+            nzTheme="outline"
+          ></span>
         </div>
       </div>
     </div>
-    </div>
-   
+  </div>
+
+  <app-visor-pdf
+    *ngIf="mostrarVisor"
+    [path]="urlDescarga"
+    (clickCerrar)="cerrarVisor()"
+  ></app-visor-pdf>
 </div>

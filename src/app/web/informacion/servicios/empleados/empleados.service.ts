@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from '../../interface/httpService';
 import { ENDPOINTS } from '../../utils/endpoint';
 import { Producto } from '../../interface/productos';
-import { RespuestaDocumetosConsulta } from '../../interface/documentos';
+import { Documento, RespuestaDocumetosConsulta } from '../../interface/documentos';
 
 @Injectable({
   providedIn: 'root'
@@ -70,13 +70,21 @@ export class EmpleadosService {
   }
 
   traerTodosDocumentos(): Observable<
-  HttpClientServiceInterface<RespuestaDocumetosConsulta>
+  HttpClientServiceInterface<Documento[]>
 > {
   return this.http.get<
-    HttpClientServiceInterface<RespuestaDocumetosConsulta>
+  HttpClientServiceInterface<Documento[]>
   >(ENDPOINTS.empleados.traerTodosDocumentos);
 }
 
-
+// Método para actualizar el archivo de un documento
+actualizarDocumento(
+  documento: any
+): Observable<HttpClientServiceInterface<Documento>> {
+  return this.http.post<HttpClientServiceInterface<Documento>>(
+    ENDPOINTS.empleados.actualizarDocumento,
+    documento
+  );
+}
 
 }

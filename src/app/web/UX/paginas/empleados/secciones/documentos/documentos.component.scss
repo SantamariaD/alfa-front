@@ -1,5 +1,15 @@
+.contenedor-principal{
+  margin-top: 4%;
+}
+
+img{
+  text-align: center;
+  width: 150px;
+  height: 150px;
+  }
+
 .buscador{
-  text-align: right;
+  text-align: left;
 }
 
 .contenedor-documentos{
@@ -50,16 +60,84 @@
   
   .icon-check {
   margin-top: 5%;
-  margin-left: 30%; 
+  margin-left: 20%; 
     color: #001529; /* Color primario */
     font-size: 30px;
   }
 
   .icon-close {
     margin-top: 5%;
-    margin-left: 19%; 
+    margin-left: 36%; 
       color: rgb(151, 26, 26); /* Color primario */
       font-size: 30px;
     }
+
+    .rechazado{
+      color: red;
+      margin-top: 10%;
+      font-size: large;
+      text-align: center;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    .aceptado{
+      color: green;
+      margin-top: 10%;
+      font-size: large;
+      text-align: center;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    .buscador input, .listaEmpleados select{
+      border: none; /* Elimina todos los bordes */
+    border-bottom: 1px solid black; /* Agrega solo el borde inferior */
+    outline: none;
+    }
+
+    .info-empleado{
+      margin-top: 4%;
+      margin-left: 12% !important;
+      width: 70%;
+      height: auto;
+      text-align: center;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .info-empleado .titulo{
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+
+    .principal {
+      display: flex;
+      width: 30%;
+      flex-direction: column;
+      margin: 3%;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .listaEmpleados{
+      margin-left: 20px;
+    }
+
+    .descripcion{
+     margin: 20px;
+     text-align: justify;
+     font-size:larger
+    }
+
+    .descripcion p{
+      margin-bottom: 10px;
+    }
+
+   
     
   
