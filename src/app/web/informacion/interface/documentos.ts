@@ -13,6 +13,7 @@ export interface Documento extends InformacionFecha {
   id: number;
   id_area: number;
   id_user?: number;
+  id_emp?:number;
   nombre_archivo?: string;
   uuid?: string;
   area?: string;
@@ -24,6 +25,7 @@ export interface Documento extends InformacionFecha {
 }
 
 export interface RespuestaDocumetosConsulta {
+  payload?:Array<Documento>;
   documentos: Array<Documento>;
   ultimaActualizacion: Documento;
 }

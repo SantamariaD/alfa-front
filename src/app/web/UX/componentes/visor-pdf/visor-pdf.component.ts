@@ -35,17 +35,7 @@ export class VisorPdfComponent implements OnInit {
    */
   zoom = 0.97;
 
-  /**
-   * @variable urlDescarga: contiene la url de descarga
-   */
-  urlDescarga = '';
-
-  constructor() {
-    const urlBase = environment.production
-      ? environment.urls.backProduction
-      : environment.urls.backDevelop;
-    this.urlDescarga = urlBase + ENDPOINTS.documentos.descargarDocumento;
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 
