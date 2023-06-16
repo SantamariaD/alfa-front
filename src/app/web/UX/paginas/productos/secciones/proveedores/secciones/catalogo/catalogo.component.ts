@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { take } from 'rxjs';
 import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import {
   HttpClientServiceInterface,
@@ -16,7 +17,9 @@ import {
 import { CatalogoProveedoresService } from 'src/app/web/informacion/servicios/catalogo-proveedores/catalogo-proveedores.service';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
+import { selectProductosStore } from 'src/app/web/informacion/state';
 import { guardarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
+import { guardarProductos } from 'src/app/web/informacion/state/productos/productos.actions';
 
 @Component({
   selector: 'app-catalogo',
@@ -83,7 +86,7 @@ export class CatalogoComponent implements OnInit {
    * @Form catalogoForm: Id del proveedor que se buscara el catalógo
    */
   catalogoForm: FormGroup = new FormGroup({
-    nombreProveedor: new FormControl({value: '', disabled: true}),
+    nombreProveedor: new FormControl({ value: '', disabled: true }),
     idProveedor: new FormControl(null, [Validators.required]),
     idProducto: new FormControl(null, [Validators.required]),
     precioCompra: new FormControl('', [Validators.required]),
@@ -102,7 +105,6 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.consultarProveedores();
-    this.consultarProductos();
   }
 
   /**
@@ -156,7 +158,6 @@ export class CatalogoComponent implements OnInit {
         ) => {
           this.message.success('Se guardo correctamente el producto');
           this.buscarCatalogo();
-
         },
       });
   }
@@ -226,19 +227,34 @@ export class CatalogoComponent implements OnInit {
    * @Metodo Agrega producto al carrito
    */
   agregarCarrito(catalogo: CatalogoProveedor): void {
-    this.store.dispatch(guardarProductoCarrito({producto: catalogo}));
-    this.botonCarrito.push(catalogo.nombreProducto)
+    this.store.dispatch(guardarProductoCarrito({ producto: catalogo }));
+    this.botonCarrito.push(catalogo.nombreProducto);
   }
 
   /**
    * @Metodo Consulta todos los productos
    */
   private consultarProductos(): void {
-    this.productosService.consultarProductos().subscribe({
-      next: (respuestaProductos: HttpClientServiceInterface<Array<Producto>>) =>
-        (this.productos = respuestaProductos.payload),
-      error: (error) => console.log(error),
-    });
+    this.store
+      .select(selectProductosStore)
+      .pipe(take(1))
+      .subscribe((productos: Array<Producto>) => {
+        if (!productos) {
+          this.productosService.consultarProductos().subscribe({
+            next: (
+              respuestaProductos: HttpClientServiceInterface<Array<Producto>>
+            ) => {
+              this.store.dispatch(
+                guardarProductos({ productos: respuestaProductos.payload })
+              );
+              this.productos = respuestaProductos.payload;
+            },
+            error: (error) => console.log(error),
+          });
+        } else {
+          this.productos = productos;
+        }
+      });
   }
 
   /**

@@ -45,8 +45,7 @@ registerLocaleData(es);
       },
     }),
     StoreDevtoolsModule.instrument({
-      maxAge: 25,
-      logOnly: environment.production,
+      maxAge: 25
     }),
   ],
   providers: [

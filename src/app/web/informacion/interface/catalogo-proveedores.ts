@@ -8,4 +8,5 @@ export interface CatalogoProveedor {
     nombreProducto: string;
     nombreProveedor: string;
     imagen: string;
+    cantidadCompra: number;
 }
