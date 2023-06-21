@@ -12,14 +12,25 @@ import {
 import { Producto } from 'src/app/web/informacion/interface/productos';
 import {
   Proveedor,
+  ProveedoresStore,
   RespuestaProveedores,
 } from 'src/app/web/informacion/interface/proveedores';
 import { CatalogoProveedoresService } from 'src/app/web/informacion/servicios/catalogo-proveedores/catalogo-proveedores.service';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
-import { selectProductosStore } from 'src/app/web/informacion/state';
+import {
+  selectCarrito,
+  selectProductosStore,
+  selectProveedoresStore,
+} from 'src/app/web/informacion/state';
 import { guardarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
 import { guardarProductos } from 'src/app/web/informacion/state/productos/productos.actions';
+import {
+  guardarCatalogoProveedor,
+  guardarComprar,
+  guardarProveedores,
+  guardarProveedorSeleccionado,
+} from 'src/app/web/informacion/state/proveedores/proveedores.actions';
 
 @Component({
   selector: 'app-catalogo',
@@ -60,7 +71,7 @@ export class CatalogoComponent implements OnInit {
   /**
    * @Form idProveedor: Id del proveedor que se buscara el catalógo
    */
-  idProveedor = new FormControl('', [Validators.required]);
+  idProveedor = new FormControl(0, [Validators.required, Validators.min(1)]);
 
   /**
    * @Form clickCerrar: Cierra o abre el modal
@@ -105,6 +116,8 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.consultarProveedores();
+    this.proveedorSeleccionado();
+    this.carritoStore();
   }
 
   /**
@@ -115,15 +128,6 @@ export class CatalogoComponent implements OnInit {
     this.catalogoForm.patchValue({
       idProveedor: this.idProveedor.value,
     });
-    this.proveedoresService
-      .consultarProveedor(this.catalogoForm.value)
-      .subscribe({
-        next: (respuestaProveedores: HttpClientServiceInterface<Proveedor>) => {
-          this.mostrarCollapse = true;
-          this.proveedor = respuestaProveedores.payload;
-        },
-        error: (error) => console.log(error),
-      });
 
     this.catalogoProveedoresService
       .consultarCatalogoProveedor(this.catalogoForm.value.idProveedor)
@@ -131,10 +135,20 @@ export class CatalogoComponent implements OnInit {
         next: (
           respuestaConsulta: HttpClientServiceInterface<CatalogoProveedor[]>
         ) => {
+          this.mostrarCollapse = true;
+          this.catalogoProveedores = respuestaConsulta.payload;
           this.catalogoForm.patchValue({
             nombreProveedor: respuestaConsulta.payload[0].nombreProveedor,
           });
-          this.catalogoProveedores = respuestaConsulta.payload;
+
+          const proveedor = this.proveedores.filter(
+            (proveedor: Proveedor) =>
+              proveedor.id == this.catalogoForm.value.idProveedor
+          )[0];
+          this.store.dispatch(guardarProveedorSeleccionado({ proveedor }));
+          this.store.dispatch(
+            guardarCatalogoProveedor({ catalogo: respuestaConsulta.payload })
+          );
         },
       });
   }
@@ -221,6 +235,7 @@ export class CatalogoComponent implements OnInit {
    */
   switch(valor: any): void {
     this.comprarProducto = valor;
+    this.store.dispatch(guardarComprar({ comprar: valor }));
   }
 
   /**
@@ -261,11 +276,65 @@ export class CatalogoComponent implements OnInit {
    * @Metodo Consulta todos los proveedores
    */
   private consultarProveedores(): void {
-    this.proveedoresService.consultarProveedores().subscribe({
-      next: (
-        respuestaProveedores: HttpClientServiceInterface<RespuestaProveedores>
-      ) => (this.proveedores = respuestaProveedores.payload.proveedores),
-      error: (error) => console.log(error),
-    });
+    this.store
+      .select(selectProveedoresStore)
+      .pipe(take(1))
+      .subscribe((proveedor: ProveedoresStore) => {
+        if (!proveedor?.proveedores) {
+          this.proveedoresService.consultarProveedores().subscribe({
+            next: (
+              respuestaProveedores: HttpClientServiceInterface<RespuestaProveedores>
+            ) => {
+              this.proveedores = respuestaProveedores.payload.proveedores;
+              this.store.dispatch(
+                guardarProveedores({
+                  proveedores: respuestaProveedores.payload.proveedores,
+                })
+              );
+            },
+            error: (error) => console.log(error),
+          });
+        } else {
+          this.proveedores = proveedor.proveedores;
+        }
+      });
+  }
+
+  /**
+   * @Metodo Consulta el store para validar si hay proveedor seleccionado
+   */
+  private proveedorSeleccionado(): void {
+    this.store
+      .select(selectProveedoresStore)
+      .pipe(take(1))
+      .subscribe((proveedor: ProveedoresStore) => {
+        if (proveedor.proveedorSeleccionado?.id) {
+          this.idProveedor.setValue(proveedor.proveedorSeleccionado?.id);
+          this.mostrarCollapse = true;
+        }
+
+        if (proveedor.catalogoProveedor) {
+          this.catalogoProveedores = proveedor.catalogoProveedor;
+        }
+
+        if (proveedor.comprar) {
+          this.comprarProducto = proveedor.comprar;
+          this.switchValue = proveedor.comprar;
+        }
+      });
+  }
+
+  /**
+   * @Metodo Consulta el store para validar si hay productos en el carrito
+   */
+  private carritoStore(): void {
+    this.store
+      .select(selectCarrito)
+      .pipe(take(1))
+      .subscribe((carritoStore: Array<CatalogoProveedor>) =>
+        carritoStore.map((producto: CatalogoProveedor) =>
+          this.botonCarrito.push(producto.nombreProducto)
+        )
+      );
   }
 }
