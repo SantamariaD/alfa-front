@@ -8,6 +8,9 @@
   </nz-result>
   <div *ngIf="carrito.length > 0" class="carrito__contenedor">
     <div class="carrito__contenedor__producto">
+      <div class="carrito__contenedor__producto--titulo">
+        Productos a comprar
+      </div>
       <div
         class="carrito__contenedor__producto--lista"
         *ngFor="let producto of carrito"
@@ -22,22 +25,76 @@
             {{ producto.nombreProducto }}
           </div>
           <div
+            class="carrito__contenedor__producto--lista--informacion--politicas"
+          >
+            {{ producto.politicasVenta }}
+          </div>
+          <div
             class="carrito__contenedor__producto--lista--informacion--eliminar"
+            (click)="eliminarProducto(producto)"
           >
             Eliminar
           </div>
         </div>
-        <div class="carrito__contenedor__producto--lista--agregar">-1+</div>
+        <div class="carrito__contenedor__producto--lista--agregar">
+          <div class="carrito__contenedor__producto--lista--agregar__sumador">
+            <div
+              class="carrito__contenedor__producto--lista--agregar__sumador--restar"
+              [ngClass]="{ restar: producto.cantidadCompra <= 1 }"
+              (click)="restar(producto)"
+            >
+              -
+            </div>
+            <div
+              class="carrito__contenedor__producto--lista--agregar__sumador--cantidad"
+            >
+              {{ producto.cantidadCompra }}
+            </div>
+            <div
+              class="carrito__contenedor__producto--lista--agregar__sumador--sumar"
+              (click)="sumar(producto)"
+            >
+              +
+            </div>
+          </div>
+          <p
+            class="carrito__contenedor__producto--lista--agregar__sumador--texto"
+          >
+            Cantidad a comprar
+          </p>
+        </div>
         <div class="carrito__contenedor__producto--lista--precio">
-          {{ producto.precioCompra }}
+          ${{ producto.precioCompra }}
+          <p class="carrito__contenedor__producto--lista--precio--texto">
+            Precio de compra
+          </p>
         </div>
       </div>
     </div>
     <div class="carrito__contenedor__resumen-compra">
-      <div class="carrito__contenedor__resumen-compra--productos">
-        Productos (3)
+      <div class="carrito__contenedor__resumen-compra--titulo">
+        Resumen de compra
       </div>
-      <div class="carrito__contenedor__resumen-compra--total">1000</div>
+      <div class="carrito__contenedor__resumen-compra--productos">
+        Productos ({{ cantidadProductos }})
+      </div>
+      <div class="carrito__contenedor__resumen-compra--total">
+        <div class="carrito__contenedor__resumen-compra--total--texto">
+          Total
+        </div>
+        <div class="carrito__contenedor__resumen-compra--total--cantidad">
+          ${{ total }}
+        </div>
+      </div>
+      <div class="carrito__contenedor__resumen-compra--comprar">
+        <button
+          class="carrito__contenedor__resumen-compra--comprar--boton"
+          nz-button
+          nzType="primary"
+        >
+          Realizar compra
+        </button>
+      </div>
     </div>
   </div>
 </section>

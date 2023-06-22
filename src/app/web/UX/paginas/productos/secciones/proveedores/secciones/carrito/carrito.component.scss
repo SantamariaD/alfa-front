@@ -2,32 +2,127 @@
   &__contenedor {
     display: grid;
     grid-template-columns: 70% 28%;
+    column-gap: 20px;
     width: 100%;
     margin: 20px auto;
     &__producto {
-        height: auto;
-        border: 1px solid rgb(192, 192, 192);
-        -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-        width: 100%;
+      height: auto;
+      -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+      width: 100%;
+      padding: 10px 20px;
+      &--titulo {
+        font-size: 22px;
+        font-weight: 600;
+        padding: 10px 0px;
+        border-bottom: 1px solid rgb(192, 192, 192);
+      }
       &--lista {
         display: grid;
-        grid-template-columns: 10% 40% 20% 10%;
+        grid-template-columns: 15% 50% 20% 15%;
+        width: 95%;
+        margin: 15px auto;
+        border-bottom: 1px solid rgb(186, 186, 186);
         &--imagen,
         &--imagen img {
-          width: 100px;
+          width: 80px;
           margin: 10px auto;
+        }
+        &--informacion {
+          margin: auto auto auto 25px;
+          &--nombre {
+            font-size: 17px;
+            font-weight: 600;
+          }
+          &--politicas {
+            font-size: 14px;
+            color: rgb(117, 117, 117);
+          }
+          &--eliminar {
+            font-size: 14px;
+            color: rgb(33, 71, 242);
+            cursor: pointer;
+          }
+        }
+        &--agregar {
+          margin: auto auto auto 25px;
+          &__sumador {
+            width: 120px;
+            margin: auto;
+            border: 1px solid rgb(192, 192, 192);
+            display: grid;
+            grid-template-columns: 30% 40% 30%;
+            text-align: center;
+            font-size: 17px;
+            &--sumar,
+            &--restar {
+              color: rgb(33, 71, 242);
+              cursor: pointer;
+            }
+            &--cantidad {
+              margin-top: auto;
+            }
+            &--texto {
+              font-size: 12px;
+              text-align: center;
+              color: rgb(117, 117, 117);
+            }
+          }
+        }
+        &--precio {
+          font-size: 17px;
+          text-align: center;
+          margin: auto;
+          &--texto {
+            font-size: 12px;
+            text-align: center;
+            color: rgb(117, 117, 117);
+            margin-top: 5px;
+          }
         }
       }
     }
     &__resumen-compra {
-      border: 1px solid rgb(192, 192, 192);
-      -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+      padding: 10px 20px;
+      -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+      -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
       width: 100%;
-      height: 500px;
+      height: 250px;
+      &--titulo {
+        font-size: 22px;
+        font-weight: 600;
+        padding: 10px 0px;
+        border-bottom: 1px solid rgb(192, 192, 192);
+      }
+      &--productos {
+        margin: 10px 0px;
+        font-size: 16px;
+      }
+      &--total {
+        display: flex;
+        justify-content: space-between;
+        &--texto,
+        &--cantidad {
+          font-size: 16px;
+          margin: 10px 0px;
+        }
+      }
+      &--comprar {
+        width: 100%;
+        margin: 30px auto 20px auto;
+        height: 35px;
+        &--boton {
+          width: 100%;
+          height: 45px;
+          font-weight: 600;
+        }
+      }
     }
   }
+}
+
+.restar {
+  color: rgb(117, 117, 117);
 }

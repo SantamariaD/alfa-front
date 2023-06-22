@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { take } from 'rxjs';
 import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import {
   HttpClientServiceInterface,
@@ -11,12 +12,25 @@ import {
 import { Producto } from 'src/app/web/informacion/interface/productos';
 import {
   Proveedor,
+  ProveedoresStore,
   RespuestaProveedores,
 } from 'src/app/web/informacion/interface/proveedores';
 import { CatalogoProveedoresService } from 'src/app/web/informacion/servicios/catalogo-proveedores/catalogo-proveedores.service';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
+import {
+  selectCarrito,
+  selectProductosStore,
+  selectProveedoresStore,
+} from 'src/app/web/informacion/state';
 import { guardarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
+import { guardarProductos } from 'src/app/web/informacion/state/productos/productos.actions';
+import {
+  guardarCatalogoProveedor,
+  guardarComprar,
+  guardarProveedores,
+  guardarProveedorSeleccionado,
+} from 'src/app/web/informacion/state/proveedores/proveedores.actions';
 
 @Component({
   selector: 'app-catalogo',
@@ -57,7 +71,7 @@ export class CatalogoComponent implements OnInit {
   /**
    * @Form idProveedor: Id del proveedor que se buscara el catalógo
    */
-  idProveedor = new FormControl('', [Validators.required]);
+  idProveedor = new FormControl(0, [Validators.required, Validators.min(1)]);
 
   /**
    * @Form clickCerrar: Cierra o abre el modal
@@ -83,7 +97,7 @@ export class CatalogoComponent implements OnInit {
    * @Form catalogoForm: Id del proveedor que se buscara el catalógo
    */
   catalogoForm: FormGroup = new FormGroup({
-    nombreProveedor: new FormControl({value: '', disabled: true}),
+    nombreProveedor: new FormControl({ value: '', disabled: true }),
     idProveedor: new FormControl(null, [Validators.required]),
     idProducto: new FormControl(null, [Validators.required]),
     precioCompra: new FormControl('', [Validators.required]),
@@ -102,7 +116,8 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit(): void {
     this.consultarProveedores();
-    this.consultarProductos();
+    this.proveedorSeleccionado();
+    this.carritoStore();
   }
 
   /**
@@ -113,15 +128,6 @@ export class CatalogoComponent implements OnInit {
     this.catalogoForm.patchValue({
       idProveedor: this.idProveedor.value,
     });
-    this.proveedoresService
-      .consultarProveedor(this.catalogoForm.value)
-      .subscribe({
-        next: (respuestaProveedores: HttpClientServiceInterface<Proveedor>) => {
-          this.mostrarCollapse = true;
-          this.proveedor = respuestaProveedores.payload;
-        },
-        error: (error) => console.log(error),
-      });
 
     this.catalogoProveedoresService
       .consultarCatalogoProveedor(this.catalogoForm.value.idProveedor)
@@ -129,10 +135,20 @@ export class CatalogoComponent implements OnInit {
         next: (
           respuestaConsulta: HttpClientServiceInterface<CatalogoProveedor[]>
         ) => {
+          this.mostrarCollapse = true;
+          this.catalogoProveedores = respuestaConsulta.payload;
           this.catalogoForm.patchValue({
             nombreProveedor: respuestaConsulta.payload[0].nombreProveedor,
           });
-          this.catalogoProveedores = respuestaConsulta.payload;
+
+          const proveedor = this.proveedores.filter(
+            (proveedor: Proveedor) =>
+              proveedor.id == this.catalogoForm.value.idProveedor
+          )[0];
+          this.store.dispatch(guardarProveedorSeleccionado({ proveedor }));
+          this.store.dispatch(
+            guardarCatalogoProveedor({ catalogo: respuestaConsulta.payload })
+          );
         },
       });
   }
@@ -156,7 +172,6 @@ export class CatalogoComponent implements OnInit {
         ) => {
           this.message.success('Se guardo correctamente el producto');
           this.buscarCatalogo();
-
         },
       });
   }
@@ -220,36 +235,106 @@ export class CatalogoComponent implements OnInit {
    */
   switch(valor: any): void {
     this.comprarProducto = valor;
+    this.store.dispatch(guardarComprar({ comprar: valor }));
   }
 
   /**
    * @Metodo Agrega producto al carrito
    */
   agregarCarrito(catalogo: CatalogoProveedor): void {
-    this.store.dispatch(guardarProductoCarrito({producto: catalogo}));
-    this.botonCarrito.push(catalogo.nombreProducto)
+    this.store.dispatch(guardarProductoCarrito({ producto: catalogo }));
+    this.botonCarrito.push(catalogo.nombreProducto);
   }
 
   /**
    * @Metodo Consulta todos los productos
    */
   private consultarProductos(): void {
-    this.productosService.consultarProductos().subscribe({
-      next: (respuestaProductos: HttpClientServiceInterface<Array<Producto>>) =>
-        (this.productos = respuestaProductos.payload),
-      error: (error) => console.log(error),
-    });
+    this.store
+      .select(selectProductosStore)
+      .pipe(take(1))
+      .subscribe((productos: Array<Producto>) => {
+        if (!productos) {
+          this.productosService.consultarProductos().subscribe({
+            next: (
+              respuestaProductos: HttpClientServiceInterface<Array<Producto>>
+            ) => {
+              this.store.dispatch(
+                guardarProductos({ productos: respuestaProductos.payload })
+              );
+              this.productos = respuestaProductos.payload;
+            },
+            error: (error) => console.log(error),
+          });
+        } else {
+          this.productos = productos;
+        }
+      });
   }
 
   /**
    * @Metodo Consulta todos los proveedores
    */
   private consultarProveedores(): void {
-    this.proveedoresService.consultarProveedores().subscribe({
-      next: (
-        respuestaProveedores: HttpClientServiceInterface<RespuestaProveedores>
-      ) => (this.proveedores = respuestaProveedores.payload.proveedores),
-      error: (error) => console.log(error),
-    });
+    this.store
+      .select(selectProveedoresStore)
+      .pipe(take(1))
+      .subscribe((proveedor: ProveedoresStore) => {
+        if (!proveedor?.proveedores) {
+          this.proveedoresService.consultarProveedores().subscribe({
+            next: (
+              respuestaProveedores: HttpClientServiceInterface<RespuestaProveedores>
+            ) => {
+              this.proveedores = respuestaProveedores.payload.proveedores;
+              this.store.dispatch(
+                guardarProveedores({
+                  proveedores: respuestaProveedores.payload.proveedores,
+                })
+              );
+            },
+            error: (error) => console.log(error),
+          });
+        } else {
+          this.proveedores = proveedor.proveedores;
+        }
+      });
+  }
+
+  /**
+   * @Metodo Consulta el store para validar si hay proveedor seleccionado
+   */
+  private proveedorSeleccionado(): void {
+    this.store
+      .select(selectProveedoresStore)
+      .pipe(take(1))
+      .subscribe((proveedor: ProveedoresStore) => {
+        if (proveedor.proveedorSeleccionado?.id) {
+          this.idProveedor.setValue(proveedor.proveedorSeleccionado?.id);
+          this.mostrarCollapse = true;
+        }
+
+        if (proveedor.catalogoProveedor) {
+          this.catalogoProveedores = proveedor.catalogoProveedor;
+        }
+
+        if (proveedor.comprar) {
+          this.comprarProducto = proveedor.comprar;
+          this.switchValue = proveedor.comprar;
+        }
+      });
+  }
+
+  /**
+   * @Metodo Consulta el store para validar si hay productos en el carrito
+   */
+  private carritoStore(): void {
+    this.store
+      .select(selectCarrito)
+      .pipe(take(1))
+      .subscribe((carritoStore: Array<CatalogoProveedor>) =>
+        carritoStore.map((producto: CatalogoProveedor) =>
+          this.botonCarrito.push(producto.nombreProducto)
+        )
+      );
   }
 }

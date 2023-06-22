@@ -1,3 +1,4 @@
+import { CatalogoProveedor } from "./catalogo-proveedores";
 import { InformacionFecha } from "./httpService";
 
 export interface Proveedor extends  InformacionFecha{
@@ -12,4 +13,11 @@ export interface Proveedor extends  InformacionFecha{
 export interface RespuestaProveedores {
     proveedores: Array<Proveedor>;
     utlimaActualizacion: Proveedor;
+}
+
+export interface ProveedoresStore {
+    proveedores: Array<Proveedor>;
+    proveedorSeleccionado: Proveedor;
+    catalogoProveedor: Array<CatalogoProveedor>;
+    comprar: boolean;
 }
