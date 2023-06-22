@@ -3,8 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { take } from 'rxjs';
-import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
+import { finalize, take } from 'rxjs';
+import {
+  BotonCarrito,
+  CatalogoProveedor,
+} from 'src/app/web/informacion/interface/catalogo-proveedores';
 import {
   HttpClientServiceInterface,
   HttpClientServiceInterfaceNoPayload,
@@ -24,7 +27,10 @@ import {
   selectProveedoresStore,
 } from 'src/app/web/informacion/state';
 import { guardarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
-import { guardarProductos } from 'src/app/web/informacion/state/productos/productos.actions';
+import {
+  eliminarProductos,
+  guardarProductos,
+} from 'src/app/web/informacion/state/productos/productos.actions';
 import {
   guardarCatalogoProveedor,
   guardarComprar,
@@ -91,7 +97,7 @@ export class CatalogoComponent implements OnInit {
   /**
    * @variable botonCarrito: muestra u oculta el boton de agregar a carrito
    */
-  botonCarrito = [''];
+  botonCarrito: Array<BotonCarrito> = [];
 
   /**
    * @Form catalogoForm: Id del proveedor que se buscara el catalógo
@@ -124,6 +130,8 @@ export class CatalogoComponent implements OnInit {
    * @Metodo busca el catalógo relacionado con el proveedor
    */
   buscarCatalogo(): void {
+    this.productos = [];
+    this.catalogoProveedores = [];
     this.mostrarCollapse = false;
     this.catalogoForm.patchValue({
       idProveedor: this.idProveedor.value,
@@ -137,18 +145,19 @@ export class CatalogoComponent implements OnInit {
         ) => {
           this.mostrarCollapse = true;
           this.catalogoProveedores = respuestaConsulta.payload;
-          this.catalogoForm.patchValue({
-            nombreProveedor: respuestaConsulta.payload[0].nombreProveedor,
-          });
 
           const proveedor = this.proveedores.filter(
             (proveedor: Proveedor) =>
               proveedor.id == this.catalogoForm.value.idProveedor
           )[0];
+          this.catalogoForm.patchValue({
+            nombreProveedor: proveedor.nombre,
+          });
           this.store.dispatch(guardarProveedorSeleccionado({ proveedor }));
           this.store.dispatch(
             guardarCatalogoProveedor({ catalogo: respuestaConsulta.payload })
           );
+          this.consultarProductos();
         },
       });
   }
@@ -166,6 +175,16 @@ export class CatalogoComponent implements OnInit {
 
     this.catalogoProveedoresService
       .guardarProductoCatalogo(this.catalogoForm.value)
+      .pipe(
+        finalize(() =>
+          this.catalogoForm.patchValue({
+            idProducto: null,
+            precioCompra: null,
+            precioMaximoVenta: null,
+            politicasVenta: null,
+          })
+        )
+      )
       .subscribe({
         next: (
           respuestaConsulta: HttpClientServiceInterface<CatalogoProveedor>
@@ -242,19 +261,29 @@ export class CatalogoComponent implements OnInit {
    * @Metodo Agrega producto al carrito
    */
   agregarCarrito(catalogo: CatalogoProveedor): void {
-    this.store.dispatch(guardarProductoCarrito({ producto: catalogo }));
-    this.botonCarrito.push(catalogo.nombreProducto);
+    this.store.dispatch(guardarProductoCarrito({ producto: catalogo}));
+    this.botonCarrito.push({
+      nombreProducto: catalogo.nombreProducto,
+      idProveedor: catalogo.idProveedor,
+    });
+  }
+
+  contieneEnCarrito(catalogo: CatalogoProveedor): boolean {
+    return this.botonCarrito.some(item =>
+      item.nombreProducto === catalogo.nombreProducto && item.idProveedor === catalogo.idProveedor
+    );
   }
 
   /**
    * @Metodo Consulta todos los productos
    */
   private consultarProductos(): void {
+    this.store.dispatch(eliminarProductos());
     this.store
       .select(selectProductosStore)
       .pipe(take(1))
       .subscribe((productos: Array<Producto>) => {
-        if (!productos) {
+        if (productos.length < 1) {
           this.productosService.consultarProductos().subscribe({
             next: (
               respuestaProductos: HttpClientServiceInterface<Array<Producto>>
@@ -262,7 +291,13 @@ export class CatalogoComponent implements OnInit {
               this.store.dispatch(
                 guardarProductos({ productos: respuestaProductos.payload })
               );
-              this.productos = respuestaProductos.payload;
+              this.productos = respuestaProductos.payload.filter(
+                (producto: Producto) =>
+                  !this.catalogoProveedores.some(
+                    (catalogo: CatalogoProveedor) =>
+                      producto.id == catalogo.idProducto
+                  )
+              );
             },
             error: (error) => console.log(error),
           });
@@ -333,7 +368,10 @@ export class CatalogoComponent implements OnInit {
       .pipe(take(1))
       .subscribe((carritoStore: Array<CatalogoProveedor>) =>
         carritoStore.map((producto: CatalogoProveedor) =>
-          this.botonCarrito.push(producto.nombreProducto)
+          this.botonCarrito.push({
+            nombreProducto: producto.nombreProducto,
+            idProveedor: producto.idProveedor,
+          })
         )
       );
   }

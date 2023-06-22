@@ -89,6 +89,12 @@ input {
   font-size: 18px;
 }
 
+input:focus {
+  border: none;
+  border-bottom: 1px solid rgb(196, 196, 196);
+  font-size: 18px;
+}
+
 .ant-input[disabled] {
   background-color: transparent;
 }
@@ -100,15 +106,15 @@ nz-avatar {
 .editar {
   color: rgb(130, 130, 130);
   font-size: 20px;
-  &:hover{
-    color: #E4A11B;
+  &:hover {
+    color: #e4a11b;
   }
 }
 
 .agregar {
   color: rgb(130, 130, 130);
   font-size: 20px;
-  &:hover{
+  &:hover {
     color: $color-brand-primary;
   }
 }
@@ -116,7 +122,20 @@ nz-avatar {
 .eliminar {
   color: rgb(130, 130, 130);
   font-size: 20px;
-  &:hover{
+  &:hover {
     color: rgb(194, 1, 1);
   }
+}
+
+.label {
+  color: rgb(130, 130, 130);
+}
+
+.ant-input-status-error:not(.ant-input-disabled):not(
+    .ant-input-borderless
+  ).ant-input,
+.ant-input-status-error:not(.ant-input-disabled):not(
+    .ant-input-borderless
+  ).ant-input:hover {
+  border-color: rgb(196, 196, 196);
 }

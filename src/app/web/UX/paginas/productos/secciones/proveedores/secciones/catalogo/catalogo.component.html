@@ -80,10 +80,7 @@
               nzTooltipTitle="Agregar al carrito"
               nzTooltipPlacement="leftTop"
               nz-tooltip
-              *ngIf="
-                comprarProducto &&
-                !botonCarrito.includes(catalogo.nombreProducto)
-              "
+              *ngIf="comprarProducto && !contieneEnCarrito(catalogo)"
             >
               <span
                 (click)="agregarCarrito(catalogo)"
@@ -124,7 +121,7 @@
               <input nz-input type="text" formControlName="nombreProveedor" />
             </nz-form-control>
             <nz-form-control>
-              <p class="catalogo__form-agregar--seccion__label">Producto</p>
+              <p class="label">Producto</p>
               <select
                 class="catalogo__form-agregar--seccion__select"
                 formControlName="idProducto"

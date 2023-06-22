@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { pipe, take } from 'rxjs';
 import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import { selectCarritoCompra } from 'src/app/web/informacion/state';
-import { eliminarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
+import {
+  actualizarProductoCarrito,
+  eliminarProductoCarrito,
+} from 'src/app/web/informacion/state/carrito/carrito.actions';
 
 @Component({
   selector: 'app-carrito',
@@ -41,6 +44,12 @@ export class CarritoComponent implements OnInit {
         productoCarrito.cantidadCompra += 1;
     });
     this.resumenCompra();
+    this.store.dispatch(
+      actualizarProductoCarrito({
+        producto,
+        cantidadCompra: producto.cantidadCompra,
+      })
+    );
   }
 
   /**
@@ -52,6 +61,12 @@ export class CarritoComponent implements OnInit {
         productoCarrito.cantidadCompra -= 1;
     });
     this.resumenCompra();
+    this.store.dispatch(
+      actualizarProductoCarrito({
+        producto,
+        cantidadCompra: producto.cantidadCompra,
+      })
+    );
   }
 
   /**
@@ -75,19 +90,26 @@ export class CarritoComponent implements OnInit {
   }
 
   /**
+   * @Metodo Realiza la compra y la generación de orden de compra
+   */
+  realizarCompra(): void {
+    console.log(this.carrito)
+  }
+
+  /**
    * @Metodo Consulta el carrito del store
    */
   private carritoStore(): void {
     this.total = 0;
     this.cantidadProductos = 0;
-    
+    this.carrito = [];
+
     this.store
       .select(selectCarritoCompra)
       .pipe(take(1))
       .subscribe((carrito: Array<CatalogoProveedor>) => {
         carrito.map((producto: CatalogoProveedor) => {
-          this.total += producto.precioCompra;
-          return (producto.cantidadCompra = 1);
+          this.total += producto.precioCompra*producto.cantidadCompra;
         });
         this.carrito = carrito;
         this.cantidadProductos = this.carrito.length;

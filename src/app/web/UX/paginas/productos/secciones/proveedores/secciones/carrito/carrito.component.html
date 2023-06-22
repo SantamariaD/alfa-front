@@ -27,6 +27,11 @@
           <div
             class="carrito__contenedor__producto--lista--informacion--politicas"
           >
+            {{ producto.nombreProveedor }}
+          </div>
+          <div
+            class="carrito__contenedor__producto--lista--informacion--politicas"
+          >
             {{ producto.politicasVenta }}
           </div>
           <div
@@ -91,6 +96,7 @@
           class="carrito__contenedor__resumen-compra--comprar--boton"
           nz-button
           nzType="primary"
+          (click)="realizarCompra()"
         >
           Realizar compra
         </button>

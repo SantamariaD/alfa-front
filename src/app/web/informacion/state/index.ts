@@ -59,7 +59,7 @@ export const selectAreas = createFeatureSelector<Array<Area>>('areas');
 
 //Productos
 export const selectProductos =
-  createFeatureSelector<Array<Producto>>('producto');
+  createFeatureSelector<Array<Producto>>('productos');
 
 //Proveedores
 export const selectProveedores =

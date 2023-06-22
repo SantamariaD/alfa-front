@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Producto } from '../../interface/productos';
-import { guardarProductos } from './productos.actions';
+import { eliminarProductos, guardarProductos } from './productos.actions';
 
 const estadoInicial: Array<Producto> = [];
 
@@ -9,6 +9,9 @@ const productosReducer = createReducer(
   on(guardarProductos, (state, { productos }) => {
     state = productos;
     return state;
+  }),
+  on(eliminarProductos, (state,) => {
+    return [];
   })
 );
 
