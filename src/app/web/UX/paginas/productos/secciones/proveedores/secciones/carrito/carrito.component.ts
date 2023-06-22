@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import { selectCarritoCompra } from 'src/app/web/informacion/state';
+import { eliminarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
 
 @Component({
   selector: 'app-carrito',
@@ -28,17 +29,7 @@ export class CarritoComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store
-      .select(selectCarritoCompra)
-      .pipe(take(1))
-      .subscribe((carrito: Array<CatalogoProveedor>) => {
-        carrito.map((producto: CatalogoProveedor) => {
-          this.total += producto.precioCompra;
-          return (producto.cantidadCompra = 1);
-        });
-        this.carrito = carrito;
-        this.cantidadProductos = this.carrito.length;
-      });
+    this.carritoStore();
   }
 
   /**
@@ -73,5 +64,33 @@ export class CarritoComponent implements OnInit {
       this.cantidadProductos += producto.cantidadCompra;
       this.total += producto.cantidadCompra * producto.precioCompra;
     });
+  }
+
+  /**
+   * @Metodo Elimina un producto del carrito de compra
+   */
+  eliminarProducto(producto: CatalogoProveedor): void {
+    this.store.dispatch(eliminarProductoCarrito({ producto }));
+    this.carritoStore();
+  }
+
+  /**
+   * @Metodo Consulta el carrito del store
+   */
+  private carritoStore(): void {
+    this.total = 0;
+    this.cantidadProductos = 0;
+    
+    this.store
+      .select(selectCarritoCompra)
+      .pipe(take(1))
+      .subscribe((carrito: Array<CatalogoProveedor>) => {
+        carrito.map((producto: CatalogoProveedor) => {
+          this.total += producto.precioCompra;
+          return (producto.cantidadCompra = 1);
+        });
+        this.carrito = carrito;
+        this.cantidadProductos = this.carrito.length;
+      });
   }
 }

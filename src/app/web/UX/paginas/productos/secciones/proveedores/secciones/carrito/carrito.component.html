@@ -8,6 +8,9 @@
   </nz-result>
   <div *ngIf="carrito.length > 0" class="carrito__contenedor">
     <div class="carrito__contenedor__producto">
+      <div class="carrito__contenedor__producto--titulo">
+        Productos a comprar
+      </div>
       <div
         class="carrito__contenedor__producto--lista"
         *ngFor="let producto of carrito"
@@ -28,6 +31,7 @@
           </div>
           <div
             class="carrito__contenedor__producto--lista--informacion--eliminar"
+            (click)="eliminarProducto(producto)"
           >
             Eliminar
           </div>
