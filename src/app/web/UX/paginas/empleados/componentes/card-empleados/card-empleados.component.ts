@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Empleados } from 'src/app/web/informacion/interface/empleados';
 import { HttpClientServiceInterfaceNoPayload } from 'src/app/web/informacion/interface/httpService';
@@ -9,7 +9,7 @@ import { EmpleadosService } from 'src/app/web/informacion/servicios/empleados/em
   templateUrl: './card-empleados.component.html',
   styleUrls: ['./card-empleados.component.scss'],
 })
-export class CardEmpleadosComponent implements OnInit {
+export class CardEmpleadosComponent implements OnInit, OnDestroy {
   /**
    * @Input empleado: contiene la info del empleado seleccionado
    */
@@ -51,7 +51,12 @@ export class CardEmpleadosComponent implements OnInit {
     private empleadoServise: EmpleadosService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(){
+    this.empleado = {} as Empleados;
+  }
 
   //Metodo que manda la actualización del empleado a la vista para que se muestre
 
@@ -179,4 +184,6 @@ export class CardEmpleadosComponent implements OnInit {
     }
     this.docEmpleado.emit(dataDocumentos);
   }
+
+  
 }

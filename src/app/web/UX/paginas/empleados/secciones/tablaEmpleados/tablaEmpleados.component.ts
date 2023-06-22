@@ -28,6 +28,17 @@ export class TablaEmpleadosComponent implements OnInit {
   empleado:Empleados = {} as Empleados;
 
   /**
+   * @variable despidos: trae los empleados despedidos en los ultimos tres meses
+   */
+  despidos:Empleados[] = [];
+
+
+  /**
+   * @variable despidos: trae los empleados contratados en los ultimos tres meses
+   */
+  contratados:Empleados[] = [];
+
+  /**
    * @variable empleados: trae el array de todos los empleados
    */
   empleados:Empleados[] = [];
@@ -54,13 +65,8 @@ switchValue = false;
   constructor(private empleadoServise:EmpleadosService) { }
 
   ngOnInit(): void {
-    const fecha = '2023-06-01T17:26:07.000000Z';
-const fechaObjeto = new Date(fecha);
-const dia = fechaObjeto.getDate();
-const mes = fechaObjeto.getMonth() + 1;
-const anio = fechaObjeto.getFullYear();
-console.log(dia, mes,anio);
     this.traerTodosEmpleados();
+   console.log(this.empleado);
   }
 
 //Metodo para traer todos los empleados
@@ -71,6 +77,7 @@ this.empleadoServise.traerTodosEmpleados().subscribe({
     this.empleados.forEach(element => {
       element.nombreCompleto = element.nombres + ' ' + element.apellido_materno + ' ' + element.apellido_paterno;
     });
+    this.calculosEmpleados();
     }, error: error => console.log(error)
 })
 }
@@ -92,6 +99,7 @@ clickCerrarModal(cerrar:any){
 }
 
 ActualizaDatos(actualiza:boolean){
+  this.empleados = [];
   this.traerTodosEmpleados();
   this.mostrarCardEmpleado = false;
 }
@@ -100,4 +108,38 @@ docEmpleado(docEmpleados:object){
 this.documentos.emit(docEmpleados);
 }
 
+// Este metodo calcula las altas bajas y faltas de los empleados
+calculosEmpleados(){
+  this.contratados = [];
+  this.despidos = [];
+  const obtenerFecha:Date = new Date();
+  const anioActual = obtenerFecha.getFullYear();
+  const mesActual = obtenerFecha.getMonth() + 1;
+this.empleados.forEach(empleado =>{
+  if(empleado.baja === 1){
+   const fechaLong = empleado.fecha_baja.split('-')
+   const fechaAnio = parseInt(fechaLong[0]);
+   const fechaMes = parseInt(fechaLong[1]);
+if(anioActual === fechaAnio && mesActual === fechaMes || mesActual - 3 <= fechaMes){
+this.despidos.push(empleado);
+}
+  }else{
+if(empleado.fecha_reingreso !== null){
+  const fechaLong = empleado.fecha_reingreso.split('-')
+  const fechaAnio = parseInt(fechaLong[0]);
+  const fechaMes = parseInt(fechaLong[1]);
+  if(anioActual === fechaAnio && mesActual === fechaMes || mesActual - 3 <= fechaMes){
+    this.contratados.push(empleado);
+    }
+}else{
+  const fechaLong = empleado.fecha_alta.split('-')
+  const fechaAnio = parseInt(fechaLong[0]);
+  const fechaMes = parseInt(fechaLong[1]);
+  if(anioActual === fechaAnio && mesActual === fechaMes || mesActual - 3 <= fechaMes){
+    this.contratados.push(empleado);
+    }
+}
+  }
+})
+}
 }

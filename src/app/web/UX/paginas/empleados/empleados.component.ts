@@ -38,7 +38,13 @@ empleado:Empleados = {} as Empleados
 
   verDocumentos(empleadoPantalla:any){
 this.empleado = empleadoPantalla.empleado;
-this.seccion = empleadoPantalla.pantalla;
+this.selectSeccion(empleadoPantalla.pantalla);
+this.secciones.forEach(seccion =>{
+  if(empleadoPantalla.pantalla === seccion.texto){
+    seccion.seleccionado = true
+  }else seccion.seleccionado = false
+})
+
   }
 
 }
