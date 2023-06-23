@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
 
 @Component({
   selector: 'app-card-orden-compra',
   templateUrl: './card-orden-compra.component.html',
-  styleUrls: ['./card-orden-compra.component.scss']
+  styleUrls: ['./card-orden-compra.component.scss'],
 })
 export class CardOrdenCompraComponent implements OnInit {
   /**
@@ -18,19 +17,42 @@ export class CardOrdenCompraComponent implements OnInit {
   @Output() clickCerrar = new EventEmitter<any>();
 
   /**
-   * @Varible subtotal: subtotal de la compra
+   * @variable seccion: Contiene la seccione actual
    */
-  subtotal = 0;
+  seccion = '';
 
-  proveedoresArray: { clave: string, valor: any }[] = [];
+  /**
+   * @variable secciones: Contiene las secciones de la página
+   */
+  secciones: { texto: string; seleccionado: boolean }[] = [];
 
-  constructor() { }
+  /**
+   * @variable proveedoresArray: formato del array para usar
+   */
+  proveedoresArray: { clave: string; valor: any }[] = [];
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.proveedoresArray = Object.keys(this.productos).map(clave => ({
+    // Formateo de array a usarse en el html
+    this.proveedoresArray = Object.keys(this.productos).map((clave) => ({
       clave,
-      valor: this.productos[clave]
+      valor: this.productos[clave],
     }));
+
+    // Seteo de cabeceras a mostrar
+    this.proveedoresArray.forEach(
+      (proveedor: { clave: string; valor: any }, index) => {
+        this.secciones.push({
+          texto: proveedor.clave,
+          seleccionado: index == 0,
+        });
+
+        if (index == 0) {
+          this.seccion = proveedor.clave;
+        }
+      }
+    );
   }
 
   /**
@@ -40,4 +62,10 @@ export class CardOrdenCompraComponent implements OnInit {
     this.clickCerrar.emit(false);
   }
 
+  /**
+   * @Metodo Asigna la sección en la que nos encontramos
+   */
+  selectSeccion(seccion: string): void {
+    this.seccion = seccion;
+  }
 }

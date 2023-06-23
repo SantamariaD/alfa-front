@@ -113,7 +113,6 @@ export class CarritoComponent implements OnInit {
       return objetoProveedores;
     }, {});
     
-    console.log(this.productosOrden);
     this.cardOrdenCompra = true;
   }
 
@@ -121,7 +120,6 @@ export class CarritoComponent implements OnInit {
    * @Metodo Cierra la card de orden de compra
    */
   clickCerrar(): void {
-    console.log(this.carrito)
     this.cardOrdenCompra = false;
   }
 

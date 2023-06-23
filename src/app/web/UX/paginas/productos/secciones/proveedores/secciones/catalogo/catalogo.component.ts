@@ -124,6 +124,7 @@ export class CatalogoComponent implements OnInit {
     this.consultarProveedores();
     this.proveedorSeleccionado();
     this.carritoStore();
+    this.consultarProductos();
   }
 
   /**
@@ -261,7 +262,7 @@ export class CatalogoComponent implements OnInit {
    * @Metodo Agrega producto al carrito
    */
   agregarCarrito(catalogo: CatalogoProveedor): void {
-    this.store.dispatch(guardarProductoCarrito({ producto: catalogo}));
+    this.store.dispatch(guardarProductoCarrito({ producto: catalogo }));
     this.botonCarrito.push({
       nombreProducto: catalogo.nombreProducto,
       idProveedor: catalogo.idProveedor,
@@ -269,8 +270,10 @@ export class CatalogoComponent implements OnInit {
   }
 
   contieneEnCarrito(catalogo: CatalogoProveedor): boolean {
-    return this.botonCarrito.some(item =>
-      item.nombreProducto === catalogo.nombreProducto && item.idProveedor === catalogo.idProveedor
+    return this.botonCarrito.some(
+      (item) =>
+        item.nombreProducto === catalogo.nombreProducto &&
+        item.idProveedor === catalogo.idProveedor
     );
   }
 
@@ -278,7 +281,6 @@ export class CatalogoComponent implements OnInit {
    * @Metodo Consulta todos los productos
    */
   private consultarProductos(): void {
-    this.store.dispatch(eliminarProductos());
     this.store
       .select(selectProductosStore)
       .pipe(take(1))
@@ -291,20 +293,26 @@ export class CatalogoComponent implements OnInit {
               this.store.dispatch(
                 guardarProductos({ productos: respuestaProductos.payload })
               );
-              this.productos = respuestaProductos.payload.filter(
-                (producto: Producto) =>
-                  !this.catalogoProveedores.some(
-                    (catalogo: CatalogoProveedor) =>
-                      producto.id == catalogo.idProducto
-                  )
-              );
+              this.filtrarProductos(respuestaProductos.payload);
             },
             error: (error) => console.log(error),
           });
         } else {
-          this.productos = productos;
+          this.filtrarProductos(productos);
         }
       });
+  }
+
+  /**
+   * @Metodo Filtra el arreglo de productos de acuerdo con el proveedor
+   */
+  private filtrarProductos(productos: Array<Producto>): void {
+    this.productos = productos.filter(
+      (producto: Producto) =>
+        !this.catalogoProveedores.some(
+          (catalogo: CatalogoProveedor) => producto.id == catalogo.idProducto
+        )
+    );
   }
 
   /**
@@ -344,8 +352,12 @@ export class CatalogoComponent implements OnInit {
       .pipe(take(1))
       .subscribe((proveedor: ProveedoresStore) => {
         if (proveedor.proveedorSeleccionado?.id) {
-          this.idProveedor.setValue(proveedor.proveedorSeleccionado?.id);
           this.mostrarCollapse = true;
+          this.idProveedor.setValue(proveedor.proveedorSeleccionado?.id);
+          this.catalogoForm.patchValue({
+            idProveedor: proveedor.proveedorSeleccionado.id,
+            nombreProveedor: proveedor.proveedorSeleccionado.nombre,
+          });
         }
 
         if (proveedor.catalogoProveedor) {

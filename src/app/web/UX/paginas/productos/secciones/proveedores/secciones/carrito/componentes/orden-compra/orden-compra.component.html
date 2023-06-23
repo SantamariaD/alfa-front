@@ -1,0 +1,185 @@
+<div class="orden-compra m-b-10">
+  <div class="orden-compra__switch">
+    <nz-switch
+      (ngModelChange)="switch($event)"
+      [(ngModel)]="switchValue"
+      name="switch"
+    ></nz-switch
+    ><span class="orden-compra__switch--span">{{editar ? 'Preciona al finalizar de editar' : 'Editar Orden de compra'}}</span>
+  </div>
+  <p class="orden-compra--titulo">Orden de compra para {{ proveedor.clave }}</p>
+  <div class="orden-compra__inicio">
+    <div class="orden-compra__inicio--info">
+      <p>{{ infoEmpresa.nombre }}</p>
+      <p>{{ infoEmpresa.direccion }}</p>
+      <p>{{ infoEmpresa.telefono }}</p>
+      <p>{{ infoEmpresa.correo }}</p>
+      <p>{{ infoEmpresa.sitioWeb }}</p>
+    </div>
+    <div class="orden-compra__inicio--fecha">
+      <p>Fecha: {{ fecha | date : "dd MMMM yyyy" }}</p>
+      <p *ngIf="numeroOrden > 0">Número de orden: {{ numeroOrden }}</p>
+    </div>
+  </div>
+  <div class="orden-compra--info-compra">
+    <div class="orden-compra--info-compra__vendedor">
+      <div class="orden-compra--info-compra__vendedor--titulo">Vendedor</div>
+      <div class="orden-compra--info-compra__vendedor--info" *ngIf="!editar">
+        <p><strong>Nombre empresa: </strong> {{ proveedorInfo.nombre }}</p>
+        <p>
+          <strong>Representante: </strong> {{ proveedorInfo.representante }}
+        </p>
+        <p><strong>Teléfono: </strong> {{ proveedorInfo.telefono }}</p>
+        <p><strong>Correo: </strong> {{ proveedorInfo.correo }}</p>
+        <p><strong>Dirección: </strong> {{ proveedorInfo.domicilio }}</p>
+      </div>
+      <form class="orden-compra--info-compra__comprador--info" *ngIf="editar">
+        <div class="orden-compra--info-compra__comprador--info__datos">
+          <input
+            class="orden-compra--info-compra__comprador--info__datos--input"
+            type="text"
+            placeholder="Ingresa el representante"
+          />
+        </div>
+        <div class="orden-compra--info-compra__comprador--info__datos">
+          <input
+            class="orden-compra--info-compra__comprador--info__datos--input"
+            type="text"
+            placeholder="Ingresa el teléfono"
+          />
+        </div>
+        <div class="orden-compra--info-compra__comprador--info__datos">
+          <input
+            class="orden-compra--info-compra__comprador--info__datos--input"
+            type="text"
+            placeholder="Ingresa el correo"
+          />
+        </div>
+        <div class="orden-compra--info-compra__comprador--info__datos">
+          <textarea
+            class="orden-compra--info-compra__comprador--info__datos--input"
+            rows="2"
+            placeholder="Ingresa la dirección"
+          ></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="orden-compra--info-compra__comprador">
+      <div class="orden-compra--info-compra__comprador--titulo">
+        Información de entrega
+      </div>
+      <div class="orden-compra--info-compra__vendedor--info" *ngIf="!editar">
+        <p>
+          <strong>Representante: </strong> {{ proveedorInfo.representante }}
+        </p>
+        <p><strong>Teléfono: </strong> {{ proveedorInfo.telefono }}</p>
+        <p><strong>Correo: </strong> {{ proveedorInfo.correo }}</p>
+        <p><strong>Dirección: </strong> {{ proveedorInfo.domicilio }}</p>
+      </div>
+      <form class="orden-compra--info-compra__comprador--info" *ngIf="editar">
+        <div class="orden-compra--info-compra__comprador--info__datos">
+          <input
+            class="orden-compra--info-compra__comprador--info__datos--input"
+            type="text"
+            placeholder="Ingresa el representante"
+          />
+        </div>
+        <div class="orden-compra--info-compra__comprador--info__datos">
+          <input
+            class="orden-compra--info-compra__comprador--info__datos--input"
+            type="text"
+            placeholder="Ingresa el teléfono"
+          />
+        </div>
+        <div class="orden-compra--info-compra__comprador--info__datos">
+          <input
+            class="orden-compra--info-compra__comprador--info__datos--input"
+            type="text"
+            placeholder="Ingresa el correo"
+          />
+        </div>
+        <div class="orden-compra--info-compra__comprador--info__datos">
+          <textarea
+            class="orden-compra--info-compra__comprador--info__datos--input"
+            rows="2"
+            placeholder="Ingresa la dirección"
+          ></textarea>
+        </div>
+      </form>
+    </div>
+  </div>
+  <table class="orden-compra--tabla">
+    <thead>
+      <tr>
+        <th class="orden-compra--tabla--articulo">Articulo</th>
+        <th class="orden-compra--tabla--articulo">Código de artículo</th>
+        <th class="orden-compra--tabla--descripcion">Politícas de venta</th>
+        <th class="orden-compra--tabla--cantidad">Cantidad</th>
+        <th class="orden-compra--tabla--precio">Precio unitario</th>
+        <th class="orden-compra--tabla--descuento">Descuento</th>
+        <th class="orden-compra--tabla--total">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of proveedor.valor">
+        <td class="orden-compra--tabla--fila">
+          {{ producto.nombreProducto }}
+        </td>
+        <td class="orden-compra--tabla--fila">
+            {{ producto.sku }}
+          </td>
+        <td class="orden-compra--tabla--fila">
+          {{ producto.politicasVenta }}
+        </td>
+        <td class="orden-compra--tabla--fila">
+          {{ producto.cantidadCompra }}
+        </td>
+        <td class="orden-compra--tabla--fila">${{ producto.precioCompra }}</td>
+        <td class="orden-compra--tabla--fila">
+          {{ producto.descuento * producto.precioCompra }}
+        </td>
+        <td class="orden-compra--tabla--fila">
+          ${{ producto.precioCompra * producto.cantidadCompra }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="orden-compra--info-final">
+    <div class="orden-compra--info-final__comentario">
+      <div class="orden-compra--info-final__comentario--titulo">
+        Comentarios o instrucciones especiales
+      </div>
+      <div class="orden-compra--info-final__comentario--contenido">
+        <p *ngIf="!editar">{{ infoEmpresa.instruccionesEspeciales }}</p>
+        <textarea
+          placeholder="Ingresa algúna instrucción especial"
+          nz-input
+          rows="4"
+          *ngIf="editar"
+        ></textarea>
+      </div>
+    </div>
+    <div class="orden-compra--info-final__resumen">
+      <div class="orden-compra--info-final__resumen--detalle">
+        <strong><p>Subtotal:</p></strong>
+        <p>${{ subtotal }}</p>
+      </div>
+      <div class="orden-compra--info-final__resumen--detalle">
+        <strong><p>Descuento:</p></strong>
+        <p>${{ descuento }}</p>
+      </div>
+      <div class="orden-compra--info-final__resumen--detalle">
+        <strong><p>Otros:</p></strong>
+        <p>${{ otros }}</p>
+      </div>
+      <div class="orden-compra--info-final__resumen--detalle">
+        <strong><p>IVA:</p></strong>
+        <p>{{ infoEmpresa.iva * 100 }}%</p>
+      </div>
+      <div class="orden-compra--info-final__resumen--total">
+        <strong><p>Total:</p> </strong>
+        <p>${{ total }}</p>
+      </div>
+    </div>
+  </div>
+</div>

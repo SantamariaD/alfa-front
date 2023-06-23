@@ -10,9 +10,15 @@ export interface CatalogoProveedor {
     imagen: string;
     cantidadCompra: number;
     descuento: number;
+    sku: string;
 }
 
 export interface BotonCarrito {
     nombreProducto: string;
     idProveedor: number;
+}
+
+export interface ClaveValor {
+    clave: string;
+    valor: Array<CatalogoProveedor>;
 }

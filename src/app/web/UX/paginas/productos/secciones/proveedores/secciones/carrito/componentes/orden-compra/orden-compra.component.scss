@@ -1,0 +1,189 @@
+.orden-compra {
+  margin-top: 20px;
+  &__switch {
+    width: auto;
+    margin: 0px 0px 15px auto;
+    &--span {
+      margin-left: 10px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+  &--titulo {
+    padding: 5px 15px;
+    background-color: rgb(176, 176, 176);
+    font-size: 22px;
+    font-weight: 800;
+    text-align: end;
+    border: 2px solid black;
+  }
+  &__inicio {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 5px 10px;
+  }
+  &--info-compra {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
+    &__vendedor {
+      border: 2px solid black;
+      border-right: none;
+      &--titulo {
+        padding: 5px 15px;
+        background-color: rgb(176, 176, 176);
+        font-size: 14px;
+        font-weight: 800;
+        text-align: start;
+        border-bottom: 2px solid black;
+      }
+      &--info {
+        padding: 10px;
+      }
+    }
+    &__comprador {
+      border: 2px solid black;
+      &--titulo {
+        padding: 5px 15px;
+        background-color: rgb(176, 176, 176);
+        font-size: 14px;
+        font-weight: 800;
+        text-align: start;
+        border-bottom: 2px solid black;
+      }
+      &--info {
+        padding: 10px;
+        &__datos {
+          width: 100%;
+          column-gap: 5px;
+          border-bottom: 1px solid rgb(200, 200, 200);
+          margin-bottom: 7px;
+          &--input {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid rgb(200, 200, 200);
+          }
+        }
+      }
+    }
+  }
+  &--info-envio {
+    margin-top: 10px;
+    &--titulo {
+      padding: 5px 15px;
+      background-color: rgb(176, 176, 176);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: start;
+      border: 2px solid black;
+    }
+    &--contenido {
+      height: 60px;
+      border: 2px solid black;
+      border-top: none;
+    }
+  }
+  &--tabla {
+    margin: 10px auto;
+    &--articulo {
+      padding: 5px 15px;
+      background-color: rgb(176, 176, 176);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      border: 2px solid black;
+    }
+    &--descripcion {
+      padding: 5px 15px;
+      background-color: rgb(176, 176, 176);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      border: 2px solid black;
+      width: 200px;
+    }
+    &--cantidad {
+      padding: 5px 15px;
+      background-color: rgb(176, 176, 176);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      border: 2px solid black;
+    }
+    &--precio {
+      padding: 5px 15px;
+      background-color: rgb(176, 176, 176);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      border: 2px solid black;
+    }
+    &--descuento {
+      padding: 5px 15px;
+      background-color: rgb(176, 176, 176);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      border: 2px solid black;
+    }
+    &--total {
+      padding: 5px 15px;
+      background-color: rgb(176, 176, 176);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: center;
+      border: 2px solid black;
+      width: 120px;
+    }
+    &--fila {
+      padding: 5px 15px;
+      font-size: 14px;
+      text-align: center;
+      border: 2px solid black;
+    }
+  }
+  &--info-final {
+    display: grid;
+    grid-template-columns: 65% 30%;
+    column-gap: 15px;
+    &__comentario {
+      &--titulo {
+        padding: 5px 15px;
+        background-color: rgb(176, 176, 176);
+        font-size: 16px;
+        text-align: start;
+        font-weight: 800;
+        border: 2px solid black;
+      }
+      &--contenido {
+        border: 2px solid black;
+        border-top: none;
+        height: 100px;
+      }
+    }
+    &__resumen {
+      font-size: 16px;
+      &--detalle {
+        display: flex;
+        justify-content: space-between;
+      }
+      &--total {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 7px;
+        border-top: 2px solid black;
+        padding-top: 10px;
+      }
+    }
+  }
+}
+
+input {
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: none !important;
+}

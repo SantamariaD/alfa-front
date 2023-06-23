@@ -5,151 +5,18 @@
     >
     <div class="contenido-ordenes">
       <div
-        class="modal__contenido__orden-compra m-b-10"
-        *ngFor="let proveedor of proveedoresArray"
+        class="ordenes-compra"
+        *ngFor="let proveedor of proveedoresArray; let i = index"
       >
-        <p class="modal__contenido__orden-compra--titulo">
-          Orden de compra para {{ proveedor.clave }}
-        </p>
-        <div class="modal__contenido__orden-compra__inicio">
-          <div class="modal__contenido__orden-compra__inicio--info">
-            <p>Dirección:</p>
-            <p>Teléfono:</p>
-            <p>Correo:</p>
-            <p>Sitio web</p>
-          </div>
-          <div class="modal__contenido__orden-compra__inicio--fecha">
-            <p>Fecha:</p>
-            <p>Número de orden</p>
-          </div>
-        </div>
-        <div class="modal__contenido__orden-compra--info-compra">
-          <div class="modal__contenido__orden-compra--info-compra__vendedor">
-            <div
-              class="modal__contenido__orden-compra--info-compra__vendedor--titulo"
-            >
-              Vendedor
-            </div>
-            <div
-              class="modal__contenido__orden-compra--info-compra__vendedor--info"
-            >
-              <p>Nombre empresa:</p>
-              <p>Contacto:</p>
-              <p>Dirección:</p>
-              <p>Teléfono:</p>
-              <p>Correo:</p>
-            </div>
-          </div>
-          <div class="modal__contenido__orden-compra--info-compra__comprador">
-            <div
-              class="modal__contenido__orden-compra--info-compra__comprador--titulo"
-            >
-              comprador
-            </div>
-            <div
-              class="modal__contenido__orden-compra--info-compra__comprador--info"
-            >
-              <p>Nombre empresa:</p>
-              <p>Contacto:</p>
-              <p>Dirección:</p>
-              <p>Teléfono:</p>
-              <p>Correo:</p>
-            </div>
-          </div>
-        </div>
-        <div class="modal__contenido__orden-compra--info-envio">
-          <div class="modal__contenido__orden-compra--info-envio--titulo">
-            Condiciones de envío
-          </div>
-          <div
-            class="modal__contenido__orden-compra--info-envio--contenido"
-          ></div>
-        </div>
-        <table class="modal__contenido__orden-compra--tabla">
-          <thead>
-            <tr>
-              <th class="modal__contenido__orden-compra--tabla--articulo">
-                Articulo
-              </th>
-              <th class="modal__contenido__orden-compra--tabla--descripcion">
-                Politícas de venta
-              </th>
-              <th class="modal__contenido__orden-compra--tabla--cantidad">
-                Cantidad
-              </th>
-              <th class="modal__contenido__orden-compra--tabla--precio">
-                Precio unitario
-              </th>
-              <th class="modal__contenido__orden-compra--tabla--descuento">
-                Descuento
-              </th>
-              <th class="modal__contenido__orden-compra--tabla--total">
-                Total
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let producto of proveedor.valor">
-            <td class="modal__contenido__orden-compra--tabla--fila">
-              {{ producto.nombreProducto }}
-            </td>
-            <td class="modal__contenido__orden-compra--tabla--fila">
-              {{ producto.politicasVenta }}
-            </td>
-            <td class="modal__contenido__orden-compra--tabla--fila">
-              {{ producto.cantidadCompra }}
-            </td>
-            <td class="modal__contenido__orden-compra--tabla--fila">
-              ${{ producto.precioCompra }}
-            </td>
-            <td class="modal__contenido__orden-compra--tabla--fila">
-              {{ producto.descuento }}
-            </td>
-            <td class="modal__contenido__orden-compra--tabla--fila">
-              ${{ producto.precioCompra * producto.cantidadCompra }}
-            </td>
-          </tr>
-          </tbody>
-        </table>
-        <div class="modal__contenido__orden-compra--info-final">
-          <div class="modal__contenido__orden-compra--info-final__comentario">
-            <div
-              class="modal__contenido__orden-compra--info-final__comentario--titulo"
-            >
-              Comentarios o instrucciones especiales
-            </div>
-            <div
-              class="modal__contenido__orden-compra--info-final__comentario--contenido"
-            ></div>
-          </div>
-          <div class="modal__contenido__orden-compra--info-final__resumen">
-            <p
-              class="modal__contenido__orden-compra--info-final__resumen--detalle"
-            >
-              Subtotal:
-            </p>
-            <p
-              class="modal__contenido__orden-compra--info-final__resumen--detalle"
-            >
-              Descuento:
-            </p>
-            <p
-              class="modal__contenido__orden-compra--info-final__resumen--detalle"
-            >
-              IVA:
-            </p>
-            <p
-              class="modal__contenido__orden-compra--info-final__resumen--detalle"
-            >
-              Otros:
-            </p>
-            <p
-              class="modal__contenido__orden-compra--info-final__resumen--total"
-            >
-              Total:
-            </p>
-          </div>
-        </div>
+        <app-secciones-cabecera
+          *ngIf="i == 0"
+          [secciones]="secciones"
+          (seleccionadoClick)="selectSeccion($event)"
+        ></app-secciones-cabecera>
+        <app-orden-compra
+          *ngIf="seccion === proveedor.clave"
+          [proveedor]="proveedor"
+        ></app-orden-compra>
       </div>
     </div>
   </div>
