@@ -15,6 +15,7 @@ import { InformacionComponent } from './secciones/informacion/componentes/card-p
 import { AgregarProveedorComponent } from './secciones/informacion/componentes/agregar-proveedor/agregar-proveedor.component';
 import { CardEditarComponent } from './secciones/catalogo/componentes/card-editar/card-editar.component';
 import { CarritoComponent } from './secciones/carrito/carrito.component';
+import { CardOrdenCompraComponent } from './secciones/carrito/componentes/card-orden-compra/card-orden-compra.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CarritoComponent } from './secciones/carrito/carrito.component';
     AgregarProveedorComponent,
     CardEditarComponent,
     CarritoComponent,
+    CardOrdenCompraComponent,
   ],
   imports: [
     CommonModule,

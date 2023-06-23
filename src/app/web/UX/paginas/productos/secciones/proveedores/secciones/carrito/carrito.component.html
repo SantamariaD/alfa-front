@@ -104,3 +104,8 @@
     </div>
   </div>
 </section>
+<app-card-orden-compra
+  *ngIf="cardOrdenCompra"
+  [productos]="productosOrden"
+  (clickCerrar)="clickCerrar()"
+></app-card-orden-compra>

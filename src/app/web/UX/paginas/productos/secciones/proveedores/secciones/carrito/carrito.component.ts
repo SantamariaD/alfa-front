@@ -25,6 +25,16 @@ export class CarritoComponent implements OnInit {
   cantidadProductos = 0;
 
   /**
+   * @Varible cardOrdenCompra: muestra la card de orden de compra
+   */
+  cardOrdenCompra = false;
+
+  /**
+   * @Varible productosOrden: contiene la información de la orden de compra
+   */
+  productosOrden = {};
+
+  /**
    * @Varible total: total a pagar
    */
   total = 0;
@@ -93,7 +103,26 @@ export class CarritoComponent implements OnInit {
    * @Metodo Realiza la compra y la generación de orden de compra
    */
   realizarCompra(): void {
+    this.productosOrden = this.carrito.reduce((objetoProveedores: any, proveedor) => {
+      if (!objetoProveedores[proveedor.nombreProveedor]) {
+        objetoProveedores[proveedor.nombreProveedor] = [];
+      }
+    
+      objetoProveedores[proveedor.nombreProveedor].push(proveedor);
+    
+      return objetoProveedores;
+    }, {});
+    
+    console.log(this.productosOrden);
+    this.cardOrdenCompra = true;
+  }
+
+  /**
+   * @Metodo Cierra la card de orden de compra
+   */
+  clickCerrar(): void {
     console.log(this.carrito)
+    this.cardOrdenCompra = false;
   }
 
   /**

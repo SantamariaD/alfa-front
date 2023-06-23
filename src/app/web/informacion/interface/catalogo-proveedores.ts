@@ -9,6 +9,7 @@ export interface CatalogoProveedor {
     nombreProveedor: string;
     imagen: string;
     cantidadCompra: number;
+    descuento: number;
 }
 
 export interface BotonCarrito {
