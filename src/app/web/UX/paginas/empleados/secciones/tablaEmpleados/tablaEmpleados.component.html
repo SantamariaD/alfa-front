@@ -10,25 +10,25 @@
   </div>
   <div class="productos__descripcion--info-stock">
     <p class="productos__descripcion--info-stock--llave">
-      Altas empleados:
+      Altas últimos 3 meses:
     </p>
     <p class="productos__descripcion--info-stock--valor">
-      {{  empleados.length }}
+      {{  contratados.length }}
     </p>
   </div>
 </div>
 <div class="productos__descripcion">
   <div class="productos__descripcion--info-stock">
     <p class="productos__descripcion--info-stock--llave">
-      Bajas Empleados:
+      Bajas últimos 3 meses:
     </p>
-    <p class="productos__descripcion--info-stock--valor"> {{  empleados.length }}</p>
+    <p class="productos__descripcion--info-stock--valor"> {{  despidos.length }}</p>
   </div>
   <div class="productos__descripcion--info-stock">
     <p class="productos__descripcion--info-stock--llave">
       Empleados Ausentes:
     </p>
-    <p class="productos__descripcion--info-stock--valor">{{  empleados.length }}</p>
+    <p class="productos__descripcion--info-stock--valor">0</p>
   </div>
 </div>
 
@@ -39,7 +39,7 @@
 (clickFila)="clickFila($event)"
 ></app-tabla>
  
-<app-modal-crear class="modal-crear" (actEmpleado)="ActualizaDatos($event)" ></app-modal-crear>
+<app-modal-crear class="icono-flotante" (actEmpleado)="ActualizaDatos($event)" ></app-modal-crear>
 
 <app-card-empleados
 *ngIf="empleado.curp"

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Area } from 'src/app/web/informacion/interface/areas';
@@ -18,13 +18,12 @@ import { environment } from 'src/environments/environment';
   templateUrl: './documentos.component.html',
   styleUrls: ['./documentos.component.scss'],
 })
-export class DocumentosComponent implements OnInit {
+export class DocumentosComponent implements OnInit, OnDestroy {
   /**
    * @Input empleado: el empleado que envia la card para consulta de documentos
    */
   @Input() empleado: Empleados = {} as Empleados;
 
-  empleadoVacio: Empleados = {} as Empleados;
 
   /**
    * @viewChild selectElement: esta id controla el elemento select de areas del template
@@ -97,13 +96,14 @@ export class DocumentosComponent implements OnInit {
 
   ngOnInit(): void {
       this.traerTodosEmpleados();
-    this.traerTodosDocumentos();
     this.traerTodasAreas();
+    if(this.empleado.curp){
+      this.traerTodosDocumentos();
+    }
   }
 
   ngOnDestroy() {
     this.empleado = {} as Empleados
-    console.log('ddd');
   }
 
   //Este metodo trae todos los empleados de la base
