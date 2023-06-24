@@ -37,6 +37,16 @@ export class OrdenCompraComponent implements OnInit {
   @Input() proveedor: ClaveValor = {} as ClaveValor;
 
   /**
+   * @Input mostrarSwitch: Muestra el switch en la orden
+   */
+  @Input() mostrarSwitch = true;
+
+  /**
+   * @Input mostrarBoton: Muestra el boton en la orden
+   */
+  @Input() mostrarBoton = true;
+
+  /**
    * @Output nombreProveedor: emite el nombre del proveedor
    */
   @Output() nombreProveedor = new EventEmitter<string>();

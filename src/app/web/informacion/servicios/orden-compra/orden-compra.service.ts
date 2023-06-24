@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpclientService } from '../httpService/http-service.service';
 import { Observable } from 'rxjs';
 import { HttpClientServiceInterface } from '../../interface/httpService';
-import { OrdenCompraInfo } from '../../interface/catalogo-proveedores';
+import {
+  ConsultaOrdenCompra,
+  OrdenCompraInfo,
+} from '../../interface/catalogo-proveedores';
 import { ENDPOINTS } from '../../utils/endpoint';
 
 @Injectable({
@@ -21,5 +24,16 @@ export class OrdenCompraService {
       ENDPOINTS.ordenCompra.guardarOrdenCompra,
       ordenCompra
     );
+  }
+
+  /**
+   * @Servicio consulta todas las ordenes de compra
+   */
+  consultarOrdenesCompra(): Observable<
+    HttpClientServiceInterface<Array<ConsultaOrdenCompra>>
+  > {
+    return this.http.get<
+      HttpClientServiceInterface<Array<ConsultaOrdenCompra>>
+    >(ENDPOINTS.ordenCompra.consultarOrdenesCompra);
   }
 }

@@ -1,5 +1,5 @@
 <div class="orden-compra m-b-10">
-  <div class="orden-compra__switch">
+  <div class="orden-compra__switch" *ngIf="mostrarSwitch">
     <nz-switch
       (ngModelChange)="switch($event)"
       [(ngModel)]="switchValue"
@@ -217,7 +217,7 @@
       </div>
     </div>
   </div>
-  <div class="boton-guardar" *ngIf="!editar">
+  <div class="boton-guardar" *ngIf="!editar && mostrarBoton">
     <button nz-button nzType="primary" (click)="guardarOrden()">
       Guardar Orden de Compra
     </button>

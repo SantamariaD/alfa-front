@@ -50,6 +50,7 @@ export const ENDPOINTS = {
   },
   ordenCompra: {
     guardarOrdenCompra: '/ordenes-compra/guardar-orden-compra',
+    consultarOrdenesCompra: '/ordenes-compra/consultar-orden-compra',
   },
   productosOrdenCompra: {
     guardarOrdenCompra: '/productos-ordenes-compra/guardar-producto-orden-compra',

@@ -9,9 +9,13 @@ import * as fromCarrito from './carrito/carrito.reducer';
 import * as fromAreas from './areas/areas.reducer';
 import * as fromProductos from './productos/productos.reducer';
 import * as fromProveedores from './proveedores/proveedores.reducer';
+import * as fromOrdenesCompra from './ordenesCompra/ordenesCompra.reducer';
 import { UsuarioInterface } from '../interface/usuario';
 import { CargandoPeticionInterface } from '../interface/httpService';
-import { CatalogoProveedor } from '../interface/catalogo-proveedores';
+import {
+  CatalogoProveedor,
+  ConsultaOrdenCompra,
+} from '../interface/catalogo-proveedores';
 import { Area } from '../interface/areas';
 import { Producto } from '../interface/productos';
 import { Proveedor, ProveedoresStore } from '../interface/proveedores';
@@ -23,6 +27,7 @@ export interface AppState {
   areas: Array<Area>;
   productos: Array<Producto>;
   proveedores: ProveedoresStore;
+  ordenesCompra: Array<ConsultaOrdenCompra>;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -32,6 +37,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   areas: fromAreas.reducer,
   productos: fromProductos.reducer,
   proveedores: fromProveedores.reducer,
+  ordenesCompra: fromOrdenesCompra.reducer,
 };
 
 //*********SELECTORES******/
@@ -64,6 +70,10 @@ export const selectProductos =
 //Proveedores
 export const selectProveedores =
   createFeatureSelector<ProveedoresStore>('proveedores');
+
+//Proveedores
+export const selectOrdenesCompra =
+  createFeatureSelector<Array<ConsultaOrdenCompra>>('ordenesCompra');
 
 //****** Creando selectores*****/
 export const selectBanderaCargandoPeticion = createSelector(
@@ -106,4 +116,8 @@ export const selectProveedoresStore = createSelector(
   (state: ProveedoresStore) => state
 );
 
-
+// Proveedores
+export const selectOrdenesCompraStore = createSelector(
+  selectOrdenesCompra,
+  (state: Array<ConsultaOrdenCompra>) => state
+);

@@ -54,3 +54,7 @@ export interface ProductoOrdenCompra {
   cantidadCompra: string;
   descuento: string;
 }
+
+export interface ConsultaOrdenCompra extends OrdenCompraInfo, InformacionFecha {
+  catalogoProveedor: Array<CatalogoProveedor>;
+}

@@ -1,1 +1,35 @@
-<p>historial works!</p>
+<section class="historial">
+  <div class="historial__descripcion">
+    <div class="historial__descripcion--info-stock">
+      <p class="historial__descripcion--info-stock--llave">Total en compras:</p>
+      <p class="historial__descripcion--info-stock--valor">$15000</p>
+    </div>
+    <div class="historial__descripcion--info-stock">
+      <p class="historial__descripcion--info-stock--llave">
+        Fecha última compra:
+      </p>
+      <p class="historial__descripcion--info-stock--valor">25/05/2023</p>
+    </div>
+  </div>
+  <app-tabla
+    [columnasTabla]="columnasTabla"
+    [filasTabla]="datosTabla"
+    [filasBusqueda]="datosTabla"
+    (clickFila)="clickFila($event)"
+  ></app-tabla>
+</section>
+
+<div class="modal" *ngIf="mostrarOrdenModal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
+      >&times;</span
+    >
+    <div class="orden-compra">
+      <app-orden-compra
+        [proveedor]="proveedorSeleccionado"
+        [mostrarSwitch]="false"
+        [mostrarBoton]="false"
+      ></app-orden-compra>
+    </div>
+  </div>
+</div>
