@@ -48,4 +48,10 @@ export const ENDPOINTS = {
   areas: {
     consultarAreas: '/areas/consultar-areas',
   },
+  ordenCompra: {
+    guardarOrdenCompra: '/ordenes-compra/guardar-orden-compra',
+  },
+  productosOrdenCompra: {
+    guardarOrdenCompra: '/productos-ordenes-compra/guardar-producto-orden-compra',
+  },
 };

@@ -4,6 +4,7 @@ import {
   actualizarProductoCarrito,
   eliminarProductoCarrito,
   guardarProductoCarrito,
+  guardarProductosCarrito,
 } from './carrito.actions';
 
 const estadoInicial: Array<CatalogoProveedor> = [];
@@ -12,6 +13,10 @@ const carritoReducer = createReducer(
   estadoInicial,
   on(guardarProductoCarrito, (state, { producto }) => {
     state.push({ ...producto, cantidadCompra: 1 });
+    return state;
+  }),
+  on(guardarProductosCarrito, (state, { productos }) => {
+    state = productos;
     return state;
   }),
   on(eliminarProductoCarrito, (state, { producto }) => {

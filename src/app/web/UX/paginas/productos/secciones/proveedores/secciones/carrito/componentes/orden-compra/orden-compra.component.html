@@ -5,7 +5,9 @@
       [(ngModel)]="switchValue"
       name="switch"
     ></nz-switch
-    ><span class="orden-compra__switch--span">{{editar ? 'Preciona al finalizar de editar' : 'Editar Orden de compra'}}</span>
+    ><span class="orden-compra__switch--span">{{
+      editar ? "Preciona al finalizar de editar" : "Editar Orden de compra"
+    }}</span>
   </div>
   <p class="orden-compra--titulo">Orden de compra para {{ proveedor.clave }}</p>
   <div class="orden-compra__inicio">
@@ -27,16 +29,27 @@
       <div class="orden-compra--info-compra__vendedor--info" *ngIf="!editar">
         <p><strong>Nombre empresa: </strong> {{ proveedorInfo.nombre }}</p>
         <p>
-          <strong>Representante: </strong> {{ proveedorInfo.representante }}
+          <strong>Representante: </strong>
+          {{ ordenCompraInfo.representanteVendedor }}
         </p>
-        <p><strong>Teléfono: </strong> {{ proveedorInfo.telefono }}</p>
-        <p><strong>Correo: </strong> {{ proveedorInfo.correo }}</p>
-        <p><strong>Dirección: </strong> {{ proveedorInfo.domicilio }}</p>
+        <p>
+          <strong>Teléfono: </strong> {{ ordenCompraInfo.telefonoVendedor }}
+        </p>
+        <p><strong>Correo: </strong> {{ ordenCompraInfo.correoVendedor }}</p>
+        <p>
+          <strong>Dirección: </strong> {{ ordenCompraInfo.direccionVendedor }}
+        </p>
       </div>
-      <form class="orden-compra--info-compra__comprador--info" *ngIf="editar">
+      <form
+        class="orden-compra--info-compra__comprador--info"
+        [formGroup]="ordenForm"
+        *ngIf="editar"
+      >
+        <p><strong>Nombre empresa: </strong> {{ proveedorInfo.nombre }}</p>
         <div class="orden-compra--info-compra__comprador--info__datos">
           <input
             class="orden-compra--info-compra__comprador--info__datos--input"
+            formControlName="representanteVendedor"
             type="text"
             placeholder="Ingresa el representante"
           />
@@ -44,6 +57,7 @@
         <div class="orden-compra--info-compra__comprador--info__datos">
           <input
             class="orden-compra--info-compra__comprador--info__datos--input"
+            formControlName="telefonoVendedor"
             type="text"
             placeholder="Ingresa el teléfono"
           />
@@ -51,6 +65,7 @@
         <div class="orden-compra--info-compra__comprador--info__datos">
           <input
             class="orden-compra--info-compra__comprador--info__datos--input"
+            formControlName="correoVendedor"
             type="text"
             placeholder="Ingresa el correo"
           />
@@ -58,6 +73,7 @@
         <div class="orden-compra--info-compra__comprador--info__datos">
           <textarea
             class="orden-compra--info-compra__comprador--info__datos--input"
+            formControlName="direccionVendedor"
             rows="2"
             placeholder="Ingresa la dirección"
           ></textarea>
@@ -70,16 +86,26 @@
       </div>
       <div class="orden-compra--info-compra__vendedor--info" *ngIf="!editar">
         <p>
-          <strong>Representante: </strong> {{ proveedorInfo.representante }}
+          <strong>Representante: </strong>
+          {{ ordenCompraInfo.representanteComprador }}
         </p>
-        <p><strong>Teléfono: </strong> {{ proveedorInfo.telefono }}</p>
-        <p><strong>Correo: </strong> {{ proveedorInfo.correo }}</p>
-        <p><strong>Dirección: </strong> {{ proveedorInfo.domicilio }}</p>
+        <p>
+          <strong>Teléfono: </strong> {{ ordenCompraInfo.telefonoComprador }}
+        </p>
+        <p><strong>Correo: </strong> {{ ordenCompraInfo.correoComprador }}</p>
+        <p>
+          <strong>Dirección: </strong> {{ ordenCompraInfo.direccionComprador }}
+        </p>
       </div>
-      <form class="orden-compra--info-compra__comprador--info" *ngIf="editar">
+      <form
+        class="orden-compra--info-compra__comprador--info"
+        [formGroup]="ordenForm"
+        *ngIf="editar"
+      >
         <div class="orden-compra--info-compra__comprador--info__datos">
           <input
             class="orden-compra--info-compra__comprador--info__datos--input"
+            formControlName="representanteComprador"
             type="text"
             placeholder="Ingresa el representante"
           />
@@ -87,6 +113,7 @@
         <div class="orden-compra--info-compra__comprador--info__datos">
           <input
             class="orden-compra--info-compra__comprador--info__datos--input"
+            formControlName="telefonoComprador"
             type="text"
             placeholder="Ingresa el teléfono"
           />
@@ -94,6 +121,7 @@
         <div class="orden-compra--info-compra__comprador--info__datos">
           <input
             class="orden-compra--info-compra__comprador--info__datos--input"
+            formControlName="correoComprador"
             type="text"
             placeholder="Ingresa el correo"
           />
@@ -101,6 +129,7 @@
         <div class="orden-compra--info-compra__comprador--info__datos">
           <textarea
             class="orden-compra--info-compra__comprador--info__datos--input"
+            formControlName="direccionComprador"
             rows="2"
             placeholder="Ingresa la dirección"
           ></textarea>
@@ -126,8 +155,8 @@
           {{ producto.nombreProducto }}
         </td>
         <td class="orden-compra--tabla--fila">
-            {{ producto.sku }}
-          </td>
+          {{ producto.sku }}
+        </td>
         <td class="orden-compra--tabla--fila">
           {{ producto.politicasVenta }}
         </td>
@@ -149,10 +178,16 @@
       <div class="orden-compra--info-final__comentario--titulo">
         Comentarios o instrucciones especiales
       </div>
-      <div class="orden-compra--info-final__comentario--contenido">
-        <p *ngIf="!editar">{{ infoEmpresa.instruccionesEspeciales }}</p>
+      <div
+        class="orden-compra--info-final__comentario--contenido"
+        [formGroup]="ordenForm"
+      >
+        <p class="instruccion-especial" *ngIf="!editar">
+          {{ ordenCompraInfo.instruccionEspecial }}
+        </p>
         <textarea
           placeholder="Ingresa algúna instrucción especial"
+          formControlName="instruccionEspecial"
           nz-input
           rows="4"
           *ngIf="editar"
@@ -181,5 +216,10 @@
         <p>${{ total }}</p>
       </div>
     </div>
+  </div>
+  <div class="boton-guardar" *ngIf="!editar">
+    <button nz-button nzType="primary" (click)="guardarOrden()">
+      Guardar Orden de Compra
+    </button>
   </div>
 </div>

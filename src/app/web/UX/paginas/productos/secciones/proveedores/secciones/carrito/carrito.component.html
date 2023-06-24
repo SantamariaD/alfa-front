@@ -108,4 +108,5 @@
   *ngIf="cardOrdenCompra"
   [productos]="productosOrden"
   (clickCerrar)="clickCerrar()"
+  (nombreProveedor)="eliminarProductos($event)"
 ></app-card-orden-compra>

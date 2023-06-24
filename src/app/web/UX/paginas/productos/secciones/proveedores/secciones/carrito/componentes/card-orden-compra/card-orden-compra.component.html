@@ -14,10 +14,18 @@
           (seleccionadoClick)="selectSeccion($event)"
         ></app-secciones-cabecera>
         <app-orden-compra
-          *ngIf="seccion === proveedor.clave"
+          *ngIf="seccion === proveedor.clave && secciones.length > 0"
           [proveedor]="proveedor"
+          (nombreProveedor)="eliminarSeccion($event)"
         ></app-orden-compra>
       </div>
+      <nz-result
+        *ngIf="secciones.length < 1"
+        nzStatus="success"
+        class="m-t-30"
+        nzTitle="Puede revisar el historial de Ordenes de compra."
+      >
+      </nz-result>
     </div>
   </div>
 </div>

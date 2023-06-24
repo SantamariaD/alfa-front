@@ -2,12 +2,18 @@ import { createAction, props } from '@ngrx/store';
 import { CatalogoProveedor } from '../../interface/catalogo-proveedores';
 
 const GUARDAR_CARRITO = '[Carrito G] Guarda un producto al carrito';
+const GUARDAR_TODO_CARRITO = '[Carrito G] Guarda todos los productos al carrito';
 const ELIMINAR_PRODUCTO_CARRITO = '[Carrito E] Elimina un producto al carrito';
 const ACTUALIZAR_CANTIDAD_PRODUCTO_CARRITO = '[Carrito A] Actualiza el precio de un producto al carrito';
 
 export const guardarProductoCarrito = createAction(
   GUARDAR_CARRITO,
   props<{ producto: CatalogoProveedor}>()
+);
+
+export const guardarProductosCarrito = createAction(
+  GUARDAR_TODO_CARRITO,
+  props<{ productos: CatalogoProveedor[]}>()
 );
 
 export const actualizarProductoCarrito = createAction(

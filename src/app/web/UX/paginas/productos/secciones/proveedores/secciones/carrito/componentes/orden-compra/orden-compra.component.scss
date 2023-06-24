@@ -1,5 +1,6 @@
 .orden-compra {
-  margin-top: 20px;
+  margin: 20px auto 0px auto;
+  width: 95%;
   &__switch {
     width: auto;
     margin: 0px 0px 15px auto;
@@ -186,4 +187,17 @@ input:focus,
 textarea:focus {
   outline: none;
   border: none !important;
+}
+
+.instruccion-especial {
+  padding: 10px;
+}
+
+.boton-guardar {
+  width: 30%;
+  margin: 25px 10px 10px auto;
+}
+
+.boton-guardar button {
+  width: 100%;
 }

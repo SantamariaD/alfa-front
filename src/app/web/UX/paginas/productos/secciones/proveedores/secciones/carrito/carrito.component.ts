@@ -6,6 +6,7 @@ import { selectCarritoCompra } from 'src/app/web/informacion/state';
 import {
   actualizarProductoCarrito,
   eliminarProductoCarrito,
+  guardarProductosCarrito,
 } from 'src/app/web/informacion/state/carrito/carrito.actions';
 
 @Component({
@@ -92,6 +93,17 @@ export class CarritoComponent implements OnInit {
   }
 
   /**
+   * @Metodo Elimina los productos al guardar una orden de compra
+   */
+  eliminarProductos(nombreProveedor: string): void {
+    this.carrito = this.carrito.filter(
+      (producto: CatalogoProveedor) =>
+        producto.nombreProveedor !== nombreProveedor
+    );
+    this.store.dispatch(guardarProductosCarrito({ productos: this.carrito }));
+  }
+
+  /**
    * @Metodo Elimina un producto del carrito de compra
    */
   eliminarProducto(producto: CatalogoProveedor): void {
@@ -103,16 +115,19 @@ export class CarritoComponent implements OnInit {
    * @Metodo Realiza la compra y la generación de orden de compra
    */
   realizarCompra(): void {
-    this.productosOrden = this.carrito.reduce((objetoProveedores: any, proveedor) => {
-      if (!objetoProveedores[proveedor.nombreProveedor]) {
-        objetoProveedores[proveedor.nombreProveedor] = [];
-      }
-    
-      objetoProveedores[proveedor.nombreProveedor].push(proveedor);
-    
-      return objetoProveedores;
-    }, {});
-    
+    this.productosOrden = this.carrito.reduce(
+      (objetoProveedores: any, proveedor) => {
+        if (!objetoProveedores[proveedor.nombreProveedor]) {
+          objetoProveedores[proveedor.nombreProveedor] = [];
+        }
+
+        objetoProveedores[proveedor.nombreProveedor].push(proveedor);
+
+        return objetoProveedores;
+      },
+      {}
+    );
+
     this.cardOrdenCompra = true;
   }
 
@@ -136,7 +151,7 @@ export class CarritoComponent implements OnInit {
       .pipe(take(1))
       .subscribe((carrito: Array<CatalogoProveedor>) => {
         carrito.map((producto: CatalogoProveedor) => {
-          this.total += producto.precioCompra*producto.cantidadCompra;
+          this.total += producto.precioCompra * producto.cantidadCompra;
         });
         this.carrito = carrito;
         this.cantidadProductos = this.carrito.length;

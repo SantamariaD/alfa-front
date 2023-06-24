@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { ClaveValor } from 'src/app/web/informacion/interface/catalogo-proveedores';
 
 @Component({
   selector: 'app-card-orden-compra',
@@ -17,6 +19,11 @@ export class CardOrdenCompraComponent implements OnInit {
   @Output() clickCerrar = new EventEmitter<any>();
 
   /**
+   * @Output nombreProveedor: manda el nombreProveedor al catalogo
+   */
+  @Output() nombreProveedor = new EventEmitter<string>();
+
+  /**
    * @variable seccion: Contiene la seccione actual
    */
   seccion = '';
@@ -29,14 +36,15 @@ export class CardOrdenCompraComponent implements OnInit {
   /**
    * @variable proveedoresArray: formato del array para usar
    */
-  proveedoresArray: { clave: string; valor: any }[] = [];
+  proveedoresArray: ClaveValor[] = [];
 
-  constructor() {}
+  constructor(private message: NzMessageService) {}
 
   ngOnInit(): void {
     // Formateo de array a usarse en el html
     this.proveedoresArray = Object.keys(this.productos).map((clave) => ({
       clave,
+      idProveedor: this.productos[clave][0].idProveedor,
       valor: this.productos[clave],
     }));
 
@@ -53,6 +61,15 @@ export class CardOrdenCompraComponent implements OnInit {
         }
       }
     );
+  }
+
+  eliminarSeccion(seccionNombre: string): void {
+    this.secciones = this.secciones.filter(
+      (seccion: { texto: string; seleccionado: boolean }) =>
+        seccion.texto !== seccionNombre
+    );
+    this.message.success(`Se creo correctamente la orden de compra.`);
+    this.nombreProveedor.emit(seccionNombre);
   }
 
   /**
