@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import {
   ClaveValor,
+  ConsultaOrdenCompra,
   OrdenCompraInfo,
   ProductoOrdenCompra,
 } from 'src/app/web/informacion/interface/catalogo-proveedores';
@@ -15,6 +16,10 @@ import {
 import { OrdenCompraService } from 'src/app/web/informacion/servicios/orden-compra/orden-compra.service';
 import { ProductoOrdenCompraService } from 'src/app/web/informacion/servicios/producto-orden-compra/producto-orden-compra.service';
 import { selectProveedoresStore } from 'src/app/web/informacion/state';
+import {
+  guardarOrdenCompra,
+  guardarOrdenesCompra,
+} from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
 import {
   CORREO_EMPRESA,
   DIRECCION_EMPRESA,
@@ -120,6 +125,11 @@ export class OrdenCompraComponent implements OnInit {
   switchValue = false;
 
   /**
+   * @variable idOrdenCompra: contine el id de la orden de compra que se manda a guardar
+   */
+  idOrdenCompra = 0;
+
+  /**
    * @variable proveedores: Datos que contiene la tabla
    */
   proveedorInfo: Proveedor = {} as Proveedor;
@@ -159,36 +169,71 @@ export class OrdenCompraComponent implements OnInit {
    * @Metodo Guarda la orden de compra y los productos de la misma
    */
   guardarOrden(): void {
-    this.ordenCompraService.guardarOrdenCompra(this.ordenForm.value).subscribe({
-      next: (respuestaGuardar: HttpClientServiceInterface<OrdenCompraInfo>) => {
-        let nuevoArray = this.proveedor.valor.map(
-          ({
-            id,
-            politicasVenta,
-            nombreProducto,
-            nombreProveedor,
-            imagen,
-            precioMaximoVenta,
-            sku,
-            updated_at,
-            created_at,
-            ...resto
-          }) => resto
-        );
-        nuevoArray.map((producto: any) => {
-          producto['idOrdenCompra'] = respuestaGuardar.payload.id;
-          this.productoOrdenCompraService
-            .guardarProductoOrdenCompra(producto)
-            .subscribe({
-              next: (
-                respuestaGuardar: HttpClientServiceInterface<ProductoOrdenCompra>
-              ) => respuestaGuardar,
-              error: (error) => console.log(error),
-            });
-        });
-        this.nombreProveedor.emit(this.proveedor.clave);
-      },
-    });
+    this.ordenCompraService
+      .guardarOrdenCompra(this.ordenForm.value)
+      .pipe(
+        finalize(() => {
+          let nuevoArray = this.proveedor.valor.map(
+            ({
+              id,
+              politicasVenta,
+              nombreProducto,
+              nombreProveedor,
+              imagen,
+              precioMaximoVenta,
+              sku,
+              updated_at,
+              created_at,
+              ...resto
+            }) => resto
+          );
+          nuevoArray.map(
+            (producto: any) => (producto['idOrdenCompra'] = this.idOrdenCompra)
+          );
+
+          const ordenCompra: ConsultaOrdenCompra = {
+            ...this.ordenForm.value,
+            id: this.idOrdenCompra,
+            created_at: new Date(),
+            catalogoProveedor: nuevoArray,
+          };
+
+          this.store.dispatch(guardarOrdenCompra({ ordenCompra }));
+        })
+      )
+      .subscribe({
+        next: (
+          respuestaGuardar: HttpClientServiceInterface<OrdenCompraInfo>
+        ) => {
+          this.idOrdenCompra = respuestaGuardar.payload.id;
+          let nuevoArray = this.proveedor.valor.map(
+            ({
+              id,
+              politicasVenta,
+              nombreProducto,
+              nombreProveedor,
+              imagen,
+              precioMaximoVenta,
+              sku,
+              updated_at,
+              created_at,
+              ...resto
+            }) => resto
+          );
+          nuevoArray.map((producto: any) => {
+            producto['idOrdenCompra'] = respuestaGuardar.payload.id;
+            this.productoOrdenCompraService
+              .guardarProductoOrdenCompra(producto)
+              .subscribe({
+                next: (
+                  respuestaGuardar: HttpClientServiceInterface<ProductoOrdenCompra>
+                ) => respuestaGuardar,
+                error: (error) => console.log(error),
+              });
+          });
+          this.nombreProveedor.emit(this.proveedor.clave);
+        },
+      });
   }
 
   /**

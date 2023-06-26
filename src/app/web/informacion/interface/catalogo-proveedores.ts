@@ -38,11 +38,11 @@ export interface OrdenCompraInfo {
   correoComprador: string;
   direccionComprador: string;
   instruccionEspecial: string;
-  subtotal: number;
+  subtotal: string;
   descuento: number;
   otros: number;
   iva: number;
-  total: number;
+  total: string;
 }
 
 export interface ProductoOrdenCompra {

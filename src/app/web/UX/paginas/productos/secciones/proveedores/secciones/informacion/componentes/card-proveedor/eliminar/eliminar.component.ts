@@ -17,7 +17,7 @@ export class EliminarComponent implements OnInit {
   /**
    * @Output actualizarProveedor: emite el evento de actualizar proveedor
    */
-  @Output() eliminarProveedorEmit = new EventEmitter<any>();
+  @Output() eliminarProveedorEmit = new EventEmitter<Proveedor>();
 
   constructor(private proveedoresService: ProveedoresService) {}
 
@@ -29,7 +29,7 @@ export class EliminarComponent implements OnInit {
   clickEliminar(): void {
     this.proveedoresService.eliminarProveedor(this.proveedor.id).subscribe({
       next: (respuestaEliminar: HttpClientServiceInterfaceNoPayload) =>
-        this.eliminarProveedorEmit.emit(true),
+        this.eliminarProveedorEmit.emit(this.proveedor),
     });
   }
 }

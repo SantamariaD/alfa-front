@@ -29,8 +29,8 @@
   [mostrarCardProveedor]="mostrarCardProveedor"
   [proveedor]="proveedor"
   (clickCerrar)="clickCerrarModal($event)"
-  (actualizarProveedorEmit)="actualizacionProveedor()"
-  (eliminarProveedorEmit)="eliminarProveedor()"
+  (actualizarProveedorEmit)="actualizacionProveedor($event)"
+  (eliminarProveedorEmit)="eliminarProveedor($event)"
 ></app-card-proveedor>
 
 <app-agregar-proveedor

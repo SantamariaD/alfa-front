@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { take } from 'rxjs';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import {
   Proveedor,
+  ProveedoresStore,
   RespuestaProveedores,
 } from 'src/app/web/informacion/interface/proveedores';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
+import { selectProveedoresStore } from 'src/app/web/informacion/state';
+import { guardarProveedores } from 'src/app/web/informacion/state/proveedores/proveedores.actions';
 
 @Component({
   selector: 'app-informacion',
@@ -56,7 +61,8 @@ export class InformacionProveedoresComponent implements OnInit {
 
   constructor(
     private message: NzMessageService,
-    private proveedoresService: ProveedoresService
+    private proveedoresService: ProveedoresService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -81,18 +87,34 @@ export class InformacionProveedoresComponent implements OnInit {
   /**
    * @Metodo captura el evento de actualizar un proveedor y consulta todos los proveedors
    */
-  actualizacionProveedor(): void {
+  actualizacionProveedor(proveedor: Proveedor): void {
+    let arrayProveedores: Array<Proveedor> = [];
     this.mostrarCardProveedor = false;
     this.message.success(`Se actualizó correctamente el proveedor.`);
+    this.datosTabla.map((proveedorArray: Proveedor) => {
+      if (proveedorArray.id == proveedor.id) {
+        arrayProveedores.push({
+          ...proveedor,
+          updated_at: new Date(),
+        });
+      } else {
+        arrayProveedores.push(proveedorArray);
+      }
+    });
+    this.store.dispatch(guardarProveedores({ proveedores: arrayProveedores }));
     this.consultarProveedores();
   }
 
   /**
    * @Metodo captura el evento de actualizar un proveedores y consulta todos los proveedoress
    */
-  eliminarProveedor(): void {
+  eliminarProveedor(proveedorEliminado: Proveedor): void {
+    this.datosTabla = this.datosTabla.filter(
+      (proveedor: Proveedor) => proveedor.id !== proveedorEliminado.id
+    );
     this.mostrarCardProveedor = false;
     this.message.success(`Se elimino correctamente el proveedor.`);
+    this.store.dispatch(guardarProveedores({ proveedores: this.datosTabla }));
     this.consultarProveedores();
   }
 
@@ -103,12 +125,13 @@ export class InformacionProveedoresComponent implements OnInit {
     this.mostrarAgregarProveedor = true;
   }
 
-   /**
+  /**
    * @Metodo Captura el evento cuando se agrega un proveedor
    */
-   clickGuardarProveedor(): void {
+  clickGuardarProveedor(): void {
     this.mostrarAgregarProveedor = false;
     this.message.success(`Se guardo correctamente el proveedor.`);
+    this.consultarProveedores();
   }
 
   /**
@@ -122,16 +145,30 @@ export class InformacionProveedoresComponent implements OnInit {
    * @Metodo Consulta todos los proveedores
    */
   private consultarProveedores(): void {
-    this.proveedoresService.consultarProveedores().subscribe({
-      next: (
-        respuestaProveedores: HttpClientServiceInterface<RespuestaProveedores>
-      ) => {
-        this.datosTabla = respuestaProveedores.payload.proveedores;
-        this.totalProveedores = this.datosTabla.length;
-        this.ultimaActualizacion =
-          respuestaProveedores.payload.utlimaActualizacion.updated_at;
-      },
-      error: (error) => console.log(error),
-    });
+    this.store
+      .select(selectProveedoresStore)
+      .pipe(take(1))
+      .subscribe((proveedor: ProveedoresStore) => {
+        if (!proveedor?.proveedores) {
+          this.proveedoresService.consultarProveedores().subscribe({
+            next: (
+              respuestaProveedores: HttpClientServiceInterface<RespuestaProveedores>
+            ) => {
+              this.datosTabla = respuestaProveedores.payload.proveedores;
+              this.totalProveedores = this.datosTabla.length;
+              this.ultimaActualizacion =
+                respuestaProveedores.payload.utlimaActualizacion.updated_at;
+              this.store.dispatch(
+                guardarProveedores({
+                  proveedores: respuestaProveedores.payload.proveedores,
+                })
+              );
+            },
+            error: (error) => console.log(error),
+          });
+        } else {
+          this.datosTabla = proveedor.proveedores;
+        }
+      });
   }
 }

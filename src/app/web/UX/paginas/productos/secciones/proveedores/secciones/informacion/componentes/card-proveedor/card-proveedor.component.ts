@@ -4,7 +4,7 @@ import { Proveedor } from 'src/app/web/informacion/interface/proveedores';
 @Component({
   selector: 'app-card-proveedor',
   templateUrl: './card-proveedor.component.html',
-  styleUrls: ['./card-proveedor.component.scss']
+  styleUrls: ['./card-proveedor.component.scss'],
 })
 export class CardProveedorComponent implements OnInit {
   /**
@@ -35,17 +35,16 @@ export class CardProveedorComponent implements OnInit {
   /**
    * @Variable seccionModal: Controla la sección que se muestra en el modal
    */
-  seccionModal = 'informacion'
+  seccionModal = 'informacion';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-   /**
+  /**
    * @Metodo cambia a la seccion informacion
    */
-   clickInformacion(): void {
+  clickInformacion(): void {
     this.seccionModal = 'informacion';
   }
 
@@ -70,26 +69,27 @@ export class CardProveedorComponent implements OnInit {
     this.seccionModal = 'eliminar';
   }
 
-
   /**
    * @Metodo cerrar modal
    */
   clickCerrarModal(): void {
+    this.seccionModal = 'informacion';
     this.clickCerrar.emit(false);
   }
 
   /**
    * @Metodo captura el evento de actualizar un proveedor y consulta todos los proveedors
    */
-  actualizacionProveedor(): void {
-    this.actualizarProveedorEmit.emit(true);
+  actualizacionProveedor(proveedor: Proveedor): void {
+    this.actualizarProveedorEmit.emit(proveedor);
+    this.seccionModal = 'informacion';
   }
 
   /**
    * @Metodo captura el evento de eliminar un proveedor y consulta todos los proveedors
    */
-  eliminarProveedor(): void {
-    this.eliminarProveedorEmit.emit(true);
+  eliminarProveedor(proveedor: Proveedor): void {
+    this.eliminarProveedorEmit.emit(proveedor);
+    this.seccionModal = 'informacion';
   }
-
 }

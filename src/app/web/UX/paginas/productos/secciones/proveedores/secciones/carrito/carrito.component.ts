@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { pipe, take } from 'rxjs';
+import { take } from 'rxjs';
 import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import { selectCarritoCompra } from 'src/app/web/informacion/state';
 import {
@@ -8,6 +8,7 @@ import {
   eliminarProductoCarrito,
   guardarProductosCarrito,
 } from 'src/app/web/informacion/state/carrito/carrito.actions';
+import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-carrito',
@@ -38,7 +39,7 @@ export class CarritoComponent implements OnInit {
   /**
    * @Varible total: total a pagar
    */
-  total = 0;
+  total = '';
 
   constructor(private store: Store) {}
 
@@ -85,11 +86,12 @@ export class CarritoComponent implements OnInit {
    */
   resumenCompra(): void {
     this.cantidadProductos = 0;
-    this.total = 0;
+    let total = 0;
     this.carrito.forEach((producto: CatalogoProveedor) => {
       this.cantidadProductos += producto.cantidadCompra;
-      this.total += producto.cantidadCompra * producto.precioCompra;
+      total += producto.cantidadCompra * producto.precioCompra;
     });
+    this.total = formateoMoneda(total);
   }
 
   /**
@@ -142,7 +144,7 @@ export class CarritoComponent implements OnInit {
    * @Metodo Consulta el carrito del store
    */
   private carritoStore(): void {
-    this.total = 0;
+    let total = 0;
     this.cantidadProductos = 0;
     this.carrito = [];
 
@@ -151,10 +153,11 @@ export class CarritoComponent implements OnInit {
       .pipe(take(1))
       .subscribe((carrito: Array<CatalogoProveedor>) => {
         carrito.map((producto: CatalogoProveedor) => {
-          this.total += producto.precioCompra * producto.cantidadCompra;
+          total += producto.precioCompra * producto.cantidadCompra;
         });
         this.carrito = carrito;
         this.cantidadProductos = this.carrito.length;
+        this.total = formateoMoneda(total);
       });
   }
 }

@@ -3,6 +3,7 @@ import { ProveedoresStore } from '../../interface/proveedores';
 import {
   guardarCatalogoProveedor,
   guardarComprar,
+  guardarProveedor,
   guardarProveedores,
   guardarProveedorSeleccionado,
 } from './proveedores.actions';
@@ -16,6 +17,10 @@ const proveedoresReducer = createReducer(
       ...state,
       proveedores,
     };
+  }),
+  on(guardarProveedor, (state, { proveedor }) => {
+    state.proveedores.push(proveedor);
+    return state;
   }),
   on(guardarProveedorSeleccionado, (state, { proveedor }) => {
     return {

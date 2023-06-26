@@ -18,7 +18,7 @@
       >
         <app-editar-proveedor
           [proveedor]="proveedor"
-          (actualizarProveedorEmit)="actualizacionProveedor()"
+          (actualizarProveedorEmit)="actualizacionProveedor($event)"
         ></app-editar-proveedor>
       </div>
       <div
@@ -27,7 +27,7 @@
       >
         <app-eliminar-proveedor
           [proveedor]="proveedor"
-          (eliminarProveedorEmit)="eliminarProveedor()"
+          (eliminarProveedorEmit)="eliminarProveedor($event)"
         ></app-eliminar-proveedor>
       </div>
     </div>

@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import {
-  CatalogoProveedor,
   ClaveValor,
   ConsultaOrdenCompra,
-  OrdenCompraInfo,
 } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import {
@@ -22,6 +20,7 @@ import {
 } from 'src/app/web/informacion/state';
 import { guardarOrdenesCompra } from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
 import { guardarProveedores } from 'src/app/web/informacion/state/proveedores/proveedores.actions';
+import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-historial',
@@ -43,6 +42,11 @@ export class HistorialComponent implements OnInit {
    * @variable proveedorSeleccionado: muestra la orden de compra en el modal
    */
   proveedorSeleccionado: ClaveValor = {} as ClaveValor;
+
+  /**
+   * @variable totalCompras: muestra la orden de compra en el modal
+   */
+  totalCompras = '';
 
   /**
    * @variable columnasTabla: Columnas que contiene la tabla
@@ -74,7 +78,6 @@ export class HistorialComponent implements OnInit {
    * @Metodo Muestra la orden de compra al darle clicl a la fila
    */
   clickFila(fila: ConsultaOrdenCompra): void {
-    console.log(fila);
     const infoProveedor = this.proveedores.filter(
       (proveedor: Proveedor) => proveedor.id == fila.idProveedor
     )[0];
@@ -144,6 +147,18 @@ export class HistorialComponent implements OnInit {
         } else {
           this.datosTabla = ordenesCompra;
         }
+        let total = 0;
+        this.datosTabla.map((ordenCompra: ConsultaOrdenCompra) => {
+          total += parseFloat(ordenCompra.total);
+          ordenCompra.total = formateoMoneda(
+            parseFloat(ordenCompra.total)
+          );
+          ordenCompra.subtotal = formateoMoneda(
+            parseFloat(ordenCompra.subtotal)
+          );
+          return ordenCompra;
+        });
+        this.totalCompras = formateoMoneda(total);
       });
   }
 }

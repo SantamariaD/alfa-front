@@ -79,11 +79,11 @@
           </div>
           <div class="catalogo__collapse--lista__info">
             <div
+              *ngIf="comprarProducto && !contieneEnCarrito(catalogo)"
               class="agregar cursor-pointer"
               nzTooltipTitle="Agregar al carrito"
               nzTooltipPlacement="leftTop"
               nz-tooltip
-              *ngIf="comprarProducto && !contieneEnCarrito(catalogo)"
             >
               <span
                 (click)="agregarCarrito(catalogo)"
@@ -93,6 +93,7 @@
               ></span>
             </div>
             <p
+              *ngIf="!comprarProducto"
               class="editar cursor-pointer"
               nzTooltipTitle="Editar producto"
               nzTooltipPlacement="leftTop"
@@ -102,6 +103,7 @@
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </p>
             <p
+              *ngIf="!comprarProducto"
               class="eliminar cursor-pointer"
               nzTooltipTitle="Eliminar producto"
               nzTooltipPlacement="leftTop"

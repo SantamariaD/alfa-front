@@ -18,7 +18,7 @@ export class EditarComponent implements OnInit {
   /**
    * @Output actualizarProveedor: emite el evento de actualizar proveedor
    */
-  @Output() actualizarProveedorEmit = new EventEmitter<any>();
+  @Output() actualizarProveedorEmit = new EventEmitter<Proveedor>();
 
   /**
    * @Formulario editarForm: fomulario para editar el producto
@@ -30,6 +30,7 @@ export class EditarComponent implements OnInit {
     domicilio: new FormControl(''),
     correo: new FormControl(''),
     sitioWeb: new FormControl(''),
+    representante: new FormControl(''),
   });
 
   constructor(private proveedoresService: ProveedoresService) {}
@@ -42,6 +43,7 @@ export class EditarComponent implements OnInit {
       correo: this.proveedor.correo,
       domicilio: this.proveedor.domicilio,
       sitioWeb: this.proveedor.sitioWeb,
+      representante: this.proveedor.representante,
     });
   }
 
@@ -52,8 +54,9 @@ export class EditarComponent implements OnInit {
     this.proveedoresService
       .actualizarProveedor(this.editarForm.value)
       .subscribe({
-        next: (respuestaProveedors: HttpClientServiceInterfaceNoPayload) =>
-          this.actualizarProveedorEmit.emit(true),
+        next: (respuestaProveedors: HttpClientServiceInterfaceNoPayload) =>{
+          this.actualizarProveedorEmit.emit(this.editarForm.value)
+        },
       });
   }
 }

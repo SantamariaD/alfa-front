@@ -16,7 +16,7 @@
     <form class="modal__form" [formGroup]="guardarForm">
       <nz-form-item class="modal__form--seccion">
         <nz-form-control>
-          <label class="label">Nombre</label>
+          <label class="label">Nombre de la empresa</label>
           <input nz-input type="text" formControlName="nombre" />
         </nz-form-control>
         <nz-form-control>
@@ -29,6 +29,12 @@
           <label class="label">Correo</label>
           <input nz-input type="text" formControlName="correo" />
         </nz-form-control>
+        <nz-form-control>
+          <label class="label">Representante de ventas</label>
+          <input nz-input type="text" formControlName="representante" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
         <nz-form-control>
           <label class="label">Sitio web</label>
           <input nz-input type="text" formControlName="sitioWeb" />

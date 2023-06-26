@@ -64,8 +64,8 @@ export class ProveedoresService {
    */
   guardarProveedor(
     proveedor: any
-  ): Observable<HttpClientServiceInterfaceNoPayload> {
-    return this.http.post<HttpClientServiceInterfaceNoPayload>(
+  ): Observable<HttpClientServiceInterface<Proveedor>> {
+    return this.http.post<HttpClientServiceInterface<Proveedor>>(
       ENDPOINTS.proveedores.guardarProveedor,
       proveedor
     );

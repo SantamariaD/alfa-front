@@ -10,21 +10,23 @@ export class ProveedoresComponent implements OnInit {
   /**
    * @variable seccion: Contiene la seccione actual
    */
-  seccion = 'Información de proveedores';
+  seccion = '';
 
   /**
    * @variable secciones: Contiene las secciones de la página
    */
   secciones = [
     { texto: 'Información de proveedores', seleccionado: true },
-    { texto: 'Historial de pedidos', seleccionado: false },
+    { texto: 'Historial de compras', seleccionado: false },
     { texto: 'Catálogo de productos', seleccionado: false },
     { texto: 'Carrito', seleccionado: false },
   ];
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.seteoTabs();
+  }
 
   /**
    * @Metodo Asigna la sección en la que nos encontramos
@@ -38,14 +40,54 @@ export class ProveedoresComponent implements OnInit {
       case 'Catálogo de productos':
         this.router.navigate(['/productos/proveedores/catalogo']);
         break;
-      case 'Historial de pedidos':
+      case 'Historial de compras':
         this.router.navigate(['/productos/proveedores/historial']);
         break;
       case 'Carrito':
         this.router.navigate(['/productos/proveedores/carrito']);
         break;
-      case 'Análisis':
-        //this.router.navigate(['/home']);
+    }
+  }
+
+  /**
+   * @Metodo Setea los tabs dependiendo la ruta
+   */
+  private seteoTabs(): void {
+    const ruta = this.router.url;
+    const seccion = ruta.split('/')[3];
+
+    switch (seccion) {
+      case 'informacion':
+        this.secciones = [
+          { texto: 'Información de proveedores', seleccionado: true },
+          { texto: 'Historial de compras', seleccionado: false },
+          { texto: 'Catálogo de productos', seleccionado: false },
+          { texto: 'Carrito', seleccionado: false },
+        ]
+        break;
+      case 'historial':
+        this.secciones = [
+          { texto: 'Información de proveedores', seleccionado: false },
+          { texto: 'Historial de compras', seleccionado: true },
+          { texto: 'Catálogo de productos', seleccionado: false },
+          { texto: 'Carrito', seleccionado: false },
+        ]
+        break;
+      case 'catalogo':
+        this.secciones = [
+          { texto: 'Información de proveedores', seleccionado: false },
+          { texto: 'Historial de compras', seleccionado: false },
+          { texto: 'Catálogo de productos', seleccionado: true },
+          { texto: 'Carrito', seleccionado: false },
+        ]
+        break;
+      case 'carrito':
+        this.secciones = [
+          { texto: 'Información de proveedores', seleccionado: false },
+          { texto: 'Historial de compras', seleccionado: false },
+          { texto: 'Catálogo de productos', seleccionado: false },
+          { texto: 'Carrito', seleccionado: true },
+        ]
         break;
     }
   }

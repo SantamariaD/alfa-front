@@ -4,6 +4,8 @@ import { Proveedor } from '../../interface/proveedores';
 
 const GUARDAR_PROVEEDORES =
   '[Prodveedores] Guarda los proveedores de la aplicación';
+  const GUARDAR_PROVEEDOR =
+  '[Prodveedores] Guarda un proveedor de la aplicación';
 const GUARDAR_PROVEEDOR_SELECCIONADO =
   '[Proveedores] Guarda el proveedor seleccionado del catálogo';
 const GUARDAR_PROVEEDOR_CATALOGO =
@@ -14,6 +16,11 @@ const GUARDAR_SWITCH_COMPRAR =
 export const guardarProveedores = createAction(
   GUARDAR_PROVEEDORES,
   props<{ proveedores: Array<Proveedor> }>()
+);
+
+export const guardarProveedor = createAction(
+  GUARDAR_PROVEEDOR,
+  props<{ proveedor: Proveedor }>()
 );
 
 export const guardarProveedorSeleccionado = createAction(

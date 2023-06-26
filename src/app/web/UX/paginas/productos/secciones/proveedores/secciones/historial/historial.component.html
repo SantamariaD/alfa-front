@@ -2,13 +2,17 @@
   <div class="historial__descripcion">
     <div class="historial__descripcion--info-stock">
       <p class="historial__descripcion--info-stock--llave">Total en compras:</p>
-      <p class="historial__descripcion--info-stock--valor">$15000</p>
+      <p class="historial__descripcion--info-stock--valor">
+        {{ totalCompras.toString() | currency }}
+      </p>
     </div>
     <div class="historial__descripcion--info-stock">
       <p class="historial__descripcion--info-stock--llave">
-        Fecha última compra:
+        Total de Ordenes de compra:
       </p>
-      <p class="historial__descripcion--info-stock--valor">25/05/2023</p>
+      <p class="historial__descripcion--info-stock--valor">
+        {{ datosTabla.length }}
+      </p>
     </div>
   </div>
   <app-tabla
