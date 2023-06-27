@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { ProveedoresStore } from '../../interface/proveedores';
 import {
+  guardarActualizacion,
   guardarCatalogoProveedor,
   guardarComprar,
   guardarProveedor,
@@ -33,12 +34,17 @@ const proveedoresReducer = createReducer(
       ...state,
       catalogoProveedor: catalogo,
     };
-  })
-  ,
+  }),
   on(guardarComprar, (state, { comprar }) => {
     return {
       ...state,
       comprar,
+    };
+  }),
+  on(guardarActualizacion, (state, { fecha }) => {
+    return {
+      ...state,
+      ultimaActualizacion: fecha,
     };
   })
 );

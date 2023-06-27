@@ -11,7 +11,10 @@ import {
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
 import { selectProveedoresStore } from 'src/app/web/informacion/state';
-import { guardarProveedores } from 'src/app/web/informacion/state/proveedores/proveedores.actions';
+import {
+  guardarActualizacion,
+  guardarProveedores,
+} from 'src/app/web/informacion/state/proveedores/proveedores.actions';
 
 @Component({
   selector: 'app-informacion',
@@ -159,6 +162,12 @@ export class InformacionProveedoresComponent implements OnInit {
               this.ultimaActualizacion =
                 respuestaProveedores.payload.utlimaActualizacion.updated_at;
               this.store.dispatch(
+                guardarActualizacion({
+                  fecha:
+                    respuestaProveedores.payload.utlimaActualizacion.updated_at,
+                })
+              );
+              this.store.dispatch(
                 guardarProveedores({
                   proveedores: respuestaProveedores.payload.proveedores,
                 })
@@ -168,6 +177,8 @@ export class InformacionProveedoresComponent implements OnInit {
           });
         } else {
           this.datosTabla = proveedor.proveedores;
+          this.totalProveedores = this.datosTabla.length;
+          this.ultimaActualizacion = proveedor.ultimaActualizacion;
         }
       });
   }

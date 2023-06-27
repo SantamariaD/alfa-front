@@ -4,14 +4,16 @@ import { Proveedor } from '../../interface/proveedores';
 
 const GUARDAR_PROVEEDORES =
   '[Prodveedores] Guarda los proveedores de la aplicación';
-  const GUARDAR_PROVEEDOR =
-  '[Prodveedores] Guarda un proveedor de la aplicación';
+const GUARDAR_PROVEEDOR = '[Prodveedores] Guarda un proveedor de la aplicación';
 const GUARDAR_PROVEEDOR_SELECCIONADO =
   '[Proveedores] Guarda el proveedor seleccionado del catálogo';
 const GUARDAR_PROVEEDOR_CATALOGO =
   '[Proveedores] Guarda el catálogo del proveedor seleccionado';
 const GUARDAR_SWITCH_COMPRAR =
   '[Proveedores] Guarda el evento del switch al comprar';
+
+const GUARDAR_ULTIMA_ACTUALIZACION =
+  '[Proveedores] Guarda la última actualización de los proveedores';
 
 export const guardarProveedores = createAction(
   GUARDAR_PROVEEDORES,
@@ -36,4 +38,9 @@ export const guardarCatalogoProveedor = createAction(
 export const guardarComprar = createAction(
   GUARDAR_SWITCH_COMPRAR,
   props<{ comprar: boolean }>()
+);
+
+export const guardarActualizacion = createAction(
+  GUARDAR_ULTIMA_ACTUALIZACION,
+  props<{ fecha: any }>()
 );

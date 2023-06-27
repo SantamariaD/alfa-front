@@ -21,4 +21,5 @@ export interface ProveedoresStore {
   proveedorSeleccionado: Proveedor;
   catalogoProveedor: Array<CatalogoProveedor>;
   comprar: boolean;
+  ultimaActualizacion: any;
 }
