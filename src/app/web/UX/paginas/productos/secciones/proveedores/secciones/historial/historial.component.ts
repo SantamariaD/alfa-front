@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { finalize, take } from 'rxjs';
 import {
   ClaveValor,
   ConsultaOrdenCompra,
@@ -61,7 +61,7 @@ export class HistorialComponent implements OnInit {
   /**
    * @variable datosTabla: Datos que contiene la tabla
    */
-  datosTabla: Array<ConsultaOrdenCompra> = [];
+  datosTabla: Array<any> = [];
 
   constructor(
     private proveedoresService: ProveedoresService,
@@ -130,35 +130,56 @@ export class HistorialComponent implements OnInit {
   private consultarOrdenesCompra(): void {
     this.store
       .select(selectOrdenesCompraStore)
+      .pipe(take(1))
       .subscribe((ordenesCompra: ConsultaOrdenCompra[]) => {
         if (ordenesCompra.length < 1) {
-          this.ordenCompraService.consultarOrdenesCompra().subscribe({
-            next: (
-              respuestaConsulta: HttpClientServiceInterface<
-                Array<ConsultaOrdenCompra>
-              >
-            ) => {
-              this.datosTabla = respuestaConsulta.payload;
-              this.store.dispatch(
-                guardarOrdenesCompra({ ordenesCompra: this.datosTabla })
-              );
-            },
-          });
+          this.ordenCompraService
+            .consultarOrdenesCompra()
+            .pipe(finalize(() => this.formateoDatos()))
+            .subscribe({
+              next: (
+                respuestaConsulta: HttpClientServiceInterface<
+                  Array<ConsultaOrdenCompra>
+                >
+              ) => {
+                this.datosTabla = respuestaConsulta.payload;
+                this.store.dispatch(
+                  guardarOrdenesCompra({
+                    ordenesCompra: respuestaConsulta.payload,
+                  })
+                );
+              },
+            });
         } else {
+          let total = 0;
           this.datosTabla = ordenesCompra;
+          this.datosTabla.map((ordenCompra: ConsultaOrdenCompra) => {
+            if (typeof ordenCompra.total == 'number') {
+              total += ordenCompra.total;
+            } else {
+              total += parseFloat(
+                ordenCompra.total.replace('$', '').replace(',', '')
+              );
+            }
+
+            return ordenCompra;
+          });
+          this.totalCompras = formateoMoneda(total);
         }
-        let total = 0;
-        this.datosTabla.map((ordenCompra: ConsultaOrdenCompra) => {
-          total += parseFloat(ordenCompra.total);
-          ordenCompra.total = formateoMoneda(
-            parseFloat(ordenCompra.total)
-          );
-          ordenCompra.subtotal = formateoMoneda(
-            parseFloat(ordenCompra.subtotal)
-          );
-          return ordenCompra;
-        });
-        this.totalCompras = formateoMoneda(total);
       });
+  }
+
+  /**
+   * @Metodo Formateo los datos de las monedas para mostrar en pantalla
+   */
+  private formateoDatos(): void {
+    let total = 0;
+    this.datosTabla.map((ordenCompra: ConsultaOrdenCompra) => {
+      total += parseFloat(ordenCompra.total);
+      ordenCompra.total = formateoMoneda(parseFloat(ordenCompra.total));
+      ordenCompra.subtotal = formateoMoneda(parseFloat(ordenCompra.subtotal));
+      return ordenCompra;
+    });
+    this.totalCompras = formateoMoneda(total);
   }
 }

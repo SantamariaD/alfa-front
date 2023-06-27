@@ -222,4 +222,9 @@
       Guardar Orden de Compra
     </button>
   </div>
+  <div class="boton-guardar" *ngIf="mostrarBotonPdf">
+    <button nz-button nzType="primary" (click)="descargarPdf()">
+      Descargar PDF
+    </button>
+  </div>
 </div>

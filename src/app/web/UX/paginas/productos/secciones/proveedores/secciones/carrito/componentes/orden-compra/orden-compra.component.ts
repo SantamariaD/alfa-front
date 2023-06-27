@@ -52,6 +52,11 @@ export class OrdenCompraComponent implements OnInit {
   @Input() mostrarBoton = true;
 
   /**
+   * @Input mostrarBoton: Muestra el boton en la orden
+   */
+  @Input() mostrarBotonPdf = false;
+
+  /**
    * @Output nombreProveedor: emite el nombre del proveedor
    */
   @Output() nombreProveedor = new EventEmitter<string>();
@@ -272,6 +277,13 @@ export class OrdenCompraComponent implements OnInit {
           this.ordenCompraInfo.instruccionEspecial,
       };
     }
+  }
+
+  /**
+   * @Metodo Descarga la orden de compra en formato PDF
+   */
+  descargarPdf(): void {
+    console.log('PDF');
   }
 
   /**

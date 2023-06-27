@@ -3,7 +3,7 @@
     <div class="historial__descripcion--info-stock">
       <p class="historial__descripcion--info-stock--llave">Total en compras:</p>
       <p class="historial__descripcion--info-stock--valor">
-        {{ totalCompras.toString() | currency }}
+        {{ totalCompras }}
       </p>
     </div>
     <div class="historial__descripcion--info-stock">
@@ -33,6 +33,7 @@
         [proveedor]="proveedorSeleccionado"
         [mostrarSwitch]="false"
         [mostrarBoton]="false"
+        [mostrarBotonPdf]="true"
       ></app-orden-compra>
     </div>
   </div>
