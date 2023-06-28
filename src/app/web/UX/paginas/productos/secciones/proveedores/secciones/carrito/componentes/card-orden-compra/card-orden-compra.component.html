@@ -14,7 +14,7 @@
           (seleccionadoClick)="selectSeccion($event)"
         ></app-secciones-cabecera>
         <app-orden-compra
-          *ngIf="seccion === proveedor.clave && secciones.length > 0"
+          *ngIf="seccion == proveedor.clave && secciones.length > 0"
           [proveedor]="proveedor"
           (nombreProveedor)="eliminarSeccion($event)"
         ></app-orden-compra>

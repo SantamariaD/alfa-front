@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs';
 import { CatalogoProveedor } from 'src/app/web/informacion/interface/catalogo-proveedores';
+import { OrdenCompraService } from 'src/app/web/informacion/servicios/orden-compra/orden-compra.service';
 import { selectCarritoCompra } from 'src/app/web/informacion/state';
 import {
   actualizarProductoCarrito,
@@ -41,10 +42,14 @@ export class CarritoComponent implements OnInit {
    */
   total = '';
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private ordenCompraService: OrdenCompraService
+  ) {}
 
   ngOnInit(): void {
     this.carritoStore();
+    this.ordenCompraService.consultarOrdenesCompraRedux();
   }
 
   /**

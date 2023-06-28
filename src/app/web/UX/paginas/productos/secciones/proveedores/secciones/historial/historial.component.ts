@@ -19,7 +19,10 @@ import {
   selectProveedoresStore,
 } from 'src/app/web/informacion/state';
 import { guardarOrdenesCompra } from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
-import { guardarProveedores } from 'src/app/web/informacion/state/proveedores/proveedores.actions';
+import {
+  guardarActualizacion,
+  guardarProveedores,
+} from 'src/app/web/informacion/state/proveedores/proveedores.actions';
 import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
@@ -113,6 +116,12 @@ export class HistorialComponent implements OnInit {
               this.store.dispatch(
                 guardarProveedores({
                   proveedores: respuestaProveedores.payload.proveedores,
+                })
+              );
+              this.store.dispatch(
+                guardarActualizacion({
+                  fecha:
+                    respuestaProveedores.payload.utlimaActualizacion.updated_at,
                 })
               );
             },

@@ -47,7 +47,6 @@ export class CardOrdenCompraComponent implements OnInit {
       idProveedor: this.productos[clave][0].idProveedor,
       valor: this.productos[clave],
     }));
-
     // Seteo de cabeceras a mostrar
     this.proveedoresArray.forEach(
       (proveedor: { clave: string; valor: any }, index) => {
@@ -68,6 +67,11 @@ export class CardOrdenCompraComponent implements OnInit {
       (seccion: { texto: string; seleccionado: boolean }) =>
         seccion.texto !== seccionNombre
     );
+    if (this.secciones.length > 0 && this.secciones[0]?.texto) {
+      this.secciones[0].seleccionado = true;
+      this.seccion = this.secciones[0].texto;
+    }
+    
     this.message.success(`Se creo correctamente la orden de compra.`);
     this.nombreProveedor.emit(seccionNombre);
   }

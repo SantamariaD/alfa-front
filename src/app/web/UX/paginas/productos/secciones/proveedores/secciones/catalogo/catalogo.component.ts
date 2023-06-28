@@ -7,6 +7,7 @@ import { finalize, take } from 'rxjs';
 import {
   BotonCarrito,
   CatalogoProveedor,
+  ConsultaOrdenCompra,
 } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import {
   HttpClientServiceInterface,
@@ -19,14 +20,17 @@ import {
   RespuestaProveedores,
 } from 'src/app/web/informacion/interface/proveedores';
 import { CatalogoProveedoresService } from 'src/app/web/informacion/servicios/catalogo-proveedores/catalogo-proveedores.service';
+import { OrdenCompraService } from 'src/app/web/informacion/servicios/orden-compra/orden-compra.service';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
 import {
   selectCarrito,
+  selectOrdenesCompraStore,
   selectProductosStore,
   selectProveedoresStore,
 } from 'src/app/web/informacion/state';
 import { guardarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
+import { guardarOrdenesCompra } from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
 import {
   eliminarProductos,
   guardarProductos,
@@ -37,6 +41,7 @@ import {
   guardarProveedores,
   guardarProveedorSeleccionado,
 } from 'src/app/web/informacion/state/proveedores/proveedores.actions';
+import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-catalogo',
@@ -117,7 +122,8 @@ export class CatalogoComponent implements OnInit {
     private catalogoProveedoresService: CatalogoProveedoresService,
     private modal: NzModalService,
     private message: NzMessageService,
-    private store: Store
+    private store: Store,
+    private ordenCompraService: OrdenCompraService
   ) {}
 
   ngOnInit(): void {
@@ -125,6 +131,7 @@ export class CatalogoComponent implements OnInit {
     this.proveedorSeleccionado();
     this.carritoStore();
     this.consultarProductos();
+    this.ordenCompraService.consultarOrdenesCompraRedux();
   }
 
   /**

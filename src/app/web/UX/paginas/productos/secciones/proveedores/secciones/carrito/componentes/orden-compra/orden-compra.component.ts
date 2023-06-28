@@ -15,11 +15,15 @@ import {
 } from 'src/app/web/informacion/interface/proveedores';
 import { OrdenCompraService } from 'src/app/web/informacion/servicios/orden-compra/orden-compra.service';
 import { ProductoOrdenCompraService } from 'src/app/web/informacion/servicios/producto-orden-compra/producto-orden-compra.service';
-import { selectProveedoresStore } from 'src/app/web/informacion/state';
+import {
+  selectOrdenesCompraStore,
+  selectProveedoresStore,
+} from 'src/app/web/informacion/state';
 import {
   guardarOrdenCompra,
   guardarOrdenesCompra,
 } from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
+import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 import {
   CORREO_EMPRESA,
   DIRECCION_EMPRESA,
@@ -70,6 +74,26 @@ export class OrdenCompraComponent implements OnInit {
    * @Varible total: subtotal de la compra
    */
   total = 0;
+
+  /**
+   * @Varible total: total de la compra formateado a moneda
+   */
+  totaFormat = '';
+
+  /**
+   * @Varible total: subtotal de la compra formateado a moneda
+   */
+  subtotalFormat = '';
+
+  /**
+   * @Varible descuento: total en descuentos de producto formateado a moneda
+   */
+  descuentoFormat = '';
+
+  /**
+   * @Varible otros: total en otros de producto formateado a moneda
+   */
+  otrosFormat = '';
 
   /**
    * @Varible descuento: total en descuentos de producto
@@ -181,17 +205,15 @@ export class OrdenCompraComponent implements OnInit {
           let nuevoArray = this.proveedor.valor.map(
             ({
               id,
-              politicasVenta,
-              nombreProducto,
               nombreProveedor,
               imagen,
               precioMaximoVenta,
-              sku,
               updated_at,
               created_at,
               ...resto
             }) => resto
           );
+
           nuevoArray.map(
             (producto: any) => (producto['idOrdenCompra'] = this.idOrdenCompra)
           );
@@ -201,8 +223,9 @@ export class OrdenCompraComponent implements OnInit {
             id: this.idOrdenCompra,
             created_at: new Date(),
             catalogoProveedor: nuevoArray,
+            total: formateoMoneda(this.ordenForm.value.total),
+            subtotal: formateoMoneda(this.ordenForm.value.subtotal),
           };
-
           this.store.dispatch(guardarOrdenCompra({ ordenCompra }));
         })
       )
@@ -306,6 +329,10 @@ export class OrdenCompraComponent implements OnInit {
           this.total += producto.precioCompra * producto.cantidadCompra;
           this.descuento += producto.descuento * producto.precioCompra;
         });
+
+        this.totaFormat = formateoMoneda(this.total);
+        this.subtotalFormat = formateoMoneda(this.subtotal);
+        this.descuentoFormat = formateoMoneda(this.descuento);
 
         this.ordenCompraInfo = {
           representanteVendedor: this.proveedorInfo.representante,

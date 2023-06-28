@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { take } from 'rxjs';
+import { ConsultaOrdenCompra } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import {
   Proveedor,
@@ -9,12 +10,18 @@ import {
   RespuestaProveedores,
 } from 'src/app/web/informacion/interface/proveedores';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
+import { OrdenCompraService } from 'src/app/web/informacion/servicios/orden-compra/orden-compra.service';
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
-import { selectProveedoresStore } from 'src/app/web/informacion/state';
+import {
+  selectOrdenesCompraStore,
+  selectProveedoresStore,
+} from 'src/app/web/informacion/state';
+import { guardarOrdenesCompra } from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
 import {
   guardarActualizacion,
   guardarProveedores,
 } from 'src/app/web/informacion/state/proveedores/proveedores.actions';
+import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-informacion',
@@ -65,11 +72,13 @@ export class InformacionProveedoresComponent implements OnInit {
   constructor(
     private message: NzMessageService,
     private proveedoresService: ProveedoresService,
-    private store: Store
+    private store: Store,
+    private ordenCompraService: OrdenCompraService
   ) {}
 
   ngOnInit(): void {
     this.consultarProveedores();
+    this.ordenCompraService.consultarOrdenesCompraRedux();
   }
 
   /**
@@ -105,6 +114,7 @@ export class InformacionProveedoresComponent implements OnInit {
       }
     });
     this.store.dispatch(guardarProveedores({ proveedores: arrayProveedores }));
+    this.store.dispatch(guardarActualizacion({ fecha: new Date() }));
     this.consultarProveedores();
   }
 
@@ -118,6 +128,7 @@ export class InformacionProveedoresComponent implements OnInit {
     this.mostrarCardProveedor = false;
     this.message.success(`Se elimino correctamente el proveedor.`);
     this.store.dispatch(guardarProveedores({ proveedores: this.datosTabla }));
+    this.store.dispatch(guardarActualizacion({ fecha: new Date() }));
     this.consultarProveedores();
   }
 
@@ -134,6 +145,7 @@ export class InformacionProveedoresComponent implements OnInit {
   clickGuardarProveedor(): void {
     this.mostrarAgregarProveedor = false;
     this.message.success(`Se guardo correctamente el proveedor.`);
+    this.store.dispatch(guardarActualizacion({ fecha: new Date() }));
     this.consultarProveedores();
   }
 
