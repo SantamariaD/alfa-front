@@ -17,7 +17,7 @@
         <app-editar
           [producto]="producto"
           [categorias]="categorias"
-          (actualizarProductoEmit)="actualizacionProducto()"
+          (actualizarProductoEmit)="actualizacionProducto($event)"
         ></app-editar>
       </div>
       <div
@@ -26,7 +26,7 @@
       >
         <app-eliminar
           [producto]="producto"
-          (eliminarProductoEmit)="eliminarProducto()"
+          (eliminarProductoEmit)="eliminarProducto($event)"
         ></app-eliminar>
       </div>
     </div>

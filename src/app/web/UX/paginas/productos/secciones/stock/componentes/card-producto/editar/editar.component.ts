@@ -43,7 +43,6 @@ export class EditarComponent implements OnInit {
     codigoBarras: new FormControl(''),
     descripcion: new FormControl(''),
     fechaCompra: new FormControl(''),
-    precioCompra: new FormControl(''),
     precioVenta: new FormControl(''),
     proveedor: new FormControl(''),
     sku: new FormControl(''),
@@ -66,7 +65,6 @@ export class EditarComponent implements OnInit {
       codigoBarras: this.producto.codigoBarras,
       descripcion: this.producto.descripcion,
       fechaCompra: this.producto.fechaCompra,
-      precioCompra: this.producto.precioCompra,
       precioVenta: this.producto.precioVenta,
       proveedor: this.producto.proveedor,
       sku: this.producto.sku,
@@ -80,10 +78,13 @@ export class EditarComponent implements OnInit {
    */
   actualizarProducto(): void {
     this.editarForm.value.categoria = parseInt(this.editarForm.value.categoria);
+    this.editarForm.value.precioVenta = parseFloat(
+      this.editarForm.value.precioVenta.replace('$', '').replace(',', '')
+    );
     this.productosService.actualizarProducto(this.editarForm.value).subscribe({
-      next: (respuestaProductos: HttpClientServiceInterfaceNoPayload) => {
+      next: (respuestaProductos: HttpClientServiceInterface<Producto[]>) => {
         this.mostrarNotificacion = true;
-        this.actualizarProductoEmit.emit(true);
+        this.actualizarProductoEmit.emit(respuestaProductos.payload);
         setTimeout(() => (this.mostrarNotificacion = false), 5000);
       },
     });

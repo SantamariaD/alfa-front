@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { finalize, take } from 'rxjs';
 import { Categoria } from 'src/app/web/informacion/interface/categorias';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { Producto } from 'src/app/web/informacion/interface/productos';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
 import { CategoriasService } from 'src/app/web/informacion/servicios/categorias/categorias.service';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
+import {
+  selectCategoriasStore,
+  selectProductosStore,
+} from 'src/app/web/informacion/state';
+import { guardarCategorias } from 'src/app/web/informacion/state/categorias/categorias.actions';
+import { guardarProductos } from 'src/app/web/informacion/state/productos/productos.actions';
+import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-stock',
@@ -23,9 +32,9 @@ export class StockComponent implements OnInit {
   totalProductos = 0;
 
   /**
-   * @variable totalProductos: Valor total de todos los productos del stock
+   * @variable valorProductosVenta: Valor total de todos los productos vendidos del stock
    */
-  valorProductos = 0;
+  valorProductosVenta = '';
 
   /**
    * @variable secciones: Contiene las secciones de la página
@@ -75,7 +84,8 @@ export class StockComponent implements OnInit {
   constructor(
     private message: NzMessageService,
     private productosService: ProductosService,
-    private categoriasService: CategoriasService
+    private categoriasService: CategoriasService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -115,9 +125,12 @@ export class StockComponent implements OnInit {
   /**
    * @Metodo Captura el evento cuando se agrega un producto
    */
-  clickGuardarProducto(): void {
+  clickGuardarProducto(producto: Producto[]): void {
+    this.datosTabla = producto;
+    this.store.dispatch(guardarProductos({ productos: producto }));
     this.mostrarAgregarProducto = false;
     this.message.success(`Se guardo correctamente el producto.`);
+    this.consultarProductos();
   }
 
   /**
@@ -150,20 +163,21 @@ export class StockComponent implements OnInit {
   /**
    * @Metodo captura el evento de actualizar un producto y consulta todos los productos
    */
-  actualizacionProducto(): void {
+  actualizacionProducto(productos: Producto[]): void {
+    this.store.dispatch(guardarProductos({ productos: productos }));
     this.mostrarCardProducto = false;
-    this.consultarProductos();
-    this.consultarCategorias();
     this.message.success(`Se actualizo correctamente el producto.`);
+    this.consultarProductos();
   }
 
   /**
    * @Metodo captura el evento de actualizar un producto y consulta todos los productos
    */
-  eliminarProducto(): void {
+  eliminarProducto(productos: Producto[]): void {
+    this.store.dispatch(guardarProductos({ productos: productos }));
     this.mostrarCardProducto = false;
-    this.consultarProductos();
     this.message.success(`Se elimino correctamente el producto.`);
+    this.consultarProductos();
   }
 
   /**
@@ -184,34 +198,70 @@ export class StockComponent implements OnInit {
    * @Metodo llama a la api para consultar las categorias
    */
   private consultarCategorias(): void {
-    this.categoriasService.traerCategorias().subscribe({
-      next: (respuestaCategorias: HttpClientServiceInterface<Categoria[]>) =>
-        (this.categorias = respuestaCategorias.payload),
-    });
+    this.store
+      .select(selectCategoriasStore)
+      .pipe(take(1))
+      .subscribe((categoriasStore: Categoria[]) => {
+        if (categoriasStore.length < 1) {
+          this.categoriasService.traerCategorias().subscribe({
+            next: (
+              respuestaCategorias: HttpClientServiceInterface<Categoria[]>
+            ) => {
+              this.categorias = respuestaCategorias.payload;
+              this.store.dispatch(
+                guardarCategorias({ categorias: respuestaCategorias.payload })
+              );
+            },
+          });
+        } else {
+          this.categorias = categoriasStore;
+        }
+      });
   }
 
   /**
    * @Metodo Consulta todos los productos
    */
   private consultarProductos(): void {
-    this.productosService.consultarProductos().subscribe({
-      next: (
-        respuestaProductos: HttpClientServiceInterface<Array<Producto>>
-      ) => {
-        this.datosTabla = respuestaProductos.payload;
-        this.informacionStock();
-      },
-      error: (error) => console.log(error),
-    });
+    this.datosTabla = [];
+    this.store
+      .select(selectProductosStore)
+      .pipe(take(1))
+      .subscribe((productosStore: Producto[]) => {
+        if (productosStore.length < 1) {
+          this.productosService.consultarProductos().subscribe({
+            next: (
+              respuestaProductos: HttpClientServiceInterface<Array<Producto>>
+            ) => {
+              const productos = respuestaProductos.payload;
+              this.datosTabla = respuestaProductos.payload;
+              this.store.dispatch(guardarProductos({ productos }));
+              this.informacionStock();
+            },
+            error: (error) => console.log(error),
+          });
+        } else {
+          this.datosTabla = productosStore;
+          this.informacionStock();
+        }
+      });
   }
 
   /**
    * @Metodo Realiza las operaciones para la información general del stock
    */
   private informacionStock(): void {
+    let valorProductosVenta = 0;
+    this.totalProductos = 0;
     this.datosTabla.map((producto: Producto) => {
-      this.valorProductos += parseFloat(producto.precioCompra);
-      this.totalProductos += parseInt(producto.cantidadStock);
+      valorProductosVenta +=
+        parseFloat(producto.precioVenta) * producto.cantidadStock;
+      this.totalProductos += producto.cantidadStock;
+      producto.precioVenta = formateoMoneda(
+        parseFloat(producto.precioVenta.replace('$', ''))
+      );
+      return producto;
     });
+    this.valorProductosVenta = formateoMoneda(valorProductosVenta);
   }
 }

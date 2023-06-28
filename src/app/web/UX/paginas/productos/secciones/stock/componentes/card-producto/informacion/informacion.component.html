@@ -36,11 +36,9 @@
     </div>
     <div class="informacion--descripcion">
       <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">
-          Precio de compra:
-        </p>
+        <p class="informacion--descripcion--info-stock--llave">Vendidos:</p>
         <p class="informacion--descripcion--info-stock--valor">
-          ${{ producto.precioCompra }}
+          {{ producto.ventas }}
         </p>
       </div>
       <div class="informacion--descripcion--info-stock">
@@ -48,7 +46,7 @@
           Precio de venta:
         </p>
         <p class="informacion--descripcion--info-stock--valor">
-          ${{ producto.precioVenta }}
+          {{ producto.precioVenta }}
         </p>
       </div>
     </div>
@@ -63,24 +61,10 @@
       </div>
       <div class="informacion--descripcion--info-stock">
         <p class="informacion--descripcion--info-stock--llave">
-          Última fecha de compra:
+          Última compra de stock:
         </p>
         <p class="informacion--descripcion--info-stock--valor">
           {{ producto.fechaCompra }}
-        </p>
-      </div>
-    </div>
-    <div class="informacion--descripcion">
-      <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">Poveedor:</p>
-        <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.proveedor }}
-        </p>
-      </div>
-      <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">Vendidos:</p>
-        <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.ventas }}
         </p>
       </div>
     </div>

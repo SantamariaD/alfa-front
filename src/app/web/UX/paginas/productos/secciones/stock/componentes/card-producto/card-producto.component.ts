@@ -41,7 +41,7 @@ export class CardProductoComponent implements OnInit {
   /**
    * @Variable seccionModal: Controla la sección que se muestra en el modal
    */
-  seccionModal = 'informacion'
+  seccionModal = 'informacion';
 
   constructor() {}
 
@@ -80,19 +80,22 @@ export class CardProductoComponent implements OnInit {
    */
   clickCerrarModal(): void {
     this.clickCerrar.emit(false);
+    this.seccionModal = 'informacion';
   }
-  
+
   /**
    * @Metodo captura el evento de actualizar un producto y consulta todos los productos
    */
-  actualizacionProducto(): void {
-    this.actualizarProductoEmit.emit(true);
+  actualizacionProducto(productos: Producto[]): void {
+    this.actualizarProductoEmit.emit(productos);
+    this.seccionModal = 'informacion';
   }
 
   /**
    * @Metodo captura el evento de eliminar un producto y consulta todos los productos
    */
-  eliminarProducto(): void {
-    this.eliminarProductoEmit.emit(true);
+  eliminarProducto(productos: Producto[]): void {
+    this.eliminarProductoEmit.emit(productos);
+    this.seccionModal = 'informacion';
   }
 }

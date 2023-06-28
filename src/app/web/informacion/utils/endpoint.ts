@@ -11,7 +11,7 @@ export const ENDPOINTS = {
     consultarProducto: '/producto/consultar-producto',
     guardarProductos: '/producto/guardar-producto',
     actualizarProductos: '/producto/actualizar-producto',
-    eliminarProductos: '/producto/eliminar-productos',
+    eliminarProductos: '/producto/eliminar-producto',
   },
   categorias: {
     consultarCategorias: '/categorias/consultar-categorias',

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Categoria } from 'src/app/web/informacion/interface/categorias';
-import { HttpClientServiceInterfaceNoPayload } from 'src/app/web/informacion/interface/httpService';
+import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from 'src/app/web/informacion/interface/httpService';
 import { Producto } from 'src/app/web/informacion/interface/productos';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 
@@ -46,9 +46,7 @@ export class AgregarComponent implements OnInit {
     codigoBarras: new FormControl('', [Validators.required]),
     descripcion: new FormControl('', [Validators.required]),
     fechaCompra: new FormControl('', [Validators.required]),
-    precioCompra: new FormControl('', [Validators.required]),
     precioVenta: new FormControl('', [Validators.required]),
-    proveedor: new FormControl('', [Validators.required]),
     sku: new FormControl('', [Validators.required]),
   });
 
@@ -72,9 +70,9 @@ export class AgregarComponent implements OnInit {
    * @Metodo guarda un nuevo producto
    */
   guardarProducto(): void {
-    this.productosService.guarderProducto(this.guardarForm.value).subscribe({
-      next: (respuestaProductos: HttpClientServiceInterfaceNoPayload) => {
-        this.clickGuardarProducto.emit(true);
+    this.productosService.guardarProducto(this.guardarForm.value).subscribe({
+      next: (respuestaProductos: HttpClientServiceInterface<Producto[]>) => {
+        this.clickGuardarProducto.emit(respuestaProductos.payload);
         this.guardarForm.reset();
         this.fechaHtml.reset();
       },

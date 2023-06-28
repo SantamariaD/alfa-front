@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  HttpClientServiceInterface,
-  HttpClientServiceInterfaceNoPayload,
-} from '../../interface/httpService';
+import { HttpClientServiceInterface } from '../../interface/httpService';
 import { Producto } from '../../interface/productos';
 import { ENDPOINTS } from '../../utils/endpoint';
 import { HttpclientService } from '../httpService/http-service.service';
@@ -30,8 +27,8 @@ export class ProductosService {
    */
   actualizarProducto(
     producto: any
-  ): Observable<HttpClientServiceInterfaceNoPayload> {
-    return this.http.put<HttpClientServiceInterfaceNoPayload>(
+  ): Observable<HttpClientServiceInterface<Producto[]>> {
+    return this.http.put<HttpClientServiceInterface<Producto[]>>(
       ENDPOINTS.productos.actualizarProductos,
       producto
     );
@@ -42,8 +39,8 @@ export class ProductosService {
    */
   eliminarProducto(
     id: number
-  ): Observable<HttpClientServiceInterfaceNoPayload> {
-    return this.http.delete<HttpClientServiceInterfaceNoPayload>(
+  ): Observable<HttpClientServiceInterface<Producto[]>> {
+    return this.http.delete<HttpClientServiceInterface<Producto[]>>(
       ENDPOINTS.productos.eliminarProductos + '/' + id
     );
   }
@@ -51,10 +48,10 @@ export class ProductosService {
   /**
    * @Servicio elimina un producto
    */
-  guarderProducto(
+  guardarProducto(
     producto: any
-  ): Observable<HttpClientServiceInterfaceNoPayload> {
-    return this.http.post<HttpClientServiceInterfaceNoPayload>(
+  ): Observable<HttpClientServiceInterface<Producto[]>> {
+    return this.http.post<HttpClientServiceInterface<Producto[]>>(
       ENDPOINTS.productos.guardarProductos,
       producto
     );

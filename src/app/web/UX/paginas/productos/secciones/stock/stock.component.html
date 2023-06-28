@@ -16,25 +16,11 @@
     </div>
     <div class="productos__descripcion--info-stock">
       <p class="productos__descripcion--info-stock--llave">
-        Valor del inventario:
+        Valor del stock vendido:
       </p>
       <p class="productos__descripcion--info-stock--valor">
-        ${{ valorProductos.toFixed(2) }}
+        {{ valorProductosVenta }}
       </p>
-    </div>
-  </div>
-  <div class="productos__descripcion">
-    <div class="productos__descripcion--info-stock">
-      <p class="productos__descripcion--info-stock--llave">
-        Producto más vendido:
-      </p>
-      <p class="productos__descripcion--info-stock--valor">Chamarra</p>
-    </div>
-    <div class="productos__descripcion--info-stock">
-      <p class="productos__descripcion--info-stock--llave">
-        Productos agotados:
-      </p>
-      <p class="productos__descripcion--info-stock--valor">Playeras</p>
     </div>
   </div>
   <app-tabla
@@ -51,14 +37,14 @@
   [producto]="producto"
   [categorias]="categorias"
   (clickCerrar)="clickCerrarModal($event)"
-  (actualizarProductoEmit)="actualizacionProducto()"
-  (eliminarProductoEmit)="eliminarProducto()"
+  (actualizarProductoEmit)="actualizacionProducto($event)"
+  (eliminarProductoEmit)="eliminarProducto($event)"
 ></app-card-producto>
 
 <app-agregar
   [mostrarModal]="mostrarAgregarProducto"
   [categorias]="categorias"
-  (clickGuardarProducto)="clickGuardarProducto()"
+  (clickGuardarProducto)="clickGuardarProducto($event)"
   (clickCerrar)="clickCerrarModalAgregarProducto($event)"
 ></app-agregar>
 

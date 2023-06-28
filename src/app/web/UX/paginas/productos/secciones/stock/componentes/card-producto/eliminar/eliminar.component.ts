@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { HttpClientServiceInterfaceNoPayload } from 'src/app/web/informacion/interface/httpService';
+import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { Producto } from 'src/app/web/informacion/interface/productos';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 
@@ -29,8 +28,8 @@ export class EliminarComponent implements OnInit {
    */
   clickEliminar(): void {
     this.productosService.eliminarProducto(this.producto.id).subscribe({
-      next: (respuestaEliminar: HttpClientServiceInterfaceNoPayload) =>
-        this.eliminarProductoEmit.emit(true),
+      next: (respuestaEliminar: HttpClientServiceInterface<Producto[]>) =>
+        this.eliminarProductoEmit.emit(respuestaEliminar.payload),
     });
   }
 }

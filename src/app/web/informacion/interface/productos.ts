@@ -7,9 +7,8 @@ export interface Producto {
   sku: string;
   categoria: string;
   proveedor: string;
-  precioCompra: string;
   precioVenta: string;
-  cantidadStock: string;
+  cantidadStock: number;
   ventas?: number;
   fechaCompra: string;
   imagen?: string;
