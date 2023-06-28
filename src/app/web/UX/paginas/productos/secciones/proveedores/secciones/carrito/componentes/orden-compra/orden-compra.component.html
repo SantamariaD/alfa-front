@@ -1,4 +1,4 @@
-<div class="orden-compra m-b-10">
+<div class="orden-compra m-b-10" id="orden-compra">
   <div class="orden-compra__switch" *ngIf="mostrarSwitch">
     <nz-switch
       (ngModelChange)="switch($event)"
@@ -12,15 +12,31 @@
   <p class="orden-compra--titulo">Orden de compra para {{ proveedor.clave }}</p>
   <div class="orden-compra__inicio">
     <div class="orden-compra__inicio--info">
-      <p>{{ infoEmpresa.nombre }}</p>
-      <p>{{ infoEmpresa.direccion }}</p>
-      <p>{{ infoEmpresa.telefono }}</p>
-      <p>{{ infoEmpresa.correo }}</p>
-      <p>{{ infoEmpresa.sitioWeb }}</p>
+      <strong
+        ><p>{{ infoEmpresa.nombre }}</p></strong
+      >
+      <strong
+        ><p>{{ infoEmpresa.direccion }}</p></strong
+      >
+      <strong
+        ><p>{{ infoEmpresa.telefono }}</p></strong
+      >
+      <strong
+        ><p>{{ infoEmpresa.correo }}</p></strong
+      >
+      <strong
+        ><p>{{ infoEmpresa.sitioWeb }}</p></strong
+      >
     </div>
     <div class="orden-compra__inicio--fecha">
-      <p>Fecha: {{ fecha | date : "dd MMMM yyyy" }}</p>
-      <p *ngIf="numeroOrden > 0">Número de orden: {{ numeroOrden }}</p>
+      <strong
+        ><p>Fecha: {{ fecha | date : "dd MMMM yyyy" }}</p></strong
+      >
+      <strong
+        ><p *ngIf="numeroOrden > 0">
+          Número de orden: {{ numeroOrden }}
+        </p></strong
+      >
     </div>
   </div>
   <div class="orden-compra--info-compra">
@@ -217,14 +233,14 @@
       </div>
     </div>
   </div>
-  <div class="boton-guardar" *ngIf="!editar && mostrarBoton">
-    <button nz-button nzType="primary" (click)="guardarOrden()">
-      Guardar Orden de Compra
-    </button>
-  </div>
-  <div class="boton-guardar" *ngIf="mostrarBotonPdf">
-    <button nz-button nzType="primary" (click)="descargarPdf()">
-      Descargar PDF
-    </button>
-  </div>
+</div>
+<div class="boton-guardar" *ngIf="!editar && mostrarBoton">
+  <button nz-button nzType="primary" (click)="guardarOrden()">
+    Guardar Orden de Compra
+  </button>
+</div>
+<div class="boton-guardar" *ngIf="mostrarBotonPdf">
+  <button nz-button nzType="primary" (click)="descargarPdf()">
+    Descargar PDF
+  </button>
 </div>

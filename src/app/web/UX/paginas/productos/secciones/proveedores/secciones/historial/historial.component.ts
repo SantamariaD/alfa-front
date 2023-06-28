@@ -52,6 +52,11 @@ export class HistorialComponent implements OnInit {
   totalCompras = '';
 
   /**
+   * @variable numeroOrden: Número de orden de compra
+   */
+  numeroOrden = 0;
+
+  /**
    * @variable columnasTabla: Columnas que contiene la tabla
    */
   columnasTabla: Array<ColumnaTabla> = [
@@ -84,6 +89,8 @@ export class HistorialComponent implements OnInit {
     const infoProveedor = this.proveedores.filter(
       (proveedor: Proveedor) => proveedor.id == fila.idProveedor
     )[0];
+
+    this.numeroOrden = fila.id;
     this.proveedorSeleccionado = {
       valor: fila.catalogoProveedor,
       clave: infoProveedor.nombre,

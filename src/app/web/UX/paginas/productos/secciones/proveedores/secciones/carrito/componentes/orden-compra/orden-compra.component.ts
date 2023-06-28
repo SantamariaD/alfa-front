@@ -15,14 +15,8 @@ import {
 } from 'src/app/web/informacion/interface/proveedores';
 import { OrdenCompraService } from 'src/app/web/informacion/servicios/orden-compra/orden-compra.service';
 import { ProductoOrdenCompraService } from 'src/app/web/informacion/servicios/producto-orden-compra/producto-orden-compra.service';
-import {
-  selectOrdenesCompraStore,
-  selectProveedoresStore,
-} from 'src/app/web/informacion/state';
-import {
-  guardarOrdenCompra,
-  guardarOrdenesCompra,
-} from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
+import { selectProveedoresStore } from 'src/app/web/informacion/state';
+import { guardarOrdenCompra } from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
 import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 import {
   CORREO_EMPRESA,
@@ -33,6 +27,9 @@ import {
   SITIO_WEB_EMPRESA,
   TELEFONO_EMPRESA,
 } from 'src/app/web/informacion/utils/variables-globales';
+import jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+
 
 @Component({
   selector: 'app-orden-compra',
@@ -59,6 +56,11 @@ export class OrdenCompraComponent implements OnInit {
    * @Input mostrarBoton: Muestra el boton en la orden
    */
   @Input() mostrarBotonPdf = false;
+
+  /**
+   * @Input numeroOrden: Número de la orden de compra
+   */
+  @Input() numeroOrden = 0;
 
   /**
    * @Output nombreProveedor: emite el nombre del proveedor
@@ -144,14 +146,10 @@ export class OrdenCompraComponent implements OnInit {
   editar = false;
 
   /**
-   * @Varible numeroOrden: Número de la orden de compra
-   */
-  numeroOrden = 0;
-
-  /**
    * @variable switchValue
    */
   switchValue = false;
+
 
   /**
    * @variable idOrdenCompra: contine el id de la orden de compra que se manda a guardar
@@ -192,6 +190,7 @@ export class OrdenCompraComponent implements OnInit {
 
   ngOnInit(): void {
     this.consultarProveedores();
+    console.log(this.proveedorInfo);
   }
 
   /**
@@ -306,7 +305,26 @@ export class OrdenCompraComponent implements OnInit {
    * @Metodo Descarga la orden de compra en formato PDF
    */
   descargarPdf(): void {
-    console.log('PDF');
+    var html = document.getElementById('orden-compra') as any; 
+    const doc = new jspdf('p', 'pt', 'a4');
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+    html2canvas(html, options).then((canvas) => {
+
+      const img = canvas.toDataURL('image/PNG');
+
+      const bufferX = 15;
+      const bufferY = 15;
+      const imgProps = (doc as any).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
+      return doc;
+    }).then((docResult) => {
+      docResult.save(`orden de compra ${this.numeroOrden}.pdf`);
+    });
   }
 
   /**
