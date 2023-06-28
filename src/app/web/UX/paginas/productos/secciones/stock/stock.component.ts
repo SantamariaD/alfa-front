@@ -255,10 +255,11 @@ export class StockComponent implements OnInit {
     this.totalProductos = 0;
     this.datosTabla.map((producto: Producto) => {
       valorProductosVenta +=
-        parseFloat(producto.precioVenta) * producto.cantidadStock;
+        parseFloat(producto.precioVenta.replace('$', '').replace(',', '')) *
+        producto.cantidadStock;
       this.totalProductos += producto.cantidadStock;
       producto.precioVenta = formateoMoneda(
-        parseFloat(producto.precioVenta.replace('$', ''))
+        parseFloat(producto.precioVenta.replace('$', '').replace(',', ''))
       );
       return producto;
     });
