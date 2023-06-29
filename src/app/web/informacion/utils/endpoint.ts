@@ -55,4 +55,7 @@ export const ENDPOINTS = {
   productosOrdenCompra: {
     guardarOrdenCompra: '/productos-ordenes-compra/guardar-producto-orden-compra',
   },
+  calendario: {
+    consultarCalendarioUsuario: '/calendario/consultar-calendario-usuario',
+  },
 };

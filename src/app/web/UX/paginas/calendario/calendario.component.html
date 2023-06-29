@@ -6,13 +6,20 @@
   <div class="calendario">
     <nz-calendar (nzSelectChange)="diaSeleccionado($event)">
       <ul *nzDateCell="let date" class="events">
-        <ng-container [ngSwitch]="date.getDate()">
-          <ng-container *ngSwitchCase="8">
-            <li *ngFor="let item of listDataMap.eight">
-              <nz-badge
-                [nzStatus]="item.type"
-                [nzText]="item.content"
-              ></nz-badge>
+        <ng-container [ngSwitch]="true">
+          <ng-container *ngFor="let keyValuePair of listDataMap | keyvalue">
+            <li *ngFor="let ite of keyValuePair.value">
+              <div (click)="clickFechaGuardada(keyValuePair)">
+                <nz-badge
+                  *ngSwitchCase="
+                    keyValuePair.key == date.getDate() &&
+                    ite.mes == date.getMonth() + 1 &&
+                    ite.ano == date.getFullYear()
+                  "
+                  [nzStatus]="ite.tipo"
+                  [nzText]="ite.contenido"
+                ></nz-badge>
+              </div>
             </li>
           </ng-container>
         </ng-container>
