@@ -1,0 +1,49 @@
+<div class="modal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
+      >&times;</span
+    >
+    <h2 class="modal__contenido--titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span>
+      Agregar tarea al calendario
+    </h2>
+
+    <form class="modal__form" [formGroup]="guardarEvento">
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Prioridad</label>
+          <select class="select" formControlName="tipo">
+            <option value="success">Prioridad baja</option>
+            <option value="warning">Prioridad media</option>
+            <option value="error">Prioridad alta</option>
+          </select>
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Fecha</label>
+          <input nz-input type="date" formControlName="fecha" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Contenido</label>
+          <textarea formControlName="contenido" nz-input rows="2"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <div class="modal__form--boton">
+        <button
+          nz-button
+          nzType="primary"
+          (click)="guardarEventoPeticion()"
+          [disabled]="!guardarEvento.valid"
+        >
+          Guardar tarea
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

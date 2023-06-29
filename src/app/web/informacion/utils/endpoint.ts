@@ -19,7 +19,7 @@ export const ENDPOINTS = {
     eliminarCategorias: '/categorias/eliminar-categoria',
   },
   empleados: {
-    crearEmpleado:'/empleados/guardar-empleado',
+    crearEmpleado: '/empleados/guardar-empleado',
     traerEmpleados: '/empleados/consultar-empleados',
     traerEmpleado: '/empleados/consultar-empleado',
     guardarEmpleado: '/empleados/guardar-empleado',
@@ -53,9 +53,12 @@ export const ENDPOINTS = {
     consultarOrdenesCompra: '/ordenes-compra/consultar-orden-compra',
   },
   productosOrdenCompra: {
-    guardarOrdenCompra: '/productos-ordenes-compra/guardar-producto-orden-compra',
+    guardarOrdenCompra:
+      '/productos-ordenes-compra/guardar-producto-orden-compra',
   },
   calendario: {
     consultarCalendarioUsuario: '/calendario/consultar-calendario-usuario',
+    eliminarEventoCalendario: '/calendario/eliminar-evento-calendario',
+    crearEventoCalendario: '/calendario/crear-evento-calendario',
   },
 };

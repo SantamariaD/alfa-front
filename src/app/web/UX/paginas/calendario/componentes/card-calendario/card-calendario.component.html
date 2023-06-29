@@ -1,0 +1,76 @@
+<div class="modal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
+      >&times;</span
+    >
+    <div class="modal__contenido--eventos">
+      <div class="modal__contenido--eventos__informacion">
+        <div class="modal__contenido--eventos__informacion--titulo">
+          <span
+            class="info"
+            nz-icon
+            nzType="info-circle"
+            nzTheme="outline"
+          ></span>
+          Pendientes por hacer
+        </div>
+        <div
+          [class]="
+            'modal__contenido--eventos__informacion--alerta ' + evento.tipo
+          "
+          *ngFor="let evento of eventosCalendario.value"
+        >
+          <div
+            class="modal__contenido--eventos__informacion--alerta__contenido"
+          >
+            <span
+              [ngClass]="{
+                iconoSuccess: evento.tipo === 'success',
+                iconoWarning: evento.tipo === 'warning',
+                iconoError: evento.tipo === 'error'
+              }"
+              nz-icon
+              nzType="calendar"
+              nzTheme="fill"
+            ></span>
+            {{ evento.contenido }}
+          </div>
+          <div class="modal__contenido--eventos__informacion--alerta__tipo">
+            <p *ngIf="mostrarEvento">{{ tipoEvento[evento.tipo] }}</p>
+            <div
+              *ngIf="eliminarEvento"
+              (click)="eliminarEventoCalendario(evento.id)"
+            >
+              <span
+                class="iconoError cursor-pointer"
+                nz-icon
+                nzType="delete"
+                nzTheme="fill"
+              ></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal__contenido--footer">
+      <div class="modal__contenido--footer__contenedor-iconos">
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono"
+          nz-icon
+          nzType="container"
+          nzTheme="outline"
+          [ngClass]="{ seleccionada: seccionModal === 'informacion' }"
+          (click)="clickInformacion()"
+        ></span>
+        <span
+          class="modal__contenido--footer__contenedor-iconos--icono eliminar"
+          nz-icon
+          nzType="delete"
+          nzTheme="outline"
+          [ngClass]="{ eliminarSelect: seccionModal === 'eliminar' }"
+          (click)="clickEliminar()"
+        ></span>
+      </div>
+    </div>
+  </div>
+</div>

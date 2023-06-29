@@ -4,32 +4,63 @@
   </div>
 
   <div class="calendario">
-    <nz-calendar (nzSelectChange)="diaSeleccionado($event)">
+    <nz-calendar (nzSelectChange)="elementoSeleccionado($event)">
       <ul *nzDateCell="let date" class="events">
         <ng-container [ngSwitch]="true">
           <ng-container *ngFor="let keyValuePair of listDataMap | keyvalue">
-            <li *ngFor="let ite of keyValuePair.value">
-              <div (click)="clickFechaGuardada(keyValuePair)">
+            <div (click)="clickFechaGuardada(keyValuePair)">
+              <li *ngFor="let item of keyValuePair.value">
                 <nz-badge
                   *ngSwitchCase="
                     keyValuePair.key == date.getDate() &&
-                    ite.mes == date.getMonth() + 1 &&
-                    ite.ano == date.getFullYear()
+                    item.mes == date.getMonth() + 1 &&
+                    item.ano == date.getFullYear()
                   "
-                  [nzStatus]="ite.tipo"
-                  [nzText]="ite.contenido"
+                  [nzStatus]="item.tipo"
+                  [nzText]="item.contenido"
                 ></nz-badge>
-              </div>
-            </li>
+              </li>
+            </div>
           </ng-container>
         </ng-container>
       </ul>
-      <ng-container *nzMonthCell="let month">
-        <div *ngIf="getMonthData(month) as monthData" class="notes-month">
-          <section>{{ monthData }}</section>
-          <span>Backlog number</span>
-        </div>
-      </ng-container>
     </nz-calendar>
   </div>
 </div>
+
+<app-card-calendario
+  *ngIf="mostrarCardCalendario"
+  [eventosCalendario]="eventosCalendario"
+  (clickCerrar)="clickCerrarModal()"
+  (clickEliminarEvento)="clickEliminarEvento($event)"
+></app-card-calendario>
+
+<app-card-agregar
+  *ngIf="mostrarAgregar"
+  (clickCerrar)="modalAgregarCerrar()"
+  (clickGuardar)="clickGuardar($event)"
+></app-card-agregar>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Eliminar"
+  nzOkText="Si"
+  nzCancelText="No"
+  (nzOnOk)="handleOk()"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-container *nzModalContent>
+    <p class="contenido">¿Desea eliminar la tarea?</p>
+  </ng-container>
+</nz-modal>
+
+<span
+  class="icono-flotante"
+  nz-icon
+  nzType="calendar"
+  nzTheme="outline"
+  nzTooltipTitle="Agregar tarea"
+  nzTooltipPlacement="leftTop"
+  nz-tooltip
+  (click)="modalAgregar()"
+></span>
