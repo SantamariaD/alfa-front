@@ -28,13 +28,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'solicitudes',
-    loadChildren: () =>
-      import('./web/UX/paginas/solicitudes/solicitudes.module').then(
-        (m) => m.SolicitudesModule
-      ),
-  },
-  {
     path: 'perfil',
     loadChildren: () =>
       import('./web/UX/paginas/perfil/perfil.module').then(

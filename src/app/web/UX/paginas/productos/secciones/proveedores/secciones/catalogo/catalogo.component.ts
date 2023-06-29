@@ -7,7 +7,6 @@ import { finalize, take } from 'rxjs';
 import {
   BotonCarrito,
   CatalogoProveedor,
-  ConsultaOrdenCompra,
 } from 'src/app/web/informacion/interface/catalogo-proveedores';
 import {
   HttpClientServiceInterface,
@@ -25,14 +24,11 @@ import { ProductosService } from 'src/app/web/informacion/servicios/productos/pr
 import { ProveedoresService } from 'src/app/web/informacion/servicios/proveedores/proveedores.service';
 import {
   selectCarrito,
-  selectOrdenesCompraStore,
   selectProductosStore,
   selectProveedoresStore,
 } from 'src/app/web/informacion/state';
 import { guardarProductoCarrito } from 'src/app/web/informacion/state/carrito/carrito.actions';
-import { guardarOrdenesCompra } from 'src/app/web/informacion/state/ordenesCompra/ordenesCompra.actions';
 import {
-  eliminarProductos,
   guardarProductos,
 } from 'src/app/web/informacion/state/productos/productos.actions';
 import {
@@ -41,7 +37,6 @@ import {
   guardarProveedores,
   guardarProveedorSeleccionado,
 } from 'src/app/web/informacion/state/proveedores/proveedores.actions';
-import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-catalogo',

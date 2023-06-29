@@ -23,12 +23,27 @@
       </div>
 
       <div
+        class="modal__contenido--secciones__descargar"
+        *ngIf="seccionModal === 'descargar'"
+      >
+        <p class="modal__contenido--secciones__descargar--titulo">
+          <span
+            class="icono-info"
+            nz-icon
+            nzType="info-circle"
+            nzTheme="outline"
+          ></span>
+          Se descargo correctamente el documento
+        </p>
+      </div>
+
+      <div
         class="modal__contenido--secciones__editar"
         *ngIf="seccionModal === 'eliminar'"
       >
         <app-eliminar
           [documento]="documento"
-          (eliminarProductoEmit)="ActualizaDatos()"
+          (eliminarProductoEmit)="eliminarDocumento()"
         ></app-eliminar>
       </div>
     </div>
@@ -56,9 +71,7 @@
             [ngClass]="{ seleccionada: seccionModal === 'ver' }"
             (click)="clickVer()"
           ></span>
-          <span *ngIf="seccionModal !== 'ver'" class="tooltip"
-            >Mostrar</span
-          >
+          <span *ngIf="seccionModal !== 'ver'" class="tooltip">Mostrar</span>
         </div>
         <div class="icon-container">
           <a
@@ -77,7 +90,8 @@
               nz-icon
               nzType="arrow-down"
               nzTheme="outline"
-              [ngClass]="{ seleccionada: seccionModal === 'agregar' }"
+              [ngClass]="{ seleccionada: seccionModal === 'descargar' }"
+              (click)="seccionDescargar()"
             ></span>
           </a>
           <span class="tooltip">Descargar</span>
@@ -100,6 +114,7 @@
             nz-icon
             nzType="delete"
             nzTheme="outline"
+            [ngClass]="{ seleccionadaEliminar: seccionModal === 'eliminar' }"
           ></span>
           <span class="tooltip">Eliminar</span>
         </div>

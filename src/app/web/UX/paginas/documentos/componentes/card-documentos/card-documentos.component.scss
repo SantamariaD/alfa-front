@@ -17,6 +17,14 @@
     padding: 10px 20px;
     border-radius: 5px;
     position: relative;
+    &--secciones__descargar{
+      height: 100px;
+      &--titulo {
+        width: 95%;
+        margin: 40px;
+        font-size: 22px;
+      }
+    }
     &--cerrar {
       position: absolute;
       top: 0px;
@@ -28,7 +36,7 @@
     &--footer {
       font-size: 20px;
       &__contenedor-iconos {
-        width: 200px;
+        width: 230px;
         margin: 10px auto 0px auto;
         &--icono {
           color: rgb(119, 119, 119);
@@ -39,7 +47,7 @@
           }
         }
       }
-    }
+    } 
   }
 }
 
@@ -53,13 +61,20 @@
 
 .seleccionada {
   color: $color-brand-primary;
+  font-size: 26px;
 }
+
 
 .eliminar {
   color: #dc4c64;
   &:hover {
-    color: #ca0727;
+    color: #df110a;
   }
+}
+
+.seleccionadaEliminar {
+  color: #df110a;
+  font-size: 26px;
 }
 
 .icon-container {

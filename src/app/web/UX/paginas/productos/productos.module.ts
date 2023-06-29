@@ -4,14 +4,12 @@ import { SharedModule } from 'src/app/web/informacion/utils/shared.module';
 import { ProductosRoutingModule } from './productos-routing.module';
 import { ComponentesModule } from '../../componentes/componentes.module';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { ComprasComponent } from './secciones/compras/compras.component';
 import { VentasComponent } from './secciones/ventas/ventas.component';
 import { AnalisisComponent } from './secciones/analisis/analisis.component';
 
 
 @NgModule({
   declarations: [
-    ComprasComponent,
     VentasComponent,
     AnalisisComponent,
   ],
@@ -24,7 +22,6 @@ import { AnalisisComponent } from './secciones/analisis/analisis.component';
     ReactiveFormsModule
   ],
   exports: [
-    ComprasComponent,
     VentasComponent,
     AnalisisComponent,
   ]

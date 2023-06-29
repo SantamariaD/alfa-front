@@ -18,7 +18,7 @@ export class ProveedoresComponent implements OnInit {
   secciones = [
     { texto: 'Información de proveedores', seleccionado: true },
     { texto: 'Historial de compras', seleccionado: false },
-    { texto: 'Catálogo de productos', seleccionado: false },
+    { texto: 'Catálogo de proveedores', seleccionado: false },
     { texto: 'Carrito', seleccionado: false },
   ];
 
@@ -37,7 +37,7 @@ export class ProveedoresComponent implements OnInit {
       case 'Información de proveedores':
         this.router.navigate(['/productos/proveedores/informacion']);
         break;
-      case 'Catálogo de productos':
+      case 'Catálogo de proveedores':
         this.router.navigate(['/productos/proveedores/catalogo']);
         break;
       case 'Historial de compras':
@@ -61,7 +61,7 @@ export class ProveedoresComponent implements OnInit {
         this.secciones = [
           { texto: 'Información de proveedores', seleccionado: true },
           { texto: 'Historial de compras', seleccionado: false },
-          { texto: 'Catálogo de productos', seleccionado: false },
+          { texto: 'Catálogo de proveedores', seleccionado: false },
           { texto: 'Carrito', seleccionado: false },
         ]
         break;
@@ -69,7 +69,7 @@ export class ProveedoresComponent implements OnInit {
         this.secciones = [
           { texto: 'Información de proveedores', seleccionado: false },
           { texto: 'Historial de compras', seleccionado: true },
-          { texto: 'Catálogo de productos', seleccionado: false },
+          { texto: 'Catálogo de proveedores', seleccionado: false },
           { texto: 'Carrito', seleccionado: false },
         ]
         break;
@@ -77,7 +77,7 @@ export class ProveedoresComponent implements OnInit {
         this.secciones = [
           { texto: 'Información de proveedores', seleccionado: false },
           { texto: 'Historial de compras', seleccionado: false },
-          { texto: 'Catálogo de productos', seleccionado: true },
+          { texto: 'Catálogo de proveedores', seleccionado: true },
           { texto: 'Carrito', seleccionado: false },
         ]
         break;
@@ -85,7 +85,7 @@ export class ProveedoresComponent implements OnInit {
         this.secciones = [
           { texto: 'Información de proveedores', seleccionado: false },
           { texto: 'Historial de compras', seleccionado: false },
-          { texto: 'Catálogo de productos', seleccionado: false },
+          { texto: 'Catálogo de proveedores', seleccionado: false },
           { texto: 'Carrito', seleccionado: true },
         ]
         break;
