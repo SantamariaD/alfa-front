@@ -1,92 +1,97 @@
-<div class="contenedor-principal-pagina" nz-row>
+<div class="contenedor-principal-pagina">
+  <app-secciones-cabecera
+    [secciones]="secciones"
+    (seleccionadoClick)="seleccionado($event)"
+  ></app-secciones-cabecera>
 
-  <div class="contInferior" nz-col nzSpan="24">
-    <app-secciones-cabecera
-      [secciones]="secciones"
-      (seleccionadoClick)="seleccionado($event)"
-    ></app-secciones-cabecera>
-    
-  </div>
-  <div *ngIf="estado === 'Información general'" class="contSuper" nz-col nzSpan="8">
-
-    <img src="/assets/imagenes/user.png" alt="Perfil" />
-    <div class="contStatus">
-      <a
-        nz-dropdown
-        [nzDropdownMenu]="menu"
-        [nzClickHide]="false"
-        [(nzVisible)]="openModal"
-      >
-        <span
-          *ngIf="openModal === false"
-          class="fijo"
-          nz-icon
-          [nzType]="claseStatus"
-          [nzTheme]="'twotone'"
-          [nzTwotoneColor]="colorStatus"
-          (click)="selccionar()"
+  <div nz-row>
+    <div
+      *ngIf="estado === 'Información general'"
+      class="contSuper m-t-25"
+      nz-col
+      nzSpan="8"
+    >
+      <img (mouseenter)="onCardHover('perfil')" src="/assets/imagenes/user.png" alt="Perfil" />
+      <div class="contStatus">
+        <a
+          nz-dropdown
+          [nzDropdownMenu]="menu"
+          [nzClickHide]="false"
+          [(nzVisible)]="openModal"
         >
-        </span>
-        <span
-          *ngIf="openModal === true"
-          nz-icon
-          [nzType]="'down-circle'"
-          [nzTheme]="'twotone'"
-          nzTwotoneColor="#001529"
-          (mouseEvent)="selccionar()"
-        >
-        </span>
-      </a>
-    <div  class="editNombre m-t-20 m-r-50" nz-row>
-      <a  nz-col nzSpan="3" nzOffset="6"><span nz-icon nzType="camera" nzTheme="outline"></span></a>
-      <h3 class="m-r-5"  nz-col nzSpan="12">Luis Felipe Juarez Ortega</h3><br>
-      <a  (click)="editInfo()"><span nz-icon nzType="edit" nzTheme="outline"></span></a>
-    </div>
-    </div>
-  </div>
-  <div *ngIf="estado === 'Información general'"  class="info-usuario" nz-col nzSpan="16">
-    <app-info-usuario ></app-info-usuario>
-  
-  </div>
-
-  <div *ngIf="estado === 'Información general'" class="secc-documentos">
-    <span><h1>Documentos<h2>(Completa tu carga de documentos)</h2></h1>
-      </span>
-    <div class="contenedor-cards">
-      <div  class="card-documentos">
-        <span class="text-card">INE</span
-        ><br />
-        <span
-          class="icon-ojo cursor-pointer"
-          nz-icon
-          nzType="eye"
-          nzTheme="outline"
-        ></span>
+          <span
+            *ngIf="openModal === false"
+            class="fijo"
+            nz-icon
+            [nzType]="claseStatus"
+            [nzTheme]="'twotone'"
+            [nzTwotoneColor]="colorStatus"
+            (click)="selccionar()"
+          >
+          </span>
+          <span
+            *ngIf="openModal === true"
+            nz-icon
+            [nzType]="'down-circle'"
+            [nzTheme]="'twotone'"
+            nzTwotoneColor="#001529"
+            (mouseEvent)="selccionar()"
+          >
+          </span>
+        </a>
+        <div class="editNombre m-t-20 m-r-50" nz-row>
+          <div class="icon-container">
+            <span nz-col nzSpan="3" nzOffset="6" nz-icon nzType="camera" nzTheme="outline" style="cursor: pointer;"></span
+          >
+          <span  class="tooltip">Editar Empleado</span>
+          </div>
+          
+          <h3 class="m-r-5" nz-col nzSpan="12">Luis Felipe Juarez Ortega</h3>
+          <br />
         
+        </div>
       </div>
-      
     </div>
 
-  </div>
-  
-  <div nz-col nzSpan="24">
-    <app-usuario-form *ngIf="estado === 'seguridad'"></app-usuario-form>
-    <nz-empty *ngIf="estado === 'acciones'"></nz-empty> 
+    <div class="cards-seleccion"  *ngIf="estado === 'Información general'">
+      <div class="card" (mouseenter)="onCardHover('documentos')">Documentos</div><br>
+      <div class="card" (click)="editInfo()" (mouseenter)="onCardHover('informacion')">Información Personal</div>
+      <div class="card" (mouseenter)="onCardHover('contratos')">Contratos</div>
+    </div>
+
+    <div class="recuadro-info"  *ngIf="estado === 'Información general'">
+      <h3 class="m-t-10" style="text-align: center;"><span nz-icon nzType="question-circle" nzTheme="outline"></span>  Información</h3>
+      <p *ngIf="tipoCard === 'perfil'" class="text-justify">El perfil de usuario te servira para gestionar documentos personales, información, contratos, solicitudes entre otras cosas, podrás cambiar tu contraseña, poder checar tu hora de entrada y de salida, también hacer solicitudes directas al area de recursos humanos a tra ves del apartado de acciones.</p>
+      <p *ngIf="tipoCard === 'informacion'" class="text-justify">En este apartado, podras agregar toda tu información personal y modificarla cuando sea necesario para que siempre este actualizada y disponible para que el área de recursos humanos pueda gestionar tus pagos, trámites y solicitudes sin inconvenientes.</p>
+      <p *ngIf="tipoCard === 'documentos'" class="text-justify">Aqui podrás cargar los documentos que te son solicitados por el área de recursos humanos, para poder formar tu expediente de trabajador y poder brindarte los beneficios a los que te haces acredor al formar parte de esta empresa.</p>
+      <p *ngIf="tipoCard === 'contratos'" class="text-justify">En este apartado vas a poder visualizar tus contratos con la empresa para que siempre puedas consultar la información que se comparte entre ambas partes, asi como las responsabilidades y derechos.</p>
+    </div>
+
+    <div *ngIf="false" class="info-usuario" nz-col nzSpan="16">
+      <app-info-usuario></app-info-usuario>
+    </div>
+
+    <div nz-col nzSpan="24">
+      <app-usuario-form *ngIf="estado === 'seguridad'"></app-usuario-form>
+      <nz-empty *ngIf="estado === 'acciones'"></nz-empty>
+    </div>
   </div>
 </div>
 
 <nz-modal
-      [(nzVisible)]="isVisible"
-      nzTitle="Editar Información"
-      (nzOnCancel)="cancelar()"
-      nzWidth="80%"
-      [nzBodyStyle]="{ 'height': '900px' }"
-      [nzStyle]="{ 'top': '5%'}"
-    >
-      <ng-container *nzModalContent class="contenedor-form-info">
-        <app-domicilio-form (setCancelar)="recibeCancelar($event)"></app-domicilio-form>
-      </ng-container>
-    </nz-modal>
+  [(nzVisible)]="isVisible"
+  nzTitle="Editar Información"
+  (nzOnCancel)="cancelar()"
+  nzWidth="80%"
+  [nzBodyStyle]="{ height: '900px' }"
+  [nzStyle]="{ top: '5%' }"
+>
+  <ng-container *nzModalContent class="contenedor-form-info">
+    <app-domicilio-form
+      (setCancelar)="recibeCancelar($event)"
+    ></app-domicilio-form>
+  </ng-container>
+</nz-modal>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul class="m-t-10" nz-menu nzSelectable>

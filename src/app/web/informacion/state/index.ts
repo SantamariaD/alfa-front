@@ -9,6 +9,7 @@ import * as fromCarrito from './carrito/carrito.reducer';
 import * as fromAreas from './areas/areas.reducer';
 import * as fromProductos from './productos/productos.reducer';
 import * as fromProveedores from './proveedores/proveedores.reducer';
+import * as fromEmpleados from './empleados/empleados.reducer';
 import * as fromOrdenesCompra from './ordenesCompra/ordenesCompra.reducer';
 import * as fromCategorias from './categorias/categorias.reducer';
 import { UsuarioInterface } from '../interface/usuario';
@@ -21,6 +22,7 @@ import { Area } from '../interface/areas';
 import { Producto } from '../interface/productos';
 import { ProveedoresStore } from '../interface/proveedores';
 import { Categoria } from '../interface/categorias';
+import { EmpleadosStore } from '../interface/empleados';
 
 export interface AppState {
   usuario: UsuarioInterface;
@@ -30,6 +32,7 @@ export interface AppState {
   categorias: Array<Categoria>;
   productos: Array<Producto>;
   proveedores: ProveedoresStore;
+  empleados: EmpleadosStore
   ordenesCompra: Array<ConsultaOrdenCompra>;
 }
 
@@ -40,6 +43,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   areas: fromAreas.reducer,
   productos: fromProductos.reducer,
   proveedores: fromProveedores.reducer,
+  empleados: fromEmpleados.reducer,
   ordenesCompra: fromOrdenesCompra.reducer,
   categorias: fromCategorias.reducer,
 };
@@ -71,9 +75,13 @@ export const selectAreas = createFeatureSelector<Array<Area>>('areas');
 export const selectProductos =
   createFeatureSelector<Array<Producto>>('productos');
 
-//Proveedores
+//Empleados
+export const selectEmpleados =
+  createFeatureSelector<EmpleadosStore>('empleados');
+
+  //Proveedores
 export const selectProveedores =
-  createFeatureSelector<ProveedoresStore>('proveedores');
+createFeatureSelector<ProveedoresStore>('proveedores');
 
 //Proveedores
 export const selectOrdenesCompra =
@@ -116,6 +124,12 @@ export const selectAreasGuardadas = createSelector(
 export const selectProductosStore = createSelector(
   selectProductos,
   (state: Array<Producto>) => state
+);
+
+// Empleados
+export const selectEmpleadosStore = createSelector(
+  selectEmpleados,
+  (state: EmpleadosStore) => state
 );
 
 // Proveedores

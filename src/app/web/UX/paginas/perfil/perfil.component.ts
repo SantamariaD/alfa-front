@@ -19,6 +19,11 @@ estado:string ='Información general';
   isVisible:boolean = false;
   pantalla:string='';
 
+  /**
+   *@Vaiable tipoCard: esta variable almacena el nombre de la card que muestra la info en el recuadro de información
+   */
+   tipoCard = 'perfil';
+
     secciones = [
     { texto: 'Información General', seleccionado: true },
     { texto: 'Seguridad', seleccionado: false },
@@ -81,6 +86,10 @@ estado:string ='Información general';
 
   cancelar(){
     this.isVisible = false;
+  }
+
+  onCardHover(identificador:string){
+this.tipoCard = identificador;
   }
 
 }
