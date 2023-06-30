@@ -85,6 +85,13 @@ export class CardDocumentosComponent implements OnInit {
   }
 
   /**
+   * @Modal Muestra la sección de descargar documento
+   */
+  seccionDescargar(): void {
+    this.seccionModal = 'descargar';
+  }
+
+  /**
    * @Metodo cambia a la seccion informacion
    */
   clickInformacion(): void {
@@ -112,5 +119,9 @@ export class CardDocumentosComponent implements OnInit {
   clickCerrarModal(): void {
     this.clickCerrar.emit(false);
     this.seccionModal = 'informacion';
+  }
+
+  eliminarDocumento(): void {
+    this.seccionModal = 'eliminar';
   }
 }

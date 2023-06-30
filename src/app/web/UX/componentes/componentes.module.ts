@@ -9,7 +9,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FeedbackModule } from './feedback/feedback.module';
 import { QuillModule } from 'ngx-quill';
 import { DocumentosRoutingModule } from '../paginas/documentos/documentos-routing.module';
-import { SolicitudesRoutingModule } from '../paginas/solicitudes/solicitudes-routing.module';
 import { IconoArchivoComponent } from './icono-archivo/icono-archivo.component';
 import { TablaComponent } from './tabla/tabla.component';
 import { CurrencyPipe } from './pipes/currencyPipe/currency.pipe';
@@ -35,7 +34,6 @@ import { VisorPdfComponent } from './visor-pdf/visor-pdf.component';
     ReactiveFormsModule,
     QuillModule,
     DocumentosRoutingModule,
-    SolicitudesRoutingModule,
     PdfViewerModule
   ],
   exports: [

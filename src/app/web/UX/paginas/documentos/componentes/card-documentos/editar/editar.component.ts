@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { finalize } from 'rxjs';
 import { Area } from 'src/app/web/informacion/interface/areas';
 import { Documento } from 'src/app/web/informacion/interface/documentos';
@@ -58,7 +59,10 @@ export class EditarComponent implements OnInit {
     uuid: new FormControl(''),
   });
 
-  constructor(private documentosService: DocumentosService) {}
+  constructor(
+    private documentosService: DocumentosService,
+    private message: NzMessageService
+  ) {}
 
   ngOnInit(): void {
     this.modalModificarArchivo(this.documento);
@@ -116,6 +120,10 @@ export class EditarComponent implements OnInit {
             documento.posicion,
             1,
             respuestaActualizar.payload
+          );
+          this.message.create(
+            'success',
+            `Se actualizó correctamente el documento`
           );
         }
       );

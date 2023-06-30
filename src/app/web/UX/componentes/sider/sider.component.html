@@ -37,58 +37,6 @@
           <span>Documentos</span>
         </li>
       </ul>
-      <li nz-submenu nzOpen nzTitle="Solicitudes" nzIcon="solution">
-        <ul>
-          <li nz-menu-item routerLink="/solicitudes/cartas">
-            <a>Cartas</a>
-          </li>
-          <li nz-menu-item routerLink="/solicitudes/vacaciones">
-            <a>Vacaciones</a>
-          </li>
-          <li nz-menu-item routerLink="/solicitudes/viaticos">
-            <a>Viaticos</a>
-          </li>
-          <li nz-menu-item routerLink="/solicitudes/compras">
-            <a>Compras</a>
-          </li>
-          <li nz-menu-item routerLink="/solicitudes/tickets">
-            <a>Tickets</a>
-          </li>
-        </ul>
-      </li>
-      <ul
-        nz-menu
-        nzMode="inline"
-        nzTheme="dark"
-        [nzInlineCollapsed]="isCollapsed"
-        routerLink="/calendario"
-      >
-        <li
-          nz-menu-item
-          nz-tooltip
-          nzTooltipPlacement="right"
-          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
-        >
-          <span nz-icon nzType="calendar"></span>
-          <span>Calendario</span>
-        </li>
-      </ul>
-      <ul
-        nz-menu
-        nzMode="inline"
-        nzTheme="dark"
-        [nzInlineCollapsed]="isCollapsed"
-      >
-        <li
-          nz-menu-item
-          nz-tooltip
-          nzTooltipPlacement="right"
-          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
-        >
-          <span nz-icon nzType="contacts"></span>
-          <span>Directorio</span>
-        </li>
-      </ul>
       <ul
         nz-menu
         nzMode="inline"
@@ -106,25 +54,91 @@
           <span>Empleados</span>
         </li>
       </ul>
-      <li nz-submenu nzOpen nzTitle="Productos" nzIcon="shop">
-        <ul>
-          <li nz-menu-item routerLink="/productos/stock">
-            <a>Stock</a>
-          </li>
-          <li nz-menu-item routerLink="/productos/proveedores/informacion">
-            <a>Proveedores</a>
-          </li>
-          <li nz-menu-item routerLink="/productos/compras">
-            <a>Compras</a>
-          </li>
-          <li nz-menu-item routerLink="/productos/ventas">
-            <a>Ventas</a>
-          </li>
-          <li nz-menu-item routerLink="/productos/analisis">
-            <a>Análisis</a>
-          </li>
-        </ul>
-      </li>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/stock"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="group"></span>
+          <span>Stock</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/proveedores/informacion"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="team"></span>
+          <span>Provedores</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/ventas"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="dollar"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="dollar"></span>
+          <span>Ventas</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/analisis"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="area-chart"></span>
+          <span>Analisis</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/calendario"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="calendar"></span>
+          <span>Calendario</span>
+        </li>
+      </ul>
     </ul>
   </div>
 </nz-sider>

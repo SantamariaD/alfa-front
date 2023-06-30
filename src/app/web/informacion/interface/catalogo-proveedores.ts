@@ -24,6 +24,8 @@ export interface ClaveValor {
   clave: string;
   idProveedor: number;
   valor: Array<CatalogoProveedor>;
+  representante?: string;
+  instruccionEspecial?: string;
 }
 
 export interface OrdenCompraInfo {

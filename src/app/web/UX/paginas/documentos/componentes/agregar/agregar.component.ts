@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Area } from 'src/app/web/informacion/interface/areas';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { AreasService } from 'src/app/web/informacion/servicios/areas/areas.service';
@@ -47,9 +48,12 @@ export class AgregarComponent implements OnInit {
     file0: new FormControl(''),
   });
 
-  constructor(private documentosService: DocumentosService) {}
+  constructor(
+    private documentosService: DocumentosService,
+    private message: NzMessageService
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   /**
    * @Metodo cierra el modal
@@ -71,7 +75,6 @@ export class AgregarComponent implements OnInit {
       area,
       id_area: parseInt(this.documentoForm.value.id_area),
     });
-    console.log(this.documentoForm.value);
 
     this.documentoFormData.append('file0', this.documentoForm.value.file0);
     this.documentoFormData.append('area', this.documentoForm.value.area);
@@ -84,6 +87,7 @@ export class AgregarComponent implements OnInit {
 
     this.documentosService.guardarDocumento(this.documentoFormData).subscribe({
       next: () => this.clickGuardarDocumento.emit(),
+      error: (error) => console.log(error),
     });
   }
 

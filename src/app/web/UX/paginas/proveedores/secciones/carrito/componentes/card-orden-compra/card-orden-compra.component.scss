@@ -1,4 +1,4 @@
-@import "../../../../../../../styles.scss";
+@import "../../../../../../../../../styles.scss";
 
 .modal {
   position: fixed;
@@ -12,19 +12,12 @@
   align-items: center;
   z-index: 9999;
   &__contenido {
-    width: 700px;
+    width: 900px;
     background-color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
     position: relative;
-    &--secciones__descargar{
-      height: 100px;
-      &--titulo {
-        width: 95%;
-        margin: 40px;
-        font-size: 22px;
-      }
-    }
+    z-index: 10000;
     &--cerrar {
       position: absolute;
       top: 0px;
@@ -35,24 +28,23 @@
     }
     &--footer {
       font-size: 20px;
+
       &__contenedor-iconos {
-        width: 230px;
+        width: 160px;
         margin: 10px auto 0px auto;
+
         &--icono {
           color: rgb(119, 119, 119);
           margin-right: 20px;
           cursor: pointer;
+
           &:hover {
             color: $color-brand-primary;
           }
         }
       }
-    } 
+    }
   }
-}
-
-.icono-info {
-  color: #3b71ca;
 }
 
 .no-seleccionada {
@@ -61,44 +53,26 @@
 
 .seleccionada {
   color: $color-brand-primary;
-  font-size: 26px;
 }
-
 
 .eliminar {
   color: #dc4c64;
   &:hover {
-    color: #df110a;
+    color: #ca0727;
   }
 }
 
-.seleccionadaEliminar {
-  color: #df110a;
-  font-size: 26px;
+.eliminarSelect {
+  color: #ca0727;
 }
 
-.icon-container {
-  position: relative;
-  display: inline-block;
+.icono-info {
+  color: #3b71ca;
+  font-size: 22px;
 }
 
-.tooltip {
-  position: absolute;
-  bottom: calc(100% + 5px); /* Ajusta la posición vertical del tooltip */
-  left: 50%; /* Ajusta la posición horizontal del tooltip */
-  transform: translateX(-50%); /* Centra el tooltip horizontalmente */
-  background-color: #000;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+.contenido-ordenes {
+  height: 550px;
+  overflow-y: auto;
+  margin-top: 20px;
 }
-
-.icon-container:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
-}
-
