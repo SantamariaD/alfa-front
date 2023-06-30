@@ -335,7 +335,8 @@ export class OrdenCompraComponent implements OnInit {
         this.descuentoFormat = formateoMoneda(this.descuento);
 
         this.ordenCompraInfo = {
-          representanteVendedor: this.proveedorInfo.representante,
+          representanteVendedor:
+            this.proveedor.representante || 'Sin representante',
           telefonoVendedor: this.proveedorInfo.telefono,
           correoVendedor: this.proveedorInfo.correo,
           direccionVendedor: this.proveedorInfo.domicilio,
@@ -343,11 +344,12 @@ export class OrdenCompraComponent implements OnInit {
           telefonoComprador: TELEFONO_EMPRESA,
           correoComprador: CORREO_EMPRESA,
           direccionComprador: DIRECCION_EMPRESA,
-          instruccionEspecial: '',
+          instruccionEspecial: this.proveedor.instruccionEspecial || '',
         };
         this.ordenForm.patchValue({
           idProveedor: this.proveedor.idProveedor,
-          representanteVendedor: this.proveedorInfo.representante,
+          representanteVendedor:
+            this.proveedor.representante || 'Sin representante',
           telefonoVendedor: this.proveedorInfo.telefono,
           correoVendedor: this.proveedorInfo.correo,
           direccionVendedor: this.proveedorInfo.domicilio,
@@ -355,7 +357,7 @@ export class OrdenCompraComponent implements OnInit {
           telefonoComprador: TELEFONO_EMPRESA,
           correoComprador: CORREO_EMPRESA,
           direccionComprador: DIRECCION_EMPRESA,
-          instruccionEspecial: '',
+          instruccionEspecial: this.proveedor.instruccionEspecial || '',
           subtotal: this.subtotal,
           descuento: this.descuento,
           otros: this.otros,

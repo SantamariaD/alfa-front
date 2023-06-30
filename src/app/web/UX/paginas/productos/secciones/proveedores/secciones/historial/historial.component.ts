@@ -95,6 +95,8 @@ export class HistorialComponent implements OnInit {
       valor: fila.catalogoProveedor,
       clave: infoProveedor.nombre,
       idProveedor: infoProveedor.id,
+      representante: fila.representanteVendedor,
+      instruccionEspecial: fila.instruccionEspecial
     };
     this.mostrarOrdenModal = true;
   }
