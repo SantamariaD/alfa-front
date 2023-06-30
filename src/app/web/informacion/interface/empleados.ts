@@ -24,3 +24,9 @@ export interface Empleados {
   baja:number;
   fecha_reingreso:string;
 }
+
+export interface EmpleadosStore {
+  Empleados: Array<Empleados>;
+  proveedorSeleccionado: Empleados;
+}
+
