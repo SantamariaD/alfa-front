@@ -93,6 +93,23 @@
         nzMode="inline"
         nzTheme="dark"
         [nzInlineCollapsed]="isCollapsed"
+        routerLink="/sucursales"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="shop"></span>
+          <span>Sucursales</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
         routerLink="/ventas"
       >
         <li

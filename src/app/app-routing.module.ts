@@ -56,6 +56,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'sucursales',
+    loadChildren: () =>
+      import('./web/UX/paginas/sucursales/sucursales.module').then(
+        (m) => m.SucursalesModule
+      ),
+  },
+  {
     path: 'ventas',
     loadChildren: () =>
       import('./web/UX/paginas/ventas/ventas.module').then(
