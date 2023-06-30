@@ -6,7 +6,7 @@ import { LoginComponent } from './web/UX/paginas/login/login.component';
 import { PaginaErrorComponent } from './web/UX/paginas/pagina-error/pagina-error.component';
 import { RegistroComponent } from './web/UX/paginas/registro/registro.component';
 import { CalendarioComponent } from './web/UX/paginas/calendario/calendario.component';
-import { EmpleadosModule } from './web/UX/paginas/empleados/empleados.module'
+import { EmpleadosModule } from './web/UX/paginas/empleados/empleados.module';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -35,10 +35,31 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'productos',
+    path: 'stock',
     loadChildren: () =>
-      import('./web/UX/paginas/productos/productos.module').then(
-        (m) => m.ProductosModule
+      import('./web/UX/paginas/stock/stock.module').then(
+        (m) => m.StockModule
+      ),
+  },
+  {
+    path: 'proveedores',
+    loadChildren: () =>
+      import('./web/UX/paginas/proveedores/proveedores.module').then(
+        (m) => m.ProveedoresModule
+      ),
+  },
+  {
+    path: 'analisis',
+    loadChildren: () =>
+      import('./web/UX/paginas/analisis/analisis.module').then(
+        (m) => m.AnalisisModule
+      ),
+  },
+  {
+    path: 'ventas',
+    loadChildren: () =>
+      import('./web/UX/paginas/ventas/ventas.module').then(
+        (m) => m.VentasModule
       ),
   },
   {

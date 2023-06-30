@@ -1,4 +1,4 @@
-@import "../../../../../../../../../../../styles.scss";
+@import "../../../../../../../../../styles.scss";
 
 .modal {
   position: fixed;
@@ -12,7 +12,7 @@
   align-items: center;
   z-index: 9999;
   &__contenido {
-    width: 900px;
+    width: 700px;
     background-color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
@@ -53,6 +53,7 @@
 
 .seleccionada {
   color: $color-brand-primary;
+  font-size: 26px;
 }
 
 .eliminar {
@@ -64,15 +65,10 @@
 
 .eliminarSelect {
   color: #ca0727;
+  font-size: 26px;
 }
 
 .icono-info {
   color: #3b71ca;
   font-size: 22px;
-}
-
-.contenido-ordenes {
-  height: 550px;
-  overflow-y: auto;
-  margin-top: 20px;
 }

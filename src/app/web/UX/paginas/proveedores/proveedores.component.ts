@@ -35,16 +35,16 @@ export class ProveedoresComponent implements OnInit {
     this.seccion = seccion;
     switch (seccion) {
       case 'Información de proveedores':
-        this.router.navigate(['/productos/proveedores/informacion']);
+        this.router.navigate(['/proveedores/informacion']);
         break;
       case 'Catálogo de proveedores':
-        this.router.navigate(['/productos/proveedores/catalogo']);
+        this.router.navigate(['/proveedores/catalogo']);
         break;
       case 'Historial de compras':
-        this.router.navigate(['/productos/proveedores/historial']);
+        this.router.navigate(['/proveedores/historial']);
         break;
       case 'Carrito':
-        this.router.navigate(['/productos/proveedores/carrito']);
+        this.router.navigate(['/proveedores/carrito']);
         break;
     }
   }
@@ -54,7 +54,7 @@ export class ProveedoresComponent implements OnInit {
    */
   private seteoTabs(): void {
     const ruta = this.router.url;
-    const seccion = ruta.split('/')[3];
+    const seccion = ruta.split('/')[2];
 
     switch (seccion) {
       case 'informacion':
