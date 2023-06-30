@@ -1,0 +1,63 @@
+<div class="modal">
+  <div class="modal__contenido">
+    <span class="modal__contenido--cerrar" (click)="cerrarModal()"
+      >&times;</span
+    >
+    <h2 class="modal__contenido--titulo">
+      <span
+        class="icono-info"
+        nz-icon
+        nzType="info-circle"
+        nzTheme="outline"
+      ></span>
+      Agregar producto
+    </h2>
+
+    <form class="modal__form" [formGroup]="agregarForm">
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Nombre de la Sucursal</label>
+          <input nz-input type="text" formControlName="nombreSucursal" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Responsable de sucursal</label>
+          <select class="select" formControlName="idEncargado">
+            <option [value]="53">Juan Gómez López</option>
+          </select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Teléfono</label>
+          <input nz-input type="text" formControlName="telefono" />
+        </nz-form-control>
+        <nz-form-control>
+          <label class="label">Correo</label>
+          <input nz-input type="text" formControlName="correo" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Horario de atención</label>
+          <input nz-input formControlName="horarioAtencion" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form">
+        <nz-form-control>
+          <label class="label">Domicilio</label>
+          <textarea rows="2" nz-input formControlName="domicilio"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <div class="modal__form--boton">
+        <button
+          nz-button
+          nzType="primary"
+          [disabled]="!agregarForm.valid"
+          (click)="guardarSucursal()"
+        >
+          Guardar Sucursal
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

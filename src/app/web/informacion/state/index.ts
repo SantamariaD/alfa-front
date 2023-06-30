@@ -11,6 +11,7 @@ import * as fromProductos from './productos/productos.reducer';
 import * as fromProveedores from './proveedores/proveedores.reducer';
 import * as fromOrdenesCompra from './ordenesCompra/ordenesCompra.reducer';
 import * as fromCategorias from './categorias/categorias.reducer';
+import * as fromSucursales from './sucursales/sucursales.reducer';
 import { UsuarioInterface } from '../interface/usuario';
 import { CargandoPeticionInterface } from '../interface/httpService';
 import {
@@ -21,6 +22,7 @@ import { Area } from '../interface/areas';
 import { Producto } from '../interface/productos';
 import { ProveedoresStore } from '../interface/proveedores';
 import { Categoria } from '../interface/categorias';
+import { ConsultaSucursales } from '../interface/sucursales';
 
 export interface AppState {
   usuario: UsuarioInterface;
@@ -31,6 +33,7 @@ export interface AppState {
   productos: Array<Producto>;
   proveedores: ProveedoresStore;
   ordenesCompra: Array<ConsultaOrdenCompra>;
+  sucursales: Array<ConsultaSucursales>;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -42,6 +45,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   proveedores: fromProveedores.reducer,
   ordenesCompra: fromOrdenesCompra.reducer,
   categorias: fromCategorias.reducer,
+  sucursales: fromSucursales.reducer,
 };
 
 //*********SELECTORES******/
@@ -75,13 +79,17 @@ export const selectProductos =
 export const selectProveedores =
   createFeatureSelector<ProveedoresStore>('proveedores');
 
-//Proveedores
+//ordenes de compra
 export const selectOrdenesCompra =
   createFeatureSelector<Array<ConsultaOrdenCompra>>('ordenesCompra');
 
-//Proveedores
+//Categoria
 export const selectCategorias =
   createFeatureSelector<Array<Categoria>>('categorias');
+
+//Sucursales
+export const selectSucursales =
+  createFeatureSelector<Array<ConsultaSucursales>>('sucursales');
 
 //****** Creando selectores*****/
 export const selectBanderaCargandoPeticion = createSelector(
@@ -134,4 +142,10 @@ export const selectOrdenesCompraStore = createSelector(
 export const selectCategoriasStore = createSelector(
   selectCategorias,
   (state: Array<Categoria>) => state
+);
+
+// Sucursale
+export const selectSucursalesStore = createSelector(
+  selectSucursales,
+  (state: Array<ConsultaSucursales>) => state
 );

@@ -1,0 +1,54 @@
+<div class="editar">
+  <h2 class="editar__titulo">
+    <span
+      class="icono-info"
+      nz-icon
+      nzType="info-circle"
+      nzTheme="outline"
+    ></span
+    >Editar Sucursal
+  </h2>
+  <form class="editar__form" [formGroup]="editarForm">
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Nombre de la sucursal</label>
+        <input
+          nz-input
+          type="text"
+          formControlName="nombreSucursal"
+        />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Responsable de la sucursal</label>
+        <input nz-input type="text" formControlName="nombreEncargado" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Horario de atención</label>
+        <input nz-input formControlName="horarioAtencion" />
+      </nz-form-control>
+      <nz-form-control>
+        <label class="label">Teléfono</label>
+        <input nz-input type="text" formControlName="telefono" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form--seccion">
+      <nz-form-control>
+        <label class="label">Correo</label>
+        <input nz-input type="text" formControlName="correo" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="editar__form">
+      <nz-form-control>
+        <label class="label">Domicilio</label>
+        <textarea rows="2" nz-input formControlName="domicilio"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="editar__form--boton" (click)="actualizarProducto()">
+      <button nz-button nzType="primary" [disabled]="!editarForm.dirty">
+        Actualizar Sucursal
+      </button>
+    </div>
+  </form>
+</div>

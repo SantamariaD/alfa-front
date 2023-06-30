@@ -61,4 +61,10 @@ export const ENDPOINTS = {
     eliminarEventoCalendario: '/calendario/eliminar-evento-calendario',
     crearEventoCalendario: '/calendario/crear-evento-calendario',
   },
+  sucursales: {
+    consultarSucursales: '/sucursales/consultar-sucursales',
+    eliminarScursal: '/sucursales/eliminar-sucursal',
+    crearScursal: '/sucursales/crear-sucursal',
+    actualizarScursal: '/sucursales/actualizar-sucursal',
+  },
 };

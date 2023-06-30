@@ -1,0 +1,63 @@
+<div class="informacion">
+  <h2 class="informacion--titulo">
+    <span
+      class="icono-info"
+      nz-icon
+      nzType="info-circle"
+      nzTheme="outline"
+    ></span>
+    Información de la sucursal
+  </h2>
+  <div class="informacion--imagen-icono">
+    <span
+      class="informacion--imagen-icono--icono"
+      nz-icon
+      nzType="shop"
+    ></span>
+  </div>
+  <div class="informacion--datos">
+    <h4 class="informacion--datos__nombre">{{ sucursal.nombreSucursal }}</h4>
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock-">
+        <p class="informacion--descripcion--info-stock--llave">
+          Responsable de la sucursal:
+        </p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ sucursal.nombreEncargado }}
+          {{ sucursal.apellidoPaternoEncargado }}
+          {{ sucursal.apellidoMaternoEncargado }}
+        </p>
+      </div>
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">
+          Horario de atención:
+        </p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ sucursal.horarioAtencion }}
+        </p>
+      </div>
+    </div>
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">Teléfono:</p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ sucursal.telefono }}
+        </p>
+      </div>
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">Correo:</p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ sucursal.correo }}
+        </p>
+      </div>
+    </div>
+    <div class="informacion-">
+      <div class="informacion--info-stock-">
+        <p class="informacion--info-stock--llave">Domicilio:</p>
+        <p class="informacion--info-stock--descripcion">
+          {{ sucursal.domicilio }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
