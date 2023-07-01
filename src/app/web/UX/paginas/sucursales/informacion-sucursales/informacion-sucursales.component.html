@@ -1,0 +1,45 @@
+<div class="sucursales">
+  <div class="sucursales__descripcion">
+    <div class="sucursales__descripcion--info-stock">
+      <p class="sucursales__descripcion--info-stock--llave">
+        Total de sucursales:
+      </p>
+      <p class="sucursales__descripcion--info-stock--valor">
+        {{ datosTabla.length }}
+      </p>
+    </div>
+  </div>
+  <app-tabla
+    [columnasTabla]="columnasTabla"
+    [filasTabla]="datosTabla"
+    [filasBusqueda]="datosTabla"
+    (clickFila)="clickFila($event)"
+  ></app-tabla>
+</div>
+
+<app-card-sucursales
+  *ngIf="mostrarCardSucursal"
+  [sucursal]="sucursal"
+  [empleados]="empleados"
+  (clickCerrar)="clickCerrarModal($event)"
+  (actualizarSucursalEmit)="actualizarSucursal($event)"
+  (eliminarSucursalEmit)="eliminarSucursal($event)"
+></app-card-sucursales>
+
+<app-agregar-sucursales
+  *ngIf="mostrarAgregarSucursal"
+  [empleados]="empleados"
+  (clickCerrar)="clickCerrarModalAgregar()"
+  (clickGuardarProducto)="guardarSucursal($event)"
+></app-agregar-sucursales>
+
+<span
+  class="icono-flotante"
+  nz-icon
+  nzType="shopping"
+  nzTheme="outline"
+  nzTooltipTitle="Agregar producto"
+  nzTooltipPlacement="leftTop"
+  nz-tooltip
+  (click)="agregarSucursal()"
+></span>

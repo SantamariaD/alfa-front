@@ -10,6 +10,7 @@ import { AgregarSucursalesComponent } from './componentes/agregar-sucursales/agr
 import { EditarComponent } from './componentes/card-sucursales/editar/editar.component';
 import { EliminarComponent } from './componentes/card-sucursales/eliminar/eliminar.component';
 import { InformacionComponent } from './componentes/card-sucursales/informacion/informacion.component';
+import { InformacionSucursalesComponent } from './informacion-sucursales/informacion-sucursales.component';
 
 
 
@@ -20,7 +21,8 @@ import { InformacionComponent } from './componentes/card-sucursales/informacion/
     AgregarSucursalesComponent,
     EditarComponent,
     EliminarComponent,
-    InformacionComponent
+    InformacionComponent,
+    InformacionSucursalesComponent
   ],
   imports: [
     CommonModule,

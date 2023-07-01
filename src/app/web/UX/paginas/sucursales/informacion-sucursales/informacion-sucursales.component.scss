@@ -1,0 +1,45 @@
+@import "../../../../../../styles.scss";
+
+.sucursales {
+  width: 100%;
+  margin: 20px auto;
+  &__secciones-cabecera {
+    margin-bottom: 30px;
+  }
+  &__descripcion {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+    margin: auto;
+    margin-bottom: 15px;
+    &--info-stock {
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid rgb(231, 231, 231);
+      &--llave {
+        background: rgb(243, 243, 243);
+        color: black;
+        padding: 10px;
+        width: 100%;
+      }
+      &--valor {
+        width: 100%;
+        margin: auto;
+        text-align: center;
+      }
+    }
+  }
+  &__botones {
+    width: 550px;
+    margin: 20px auto;
+    &--boton {
+      margin-right: 7px;
+      width: 250px;
+      height: 40px;
+      &:hover {
+        background-color: $color-brand-primary;
+        color: white;
+      }
+    }
+  }
+}
