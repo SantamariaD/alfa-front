@@ -34,7 +34,7 @@ export class StockComponent implements OnInit {
   /**
    * @variable valorProductosVenta: Valor total de todos los productos vendidos del stock
    */
-  valorProductosVenta = '';
+  valorProductosVenta = 0;
 
   /**
    * @variable secciones: Contiene las secciones de la página
@@ -251,18 +251,12 @@ export class StockComponent implements OnInit {
    * @Metodo Realiza las operaciones para la información general del stock
    */
   private informacionStock(): void {
-    let valorProductosVenta = 0;
     this.totalProductos = 0;
-    this.datosTabla.map((producto: Producto) => {
-      valorProductosVenta +=
-        parseFloat(producto.precioVenta.replace('$', '').replace(',', '')) *
-        producto.cantidadStock;
-      this.totalProductos += producto.cantidadStock;
-      producto.precioVenta = formateoMoneda(
-        parseFloat(producto.precioVenta.replace('$', '').replace(',', ''))
-      );
-      return producto;
-    });
-    this.valorProductosVenta = formateoMoneda(valorProductosVenta);
+    this.datosTabla.map(
+      (producto: Producto) => {
+        this.totalProductos += producto.cantidadStock
+        this.valorProductosVenta += producto.comprasTotales
+      }
+    );
   }
 }

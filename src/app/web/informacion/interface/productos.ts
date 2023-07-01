@@ -6,11 +6,7 @@ export interface Producto {
   codigoBarras: string;
   sku: string;
   categoria: string;
-  proveedor: string;
-  precioVenta: string;
   cantidadStock: number;
-  ventas?: number;
-  fechaCompra: string;
-  imagen?: string;
+  comprasTotales: number;
   agotado?: boolean;
 }

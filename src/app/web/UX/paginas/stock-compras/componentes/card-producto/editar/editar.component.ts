@@ -42,11 +42,10 @@ export class EditarComponent implements OnInit {
     cantidadStock: new FormControl(''),
     codigoBarras: new FormControl(''),
     descripcion: new FormControl(''),
-    fechaCompra: new FormControl(''),
     precioVenta: new FormControl(''),
     proveedor: new FormControl(''),
     sku: new FormControl(''),
-    ventas: new FormControl(''),
+    comprasTotales: new FormControl(''),
   });
 
   /**
@@ -64,12 +63,9 @@ export class EditarComponent implements OnInit {
       cantidadStock: this.producto.cantidadStock,
       codigoBarras: this.producto.codigoBarras,
       descripcion: this.producto.descripcion,
-      fechaCompra: this.producto.fechaCompra,
-      precioVenta: this.producto.precioVenta,
-      proveedor: this.producto.proveedor,
       sku: this.producto.sku,
       agotado: this.producto.agotado,
-      ventas: this.producto.ventas,
+      comprasTotales: this.producto.comprasTotales,
     });
   }
 

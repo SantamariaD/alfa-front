@@ -8,14 +8,11 @@
     ></span>
     Información del producto
   </h2>
-  <div *ngIf="producto.imagen" class="informacion--imagen">
-    <img [src]="producto.imagen" alt="" />
-  </div>
-  <div *ngIf="!producto.imagen" class="informacion--imagen-icono">
+  <div class="informacion--imagen-icono">
     <span
       class="informacion--imagen-icono--icono"
       nz-icon
-      nzType="file-image"
+      nzType="shopping-cart"
     ></span>
   </div>
   <div class="informacion--datos">
@@ -36,35 +33,17 @@
     </div>
     <div class="informacion--descripcion">
       <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">Vendidos:</p>
+        <p class="informacion--descripcion--info-stock--llave">Compras totales:</p>
         <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.ventas }}
+          {{ producto.comprasTotales }}
         </p>
       </div>
-      <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">
-          Precio de venta:
-        </p>
-        <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.precioVenta }}
-        </p>
-      </div>
-    </div>
-    <div class="informacion--descripcion">
       <div class="informacion--descripcion--info-stock">
         <p class="informacion--descripcion--info-stock--llave">
           Cantidad en stock:
         </p>
         <p class="informacion--descripcion--info-stock--valor">
           {{ producto.cantidadStock }}
-        </p>
-      </div>
-      <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">
-          Última compra de stock:
-        </p>
-        <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.fechaCompra }}
         </p>
       </div>
     </div>
