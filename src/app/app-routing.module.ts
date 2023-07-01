@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'stock-compras',
     loadChildren: () =>
-      import('./web/UX/paginas/stock/stock.module').then(
+      import('./web/UX/paginas/stock-compras/stock.module').then(
         (m) => m.StockModule
       ),
   },
