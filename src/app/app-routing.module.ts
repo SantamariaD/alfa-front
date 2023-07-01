@@ -42,6 +42,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'stock-ventas',
+    loadChildren: () =>
+      import('./web/UX/paginas/stock-ventas/stock-ventas.module').then(
+        (m) => m.StockVentasModule
+      ),
+  },
+  {
     path: 'proveedores',
     loadChildren: () =>
       import('./web/UX/paginas/proveedores/proveedores.module').then(

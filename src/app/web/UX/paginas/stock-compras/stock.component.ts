@@ -39,7 +39,7 @@ export class StockComponent implements OnInit {
   /**
    * @variable secciones: Contiene las secciones de la página
    */
-  secciones = [{ texto: 'Stock de productos', seleccionado: true }];
+  secciones = [{ texto: 'Stock de compras', seleccionado: true }];
 
   /**
    * @variable columnasTabla: Columnas que contiene la tabla
@@ -79,7 +79,7 @@ export class StockComponent implements OnInit {
   /**
    * @variable seccion: Contiene la seccione actual
    */
-  seccion = 'Stock de productos';
+  seccion = 'Stock de compras';
 
   constructor(
     private message: NzMessageService,

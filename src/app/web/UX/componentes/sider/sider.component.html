@@ -76,6 +76,23 @@
         nzMode="inline"
         nzTheme="dark"
         [nzInlineCollapsed]="isCollapsed"
+        routerLink="/stock-ventas"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="ungroup"></span>
+          <span>Stock de ventas</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
         routerLink="/proveedores/informacion"
       >
         <li
@@ -84,7 +101,7 @@
           nzTooltipPlacement="right"
           [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
         >
-          <span nz-icon nzType="team"></span>
+          <span nz-icon nzType="barcode"></span>
           <span>Provedores</span>
         </li>
       </ul>
