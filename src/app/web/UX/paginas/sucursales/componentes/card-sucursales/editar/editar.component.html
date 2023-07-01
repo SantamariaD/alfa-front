@@ -12,15 +12,17 @@
     <nz-form-item class="editar__form--seccion">
       <nz-form-control>
         <label class="label">Nombre de la sucursal</label>
-        <input
-          nz-input
-          type="text"
-          formControlName="nombreSucursal"
-        />
+        <input nz-input type="text" formControlName="nombreSucursal" />
       </nz-form-control>
       <nz-form-control>
-        <label class="label">Responsable de la sucursal</label>
-        <input nz-input type="text" formControlName="nombreEncargado" />
+        <label class="label">Responsable de sucursal</label>
+        <select class="select" formControlName="idEncargado">
+          <option *ngFor="let empleado of empleados" [value]="empleado.id">
+            {{ empleado.apellido_paterno }}
+            {{ empleado.apellido_materno }} 
+            {{ empleado.nombres }}
+          </option>
+        </select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="editar__form--seccion">

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Empleados } from 'src/app/web/informacion/interface/empleados';
 
 @Component({
   selector: 'app-agregar-sucursales',
@@ -7,6 +8,11 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./agregar-sucursales.component.scss'],
 })
 export class AgregarSucursalesComponent implements OnInit {
+  /**
+   * @Input empleados: Catalogo de empleados
+   */
+  @Input() empleados: Empleados[] = [];
+  
   /**
    * @Output clickCerrar: manda el evento al dar click sobre el icono X
    */

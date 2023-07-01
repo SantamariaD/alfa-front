@@ -17,7 +17,7 @@ const empleadosReducer = createReducer(
     };
   }),
   on(guardarEmpleado, (state, { empleado }) => {
-    state.Empleados.push(empleado);
+    state.empleados.push(empleado);
     return state;
   }),
   on(guardarEmpleadoSeleccionado, (state, { empleado }) => {

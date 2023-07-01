@@ -26,7 +26,7 @@ export interface Empleados {
 }
 
 export interface EmpleadosStore {
-  Empleados: Array<Empleados>;
+  empleados: Array<Empleados>;
   proveedorSeleccionado: Empleados;
 }
 

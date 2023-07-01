@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Empleados } from 'src/app/web/informacion/interface/empleados';
 import { ConsultaSucursales } from 'src/app/web/informacion/interface/sucursales';
 
 @Component({
@@ -14,6 +15,11 @@ export class EditarComponent implements OnInit {
   @Input() sucursal: ConsultaSucursales = {} as ConsultaSucursales;
 
   /**
+   * @Input empleados: Catalogo de empleados
+   */
+  @Input() empleados: Empleados[] = [];
+
+  /**
    * @Output actualizarSucursalEmit: emite el evento de actualizar sucursal
    */
   @Output() actualizarSucursalEmit = new EventEmitter<any>();
@@ -24,7 +30,7 @@ export class EditarComponent implements OnInit {
   editarForm: FormGroup = new FormGroup({
     id: new FormControl(''),
     nombreSucursal: new FormControl(''),
-    nombreEncargado: new FormControl({ value: '', disabled: true }),
+    idEncargado: new FormControl(0),
     telefono: new FormControl(''),
     correo: new FormControl(''),
     horarioAtencion: new FormControl(''),
@@ -41,12 +47,7 @@ export class EditarComponent implements OnInit {
       horarioAtencion: this.sucursal.horarioAtencion,
       domicilio: this.sucursal.domicilio,
       telefono: this.sucursal.telefono,
-      nombreEncargado:
-        this.sucursal.nombreEncargado +
-        ' ' +
-        this.sucursal.apellidoPaternoEncargado +
-        ' ' +
-        this.sucursal.apellidoMaternoEncargado,
+      idEncargado: this.sucursal.idEncargado,
     });
   }
 

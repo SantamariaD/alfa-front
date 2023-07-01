@@ -1,27 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpclientService } from '../httpService/http-service.service';
 import { Observable } from 'rxjs';
-import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from '../../interface/httpService';
+import {
+  HttpClientServiceInterface,
+  HttpClientServiceInterfaceNoPayload,
+} from '../../interface/httpService';
 import { ENDPOINTS } from '../../utils/endpoint';
 import { Producto } from '../../interface/productos';
-import { Documento, RespuestaDocumetosConsulta } from '../../interface/documentos';
+import {
+  Documento,
+  RespuestaDocumetosConsulta,
+} from '../../interface/documentos';
+import { Empleados } from '../../interface/empleados';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmpleadosService {
+  constructor(private http: HttpclientService) {}
 
-  constructor(private http: HttpclientService) { }
-
-  
   /**
    * @Servicio consulta todos los productos de la base
    */
   traerTodosEmpleados(): Observable<
-  
-    HttpClientServiceInterface<Array<any>>
+    HttpClientServiceInterface<Array<Empleados>>
   > {
-    return this.http.get<HttpClientServiceInterface<Array<Producto>>>(
+    return this.http.get<HttpClientServiceInterface<Array<Empleados>>>(
       ENDPOINTS.empleados.traerEmpleados
     );
   }
@@ -52,9 +56,7 @@ export class EmpleadosService {
   /**
    * @Servicio elimina un producto
    */
-  traerEmpleado(
-    id: number
-  ): Observable<HttpClientServiceInterface<Producto>> {
+  traerEmpleado(id: number): Observable<HttpClientServiceInterface<Producto>> {
     return this.http.get<HttpClientServiceInterface<Producto>>(
       ENDPOINTS.empleados.traerEmpleado + '/' + id
     );
@@ -69,22 +71,19 @@ export class EmpleadosService {
     );
   }
 
-  traerTodosDocumentos(): Observable<
-  HttpClientServiceInterface<Documento[]>
-> {
-  return this.http.get<
-  HttpClientServiceInterface<Documento[]>
-  >(ENDPOINTS.empleados.traerTodosDocumentos);
-}
+  traerTodosDocumentos(): Observable<HttpClientServiceInterface<Documento[]>> {
+    return this.http.get<HttpClientServiceInterface<Documento[]>>(
+      ENDPOINTS.empleados.traerTodosDocumentos
+    );
+  }
 
-// Método para actualizar el archivo de un documento
-actualizarDocumento(
-  documento: any
-): Observable<HttpClientServiceInterface<Documento>> {
-  return this.http.post<HttpClientServiceInterface<Documento>>(
-    ENDPOINTS.empleados.actualizarDocumento,
-    documento
-  );
-}
-
+  // Método para actualizar el archivo de un documento
+  actualizarDocumento(
+    documento: any
+  ): Observable<HttpClientServiceInterface<Documento>> {
+    return this.http.post<HttpClientServiceInterface<Documento>>(
+      ENDPOINTS.empleados.actualizarDocumento,
+      documento
+    );
+  }
 }

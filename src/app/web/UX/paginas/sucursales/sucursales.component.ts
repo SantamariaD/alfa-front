@@ -2,11 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { take } from 'rxjs';
+import {
+  Empleados,
+  EmpleadosStore,
+} from 'src/app/web/informacion/interface/empleados';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { ConsultaSucursales } from 'src/app/web/informacion/interface/sucursales';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
+import { EmpleadosService } from 'src/app/web/informacion/servicios/empleados/empleados.service';
 import { SucursalesService } from 'src/app/web/informacion/servicios/sucursales/sucursales.service';
-import { selectSucursalesStore } from 'src/app/web/informacion/state';
+import {
+  selectEmpleadosStore,
+  selectSucursalesStore,
+} from 'src/app/web/informacion/state';
+import { guardarEmpleados } from 'src/app/web/informacion/state/empleados/empleados.actions';
 import { guardarSucursales } from 'src/app/web/informacion/state/sucursales/sucursales.actions';
 
 @Component({
@@ -24,6 +33,11 @@ export class SucursalesComponent implements OnInit {
    * @variable mostrarAgregarSucursal: Muestra la card de la sucursal
    */
   mostrarAgregarSucursal = false;
+
+  /**
+   * @variable empleados: Catalogo de empleados
+   */
+  empleados: Empleados[] = [];
 
   /**
    * @variable sucursal: Muestra la card de la sucursal
@@ -61,11 +75,13 @@ export class SucursalesComponent implements OnInit {
   constructor(
     private sucursalesService: SucursalesService,
     private store: Store,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private empleadosService: EmpleadosService
   ) {}
 
   ngOnInit(): void {
     this.consultarSucursales();
+    this.consultarEmpleados();
   }
 
   /**
@@ -191,6 +207,28 @@ export class SucursalesComponent implements OnInit {
           });
         } else {
           this.datosTabla = sucursalesStore;
+        }
+      });
+  }
+
+  private consultarEmpleados(): void {
+    this.store
+      .select(selectEmpleadosStore)
+      .pipe(take(1))
+      .subscribe((empleadosStore: EmpleadosStore) => {
+        if (!empleadosStore.empleados) {
+          this.empleadosService.traerTodosEmpleados().subscribe({
+            next: (
+              respuestaConsulta: HttpClientServiceInterface<Empleados[]>
+            ) => {
+              this.store.dispatch(
+                guardarEmpleados({ empleados: respuestaConsulta.payload })
+              );
+              this.empleados = respuestaConsulta.payload;
+            },
+          });
+        } else {
+          this.empleados = empleadosStore.empleados;
         }
       });
   }

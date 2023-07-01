@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Empleados } from 'src/app/web/informacion/interface/empleados';
 import { ConsultaSucursales } from 'src/app/web/informacion/interface/sucursales';
 
 @Component({
@@ -11,6 +12,11 @@ export class CardSucursalesComponent implements OnInit {
    * @Input sucursal: Información de la sucursal mostrado en la card
    */
   @Input() sucursal: ConsultaSucursales = {} as ConsultaSucursales;
+
+  /**
+   * @Input empleados: Catalogo de empleados
+   */
+  @Input() empleados: Empleados[] = [];
   
   /**
    * @Output clickCerrar: manda el evento al dar click sobre el icono X

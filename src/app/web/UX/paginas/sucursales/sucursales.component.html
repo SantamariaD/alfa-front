@@ -26,6 +26,7 @@
 <app-card-sucursales
   *ngIf="mostrarCardSucursal"
   [sucursal]="sucursal"
+  [empleados]="empleados"
   (clickCerrar)="clickCerrarModal($event)"
   (actualizarSucursalEmit)="actualizarSucursal($event)"
   (eliminarSucursalEmit)="eliminarSucursal($event)"
@@ -33,6 +34,7 @@
 
 <app-agregar-sucursales
   *ngIf="mostrarAgregarSucursal"
+  [empleados]="empleados"
   (clickCerrar)="clickCerrarModalAgregar()"
   (clickGuardarProducto)="guardarSucursal($event)"
 ></app-agregar-sucursales>

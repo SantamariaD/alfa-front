@@ -22,7 +22,11 @@
         <nz-form-control>
           <label class="label">Responsable de sucursal</label>
           <select class="select" formControlName="idEncargado">
-            <option [value]="53">Juan Gómez López</option>
+            <option *ngFor="let empleado of empleados" [value]="empleado.id">
+              {{ empleado.apellido_paterno }}
+              {{ empleado.apellido_materno }} 
+              {{ empleado.nombres }}
+            </option>
           </select>
         </nz-form-control>
       </nz-form-item>
