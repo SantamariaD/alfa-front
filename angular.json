@@ -69,7 +69,17 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "allowedCommonJsDependencies": [
+                "jspdf-autotable",
+                "raf",
+                "core-js",
+                "rgbcolor",
+                "quill",
+                "pdfjs-dist/build/pdf",
+                "pdfjs-dist/web/pdf_viewer",
+                "html2canvas"
+              ]
             }
           },
           "defaultConfiguration": "production"
