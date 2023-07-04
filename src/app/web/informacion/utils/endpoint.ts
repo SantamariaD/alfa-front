@@ -67,4 +67,7 @@ export const ENDPOINTS = {
     crearScursal: '/sucursales/crear-sucursal',
     actualizarScursal: '/sucursales/actualizar-sucursal',
   },
+  stockVentas: {
+    
+  }
 };

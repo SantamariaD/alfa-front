@@ -5,4 +5,28 @@
       (seleccionadoClick)="selectSeccion($event)"
     ></app-secciones-cabecera>
   </header>
+  <div class="productos__descripcion">
+    <div class="productos__descripcion--info-stock">
+      <p class="productos__descripcion--info-stock--llave">
+        Total de productos:
+      </p>
+      <p class="productos__descripcion--info-stock--valor">
+        
+      </p>
+    </div>
+    <div class="productos__descripcion--info-stock">
+      <p class="productos__descripcion--info-stock--llave">
+        Total de productos comprados:
+      </p>
+      <p class="productos__descripcion--info-stock--valor">
+        
+      </p>
+    </div>
+  </div>
+  <app-tabla
+    [columnasTabla]="columnasTabla"
+    [filasTabla]="datosTabla"
+    [filasBusqueda]="datosTabla"
+    (clickFila)="clickFila($event)"
+  ></app-tabla>
 </section>
