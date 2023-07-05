@@ -13,6 +13,8 @@ import * as fromEmpleados from './empleados/empleados.reducer';
 import * as fromOrdenesCompra from './ordenesCompra/ordenesCompra.reducer';
 import * as fromCategorias from './categorias/categorias.reducer';
 import * as fromSucursales from './sucursales/sucursales.reducer';
+import * as fromCategoriasVentas from './categoriasVentas/categoriasVentas.reducer';
+import * as fromStockVenta from './stockVentas/stockVentas.reducer';
 import { UsuarioInterface } from '../interface/usuario';
 import { CargandoPeticionInterface } from '../interface/httpService';
 import {
@@ -20,7 +22,7 @@ import {
   ConsultaOrdenCompra,
 } from '../interface/catalogo-proveedores';
 import { Area } from '../interface/areas';
-import { Producto } from '../interface/productos';
+import { Producto, ProductoVenta } from '../interface/productos';
 import { ProveedoresStore } from '../interface/proveedores';
 import { Categoria } from '../interface/categorias';
 import { EmpleadosStore } from '../interface/empleados';
@@ -32,11 +34,13 @@ export interface AppState {
   carrito: Array<CatalogoProveedor>;
   areas: Array<Area>;
   categorias: Array<Categoria>;
+  categoriasVentas: Array<Categoria>;
   productos: Array<Producto>;
   proveedores: ProveedoresStore;
-  empleados: EmpleadosStore
+  empleados: EmpleadosStore;
   ordenesCompra: Array<ConsultaOrdenCompra>;
   sucursales: Array<ConsultaSucursales>;
+  stockVenta: Array<ProductoVenta>;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -50,6 +54,8 @@ export const appReducers: ActionReducerMap<AppState> = {
   ordenesCompra: fromOrdenesCompra.reducer,
   categorias: fromCategorias.reducer,
   sucursales: fromSucursales.reducer,
+  categoriasVentas: fromCategoriasVentas.reducer,
+  stockVenta: fromStockVenta.reducer,
 };
 
 //*********SELECTORES******/
@@ -79,13 +85,17 @@ export const selectAreas = createFeatureSelector<Array<Area>>('areas');
 export const selectProductos =
   createFeatureSelector<Array<Producto>>('productos');
 
+//Stock ventas
+export const selectStockVenta =
+  createFeatureSelector<Array<ProductoVenta>>('stockVenta');
+
 //Empleados
 export const selectEmpleados =
   createFeatureSelector<EmpleadosStore>('empleados');
 
-  //Proveedores
+//Proveedores
 export const selectProveedores =
-createFeatureSelector<ProveedoresStore>('proveedores');
+  createFeatureSelector<ProveedoresStore>('proveedores');
 
 //ordenes de compra
 export const selectOrdenesCompra =
@@ -94,6 +104,10 @@ export const selectOrdenesCompra =
 //Categoria
 export const selectCategorias =
   createFeatureSelector<Array<Categoria>>('categorias');
+
+//Categorias Ventas
+export const selectCategoriasVentas =
+  createFeatureSelector<Array<Categoria>>('categoriasVentas');
 
 //Sucursales
 export const selectSucursales =
@@ -134,6 +148,12 @@ export const selectProductosStore = createSelector(
   (state: Array<Producto>) => state
 );
 
+// Stock Venta
+export const selectStockVentasStore = createSelector(
+  selectStockVenta,
+  (state: Array<ProductoVenta>) => state
+);
+
 // Empleados
 export const selectEmpleadosStore = createSelector(
   selectEmpleados,
@@ -155,6 +175,12 @@ export const selectOrdenesCompraStore = createSelector(
 // Categoria
 export const selectCategoriasStore = createSelector(
   selectCategorias,
+  (state: Array<Categoria>) => state
+);
+
+// Categorias ventas
+export const selectCategoriasVentasStore = createSelector(
+  selectCategoriasVentas,
   (state: Array<Categoria>) => state
 );
 

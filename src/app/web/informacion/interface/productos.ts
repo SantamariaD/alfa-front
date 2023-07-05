@@ -16,7 +16,8 @@ export interface Producto {
 export interface ProductoVenta extends InformacionFecha {
   id: number;
   idCategoria: number;
-  nombre: string;
+  nombreProducto: string;
+  precioVenta: number;
   descripcion: string;
   codigoBarras: string;
   sku: string;

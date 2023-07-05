@@ -18,6 +18,11 @@ export const ENDPOINTS = {
     crearCategorias: '/categorias/guardar-categoria',
     eliminarCategorias: '/categorias/eliminar-categoria',
   },
+  categoriasVentas: {
+    consultarCategorias: '/categorias-ventas/consultar-categorias',
+    crearCategorias: '/categorias-ventas/guardar-categoria',
+    eliminarCategorias: '/categorias-ventas/eliminar-categoria',
+  },
   empleados: {
     crearEmpleado: '/empleados/guardar-empleado',
     traerEmpleados: '/empleados/consultar-empleados',
@@ -68,6 +73,9 @@ export const ENDPOINTS = {
     actualizarScursal: '/sucursales/actualizar-sucursal',
   },
   stockVentas: {
-    
+    guardarProducto: '/stock-ventas/guardar-producto',
+    actualizarProducto: '/stock-ventas/actualizar-producto',
+    eliminarProducto: '/stock-ventas/eliminar-producto',
+    consultarProductos: '/stock-ventas/consultar-productos'
   }
 };

@@ -26,6 +26,7 @@ export class StockComponent implements OnInit {
    * @variable producto: información del producto
    */
   producto: Producto = {} as Producto;
+  
   /**
    * @variable totalProductos: total de todos los productos del stock
    */
@@ -48,7 +49,7 @@ export class StockComponent implements OnInit {
     { columna: 'Nombre', llave: 'nombre', busqueda: true },
     { columna: 'SKU', llave: 'sku', busqueda: true },
     { columna: 'Categoría', llave: 'categoria', busqueda: true },
-    { columna: 'Precio de venta', llave: 'precioVenta', busqueda: true },
+    { columna: 'Cantidad en stock', llave: 'cantidadStock', busqueda: true },
   ];
 
   /**

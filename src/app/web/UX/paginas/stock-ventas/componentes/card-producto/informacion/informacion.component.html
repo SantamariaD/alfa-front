@@ -1,1 +1,79 @@
-<p>informacion works!</p>
+<div class="informacion">
+  <h2 class="informacion--titulo">
+    <span
+      class="icono-info"
+      nz-icon
+      nzType="info-circle"
+      nzTheme="outline"
+    ></span>
+    Información del producto
+  </h2>
+  <div class="informacion--imagen-icono">
+    <span
+      class="informacion--imagen-icono--icono"
+      nz-icon
+      nzType="shopping-cart"
+    ></span>
+  </div>
+  <div class="informacion--datos">
+    <h4 class="informacion--datos__nombre">{{ producto.nombreProducto }}</h4>
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">Categoria:</p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ producto.categoria }}
+        </p>
+      </div>
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">SKU:</p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ producto.sku }}
+        </p>
+      </div>
+    </div>
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">
+          Ventas totales:
+        </p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ producto.ventasTotales }}
+        </p>
+      </div>
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">
+          Cantidad en stock:
+        </p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ producto.cantidadStock }}
+        </p>
+      </div>
+    </div>
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">
+          Precio de venta:
+        </p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ producto.precioVenta }}
+        </p>
+      </div>
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">
+          Agotado:
+        </p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ !producto.agotado ? "No" : "Si" }}
+        </p>
+      </div>
+    </div>
+    <div class="informacion--descripcion-">
+      <div class="informacion--info-stock">
+        <p class="informacion--info-stock--llave">Descripcón:</p>
+        <p class="informacion--info-stock--descripcion">
+          {{ producto.descripcion }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

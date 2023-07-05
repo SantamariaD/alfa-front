@@ -6,10 +6,9 @@ import { ProductoVenta } from '../../interface/productos';
 import { ENDPOINTS } from '../../utils/endpoint';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StockVentasService {
-
   constructor(private http: HttpclientService) {}
 
   /**
@@ -19,7 +18,19 @@ export class StockVentasService {
     HttpClientServiceInterface<Array<ProductoVenta>>
   > {
     return this.http.get<HttpClientServiceInterface<Array<ProductoVenta>>>(
-      ENDPOINTS.productos.consultarProductos
+      ENDPOINTS.stockVentas.consultarProductos
+    );
+  }
+
+  /**
+   * @Servicio consulta todos los productos de la base
+   */
+  actualizarProductoVentas(
+    producto: any
+  ): Observable<HttpClientServiceInterface<Array<ProductoVenta>>> {
+    return this.http.put<HttpClientServiceInterface<Array<ProductoVenta>>>(
+      ENDPOINTS.stockVentas.actualizarProducto,
+      producto
     );
   }
 }

@@ -52,7 +52,12 @@
           *ngFor="let catalogo of catalogoProveedores"
         >
           <div class="catalogo__collapse--lista__info imagen">
-            <nz-avatar [nzSize]="50" [nzSrc]="catalogo.imagen"></nz-avatar>
+            <span
+              class="icono-shop"
+              nz-icon
+              nzType="shopping"
+              nzTheme="outline"
+            ></span>
             <p class="catalogo__collapse--lista__info--nombre">
               <span class="tex">{{ catalogo.nombreProducto }}</span>
             </p>

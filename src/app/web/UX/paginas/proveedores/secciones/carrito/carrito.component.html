@@ -16,7 +16,12 @@
         *ngFor="let producto of carrito"
       >
         <div class="carrito__contenedor__producto--lista--imagen">
-          <img [src]="producto.imagen" alt="imagen producto" />
+          <span
+            class="icono-shop"
+            nz-icon
+            nzType="shopping-cart"
+            nzTheme="outline"
+          ></span>
         </div>
         <div class="carrito__contenedor__producto--lista--informacion">
           <div

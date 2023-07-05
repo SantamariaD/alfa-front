@@ -1,15 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Categoria } from 'src/app/web/informacion/interface/categorias';
+import { ProductoVenta } from 'src/app/web/informacion/interface/productos';
 
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',
-  styleUrls: ['./editar.component.scss']
+  styleUrls: ['./editar.component.scss'],
 })
 export class EditarComponent implements OnInit {
+  /**
+   * @Input producto: Información del producto mostrado en la card
+   */
+  @Input() producto: ProductoVenta = {} as ProductoVenta;
 
-  constructor() { }
+  /**
+   * @Input categorias: contiene las categorias
+   */
+  @Input() categorias: Array<Categoria> = [];
+
+  /**
+   * @Output actualizarProducto: emite el evento de actualizar producto
+   */
+  @Output() actualizarProductoEmit = new EventEmitter<any>();
+
+  /**
+   * @Formulario editarForm: fomulario para editar el producto
+   */
+  editarForm: FormGroup = new FormGroup({
+    id: new FormControl(''),
+    nombreProducto: new FormControl(''),
+    idCategoria: new FormControl(0),
+    agotado: new FormControl(0),
+    cantidadStock: new FormControl(''),
+    codigoBarras: new FormControl(''),
+    descripcion: new FormControl(''),
+    precioVenta: new FormControl(''),
+    proveedor: new FormControl(''),
+    sku: new FormControl(''),
+    ventasTotales: new FormControl(''),
+  });
+
+  constructor() {}
 
   ngOnInit(): void {
+    this.editarForm.patchValue({
+      id: this.producto.id,
+      nombreProducto: this.producto.nombreProducto,
+      idCategoria: this.producto.idCategoria,
+      cantidadStock: this.producto.cantidadStock,
+      codigoBarras: this.producto.codigoBarras,
+      descripcion: this.producto.descripcion,
+      sku: this.producto.sku,
+      agotado: this.producto.agotado,
+      precioVenta: this.producto.precioVenta,
+    });
   }
 
+  /**
+   * @Metodo Emite el evento de actualizar producto
+   */
+  actualizarProducto(): void {
+    this.editarForm.value.categoria = parseInt(this.editarForm.value.categoria);
+    this.editarForm.value.agotado = parseInt(this.editarForm.value.agotado);
+    this.actualizarProductoEmit.emit(this.editarForm.value);
+  }
 }

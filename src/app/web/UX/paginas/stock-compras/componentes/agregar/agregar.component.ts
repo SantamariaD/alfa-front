@@ -45,15 +45,8 @@ export class AgregarComponent implements OnInit {
     cantidadStock: new FormControl('', [Validators.required]),
     codigoBarras: new FormControl('', [Validators.required]),
     descripcion: new FormControl('', [Validators.required]),
-    fechaCompra: new FormControl('', [Validators.required]),
-    precioVenta: new FormControl('', [Validators.required]),
     sku: new FormControl('', [Validators.required]),
   });
-
-  /**
-   * @Formulario fechaForm: fomulario para fecha
-   */
-  fechaHtml = new FormControl('');
 
   constructor(private productosService: ProductosService) {}
 
@@ -74,23 +67,7 @@ export class AgregarComponent implements OnInit {
       next: (respuestaProductos: HttpClientServiceInterface<Producto[]>) => {
         this.clickGuardarProducto.emit(respuestaProductos.payload);
         this.guardarForm.reset();
-        this.fechaHtml.reset();
       },
     });
-  }
-
-  /**
-   * @Metodo seleccion de fecha en datepicker
-   */
-  onChange(result: any): void {
-    if (result) {
-      var partes = result.split('-');
-      var dia = partes[2];
-      var mes = partes[1];
-      var anio = partes[0];
-
-      var fechaFormateada = dia + '-' + mes + '-' + anio;
-      this.guardarForm.patchValue({ fechaCompra: fechaFormateada });
-    }
   }
 }

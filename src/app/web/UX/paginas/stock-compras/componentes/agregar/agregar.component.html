@@ -34,29 +34,14 @@
           <input nz-input type="text" formControlName="cantidadStock" />
         </nz-form-control>
         <nz-form-control>
-          <label class="label">Precio de venta</label>
-          <input nz-input type="text" formControlName="precioVenta" />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="modal__form--seccion">
-        <nz-form-control>
-          <label class="label">Código de barras</label>
-          <input nz-input formControlName="codigoBarras" />
-        </nz-form-control>
-        <nz-form-control>
           <label class="label">SKU</label>
           <input nz-input type="text" formControlName="sku" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item class="modal__form--seccion">
         <nz-form-control>
-          <p class="label">Fecha de compra</p>
-          <input
-            type="date"
-            class="fecha"
-            [formControl]="fechaHtml"
-            (ngModelChange)="onChange($event)"
-          />
+          <label class="label">Código de barras</label>
+          <input nz-input formControlName="codigoBarras" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item class="modal__form">

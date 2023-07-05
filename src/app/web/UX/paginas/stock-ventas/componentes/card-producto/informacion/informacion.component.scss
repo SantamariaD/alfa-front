@@ -1,0 +1,71 @@
+.informacion {
+  &--titulo {
+    border-top: 1px solid #d2d2d2;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+    color: black;
+    margin-left: 5px;
+  }
+  &--imagen,
+  &--imagen img {
+    width: 100px;
+    height: 170px;
+    margin: 0px auto;
+  }
+  &--imagen-icono {
+    height: 100px;
+    text-align: center;
+    &--icono {
+      font-size: 100px;
+    }
+  }
+  &--descripcion {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: auto;
+    &--info-stock {
+      border: 1px solid rgb(231, 231, 231);
+      &--llave {
+        background: rgb(243, 243, 243);
+        color: black;
+        padding: 5px;
+        width: 100%;
+      }
+      &--valor {
+        width: auto;
+        margin: auto;
+        text-align: center;
+      }
+    }
+  }
+  &--info-stock {
+    border: 1px solid rgb(231, 231, 231);
+    &--llave {
+      background: rgb(243, 243, 243);
+      color: black;
+      padding: 5px;
+      width: 100%;
+    }
+    &--descripcion {
+      width: auto;
+      padding: 10px;
+      text-align: start;
+    }
+  }
+  &--datos {
+    &__nombre {
+      color: rgb(120, 120, 120);
+      margin: 10px auto;
+      font-size: 24px;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+}
+
+.icono-info {
+  color: #3b71ca;
+  font-size: 22px;
+}

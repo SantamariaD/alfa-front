@@ -11,15 +11,15 @@
         Total de productos:
       </p>
       <p class="productos__descripcion--info-stock--valor">
-        
+        {{ totalProductos }}
       </p>
     </div>
     <div class="productos__descripcion--info-stock">
       <p class="productos__descripcion--info-stock--llave">
-        Total de productos comprados:
+        Total de productos vendidos:
       </p>
       <p class="productos__descripcion--info-stock--valor">
-        
+        {{ valorProductosVendidos }}
       </p>
     </div>
   </div>
@@ -30,3 +30,50 @@
     (clickFila)="clickFila($event)"
   ></app-tabla>
 </section>
+
+<app-card-producto-venta
+  *ngIf="mostrarCardProducto"
+  [mostrarCardProducto]="mostrarCardProducto"
+  [producto]="producto"
+  [categorias]="categorias"
+  (clickCerrar)="clickCerrarModal($event)"
+  (actualizarProductoEmit)="actualizacionProducto($event)"
+  (eliminarProductoEmit)="eliminarProducto($event)"
+></app-card-producto-venta>
+
+<app-agregar
+  *ngIf="mostrarAgregarProducto"
+  [categorias]="categorias"
+  (clickGuardarProducto)="clickGuardarProducto($event)"
+  (clickCerrar)="clickCerrarModalAgregarProducto($event)"
+></app-agregar>
+
+<app-agregar-categoria
+  *ngIf="mostrarAgregarCategoria"
+  [categorias]="categorias"
+  (clickGuardarCategoria)="clickGuardarCategoria()"
+  (clickEliminarCategoria)="clickEliminarCategoria()"
+  (clickCerrar)="clickCerrarModalAgregarCategoria()"
+></app-agregar-categoria>
+
+<span
+  class="icono-flotante"
+  nz-icon
+  nzType="shopping"
+  nzTheme="outline"
+  nzTooltipTitle="Agregar producto"
+  nzTooltipPlacement="leftTop"
+  nz-tooltip
+  (click)="agregarProducto()"
+></span>
+
+<span
+  class="icono-flotante-2"
+  nz-icon
+  nzType="apartment"
+  nzTheme="outline"
+  nzTooltipTitle="Agregar categoría"
+  nzTooltipPlacement="leftTop"
+  nz-tooltip
+  (click)="agregarCategoria()"
+></span>
