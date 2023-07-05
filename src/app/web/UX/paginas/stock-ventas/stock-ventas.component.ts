@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { take } from 'rxjs';
-import { Categoria } from 'src/app/web/informacion/interface/categorias';
+import { finalize, take } from 'rxjs';
+import {
+  Categoria,
+  EliminarCategoria,
+} from 'src/app/web/informacion/interface/categorias';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { ProductoVenta } from 'src/app/web/informacion/interface/productos';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
@@ -125,11 +128,24 @@ export class StockVentasComponent implements OnInit {
   /**
    * @Metodo Captura el evento cuando se agrega un producto
    */
-  clickGuardarProducto(producto: ProductoVenta[]): void {
-    this.datosTabla = producto;
+  clickGuardarProducto(producto: ProductoVenta): void {
     this.mostrarAgregarProducto = false;
-    this.message.success(`Se guardo correctamente el producto.`);
-    this.consultarProductos();
+    this.stockVentasService
+      .guardarProductoVentas(producto)
+      .pipe(finalize(() => this.consultarProductos()))
+      .subscribe({
+        next: (
+          respuestaGuardar: HttpClientServiceInterface<ProductoVenta[]>
+        ) => {
+          this.datosTabla = respuestaGuardar.payload;
+          this.store.dispatch(
+            guardarProductosVentas({
+              productos: respuestaGuardar.payload,
+            })
+          );
+          this.message.success(`Se guardo correctamente el producto.`);
+        },
+      });
   }
 
   /**
@@ -142,21 +158,60 @@ export class StockVentasComponent implements OnInit {
   /**
    * @Metodo Captura el evento cuando se agrega una categoría
    */
-  clickGuardarCategoria(): void {
+  clickGuardarCategoria(categoria: any): void {
     this.mostrarAgregarCategoria = false;
-    this.message.success(`Se guardo correctamente la categoría.`);
-    this.consultarCategorias();
-    this.consultarProductos();
+    this.categoriasVentasService
+      .crearCategorias(categoria)
+      .pipe(
+        finalize(() => {
+          this.consultarCategorias();
+          this.consultarProductos();
+        })
+      )
+      .subscribe({
+        next: (respuestaCrear: HttpClientServiceInterface<Categoria[]>) => {
+          this.store.dispatch(
+            guardarCategoriasVentas({
+              categorias: respuestaCrear.payload,
+            })
+          );
+          this.message.success(`Se guardo correctamente la categoría.`);
+        },
+        error: (error) => console.log(error),
+      });
   }
 
   /**
    * @Metodo Captura el evento cuando se agrega una categoría
    */
-  clickEliminarCategoria(): void {
+  clickEliminarCategoria(idCategoria: number): void {
     this.mostrarAgregarCategoria = false;
-    this.message.success(`Se elimino correctamente la categoría.`);
-    this.consultarCategorias();
-    this.consultarProductos();
+    this.categoriasVentasService
+      .eliminarCategoria(idCategoria)
+      .pipe(
+        finalize(() => {
+          this.consultarCategorias();
+          this.consultarProductos();
+        })
+      )
+      .subscribe({
+        next: (
+          respuestaEliminar: HttpClientServiceInterface<EliminarCategoria>
+        ) => {
+          this.store.dispatch(
+            guardarProductosVentas({
+              productos: respuestaEliminar.payload.productos,
+            })
+          );
+          this.store.dispatch(
+            guardarCategoriasVentas({
+              categorias: respuestaEliminar.payload.categoria,
+            })
+          );
+          this.message.success(`Se elimino correctamente la categoría.`);
+        },
+        error: (error) => console.log(error),
+      });
   }
 
   /**
@@ -164,7 +219,6 @@ export class StockVentasComponent implements OnInit {
    */
   actualizacionProducto(producto: ProductoVenta): void {
     this.mostrarCardProducto = false;
-    this.message.success(`Se actualizo correctamente el producto.`);
     this.stockVentasService.actualizarProductoVentas(producto).subscribe({
       next: (
         respuestaActualizar: HttpClientServiceInterface<ProductoVenta[]>
@@ -173,6 +227,7 @@ export class StockVentasComponent implements OnInit {
           guardarProductosVentas({ productos: respuestaActualizar.payload })
         );
         this.consultarProductos();
+        this.message.success(`Se actualizo correctamente el producto.`);
       },
       error: (error) => console.log(error),
     });
@@ -181,11 +236,20 @@ export class StockVentasComponent implements OnInit {
   /**
    * @Metodo captura el evento de actualizar un producto y consulta todos los productos
    */
-  eliminarProducto(idProducto: number[]): void {
-    console.log(idProducto);
+  eliminarProducto(idProducto: number): void {
     this.mostrarCardProducto = false;
-    this.message.success(`Se elimino correctamente el producto.`);
-    //this.consultarProductos();
+    this.stockVentasService.eliminarProductoVentas(idProducto).subscribe({
+      next: (
+        respuestaEliminar: HttpClientServiceInterface<ProductoVenta[]>
+      ) => {
+        this.store.dispatch(
+          guardarProductosVentas({ productos: respuestaEliminar.payload })
+        );
+        this.consultarProductos();
+        this.message.success(`Se elimino correctamente el producto.`);
+      },
+      error: (error) => console.log(error),
+    });
   }
 
   /**
@@ -210,7 +274,7 @@ export class StockVentasComponent implements OnInit {
       .select(selectCategoriasVentasStore)
       .pipe(take(1))
       .subscribe((categoriasStore: Categoria[]) => {
-        if (categoriasStore.length < 1) {
+        if (categoriasStore?.length < 1) {
           this.categoriasVentasService.traerCategorias().subscribe({
             next: (
               respuestaCategorias: HttpClientServiceInterface<Categoria[]>
@@ -222,6 +286,7 @@ export class StockVentasComponent implements OnInit {
                 })
               );
             },
+            error: (error) => console.log(error),
           });
         } else {
           this.categorias = categoriasStore;
@@ -238,7 +303,6 @@ export class StockVentasComponent implements OnInit {
       .select(selectStockVentasStore)
       .pipe(take(1))
       .subscribe((productosStore: ProductoVenta[]) => {
-        console.log(productosStore);
         if (productosStore.length < 1) {
           this.stockVentasService.consultarStockVentas().subscribe({
             next: (

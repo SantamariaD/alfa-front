@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { finalize, take } from 'rxjs';
-import { Categoria } from 'src/app/web/informacion/interface/categorias';
+import {
+  Categoria,
+  EliminarCategoriaCompra,
+} from 'src/app/web/informacion/interface/categorias';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { Producto } from 'src/app/web/informacion/interface/productos';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
@@ -26,7 +29,7 @@ export class StockComponent implements OnInit {
    * @variable producto: información del producto
    */
   producto: Producto = {} as Producto;
-  
+
   /**
    * @variable totalProductos: total de todos los productos del stock
    */
@@ -126,12 +129,24 @@ export class StockComponent implements OnInit {
   /**
    * @Metodo Captura el evento cuando se agrega un producto
    */
-  clickGuardarProducto(producto: Producto[]): void {
-    this.datosTabla = producto;
-    this.store.dispatch(guardarProductos({ productos: producto }));
+  clickGuardarProducto(producto: Producto): void {
     this.mostrarAgregarProducto = false;
-    this.message.success(`Se guardo correctamente el producto.`);
-    this.consultarProductos();
+    this.productosService
+      .guardarProducto(producto)
+      .pipe(
+        finalize(() => {
+          this.message.success(`Se guardo correctamente el producto.`);
+          this.consultarProductos();
+        })
+      )
+      .subscribe({
+        next: (respuestaProductos: HttpClientServiceInterface<Producto[]>) => {
+          this.datosTabla = respuestaProductos.payload;
+          this.store.dispatch(
+            guardarProductos({ productos: respuestaProductos.payload })
+          );
+        },
+      });
   }
 
   /**
@@ -144,21 +159,49 @@ export class StockComponent implements OnInit {
   /**
    * @Metodo Captura el evento cuando se agrega una categoría
    */
-  clickGuardarCategoria(): void {
+  clickGuardarCategoria(categoria: Categoria[]): void {
     this.mostrarAgregarCategoria = false;
-    this.message.success(`Se guardo correctamente la categoría.`);
-    this.consultarCategorias();
-    this.consultarProductos();
+    this.categoriasService
+      .crearCategorias(categoria)
+      .pipe(
+        finalize(() => {
+          this.consultarCategorias();
+          this.consultarProductos();
+          this.message.success(`Se guardo correctamente la categoría.`);
+        })
+      )
+      .subscribe({
+        next: (respuestaCrear: HttpClientServiceInterface<Categoria[]>) =>
+          this.store.dispatch(
+            guardarCategorias({ categorias: respuestaCrear.payload })
+          ),
+      });
   }
 
   /**
    * @Metodo Captura el evento cuando se agrega una categoría
    */
-  clickEliminarCategoria(): void {
+  clickEliminarCategoria(idCategoriaForm: number): void {
     this.mostrarAgregarCategoria = false;
-    this.message.success(`Se elimino correctamente la categoría.`);
-    this.consultarCategorias();
-    this.consultarProductos();
+    this.categoriasService
+      .eliminarCategoria(idCategoriaForm)
+      .pipe(
+        finalize(() => {
+          this.message.success(`Se elimino correctamente la categoría.`);
+          this.consultarCategorias();
+          this.consultarProductos();
+        })
+      )
+      .subscribe({
+        next: (respuestaEliminar: EliminarCategoriaCompra) => {
+          this.store.dispatch(
+            guardarCategorias({ categorias: respuestaEliminar.categoria })
+          );
+          this.store.dispatch(
+            guardarProductos({ productos: respuestaEliminar.productos })
+          );
+        },
+      });
   }
 
   /**
@@ -229,7 +272,7 @@ export class StockComponent implements OnInit {
       .select(selectProductosStore)
       .pipe(take(1))
       .subscribe((productosStore: Producto[]) => {
-        if (productosStore.length < 1) {
+        if (productosStore?.length < 1) {
           this.productosService.consultarProductos().subscribe({
             next: (
               respuestaProductos: HttpClientServiceInterface<Array<Producto>>
@@ -253,11 +296,9 @@ export class StockComponent implements OnInit {
    */
   private informacionStock(): void {
     this.totalProductos = 0;
-    this.datosTabla.map(
-      (producto: Producto) => {
-        this.totalProductos += producto.cantidadStock
-        this.valorProductosVenta += producto.comprasTotales
-      }
-    );
+    this.datosTabla.map((producto: Producto) => {
+      this.totalProductos += producto.cantidadStock;
+      this.valorProductosVenta += producto.comprasTotales;
+    });
   }
 }

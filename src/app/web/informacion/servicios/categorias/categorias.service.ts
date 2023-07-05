@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Categoria } from '../../interface/categorias';
+import { Categoria, EliminarCategoriaCompra } from '../../interface/categorias';
 import {
   HttpClientServiceInterface,
   HttpClientServiceInterfaceNoPayload,
@@ -28,8 +28,8 @@ export class CategoriasService {
    */
   crearCategorias(
     categoria: any
-  ): Observable<HttpClientServiceInterfaceNoPayload> {
-    return this.http.post<HttpClientServiceInterfaceNoPayload>(
+  ): Observable<HttpClientServiceInterface<Categoria[]>> {
+    return this.http.post<HttpClientServiceInterface<Categoria[]>>(
       ENDPOINTS.categorias.crearCategorias,
       { categoria }
     );
@@ -40,8 +40,8 @@ export class CategoriasService {
    */
   eliminarCategoria(
     id: any
-  ): Observable<HttpClientServiceInterfaceNoPayload> {
-    return this.http.delete<HttpClientServiceInterfaceNoPayload>(
+  ): Observable<EliminarCategoriaCompra> {
+    return this.http.delete<EliminarCategoriaCompra>(
       ENDPOINTS.categorias.eliminarCategorias + '/' + id
     );
   }

@@ -51,8 +51,8 @@
 <app-agregar-categoria
   [mostrarModal]="mostrarAgregarCategoria"
   [categorias]="categorias"
-  (clickGuardarCategoria)="clickGuardarCategoria()"
-  (clickEliminarCategoria)="clickEliminarCategoria()"
+  (clickGuardarCategoria)="clickGuardarCategoria($event)"
+  (clickEliminarCategoria)="clickEliminarCategoria($event)"
   (clickCerrar)="clickCerrarModalAgregarCategoria($event)"
 ></app-agregar-categoria>
 

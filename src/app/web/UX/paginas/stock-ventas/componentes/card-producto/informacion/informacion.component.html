@@ -12,16 +12,24 @@
     <span
       class="informacion--imagen-icono--icono"
       nz-icon
-      nzType="shopping-cart"
+      nzType="shopping"
     ></span>
   </div>
   <div class="informacion--datos">
     <h4 class="informacion--datos__nombre">{{ producto.nombreProducto }}</h4>
+    <div class="informacion--descripcion-">
+      <div class="informacion--info-stock">
+        <p class="informacion--info-stock--llave">Descripcón:</p>
+        <p class="informacion--info-stock--descripcion desc">
+          {{ producto.descripcion }}
+        </p>
+      </div>
+    </div>
     <div class="informacion--descripcion">
       <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">Categoria:</p>
+        <p class="informacion--descripcion--info-stock--llave">Código de barras:</p>
         <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.categoria }}
+          {{ producto.codigoBarras }}
         </p>
       </div>
       <div class="informacion--descripcion--info-stock">
@@ -67,11 +75,13 @@
         </p>
       </div>
     </div>
-    <div class="informacion--descripcion-">
-      <div class="informacion--info-stock">
-        <p class="informacion--info-stock--llave">Descripcón:</p>
-        <p class="informacion--info-stock--descripcion">
-          {{ producto.descripcion }}
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">
+          Categoría:
+        </p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ producto.categoria }}
         </p>
       </div>
     </div>

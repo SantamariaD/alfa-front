@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Categoria } from 'src/app/web/informacion/interface/categorias';
-import { CategoriasService } from 'src/app/web/informacion/servicios/categorias/categorias.service';
 
 @Component({
   selector: 'app-agregar-categoria',
@@ -32,7 +31,7 @@ export class AgregarCategoriaComponent implements OnInit {
   /**
    * @Output clickEliminarCategoria: manda el evento al eliminar la categoria
    */
-  @Output() clickEliminarCategoria = new EventEmitter<any>();
+  @Output() clickEliminarCategoria = new EventEmitter<number>();
 
   /**
    * @Variable seccionModal: selecciona la seccion del modal
@@ -47,9 +46,9 @@ export class AgregarCategoriaComponent implements OnInit {
   /**
    * @Formulario idCategoriaForm: fomulario para eliminar categoria
    */
-  idCategoriaForm = new FormControl(null, [Validators.required]);
+  idCategoriaForm = new FormControl(0, [Validators.required]);
 
-  constructor(private categoriaService: CategoriasService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
@@ -58,26 +57,25 @@ export class AgregarCategoriaComponent implements OnInit {
    */
   cerrarModal(): void {
     this.clickCerrar.emit(false);
+    this.categoriaForm.reset();
   }
 
   /**
    * @Metodo guarda la categoría
    */
   guardarCategoria(): void {
-    this.categoriaService.crearCategorias(this.categoriaForm.value).subscribe({
-      next: () => this.clickGuardarCategoria.emit(false),
-    });
+    this.clickGuardarCategoria.emit(this.categoriaForm.value);
+    this.categoriaForm.reset();
+    this.idCategoriaForm.reset();
   }
 
   /**
    * @Metodo guarda la categoría
    */
   eliminarCategoria(): void {
-    this.categoriaService
-      .eliminarCategoria(this.idCategoriaForm.value)
-      .subscribe({
-        next: () => this.clickEliminarCategoria.emit(false),
-      });
+    this.clickEliminarCategoria.emit(this.idCategoriaForm.value as number);
+    this.idCategoriaForm.reset();
+    this.seccionModal = 'guardar';
   }
 
   /**

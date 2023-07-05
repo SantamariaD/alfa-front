@@ -10,7 +10,8 @@ export interface Producto {
   categoria: string;
   cantidadStock: number;
   comprasTotales: number;
-  agotado?: boolean;
+  agotado: boolean;
+  eliminado: boolean;
 }
 
 export interface ProductoVenta extends InformacionFecha {
@@ -25,4 +26,5 @@ export interface ProductoVenta extends InformacionFecha {
   cantidadStock: number;
   ventasTotales: number;
   agotado: boolean;
+  eliminado: boolean;
 }

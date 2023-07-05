@@ -27,8 +27,8 @@ export class AgregarComponent implements OnInit {
    * @Formulario editarForm: fomulario para editar el producto
    */
   guardarForm: FormGroup = new FormGroup({
-    nombre: new FormControl('', [Validators.required]),
-    categoria: new FormControl(0, [Validators.required]),
+    nombreProducto: new FormControl('', [Validators.required]),
+    idCategoria: new FormControl(0, [Validators.required]),
     cantidadStock: new FormControl('', [Validators.required]),
     precioVenta: new FormControl('', [Validators.required]),
     codigoBarras: new FormControl('', [Validators.required]),

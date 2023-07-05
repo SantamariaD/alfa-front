@@ -15,21 +15,44 @@ export class StockVentasService {
    * @Servicio consulta todos los productos de la base
    */
   consultarStockVentas(): Observable<
-    HttpClientServiceInterface<Array<ProductoVenta>>
+    HttpClientServiceInterface<ProductoVenta[]>
   > {
-    return this.http.get<HttpClientServiceInterface<Array<ProductoVenta>>>(
+    return this.http.get<HttpClientServiceInterface<ProductoVenta[]>>(
       ENDPOINTS.stockVentas.consultarProductos
     );
   }
 
   /**
-   * @Servicio consulta todos los productos de la base
+   * @Servicio actualiza un productos de venta
    */
   actualizarProductoVentas(
     producto: any
-  ): Observable<HttpClientServiceInterface<Array<ProductoVenta>>> {
-    return this.http.put<HttpClientServiceInterface<Array<ProductoVenta>>>(
+  ): Observable<HttpClientServiceInterface<ProductoVenta[]>> {
+    return this.http.put<HttpClientServiceInterface<ProductoVenta[]>>(
       ENDPOINTS.stockVentas.actualizarProducto,
+      producto
+    );
+  }
+
+  /**
+   * @Servicio elimina un producto de venta
+   */
+  eliminarProductoVentas(
+    idProducto: number
+  ): Observable<HttpClientServiceInterface<ProductoVenta[]>> {
+    return this.http.delete<HttpClientServiceInterface<ProductoVenta[]>>(
+      ENDPOINTS.stockVentas.eliminarProducto+'/'+idProducto
+    );
+  }
+
+  /**
+   * @Servicio guarda un producto de venta
+   */
+  guardarProductoVentas(
+    producto: any
+  ): Observable<HttpClientServiceInterface<ProductoVenta[]>> {
+    return this.http.post<HttpClientServiceInterface<ProductoVenta[]>>(
+      ENDPOINTS.stockVentas.guardarProducto,
       producto
     );
   }

@@ -51,8 +51,8 @@
 <app-agregar-categoria
   *ngIf="mostrarAgregarCategoria"
   [categorias]="categorias"
-  (clickGuardarCategoria)="clickGuardarCategoria()"
-  (clickEliminarCategoria)="clickEliminarCategoria()"
+  (clickGuardarCategoria)="clickGuardarCategoria($event)"
+  (clickEliminarCategoria)="clickEliminarCategoria($event)"
   (clickCerrar)="clickCerrarModalAgregarCategoria()"
 ></app-agregar-categoria>
 

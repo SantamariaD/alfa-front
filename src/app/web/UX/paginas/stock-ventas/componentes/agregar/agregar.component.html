@@ -17,11 +17,11 @@
       <nz-form-item class="modal__form--seccion">
         <nz-form-control>
           <label class="label">Nombre</label>
-          <input nz-input type="text" formControlName="nombre" />
+          <input nz-input type="text" formControlName="nombreProducto" />
         </nz-form-control>
         <nz-form-control>
           <label class="label">Categoría</label>
-          <select class="select" formControlName="categoria">
+          <select class="select" formControlName="idCategoria">
             <option *ngFor="let categoria of categorias" [value]="categoria.id">
               {{ categoria.categoria }}
             </option>

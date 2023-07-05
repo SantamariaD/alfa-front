@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Categoria } from 'src/app/web/informacion/interface/categorias';
-import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from 'src/app/web/informacion/interface/httpService';
+import {
+  HttpClientServiceInterface,
+  HttpClientServiceInterfaceNoPayload,
+} from 'src/app/web/informacion/interface/httpService';
 import { Producto } from 'src/app/web/informacion/interface/productos';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 
@@ -63,11 +66,7 @@ export class AgregarComponent implements OnInit {
    * @Metodo guarda un nuevo producto
    */
   guardarProducto(): void {
-    this.productosService.guardarProducto(this.guardarForm.value).subscribe({
-      next: (respuestaProductos: HttpClientServiceInterface<Producto[]>) => {
-        this.clickGuardarProducto.emit(respuestaProductos.payload);
-        this.guardarForm.reset();
-      },
-    });
+    this.clickGuardarProducto.emit(this.guardarForm.value);
+    this.guardarForm.reset();
   }
 }

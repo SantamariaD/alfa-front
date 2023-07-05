@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Categoria } from '../../interface/categorias';
-import { HttpClientServiceInterface, HttpClientServiceInterfaceNoPayload } from '../../interface/httpService';
+import { Categoria, EliminarCategoria } from '../../interface/categorias';
+import { HttpClientServiceInterface } from '../../interface/httpService';
 import { ENDPOINTS } from '../../utils/endpoint';
 import { HttpclientService } from '../httpService/http-service.service';
 
@@ -25,9 +25,9 @@ export class CategoriasVentasService {
    * @Servicio Crea una categoria de los productos
    */
   crearCategorias(
-    categoria: any
-  ): Observable<HttpClientServiceInterfaceNoPayload> {
-    return this.http.post<HttpClientServiceInterfaceNoPayload>(
+    categoria: string
+  ): Observable<HttpClientServiceInterface<Categoria[]>> {
+    return this.http.post<HttpClientServiceInterface<Categoria[]>>(
       ENDPOINTS.categoriasVentas.crearCategorias,
       { categoria }
     );
@@ -37,9 +37,9 @@ export class CategoriasVentasService {
    * @Servicio elimina una categoria de los productos
    */
   eliminarCategoria(
-    id: any
-  ): Observable<HttpClientServiceInterfaceNoPayload> {
-    return this.http.delete<HttpClientServiceInterfaceNoPayload>(
+    id: number
+  ): Observable<HttpClientServiceInterface<EliminarCategoria>> {
+    return this.http.delete<HttpClientServiceInterface<EliminarCategoria>>(
       ENDPOINTS.categoriasVentas.eliminarCategorias + '/' + id
     );
   }

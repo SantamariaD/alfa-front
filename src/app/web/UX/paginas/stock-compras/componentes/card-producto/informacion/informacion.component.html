@@ -17,11 +17,19 @@
   </div>
   <div class="informacion--datos">
     <h4 class="informacion--datos__nombre">{{ producto.nombre }}</h4>
+    <div class="informacion">
+      <div class="informacion--info-stock">
+        <p class="informacion--info-stock--llave">Descripcón:</p>
+        <p class="informacion--info-stock--descripcion informacion">
+          {{ producto.descripcion }}
+        </p>
+      </div>
+    </div>
     <div class="informacion--descripcion">
       <div class="informacion--descripcion--info-stock">
-        <p class="informacion--descripcion--info-stock--llave">Categoria:</p>
+        <p class="informacion--descripcion--info-stock--llave">Código de barras:</p>
         <p class="informacion--descripcion--info-stock--valor">
-          {{ producto.categoria }}
+          {{ producto.codigoBarras }}
         </p>
       </div>
       <div class="informacion--descripcion--info-stock">
@@ -47,11 +55,13 @@
         </p>
       </div>
     </div>
-    <div class="informacion">
-      <div class="informacion--info-stock">
-        <p class="informacion--info-stock--llave">Descripcón:</p>
-        <p class="informacion--info-stock--descripcion">
-          {{ producto.descripcion }}
+    <div class="informacion--descripcion">
+      <div class="informacion--descripcion--info-stock">
+        <p class="informacion--descripcion--info-stock--llave">
+          Categoria:
+        </p>
+        <p class="informacion--descripcion--info-stock--valor">
+          {{ producto.categoria }}
         </p>
       </div>
     </div>
