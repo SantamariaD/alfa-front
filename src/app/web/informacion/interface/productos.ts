@@ -27,4 +27,5 @@ export interface ProductoVenta extends InformacionFecha {
   ventasTotales: number;
   agotado: boolean;
   eliminado: boolean;
+  stockCompras: boolean;
 }

@@ -15,6 +15,7 @@ import * as fromCategorias from './categorias/categorias.reducer';
 import * as fromSucursales from './sucursales/sucursales.reducer';
 import * as fromCategoriasVentas from './categoriasVentas/categoriasVentas.reducer';
 import * as fromStockVenta from './stockVentas/stockVentas.reducer';
+import * as fromProductosCompraVenta from './productosCompraVenta/productosCompraVenta.reducer';
 import { UsuarioInterface } from '../interface/usuario';
 import { CargandoPeticionInterface } from '../interface/httpService';
 import {
@@ -36,6 +37,7 @@ export interface AppState {
   categorias: Array<Categoria>;
   categoriasVentas: Array<Categoria>;
   productos: Array<Producto>;
+  productosCompraVenta: Array<Producto>;
   proveedores: ProveedoresStore;
   empleados: EmpleadosStore;
   ordenesCompra: Array<ConsultaOrdenCompra>;
@@ -56,6 +58,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   sucursales: fromSucursales.reducer,
   categoriasVentas: fromCategoriasVentas.reducer,
   stockVenta: fromStockVenta.reducer,
+  productosCompraVenta: fromProductosCompraVenta.reducer,
 };
 
 //*********SELECTORES******/
@@ -112,6 +115,11 @@ export const selectCategoriasVentas =
 //Sucursales
 export const selectSucursales =
   createFeatureSelector<Array<ConsultaSucursales>>('sucursales');
+
+//Productos Compra Venta
+export const selectProductosCompraVenta = createFeatureSelector<
+  Producto[]
+>('productosCompraVenta');
 
 //****** Creando selectores*****/
 export const selectBanderaCargandoPeticion = createSelector(
@@ -188,4 +196,10 @@ export const selectCategoriasVentasStore = createSelector(
 export const selectSucursalesStore = createSelector(
   selectSucursales,
   (state: Array<ConsultaSucursales>) => state
+);
+
+// Productos Compra Venta
+export const selectProductosCompraVentaStore = createSelector(
+  selectProductosCompraVenta,
+  (state: Producto[]) => state
 );

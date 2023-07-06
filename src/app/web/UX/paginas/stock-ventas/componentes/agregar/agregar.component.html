@@ -13,11 +13,36 @@
       Agregar producto
     </h2>
 
+    <div class="orden-compra__switch m-b-15">
+      <nz-switch
+        (ngModelChange)="switch($event)"
+        [(ngModel)]="switchValue"
+        name="switch"
+      ></nz-switch
+      ><span class="orden-compra__switch--span">
+        ¿Desea agregar un producto desde el stock de compras?
+      </span>
+    </div>
     <form class="modal__form" [formGroup]="guardarForm">
       <nz-form-item class="modal__form--seccion">
-        <nz-form-control>
+        <nz-form-control *ngIf="!productoCompra">
           <label class="label">Nombre</label>
           <input nz-input type="text" formControlName="nombreProducto" />
+        </nz-form-control>
+        <nz-form-control *ngIf="productoCompra">
+          <label class="label">Nombre</label>
+          <select
+            class="select"
+            formControlName="nombreProducto"
+            (change)="selectNombreProductoCompraVenta($event)"
+          >
+            <option
+              *ngFor="let producto of productosCompraVenta"
+              [value]="producto.id"
+            >
+              {{ producto.nombre }}
+            </option>
+          </select>
         </nz-form-control>
         <nz-form-control>
           <label class="label">Categoría</label>
@@ -44,9 +69,14 @@
           <input nz-input formControlName="codigoBarras" />
         </nz-form-control>
         <nz-form-control>
-            <label class="label">Precio de venta</label>
-            <input nz-input formControlName="precioVenta" />
-          </nz-form-control>
+          <p class="label">Precio de venta</p>
+          <input
+            class="input"
+            type="text"
+            formControlName="precioVenta"
+            (ngModelChange)="cambioPrecioVena($event)"
+          />
+        </nz-form-control>
       </nz-form-item>
       <nz-form-item class="modal__form">
         <nz-form-control>
@@ -58,7 +88,7 @@
         <button
           nz-button
           nzType="primary"
-          [disabled]="!guardarForm.valid"
+          [disabled]="!guardarForm.valid || !habilitarBotn"
           (click)="guardarProducto()"
         >
           Guardar producto

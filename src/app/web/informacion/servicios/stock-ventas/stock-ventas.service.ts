@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpclientService } from '../httpService/http-service.service';
 import { HttpClientServiceInterface } from '../../interface/httpService';
 import { Observable } from 'rxjs';
-import { ProductoVenta } from '../../interface/productos';
+import { Producto, ProductoVenta } from '../../interface/productos';
 import { ENDPOINTS } from '../../utils/endpoint';
 
 @Injectable({
@@ -54,6 +54,17 @@ export class StockVentasService {
     return this.http.post<HttpClientServiceInterface<ProductoVenta[]>>(
       ENDPOINTS.stockVentas.guardarProducto,
       producto
+    );
+  }
+
+  /**
+   * @Servicio consulta todos los productos que pueden estar en el stock de venta
+   */
+  consultarProductosVenta(): Observable<
+    HttpClientServiceInterface<Producto[]>
+  > {
+    return this.http.get<HttpClientServiceInterface<Producto[]>>(
+      ENDPOINTS.productos.consultarProductosVenta
     );
   }
 }

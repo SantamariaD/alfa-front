@@ -8,6 +8,7 @@ export const ENDPOINTS = {
   },
   productos: {
     consultarProductos: '/producto/consultar-productos',
+    consultarProductosVenta: '/producto/consultar-productos-venta',
     consultarProducto: '/producto/consultar-producto',
     guardarProductos: '/producto/guardar-producto',
     actualizarProductos: '/producto/actualizar-producto',

@@ -44,6 +44,8 @@
 <app-agregar
   *ngIf="mostrarAgregarProducto"
   [categorias]="categorias"
+  [productosCompraVenta]="productosCompraVenta"
+  [productosVenta]="datosTabla"
   (clickGuardarProducto)="clickGuardarProducto($event)"
   (clickCerrar)="clickCerrarModalAgregarProducto($event)"
 ></app-agregar>

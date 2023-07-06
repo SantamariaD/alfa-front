@@ -7,15 +7,20 @@ import {
   EliminarCategoria,
 } from 'src/app/web/informacion/interface/categorias';
 import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
-import { ProductoVenta } from 'src/app/web/informacion/interface/productos';
+import {
+  Producto,
+  ProductoVenta,
+} from 'src/app/web/informacion/interface/productos';
 import { ColumnaTabla } from 'src/app/web/informacion/interface/tabla';
 import { CategoriasVentasService } from 'src/app/web/informacion/servicios/categorias-ventas/categorias-ventas.service';
 import { StockVentasService } from 'src/app/web/informacion/servicios/stock-ventas/stock-ventas.service';
 import {
   selectCategoriasVentasStore,
+  selectProductosCompraVentaStore,
   selectStockVentasStore,
 } from 'src/app/web/informacion/state';
 import { guardarCategoriasVentas } from 'src/app/web/informacion/state/categoriasVentas/categoriasVentas.actions';
+import { guardarProductosCompraVenta } from 'src/app/web/informacion/state/productosCompraVenta/productosCompraVenta.actions';
 import { guardarProductosVentas } from 'src/app/web/informacion/state/stockVentas/stockVentas.actions';
 
 @Component({
@@ -65,6 +70,12 @@ export class StockVentasComponent implements OnInit {
   datosTabla: Array<ProductoVenta> = [];
 
   /**
+   * @variable productosCompraVenta: Productos del stock de compra con la categoria venta
+   *           se pueden poner en el stock de venta
+   */
+  productosCompraVenta: Array<Producto> = [];
+
+  /**
    * @variable mostrarCardProducto: Muestra la card del producto
    */
   mostrarCardProducto = false;
@@ -94,6 +105,7 @@ export class StockVentasComponent implements OnInit {
   ngOnInit(): void {
     this.consultarCategorias();
     this.consultarProductos();
+    this.consultarProductosCompraVenta();
   }
 
   /**
@@ -333,5 +345,33 @@ export class StockVentasComponent implements OnInit {
       this.totalProductos += producto.cantidadStock;
       this.valorProductosVendidos += producto.ventasTotales;
     });
+  }
+
+  /**
+   * @Metodo guarda un nuevo producto
+   */
+  private consultarProductosCompraVenta(): void {
+    this.store
+      .select(selectProductosCompraVentaStore)
+      .pipe(take(1))
+      .subscribe((productosVentaStore: Producto[]) => {
+        if (productosVentaStore.length < 1) {
+          this.stockVentasService.consultarProductosVenta().subscribe({
+            next: (
+              respuestaConsulta: HttpClientServiceInterface<Producto[]>
+            ) => {
+              this.productosCompraVenta = respuestaConsulta.payload;
+              this.store.dispatch(
+                guardarProductosCompraVenta({
+                  productos: respuestaConsulta.payload,
+                })
+              );
+            },
+            error: (error) => console.log(error),
+          });
+        } else {
+          this.productosCompraVenta = productosVentaStore;
+        }
+      });
   }
 }

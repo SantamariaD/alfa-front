@@ -107,3 +107,18 @@ option {
   transform: translate(-50%, -50%); /* Centra el elemento correctamente */
   z-index: 9999; /* Asegura que el elemento esté encima de todos los demás elementos */
 }
+
+.ant-input[disabled] {
+  background-color: white;
+}
+
+.input {
+  width: 100%;
+  height: 34px;
+  transition: .8!important;
+  &:focus {
+    border: 2px solid #cacaca!important;
+    border-radius: 5px;
+    padding: 1px 8px!important;
+  }
+}
