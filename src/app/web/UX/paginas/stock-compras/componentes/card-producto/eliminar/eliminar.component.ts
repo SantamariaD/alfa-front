@@ -28,8 +28,10 @@ export class EliminarComponent implements OnInit {
    */
   clickEliminar(): void {
     this.productosService.eliminarProducto(this.producto.id).subscribe({
-      next: (respuestaEliminar: HttpClientServiceInterface<Producto[]>) =>
-        this.eliminarProductoEmit.emit(respuestaEliminar.payload),
+      next: (respuestaEliminar: HttpClientServiceInterface<Producto[]>) => {
+        this.productosService.consultarProductosCompraVenta();
+        this.eliminarProductoEmit.emit(respuestaEliminar.payload);
+      },
     });
   }
 }

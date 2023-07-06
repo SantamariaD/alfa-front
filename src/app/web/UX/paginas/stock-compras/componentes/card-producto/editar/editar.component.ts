@@ -1,13 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Categoria } from 'src/app/web/informacion/interface/categorias';
-import {
-  HttpClientServiceInterface,
-  HttpClientServiceInterfaceNoPayload,
-} from 'src/app/web/informacion/interface/httpService';
+import { HttpClientServiceInterface } from 'src/app/web/informacion/interface/httpService';
 import { Producto } from 'src/app/web/informacion/interface/productos';
-import { CategoriasService } from 'src/app/web/informacion/servicios/categorias/categorias.service';
 import { ProductosService } from 'src/app/web/informacion/servicios/productos/productos.service';
 
 @Component({
@@ -81,7 +76,7 @@ export class EditarComponent implements OnInit {
       next: (respuestaProductos: HttpClientServiceInterface<Producto[]>) => {
         this.mostrarNotificacion = true;
         this.actualizarProductoEmit.emit(respuestaProductos.payload);
-        setTimeout(() => (this.mostrarNotificacion = false), 5000);
+        this.productosService.consultarProductosCompraVenta();
       },
     });
   }

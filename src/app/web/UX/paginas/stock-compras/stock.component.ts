@@ -145,6 +145,7 @@ export class StockComponent implements OnInit {
           this.store.dispatch(
             guardarProductos({ productos: respuestaProductos.payload })
           );
+        this.productosService.consultarProductosCompraVenta();
         },
       });
   }

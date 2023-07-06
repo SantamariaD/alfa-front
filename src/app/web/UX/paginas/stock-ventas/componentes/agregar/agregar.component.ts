@@ -73,7 +73,7 @@ export class AgregarComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    const productosFiltrados = this.productosCompraVenta.filter(
+    this.productosCompraVenta = this.productosCompraVenta.filter(
       (producto: Producto) => {
         return !this.productosVenta.some(
           (venta: ProductoVenta) =>
@@ -81,10 +81,6 @@ export class AgregarComponent implements OnInit {
         );
       }
     );
-    console.log(this.productosCompraVenta)
-    console.log(this.productosVenta)
-    console.log(productosFiltrados)
-    this.productosCompraVenta =productosFiltrados;
   }
 
   /**

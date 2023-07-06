@@ -35,14 +35,21 @@
       font-weight: bold;
       cursor: pointer;
     }
-    &--titulo {
+    &--cabecera {
+      display: flex;
+      justify-content: space-between;
       border-top: 1px solid #d2d2d2;
       margin-top: 20px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       padding-top: 10px;
-      font-size: 20px;
-      color: black;
-      margin-left: 5px;
+      &__titulo {
+        font-size: 20px;
+        color: black;
+        margin-left: 5px;
+      }
+      &__switch {
+        margin-top: 7px;
+      }
     }
   }
 }
@@ -115,10 +122,10 @@ option {
 .input {
   width: 100%;
   height: 34px;
-  transition: .8!important;
+  transition: 0.8 !important;
   &:focus {
-    border: 2px solid #cacaca!important;
+    border: 2px solid #cacaca !important;
     border-radius: 5px;
-    padding: 1px 8px!important;
+    padding: 1px 8px !important;
   }
 }

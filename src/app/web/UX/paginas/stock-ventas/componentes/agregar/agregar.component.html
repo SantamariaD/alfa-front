@@ -3,26 +3,32 @@
     <span class="modal__contenido--cerrar" (click)="cerrarModal()"
       >&times;</span
     >
-    <h2 class="modal__contenido--titulo">
-      <span
-        class="icono-info"
-        nz-icon
-        nzType="info-circle"
-        nzTheme="outline"
-      ></span>
-      Agregar producto
-    </h2>
 
-    <div class="orden-compra__switch m-b-15">
-      <nz-switch
-        (ngModelChange)="switch($event)"
-        [(ngModel)]="switchValue"
-        name="switch"
-      ></nz-switch
-      ><span class="orden-compra__switch--span">
-        ¿Desea agregar un producto desde el stock de compras?
-      </span>
+    <div class="modal__contenido--cabecera">
+      <div class="modal__contenido--cabecera__titulo">
+        <span
+          class="icono-info"
+          nz-icon
+          nzType="info-circle"
+          nzTheme="outline"
+        ></span>
+        Agregar producto
+      </div>
+      <div
+        class="modal__contenido--cabecera__switch"
+        *ngIf="productosCompraVenta.length > 0"
+      >
+        <span class="modal__contenido--cabecera__switch--titulo">
+          ¿Desea agregar un producto desde el stock de compras?
+        </span>
+        <nz-switch
+          (ngModelChange)="switch($event)"
+          [(ngModel)]="switchValue"
+          name="switch"
+        ></nz-switch>
+      </div>
     </div>
+
     <form class="modal__form" [formGroup]="guardarForm">
       <nz-form-item class="modal__form--seccion">
         <nz-form-control *ngIf="!productoCompra">
