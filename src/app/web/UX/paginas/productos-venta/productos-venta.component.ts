@@ -25,14 +25,14 @@ import { guardarProductosVentas } from 'src/app/web/informacion/state/stockVenta
 
 @Component({
   selector: 'app-stock-ventas',
-  templateUrl: './catalogo-productos.component.html',
-  styleUrls: ['./catalogo-productos.component.scss'],
+  templateUrl: './productos-venta.component.html',
+  styleUrls: ['./productos-venta.component.scss'],
 })
-export class CatalogoProductosComponent implements OnInit {
+export class ProductosVentaComponent implements OnInit {
   /**
    * @variable secciones: Contiene las secciones de la página
    */
-  secciones = [{ texto: 'Cátalogo de productos', seleccionado: true }];
+  secciones = [{ texto: 'Productos de venta', seleccionado: true }];
 
   /**
    * @variable columnasTabla: Columnas que contiene la tabla

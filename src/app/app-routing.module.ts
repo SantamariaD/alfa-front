@@ -41,9 +41,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'catalogo-productos',
+    path: 'productos-venta',
     loadChildren: () =>
-      import('./web/UX/paginas/catalogo-productos/catalogo-productos.module').then(
+      import('./web/UX/paginas/productos-venta/productos-venta.module').then(
         (m) => m.StockVentasModule
       ),
   },

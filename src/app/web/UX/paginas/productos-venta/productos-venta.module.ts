@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StockVentaRoutingModule } from './catalogo-productos-routing.module';
+import { StockVentaRoutingModule } from './productos-venta-routing.module';
 import { SharedModule } from 'src/app/web/informacion/utils/shared.module';
 import { ComponentesModule } from '../../componentes/componentes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,11 +10,11 @@ import { CardProductoComponent } from './componentes/card-producto/card-producto
 import { EditarComponent } from './componentes/card-producto/editar/editar.component';
 import { EliminarComponent } from './componentes/card-producto/eliminar/eliminar.component';
 import { InformacionComponent } from './componentes/card-producto/informacion/informacion.component';
-import { CatalogoProductosComponent } from './catalogo-productos.component';
+import { ProductosVentaComponent } from './productos-venta.component';
 
 @NgModule({
   declarations: [
-    CatalogoProductosComponent,
+    ProductosVentaComponent,
     AgregarComponent,
     AgregarCategoriaComponent,
     CardProductoComponent,
