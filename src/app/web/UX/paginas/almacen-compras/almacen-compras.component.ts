@@ -21,8 +21,8 @@ import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-stock',
-  templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.scss'],
+  templateUrl: './almacen-compras.component.html',
+  styleUrls: ['./almacen-compras.component.scss'],
 })
 export class StockComponent implements OnInit {
   /**
@@ -43,7 +43,7 @@ export class StockComponent implements OnInit {
   /**
    * @variable secciones: Contiene las secciones de la página
    */
-  secciones = [{ texto: 'Stock de compras', seleccionado: true }];
+  secciones = [{ texto: 'Almacen de compras', seleccionado: true }];
 
   /**
    * @variable columnasTabla: Columnas que contiene la tabla
@@ -83,7 +83,7 @@ export class StockComponent implements OnInit {
   /**
    * @variable seccion: Contiene la seccione actual
    */
-  seccion = 'Stock de compras';
+  seccion = 'Almacen de compras';
 
   constructor(
     private message: NzMessageService,

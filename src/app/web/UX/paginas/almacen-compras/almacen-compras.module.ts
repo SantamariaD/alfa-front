@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StockRoutingModule } from './stock-routing.module';
-import { StockComponent } from './stock.component';
+import { StockRoutingModule } from './almacen-compras-routing.module';
+import { StockComponent } from './almacen-compras.component';
 import { CardProductoComponent } from './componentes/card-producto/card-producto.component';
 import { AgregarComponent } from './componentes/agregar/agregar.component';
 import { EditarComponent } from './componentes/card-producto/editar/editar.component';

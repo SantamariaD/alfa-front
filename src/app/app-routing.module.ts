@@ -35,9 +35,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'stock-compras',
+    path: 'almacen-compras',
     loadChildren: () =>
-      import('./web/UX/paginas/stock-compras/stock.module').then(
+      import('./web/UX/paginas/almacen-compras/almacen-compras.module').then(
         (m) => m.StockModule
       ),
   },
