@@ -25,7 +25,24 @@
         nzMode="inline"
         nzTheme="dark"
         [nzInlineCollapsed]="isCollapsed"
-        routerLink="/documentos"
+        routerLink="/ventas"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="dollar"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="dollar"></span>
+          <span>Punto de venta</span>
+        </li>
+      </ul>
+      <ul
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/catalogo-productos"
       >
         <li
           nz-menu-item
@@ -33,11 +50,67 @@
           nzTooltipPlacement="right"
           [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
         >
-          <span nz-icon nzType="file-text"></span>
-          <span>Documentos</span>
+          <span nz-icon nzType="ungroup"></span>
+          <span>Cátalogo de productos</span>
         </li>
       </ul>
       <ul
+        *ngIf="enviromentsModulos.almacenCompra"
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/almacen-compras"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="group"></span>
+          <span>Almacen de compras</span>
+        </li>
+      </ul>
+
+      <ul
+        *ngIf="enviromentsModulos.sucursales"
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/sucursales/informacion"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="shop"></span>
+          <span>Sucursales</span>
+        </li>
+      </ul>
+      <ul
+        *ngIf="enviromentsModulos.proveedores"
+        nz-menu
+        nzMode="inline"
+        nzTheme="dark"
+        [nzInlineCollapsed]="isCollapsed"
+        routerLink="/proveedores/informacion"
+      >
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+        >
+          <span nz-icon nzType="barcode"></span>
+          <span>Provedores</span>
+        </li>
+      </ul>
+      <ul
+        *ngIf="enviromentsModulos.empleados"
         nz-menu
         nzMode="inline"
         nzTheme="dark"
@@ -59,7 +132,7 @@
         nzMode="inline"
         nzTheme="dark"
         [nzInlineCollapsed]="isCollapsed"
-        routerLink="/almacen-compras"
+        routerLink="/documentos"
       >
         <li
           nz-menu-item
@@ -67,76 +140,8 @@
           nzTooltipPlacement="right"
           [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
         >
-          <span nz-icon nzType="group"></span>
-          <span>Almacen de compras</span>
-        </li>
-      </ul>
-      <ul
-        nz-menu
-        nzMode="inline"
-        nzTheme="dark"
-        [nzInlineCollapsed]="isCollapsed"
-        routerLink="/catalogo-productos"
-      >
-        <li
-          nz-menu-item
-          nz-tooltip
-          nzTooltipPlacement="right"
-          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
-        >
-          <span nz-icon nzType="ungroup"></span>
-          <span>Cátalogo de productos</span>
-        </li>
-      </ul>
-      <ul
-        nz-menu
-        nzMode="inline"
-        nzTheme="dark"
-        [nzInlineCollapsed]="isCollapsed"
-        routerLink="/proveedores/informacion"
-      >
-        <li
-          nz-menu-item
-          nz-tooltip
-          nzTooltipPlacement="right"
-          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
-        >
-          <span nz-icon nzType="barcode"></span>
-          <span>Provedores</span>
-        </li>
-      </ul>
-      <ul
-        nz-menu
-        nzMode="inline"
-        nzTheme="dark"
-        [nzInlineCollapsed]="isCollapsed"
-        routerLink="/sucursales/informacion"
-      >
-        <li
-          nz-menu-item
-          nz-tooltip
-          nzTooltipPlacement="right"
-          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
-        >
-          <span nz-icon nzType="shop"></span>
-          <span>Sucursales</span>
-        </li>
-      </ul>
-      <ul
-        nz-menu
-        nzMode="inline"
-        nzTheme="dark"
-        [nzInlineCollapsed]="isCollapsed"
-        routerLink="/ventas"
-      >
-        <li
-          nz-menu-item
-          nz-tooltip
-          nzTooltipPlacement="dollar"
-          [nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
-        >
-          <span nz-icon nzType="dollar"></span>
-          <span>Ventas</span>
+          <span nz-icon nzType="file-text"></span>
+          <span>Documentos</span>
         </li>
       </ul>
       <ul

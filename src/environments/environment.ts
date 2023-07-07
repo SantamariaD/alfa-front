@@ -8,6 +8,13 @@ export const environment = {
     backDevelop: 'http://localhost:8000/api',
     backProduction: 'http://localhost:8000/api',
   },
+  modulosAplicacion: {
+    puntoVenta: true,
+    proveedores: false,
+    empleados: false,
+    almacenCompra: false,
+    sucursales: false,
+  }
 };
 
 /*

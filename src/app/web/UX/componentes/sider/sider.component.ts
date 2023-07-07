@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sider',
@@ -6,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sider.component.scss']
 })
 export class SiderComponent implements OnInit {
+  /**
+   * @Variable isCollapse: controla el colapse si hay submenus
+   */
   isCollapsed = true;
+
+  /**
+   * @Variable enviromentsModulos: controla el colapse si hay submenus
+   */
+  enviromentsModulos = environment.modulosAplicacion;
 
   constructor() { }
 
