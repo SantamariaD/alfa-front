@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StockVentasComponent } from './stock-ventas.component';
+import { CatalogoProductosComponent } from './catalogo-productos.component';
 
 const routes: Routes = [
-  { path: '', component: StockVentasComponent },
+  { path: '', component: CatalogoProductosComponent },
 ];
 
 @NgModule({

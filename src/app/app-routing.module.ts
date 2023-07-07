@@ -6,7 +6,6 @@ import { LoginComponent } from './web/UX/paginas/login/login.component';
 import { PaginaErrorComponent } from './web/UX/paginas/pagina-error/pagina-error.component';
 import { RegistroComponent } from './web/UX/paginas/registro/registro.component';
 import { CalendarioComponent } from './web/UX/paginas/calendario/calendario.component';
-import { EmpleadosModule } from './web/UX/paginas/empleados/empleados.module';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
@@ -42,9 +41,9 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'stock-ventas',
+    path: 'catalogo-productos',
     loadChildren: () =>
-      import('./web/UX/paginas/stock-ventas/stock-ventas.module').then(
+      import('./web/UX/paginas/catalogo-productos/catalogo-productos.module').then(
         (m) => m.StockVentasModule
       ),
   },

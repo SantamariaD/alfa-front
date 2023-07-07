@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StockVentasComponent } from './stock-ventas.component';
-import { StockVentaRoutingModule } from './stock-venta-routing.module';
+import { StockVentaRoutingModule } from './catalogo-productos-routing.module';
 import { SharedModule } from 'src/app/web/informacion/utils/shared.module';
 import { ComponentesModule } from '../../componentes/componentes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,9 +10,18 @@ import { CardProductoComponent } from './componentes/card-producto/card-producto
 import { EditarComponent } from './componentes/card-producto/editar/editar.component';
 import { EliminarComponent } from './componentes/card-producto/eliminar/eliminar.component';
 import { InformacionComponent } from './componentes/card-producto/informacion/informacion.component';
+import { CatalogoProductosComponent } from './catalogo-productos.component';
 
 @NgModule({
-  declarations: [StockVentasComponent, AgregarComponent, AgregarCategoriaComponent, CardProductoComponent, EditarComponent, EliminarComponent, InformacionComponent],
+  declarations: [
+    CatalogoProductosComponent,
+    AgregarComponent,
+    AgregarCategoriaComponent,
+    CardProductoComponent,
+    EditarComponent,
+    EliminarComponent,
+    InformacionComponent,
+  ],
   imports: [
     CommonModule,
     StockVentaRoutingModule,
