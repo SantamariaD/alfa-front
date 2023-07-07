@@ -11,8 +11,7 @@ export class SucursalesComponent implements OnInit {
    * @variable secciones: Contiene las secciones de la página
    */
   secciones = [
-    { texto: 'Información Sucursales', seleccionado: true },
-    { texto: 'Stock Sucursales', seleccionado: false },
+    { texto: 'Información Sucursales', seleccionado: true }
   ];
 
   /**
@@ -48,8 +47,7 @@ export class SucursalesComponent implements OnInit {
     switch (seccion) {
       case 'informacion':
         this.secciones = [
-          { texto: 'Información Sucursales', seleccionado: true },
-          { texto: 'Stock Sucursales', seleccionado: false },
+          { texto: 'Información Sucursales', seleccionado: true }
         ];
         break;
     }
