@@ -4,7 +4,7 @@ import { ProductoVenta } from 'src/app/web/informacion/interface/productos';
 @Component({
   selector: 'app-informacion',
   templateUrl: './informacion.component.html',
-  styleUrls: ['./informacion.component.scss']
+  styleUrls: ['./informacion.component.scss'],
 })
 export class InformacionComponent implements OnInit {
   /**
@@ -12,9 +12,7 @@ export class InformacionComponent implements OnInit {
    */
   @Input() producto: ProductoVenta = {} as ProductoVenta;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

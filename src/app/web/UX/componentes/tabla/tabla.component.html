@@ -3,7 +3,9 @@
     <tr>
       <th [nzColumnKey]="columna.llave" *ngFor="let columna of columnasTabla">
         <div class="columna">
-          <p class="columna__texto">{{ columna.columna }}</p>
+          <p class="columna__texto">
+            {{ columna.columna }}
+          </p>
           <div
             *ngIf="columna.busqueda"
             nz-popover
@@ -89,6 +91,12 @@
         >
           {{ fila[columna.llave] | date }}
         </div>
+        <span
+          *ngIf="columna.columna == 'Ver'"
+          nz-icon
+          nzType="search"
+          nzTheme="outline"
+        ></span>
       </td>
     </tr>
   </tbody>

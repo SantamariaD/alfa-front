@@ -1,9 +1,16 @@
 <div class="modal">
   <div class="modal__contenido">
-    <span class="modal__contenido--cerrar" (click)="clickCerrarModal()"
-      >&times;</span
-    >
+    <div class="modal__contenido--cerrar" (click)="clickCerrarModal()">
+      &times;
+    </div>
     <div class="modal__contenido--secciones">
+      <div class="modal__contenido--secciones__imagen">
+        <img
+          class="modal__contenido--secciones__imagen--icono"
+          src="/assets/imagenes/caracteristicas.png"
+          alt=""
+        />
+      </div>
       <div
         class="modal__contenido--secciones__informacion"
         *ngIf="seccionModal === 'informacion'"
@@ -32,30 +39,57 @@
     </div>
     <div class="modal__contenido--footer">
       <div class="modal__contenido--footer__contenedor-iconos">
-        <span
-          class="modal__contenido--footer__contenedor-iconos--icono"
-          nz-icon
-          nzType="container"
-          nzTheme="outline"
-          [ngClass]="{ seleccionada: seccionModal === 'informacion' }"
+        <div
+          class="modal__contenido--footer__contenedor-iconos--seccion"
           (click)="clickInformacion()"
-        ></span>
-        <span
-          class="modal__contenido--footer__contenedor-iconos--icono"
-          nz-icon
-          nzType="edit"
-          nzTheme="outline"
-          [ngClass]="{ seleccionada: seccionModal === 'editar' }"
+        >
+          <span
+            class="modal__contenido--footer__contenedor-iconos--seccion__icono"
+            nz-icon
+            nzType="container"
+            nzTheme="outline"
+            [ngClass]="{ seleccionada: seccionModal === 'informacion' }"
+          ></span>
+          <p
+            class="modal__contenido--footer__contenedor-iconos--seccion__texto"
+          >
+            Información
+          </p>
+        </div>
+        <div
+          class="modal__contenido--footer__contenedor-iconos--seccion"
           (click)="clickEditar()"
-        ></span>
-        <span
-          class="modal__contenido--footer__contenedor-iconos--icono eliminar"
-          nz-icon
-          nzType="delete"
-          nzTheme="outline"
-          [ngClass]="{ eliminarSelect: seccionModal === 'eliminar' }"
+        >
+          <span
+            class="modal__contenido--footer__contenedor-iconos--seccion__icono"
+            nz-icon
+            nzType="edit"
+            nzTheme="outline"
+            [ngClass]="{ seleccionada: seccionModal === 'editar' }"
+          ></span>
+          <p
+            class="modal__contenido--footer__contenedor-iconos--seccion__texto"
+          >
+            Editar
+          </p>
+        </div>
+        <div
+          class="modal__contenido--footer__contenedor-iconos--seccion"
           (click)="clickEliminar()"
-        ></span>
+        >
+          <span
+            class="modal__contenido--footer__contenedor-iconos--seccion__icono eliminar"
+            nz-icon
+            nzType="delete"
+            nzTheme="outline"
+            [ngClass]="{ eliminarSelect: seccionModal === 'eliminar' }"
+          ></span>
+          <p
+            class="modal__contenido--footer__contenedor-iconos--seccion__texto"
+          >
+            Eliminar
+          </p>
+        </div>
       </div>
     </div>
   </div>

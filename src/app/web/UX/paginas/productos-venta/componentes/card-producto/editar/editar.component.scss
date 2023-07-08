@@ -1,32 +1,57 @@
-.editar {
-  position: relative;
-  z-index: 1000;
-  &__titulo {
-    border-top: 1px solid #d2d2d2;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    font-size: 20px;
-    color: black;
-    margin-left: 8px;
-  }
-  &__form {
-    &--seccion {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 15px;
-    }
-    &--boton {
-      width: 152px;
-      margin: 0px 0px 0px auto;
-    }
-  }
-}
+@import "../../../../../../../../styles.scss";
 
-.icono-info {
-  color: #3b71ca;
-  margin-right: 5px;
-  font-size: 22px;
+.editar {
+  padding: 0px 15px;
+  &--datos {
+    &__nombre {
+      width: 180px;
+      margin: 0px auto 10px auto;
+      font-size: 24px;
+      height: 32px!important;
+    }
+    &__descripcion {
+      color: $color-brand-primary;
+      margin: 0px auto 15px auto;
+      font-size: 14px;
+      text-align: center;
+    }
+    &__contenedor {
+      width: 250px;
+      margin: 0px auto;
+      margin-top: -8px;
+      &--texto {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 10px;
+        margin-bottom: 5px;
+        height: 20px;
+        &--llave {
+          width: 100%;
+          font-weight: 700;
+          border-right: 1px dashed black;
+          height: 20px;
+        }
+        &--valor {
+          height: 25px;
+          input {
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+  &--boton {
+    cursor: pointer;
+    height: 24px!important;
+    width: 250px;
+    margin: 9px auto 0px auto;
+    font-size: 12px;
+     button {
+      width: 100%;
+      height: 24px!important;
+      padding: 0px!important;
+    }
+  }
 }
 
 select:focus {
@@ -36,7 +61,8 @@ select:focus {
 }
 
 input,
-select {
+select,
+textarea {
   border: none;
   border-bottom: 1px solid rgb(200, 200, 200);
 }
@@ -44,12 +70,13 @@ select {
 .select {
   background-color: transparent;
   width: 100%;
-  height: 32px;
+  height: 20px;
 }
 
 input:focus {
-  outline: none;
+  outline: none!important;
   border: none !important;
+  margin: 5px auto;
 }
 
 option {

@@ -36,6 +36,8 @@ export class EditarComponent implements OnInit {
     codigoBarras: new FormControl(''),
     descripcion: new FormControl(''),
     precioVenta: new FormControl(''),
+    precioCompra: new FormControl(''),
+    descuento: new FormControl(''),
     proveedor: new FormControl(''),
     sku: new FormControl(''),
     ventasTotales: new FormControl(''),
@@ -54,6 +56,9 @@ export class EditarComponent implements OnInit {
       sku: this.producto.sku,
       agotado: this.producto.agotado,
       precioVenta: this.producto.precioVenta,
+      ventasTotales: this.producto.ventasTotales,
+      descuento: this.producto.descuento,
+      precioCompra: this.producto.precioCompra,
     });
   }
 
@@ -61,8 +66,17 @@ export class EditarComponent implements OnInit {
    * @Metodo Emite el evento de actualizar producto
    */
   actualizarProducto(): void {
-    this.editarForm.value.categoria = parseInt(this.editarForm.value.categoria);
-    this.editarForm.value.agotado = parseInt(this.editarForm.value.agotado);
+    if (
+      this.editarForm.value.precioCompra.includes('$') &&
+      this.editarForm.value.precioVenta.includes('$')
+    ) {
+      this.editarForm.value.precioCompra = parseFloat(
+        this.editarForm.value.precioCompra?.replace('$', '').replace(',', '')
+      );
+      this.editarForm.value.precioVenta = parseFloat(
+        this.editarForm.value.precioVenta?.replace('$', '')?.replace(',', '')
+      );
+    }
     this.actualizarProductoEmit.emit(this.editarForm.value);
   }
 }

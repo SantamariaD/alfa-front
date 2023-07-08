@@ -5,24 +5,63 @@
       (seleccionadoClick)="selectSeccion($event)"
     ></app-secciones-cabecera>
   </header>
-  <div class="productos__descripcion">
-    <div class="productos__descripcion--info-stock">
-      <p class="productos__descripcion--info-stock--llave">
-        Total de productos:
-      </p>
-      <p class="productos__descripcion--info-stock--valor">
-        {{ totalProductos }}
-      </p>
+  <div class="productos__cabecera">
+    <div class="productos__cabecera--descripcion">
+      <div class="productos__cabecera--descripcion__texto">
+        <p class="stock-p">
+          <span
+            class="icono-text"
+            nz-icon
+            nzType="shopping"
+            nzTheme="outline"
+          ></span>
+          Stock de productos de venta
+        </p>
+        <p>
+          En está sección podrás ver todos los productos que estan a la venta
+        </p>
+      </div>
+      <div class="productos__boton" (click)="agregarProducto()">
+        <button>
+          <span nz-icon nzType="plus" nzTheme="outline"></span>
+          Agregar un producto nuevo
+        </button>
+      </div>
     </div>
-    <div class="productos__descripcion--info-stock">
-      <p class="productos__descripcion--info-stock--llave">
-        Total de productos vendidos:
-      </p>
-      <p class="productos__descripcion--info-stock--valor">
-        {{ valorProductosVendidos }}
-      </p>
+    <div class="productos__descripcion--contenedor">
+      <p class="productos__descripcion--contenedor__info">Datos informativos</p>
+      <div class="productos__descripcion">
+        <div class="productos__descripcion--info-stock">
+          <p class="productos__descripcion--info-stock--llave">
+            <span nz-icon nzType="thunderbolt"></span>
+            Total de productos:
+          </p>
+          <p class="productos__descripcion--info-stock--valor">
+            {{ totalProductos }}
+          </p>
+        </div>
+        <div class="productos__descripcion--info-stock">
+          <p class="productos__descripcion--info-stock--llave">
+            <span nz-icon nzType="thunderbolt"></span>
+            Valor de productos vendidos:
+          </p>
+          <p class="productos__descripcion--info-stock--valor">
+            {{ valorProductosVendidos }}
+          </p>
+        </div>
+        <div class="productos__descripcion--info-stock">
+          <p class="productos__descripcion--info-stock--llave">
+            <span nz-icon nzType="thunderbolt"></span>
+            Valor de stock de productos:
+          </p>
+          <p class="productos__descripcion--info-stock--valor">
+            {{ valorStockProductos }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
+
   <app-tabla
     [columnasTabla]="columnasTabla"
     [filasTabla]="datosTabla"
@@ -57,25 +96,3 @@
   (clickEliminarCategoria)="clickEliminarCategoria($event)"
   (clickCerrar)="clickCerrarModalAgregarCategoria()"
 ></app-agregar-categoria>
-
-<span
-  class="icono-flotante"
-  nz-icon
-  nzType="shopping"
-  nzTheme="outline"
-  nzTooltipTitle="Agregar producto"
-  nzTooltipPlacement="leftTop"
-  nz-tooltip
-  (click)="agregarProducto()"
-></span>
-
-<span
-  class="icono-flotante-2"
-  nz-icon
-  nzType="apartment"
-  nzTheme="outline"
-  nzTooltipTitle="Agregar categoría"
-  nzTooltipPlacement="leftTop"
-  nz-tooltip
-  (click)="agregarCategoria()"
-></span>

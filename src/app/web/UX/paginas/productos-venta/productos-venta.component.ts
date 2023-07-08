@@ -22,6 +22,7 @@ import {
 import { guardarCategoriasVentas } from 'src/app/web/informacion/state/categoriasVentas/categoriasVentas.actions';
 import { guardarProductosCompraVenta } from 'src/app/web/informacion/state/productosCompraVenta/productosCompraVenta.actions';
 import { guardarProductosVentas } from 'src/app/web/informacion/state/stockVentas/stockVentas.actions';
+import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-stock-ventas',
@@ -38,21 +39,29 @@ export class ProductosVentaComponent implements OnInit {
    * @variable columnasTabla: Columnas que contiene la tabla
    */
   columnasTabla: Array<ColumnaTabla> = [
+    { columna: 'Código de barras', llave: 'codigoBarras', busqueda: true },
     { columna: 'Nombre', llave: 'nombreProducto', busqueda: true },
-    { columna: 'SKU', llave: 'sku', busqueda: true },
     { columna: 'Categoría', llave: 'categoria', busqueda: true },
     { columna: 'Cantidad en stock', llave: 'cantidadStock', busqueda: true },
+    { columna: 'Precio de compra', llave: 'precioCompra', busqueda: true },
+    { columna: 'Precio de venta', llave: 'precioVenta', busqueda: true },
+    { columna: 'Ver', llave: '', busqueda: false },
   ];
 
   /**
    * @variable totalProductos: total de todos los productos del stock
    */
-  totalProductos = 0;
+  totalProductos = '';
 
   /**
    * @variable valorProductosVendidos: Valor total de todos los productos vendidos del stock
    */
-  valorProductosVendidos = 0;
+  valorProductosVendidos = '';
+
+  /**
+   * @variable valorStockProductos: Valor total de todos los productos vendidos del stock
+   */
+  valorStockProductos = '';
 
   /**
    * @variable seccion: Contiene la seccione actual
@@ -105,7 +114,6 @@ export class ProductosVentaComponent implements OnInit {
   ngOnInit(): void {
     this.consultarCategorias();
     this.consultarProductos();
-    this.consultarProductosCompraVenta();
   }
 
   /**
@@ -322,16 +330,31 @@ export class ProductosVentaComponent implements OnInit {
                 Array<ProductoVenta>
               >
             ) => {
-              const productos = respuestaProductos.payload;
+              this.store.dispatch(
+                guardarProductosVentas({
+                  productos: respuestaProductos.payload,
+                })
+              );
               this.datosTabla = respuestaProductos.payload;
-              this.store.dispatch(guardarProductosVentas({ productos }));
               this.informacionStock();
+              this.datosTabla.map((producto: ProductoVenta) => {
+                producto.precioCompra = formateoMoneda(
+                  parseFloat(producto.precioCompra)
+                );
+                producto.precioVenta = formateoMoneda(
+                  parseFloat(producto.precioVenta)
+                );
+                return producto;
+              });
             },
             error: (error) => console.log(error),
           });
+          this.consultarProductosCompraVenta();
         } else {
           this.datosTabla = productosStore;
+          this.datosTabla = this.quitarMoneda(this.datosTabla);
           this.informacionStock();
+          this.ponerMoneda();
         }
       });
   }
@@ -340,10 +363,52 @@ export class ProductosVentaComponent implements OnInit {
    * @Metodo Realiza las operaciones para la información general del stock
    */
   private informacionStock(): void {
-    this.totalProductos = 0;
+    let totalProductos = 0;
+    let valorProductosVendidos = 0;
+    let valorStockProductos = 0;
+
     this.datosTabla.map((producto: ProductoVenta) => {
-      this.totalProductos += producto.cantidadStock;
-      this.valorProductosVendidos += producto.ventasTotales;
+      totalProductos += producto.cantidadStock;
+      valorProductosVendidos +=
+        parseInt(producto.precioVenta) * producto.ventasTotales;
+      valorStockProductos +=
+        producto.cantidadStock * parseInt(producto.precioCompra);
+    });
+
+    this.totalProductos = totalProductos.toString();
+    this.valorProductosVendidos = formateoMoneda(valorProductosVendidos);
+    this.valorStockProductos = formateoMoneda(valorStockProductos);
+  }
+
+  /**
+   * @Metodo quita los simbolos y parse a un numero
+   */
+  private quitarMoneda(datos: any): any {
+    return datos.map((producto: ProductoVenta) => {
+      if (
+        typeof producto.precioVenta == 'string' &&
+        typeof producto.precioCompra == 'string'
+      ) {
+        producto.precioCompra = producto.precioCompra
+          .replace('$', '')
+          .replace(',', '');
+        producto.precioVenta = producto.precioVenta
+          .replace('$', '')
+          .replace(',', '');
+      }
+
+      return producto;
+    });
+  }
+
+  /**
+   * @Metodo quita los simbolos y parse a un numero
+   */
+  private ponerMoneda(): void {
+    this.datosTabla.map((producto: ProductoVenta) => {
+      producto.precioCompra = formateoMoneda(parseFloat(producto.precioCompra));
+      producto.precioVenta = formateoMoneda(parseFloat(producto.precioVenta));
+      return producto;
     });
   }
 

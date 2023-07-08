@@ -18,7 +18,9 @@ export interface ProductoVenta extends InformacionFecha {
   id: number;
   idCategoria: number;
   nombreProducto: string;
-  precioVenta: number;
+  precioVenta: string;
+  precioCompra: string;
+  descuento: number;
   descripcion: string;
   codigoBarras: string;
   sku: string;

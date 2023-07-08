@@ -67,6 +67,7 @@ export class AgregarComponent implements OnInit {
     precioVenta: new FormControl('', [Validators.required]),
     codigoBarras: new FormControl('', [Validators.required]),
     descripcion: new FormControl('', [Validators.required]),
+    precioCompra: new FormControl('', [Validators.required]),
     sku: new FormControl('', [Validators.required]),
   });
 

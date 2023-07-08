@@ -61,8 +61,8 @@
       </nz-form-item>
       <nz-form-item class="modal__form--seccion">
         <nz-form-control>
-          <label class="label">Cantidad en stock</label>
-          <input nz-input type="text" formControlName="cantidadStock" />
+          <label class="label">Código de barras</label>
+          <input nz-input formControlName="codigoBarras" />
         </nz-form-control>
         <nz-form-control>
           <label class="label">SKU</label>
@@ -71,8 +71,8 @@
       </nz-form-item>
       <nz-form-item class="modal__form--seccion">
         <nz-form-control>
-          <label class="label">Código de barras</label>
-          <input nz-input formControlName="codigoBarras" />
+          <label class="label">Precio de compra</label>
+          <input nz-input formControlName="precioCompra" />
         </nz-form-control>
         <nz-form-control>
           <p class="label">Precio de venta</p>
@@ -82,6 +82,12 @@
             formControlName="precioVenta"
             (ngModelChange)="cambioPrecioVena($event)"
           />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="modal__form--seccion">
+        <nz-form-control>
+          <label class="label">Cantidad en stock</label>
+          <input nz-input type="text" formControlName="cantidadStock" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item class="modal__form">
@@ -94,7 +100,7 @@
         <button
           nz-button
           nzType="primary"
-          [disabled]="!guardarForm.valid || !habilitarBotn"
+          [disabled]="!guardarForm.valid"
           (click)="guardarProducto()"
         >
           Guardar producto

@@ -12,34 +12,62 @@
   align-items: center;
   z-index: 9999;
   &__contenido {
-    width: 700px;
+    width: 400px;
     background-color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 27px;
     position: relative;
     z-index: 10000;
+    border: 5px solid $color-brand-primary;
+    margin-top: 50px;
+    &--secciones {
+      height: 500px;
+      &__imagen {
+        width: 180px;
+        height: 180px;
+        border: 4px solid $color-brand-primary;
+        border-radius: 50%;
+        margin: -130px auto 0px auto;
+        background: white;
+        &--icono {
+          width: 130px;
+          margin-top: 25px;
+          margin-left: 20px;
+        }
+      }
+    }
     &--cerrar {
-      position: absolute;
-      top: 0px;
-      right: 10px;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: bold;
       cursor: pointer;
+      width: 18px;
+      margin: 0px 10px 0px auto;
+      color: $color-brand-primary;
     }
     &--footer {
-      font-size: 20px;
-
+      border-radius: 0px 0px 20px 20px;
+      -moz-border-radius: 0px 0px 20px 20px;
+      -webkit-border-radius: 0px 0px 20px 20px;
+      border: 0px solid #000000;
+      background-color: $color-brand-primary;
+      padding: 5px 10px;
       &__contenedor-iconos {
-        width: 160px;
+        width: 200px;
         margin: 10px auto 0px auto;
-
-        &--icono {
-          color: rgb(119, 119, 119);
-          margin-right: 20px;
+        display: flex;
+        justify-content: space-between;
+        &--seccion {
+          text-align: center;
           cursor: pointer;
-
-          &:hover {
-            color: $color-brand-primary;
+          &__icono {
+            font-size: 20px;
+            color: rgb(255, 255, 255);
+            &:hover {
+              color: white;
+            }
+          }
+          &__texto {
+            font-size: 14px;
+            color:  white;
           }
         }
       }
@@ -47,12 +75,9 @@
   }
 }
 
-.no-seleccionada {
-  color: rgb(119, 119, 119);
-}
 
 .seleccionada {
-  color: $color-brand-primary;
+  color: white;
   font-size: 26px;
 }
 
