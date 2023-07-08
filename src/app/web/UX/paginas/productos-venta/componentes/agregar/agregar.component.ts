@@ -68,6 +68,7 @@ export class AgregarComponent implements OnInit {
     codigoBarras: new FormControl('', [Validators.required]),
     descripcion: new FormControl('', [Validators.required]),
     precioCompra: new FormControl('', [Validators.required]),
+    descuento: new FormControl('', [Validators.required]),
     sku: new FormControl('', [Validators.required]),
   });
 
@@ -82,6 +83,7 @@ export class AgregarComponent implements OnInit {
         );
       }
     );
+    console.log(this.productosCompraVenta)
   }
 
   /**

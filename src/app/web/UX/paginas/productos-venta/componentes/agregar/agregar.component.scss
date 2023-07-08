@@ -1,3 +1,5 @@
+@import "../../../../../../../styles.scss";
+
 .modal {
   position: fixed;
   top: 0;
@@ -9,54 +11,142 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  &__form {
-    &--seccion {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 15px;
+  &__cabecera {
+    &--titulo {
+      font-size: 20px;
+      text-align: center;
+      margin: 10px auto;
     }
-    &--boton {
-      width: 152px;
-      margin: 0px 0px 0px auto;
+  }
+  &__switch {
+    margin: 5px auto;
+    &--icono {
+      width: 50px;
+      margin: 0px auto 15px auto;
+    }
+    &--titulo {
+      text-align: center;
+      font-weight: 600;
     }
   }
   &__contenido {
-    width: 700px;
+    width: 400px;
     background-color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 27px;
     position: relative;
     z-index: 10000;
+    border: 5px solid $color-brand-primary;
+    margin-top: 50px;
+    &--secciones {
+      height: 520px;
+      &__imagen {
+        width: 180px;
+        height: 180px;
+        border: 4px solid $color-brand-primary;
+        border-radius: 50%;
+        margin: -130px auto 0px auto;
+        background: white;
+        &--icono {
+          width: 130px;
+          margin-top: 25px;
+          margin-left: 20px;
+        }
+      }
+    }
     &--cerrar {
-      position: absolute;
-      top: 0px;
-      right: 10px;
-      font-size: 20px;
+      font-size: 24px;
       font-weight: bold;
       cursor: pointer;
+      width: 18px;
+      margin: 0px 10px 0px auto;
+      color: $color-brand-primary;
     }
-    &--cabecera {
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid #d2d2d2;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding-top: 10px;
-      &__titulo {
-        font-size: 20px;
-        color: black;
-        margin-left: 5px;
-      }
-      &__switch {
-        margin-top: 7px;
+    &--footer {
+      border-radius: 0px 0px 20px 20px;
+      -moz-border-radius: 0px 0px 20px 20px;
+      -webkit-border-radius: 0px 0px 20px 20px;
+      border: 0px solid #000000;
+      background-color: $color-brand-primary;
+      padding: 5px 10px;
+      &__contenedor-iconos {
+        width: 200px;
+        height: 45px;
+        margin: 10px auto 0px auto;
+        display: flex;
+        justify-content: space-between;
+        &--seccion {
+          text-align: center;
+          cursor: pointer;
+          &__icono {
+            font-size: 20px;
+            color: rgb(255, 255, 255);
+            &:hover {
+              color: white;
+            }
+          }
+          &__texto {
+            font-size: 14px;
+            color: white;
+          }
+        }
       }
     }
   }
 }
 
-.icono-info {
-  color: #3b71ca;
-  font-size: 24px;
+.agregar {
+  padding: 0px 15px;
+  &--datos {
+    &__nombre {
+      width: 180px;
+      margin: 0px auto;
+      height: 32px !important;
+    }
+    &__descripcion {
+      color: $color-brand-primary;
+      margin: 0px auto 15px auto;
+      font-size: 14px;
+      text-align: center;
+    }
+    &__contenedor {
+      width: 300px;
+      margin: 0px auto;
+      &--texto {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 10px;
+        margin-bottom: 5px;
+        height: 25px;
+        &--llave {
+          width: 100%;
+          font-weight: 700;
+          border-right: 1px dashed black;
+          height: 25px;
+        }
+        &--valor {
+          height: 25px;
+          input {
+            height: 25px;
+          }
+        }
+      }
+    }
+  }
+  &--boton {
+    cursor: pointer;
+    width: 250px;
+    margin: 0px auto;
+    font-size: 12px;
+    background: white;
+    border: 1px soli $color-brand-primary;
+    height: 40px;
+    color: $color-brand-primary;
+    button {
+      width: 100%;
+      height: 40px;
+      padding: 5px auto;
+    }
+  }
 }
 
 select:focus {
@@ -66,20 +156,28 @@ select:focus {
 }
 
 input,
-select {
+select,
+textarea {
   border: none;
   border-bottom: 1px solid rgb(200, 200, 200);
+  height: 30px;
+}
+
+textarea {
+  padding: 0;
+  height: 20px!important;
 }
 
 .select {
   background-color: transparent;
   width: 100%;
-  height: 32px;
+  height: 30px;
 }
 
 input:focus {
-  outline: none;
+  outline: none !important;
   border: none !important;
+  margin: 5px auto;
 }
 
 option {
@@ -98,23 +196,6 @@ option {
   margin-bottom: 10px;
 }
 
-.notificacion {
-  margin: 10px auto;
-}
-
-.fecha {
-  width: 100%;
-}
-
-.green-icon {
-  font-size: 30px;
-  position: fixed; /* Establece la posición fija para que se mantenga en su lugar */
-  top: 95%; /* Posiciona el elemento en la mitad de la pantalla verticalmente */
-  left: 95%; /* Posiciona el elemento en la mitad de la pantalla horizontalmente */
-  transform: translate(-50%, -50%); /* Centra el elemento correctamente */
-  z-index: 9999; /* Asegura que el elemento esté encima de todos los demás elementos */
-}
-
 .ant-input[disabled] {
   background-color: white;
 }
@@ -128,4 +209,9 @@ option {
     border-radius: 5px;
     padding: 1px 8px !important;
   }
+}
+
+.icono-info {
+  color: #3b71ca;
+  font-size: 24px;
 }

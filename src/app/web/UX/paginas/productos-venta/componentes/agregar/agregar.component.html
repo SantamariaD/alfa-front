@@ -1,11 +1,18 @@
 <div class="modal">
   <div class="modal__contenido">
-    <span class="modal__contenido--cerrar" (click)="cerrarModal()"
-      >&times;</span
-    >
-
-    <div class="modal__contenido--cabecera">
-      <div class="modal__contenido--cabecera__titulo">
+    <div class="modal__contenido--cerrar" (click)="cerrarModal()">&times;</div>
+    <div class="modal__contenido--secciones">
+      <div class="modal__contenido--secciones__imagen">
+        <img
+          class="modal__contenido--secciones__imagen--icono"
+          src="/assets/imagenes/caracteristicas.png"
+          alt=""
+        />
+      </div>
+      <div
+        class="modal__cabecera--titulo"
+        *ngIf="productosCompraVenta.length < 1"
+      >
         <span
           class="icono-info"
           nz-icon
@@ -14,98 +21,127 @@
         ></span>
         Agregar producto
       </div>
-      <div
-        class="modal__contenido--cabecera__switch"
-        *ngIf="productosCompraVenta.length > 0"
-      >
-        <span class="modal__contenido--cabecera__switch--titulo">
-          ¿Desea agregar un producto desde el stock de compras?
-        </span>
-        <nz-switch
-          (ngModelChange)="switch($event)"
-          [(ngModel)]="switchValue"
-          name="switch"
-        ></nz-switch>
+      <div class="modal__switch" *ngIf="productosCompraVenta.length > 0">
+        <p class="modal__switch--titulo">
+          ¿Desea agregar un producto del almacen de compras?
+        </p>
+        <div class="modal__switch--icono">
+          <nz-switch
+            (ngModelChange)="switch($event)"
+            [(ngModel)]="switchValue"
+            name="switch"
+          ></nz-switch>
+        </div>
+      </div>
+      <div class="agregar" [formGroup]="guardarForm">
+        <div class="agregar--datos">
+          <div class="agregar--datos__contenedor">
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">Nombre</p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <input
+                  nz-input
+                  *ngIf="!productoCompra"
+                  type="text"
+                  formControlName="nombreProducto"
+                />
+                <select
+                  class="select"
+                  *ngIf="productoCompra"
+                  formControlName="nombreProducto"
+                  (change)="selectNombreProductoCompraVenta($event)"
+                >
+                  <option
+                    *ngFor="let producto of productosCompraVenta"
+                    [value]="producto.id"
+                  >
+                    {{ producto.nombre }}
+                  </option>
+                </select>
+              </p>
+            </div>
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">
+                Código de barras
+              </p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <input nz-input formControlName="codigoBarras" />
+              </p>
+            </div>
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">SKU</p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <input nz-input formControlName="sku" />
+              </p>
+            </div>
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">Categoría</p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <select class="select" formControlName="idCategoria">
+                  <option
+                    *ngFor="let categoria of categorias"
+                    [value]="categoria.id"
+                  >
+                    {{ categoria.categoria }}
+                  </option>
+                </select>
+              </p>
+            </div>
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">
+                Cantidad en stock
+              </p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <input nz-input formControlName="cantidadStock" />
+              </p>
+            </div>
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">
+                Precio de venta
+              </p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <input nz-input formControlName="precioVenta" />
+              </p>
+            </div>
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">
+                Precio de compra
+              </p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <input nz-input formControlName="precioCompra" />
+              </p>
+            </div>
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">Descuento</p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <input nz-input formControlName="descuento" />
+              </p>
+            </div>
+            <div class="agregar--datos__contenedor--texto">
+              <p class="agregar--datos__contenedor--texto--llave">
+                Descripción
+              </p>
+              <p class="agregar--datos__contenedor--texto--valor">
+                <textarea
+                  rows="1"
+                  nz-input
+                  formControlName="descripcion"
+                ></textarea>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <form class="modal__form" [formGroup]="guardarForm">
-      <nz-form-item class="modal__form--seccion">
-        <nz-form-control *ngIf="!productoCompra">
-          <label class="label">Nombre</label>
-          <input nz-input type="text" formControlName="nombreProducto" />
-        </nz-form-control>
-        <nz-form-control *ngIf="productoCompra">
-          <label class="label">Nombre</label>
-          <select
-            class="select"
-            formControlName="nombreProducto"
-            (change)="selectNombreProductoCompraVenta($event)"
-          >
-            <option
-              *ngFor="let producto of productosCompraVenta"
-              [value]="producto.id"
-            >
-              {{ producto.nombre }}
-            </option>
-          </select>
-        </nz-form-control>
-        <nz-form-control>
-          <label class="label">Categoría</label>
-          <select class="select" formControlName="idCategoria">
-            <option *ngFor="let categoria of categorias" [value]="categoria.id">
-              {{ categoria.categoria }}
-            </option>
-          </select>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="modal__form--seccion">
-        <nz-form-control>
-          <label class="label">Código de barras</label>
-          <input nz-input formControlName="codigoBarras" />
-        </nz-form-control>
-        <nz-form-control>
-          <label class="label">SKU</label>
-          <input nz-input type="text" formControlName="sku" />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="modal__form--seccion">
-        <nz-form-control>
-          <label class="label">Precio de compra</label>
-          <input nz-input formControlName="precioCompra" />
-        </nz-form-control>
-        <nz-form-control>
-          <p class="label">Precio de venta</p>
-          <input
-            class="input"
-            type="text"
-            formControlName="precioVenta"
-            (ngModelChange)="cambioPrecioVena($event)"
-          />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="modal__form--seccion">
-        <nz-form-control>
-          <label class="label">Cantidad en stock</label>
-          <input nz-input type="text" formControlName="cantidadStock" />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="modal__form">
-        <nz-form-control>
-          <label class="label">Descripción</label>
-          <textarea rows="2" nz-input formControlName="descripcion"></textarea>
-        </nz-form-control>
-      </nz-form-item>
-      <div class="modal__form--boton">
-        <button
-          nz-button
-          nzType="primary"
-          [disabled]="!guardarForm.valid"
-          (click)="guardarProducto()"
-        >
-          Guardar producto
-        </button>
+    <div class="modal__contenido--footer">
+      <div class="modal__contenido--footer__contenedor-iconos">
+        <div class="agregar--boton" (click)="guardarProducto()">
+          <button nz-button [disabled]="!guardarForm.valid">
+            <span nz-icon nzType="plus" nzTheme="outline"></span>
+            Agregar producto
+          </button>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </div>
