@@ -63,7 +63,30 @@
   </div>
   <div class="punto-venta__secciones">
     <div class="punto-venta__secciones--info-ticket">
-      <app-ticket #ticketComponent [ticket]="ticket"></app-ticket>
+      <div class="punto-venta__secciones__agregar-ticket">
+        <div
+          class="punto-venta__secciones__agregar-ticket--ticket"
+          *ngFor="let ticket of tickets; let i = index"
+          [ngClass]="{ ticketSeleccionado: i == posicionTicket }"
+          (click)="cambiarPosicionTicket(i)"
+        >
+          Ticket {{ i + 1 }}
+        </div>
+        <span
+          class="punto-venta__secciones__agregar-ticket--mas"
+          nz-icon
+          nzType="plus"
+          nzTheme="outline"
+          (click)="agregarTicket()"
+        ></span>
+      </div>
+      <div *ngFor="let ticket of tickets; let i = index">
+        <app-ticket
+          *ngIf="i == posicionTicket"
+          #ticketComponent
+          [ticket]="ticket"
+        ></app-ticket>
+      </div>
     </div>
     <div class="punto-venta__secciones--lista-productos menu-sidebar">
       <div

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -19,7 +19,6 @@ import {
 import { guardarCategoriasVentas } from 'src/app/web/informacion/state/categoriasVentas/categoriasVentas.actions';
 import { guardarProductosVentas } from 'src/app/web/informacion/state/stockVentas/stockVentas.actions';
 import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
-import { IVA } from 'src/app/web/informacion/utils/variables-globales';
 import { TicketComponent } from './componentes/ticket/ticket.component';
 
 @Component({
@@ -56,9 +55,14 @@ export class VentasComponent implements OnInit {
   productosVentaFiltrados: ProductoVenta[] = [];
 
   /**
-   * @variable ticket: info de los productos que estan en el ticket
+   * @variable tickets: Contiene los tickets que se se estan manejando
    */
-  ticket: Ticket = {} as Ticket;
+  tickets: Ticket[] = [{} as Ticket];
+
+  /**
+   * @variable posicionTicket: Es el ticket que se trabaja actualmente
+   */
+  posicionTicket = 0;
 
   /**
    * @variable categorias: contiene las categorias
@@ -80,6 +84,7 @@ export class VentasComponent implements OnInit {
   ngOnInit(): void {
     this.consultarCategorias();
     this.consultarProductos();
+    console.log(this.tickets);
   }
 
   /**
@@ -96,8 +101,8 @@ export class VentasComponent implements OnInit {
         this.productosVentaFiltrados = [productoSeleccionado];
         this.codigoBarrasForm.reset();
 
-        if (!this.ticket.productosVenta) {
-          this.ticket.productosVenta = [
+        if (!this.tickets[this.posicionTicket].productosVenta) {
+          this.tickets[this.posicionTicket].productosVenta = [
             {
               ...productoSeleccionado,
               cantidad: 1,
@@ -105,13 +110,17 @@ export class VentasComponent implements OnInit {
             },
           ];
         } else {
-          const productoExistente = this.ticket.productosVenta.find(
+          const productoExistente = this.tickets[
+            this.posicionTicket
+          ].productosVenta.find(
             (productoTicket: ProductoTicket) =>
               productoTicket.codigoBarras == codigoBarras
           );
 
           if (productoExistente) {
-            const indiceObjeto = this.ticket.productosVenta.findIndex(
+            const indiceObjeto = this.tickets[
+              this.posicionTicket
+            ].productosVenta.findIndex(
               (objeto) => objeto.codigoBarras == productoExistente.codigoBarras
             );
             productoExistente.cantidad += 1;
@@ -124,15 +133,16 @@ export class VentasComponent implements OnInit {
                 )
             );
             if (indiceObjeto !== -1) {
-              const objetoMover = this.ticket.productosVenta.splice(
-                indiceObjeto,
-                1
-              )[0];
-              this.ticket.productosVenta.unshift(objetoMover);
+              const objetoMover = this.tickets[
+                this.posicionTicket
+              ].productosVenta.splice(indiceObjeto, 1)[0];
+              this.tickets[this.posicionTicket].productosVenta.unshift(
+                objetoMover
+              );
               this.ticketComponent?.calculoTicket();
             }
           } else {
-            this.ticket.productosVenta.unshift({
+            this.tickets[this.posicionTicket].productosVenta.unshift({
               ...productoSeleccionado,
               cantidad: 1,
               total: productoSeleccionado.precioVenta,
@@ -151,24 +161,28 @@ export class VentasComponent implements OnInit {
    * @Metodo click en card para agregar un producto
    */
   clickAgregarProducto(productoSeleccionado: ProductoVenta): void {
-    if (!this.ticket.productosVenta) {
-      this.ticket.productosVenta = [];
+    if (!this.tickets[this.posicionTicket].productosVenta) {
+      this.tickets[this.posicionTicket].productosVenta = [];
     }
 
-    let productoExistente = this.ticket.productosVenta.find(
+    let productoExistente = this.tickets[
+      this.posicionTicket
+    ].productosVenta.find(
       (productoTicket: ProductoTicket) =>
         productoTicket.codigoBarras == productoSeleccionado.codigoBarras
     ) as ProductoTicket;
 
     if (!productoExistente) {
-      this.ticket.productosVenta.unshift({
+      this.tickets[this.posicionTicket].productosVenta.unshift({
         ...productoSeleccionado,
         cantidad: 1,
         total: productoSeleccionado.precioVenta,
       });
       this.ticketComponent?.calculoTicket();
     } else {
-      const indiceObjeto = this.ticket.productosVenta.findIndex(
+      const indiceObjeto = this.tickets[
+        this.posicionTicket
+      ].productosVenta.findIndex(
         (objeto) => objeto.codigoBarras == productoExistente.codigoBarras
       );
       productoExistente.cantidad += 1;
@@ -179,14 +193,27 @@ export class VentasComponent implements OnInit {
           )
       );
       if (indiceObjeto !== -1) {
-        const objetoMover = this.ticket.productosVenta.splice(
-          indiceObjeto,
-          1
-        )[0];
-        this.ticket.productosVenta.unshift(objetoMover);
+        const objetoMover = this.tickets[
+          this.posicionTicket
+        ].productosVenta.splice(indiceObjeto, 1)[0];
+        this.tickets[this.posicionTicket].productosVenta.unshift(objetoMover);
         this.ticketComponent?.calculoTicket();
       }
     }
+  }
+
+  /**
+   * @Metodo agrega un nuevo ticket
+   */
+  agregarTicket(): void {
+    this.tickets.push({} as Ticket);
+  }
+
+/**
+   * @Metodo cambia la posición del ticket para ver otro
+   */
+  cambiarPosicionTicket(posicion: number): void {
+    this.posicionTicket = posicion;
   }
 
   /**
@@ -290,8 +317,6 @@ export class VentasComponent implements OnInit {
     this.mostrarAgregarProducto = true;
   }
 
-  
-
   /**
    * @Metodo quita los simbolos y parse a un numero
    */
@@ -302,8 +327,6 @@ export class VentasComponent implements OnInit {
       return producto;
     });
   }
-
-  
 
   /**
    * @Metodo llama a la api para consultar las categorias

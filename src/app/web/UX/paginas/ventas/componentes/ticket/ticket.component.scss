@@ -2,15 +2,14 @@
 
 .ticket {
   width: 100%;
-  margin-top: 20px;
-  min-height: 67vh;
-  max-height: 67vh;
+  min-height: 64vh;
+  max-height: 64vh;
   background-color: white;
   display: grid;
   grid-template-rows: 10% 10% 52% 8% 8% 12%;
-  -webkit-box-shadow: 0px 0px 30px -13px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 30px -13px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 30px -13px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 6px 13px -8px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 6px 13px -8px rgba(0,0,0,0.75);
+box-shadow: 0px 6px 13px -8px rgba(0,0,0,0.75);
   &__titulo {
     padding: 5px 15px;
     background: rgb(246, 246, 246);
@@ -42,7 +41,7 @@
       &--img {
         width: 150px;
         height: 150px;
-        margin: 20px auto 0px auto;
+        margin: 10px auto 0px auto;
         img {
           width: 150px;
           height: 150px;

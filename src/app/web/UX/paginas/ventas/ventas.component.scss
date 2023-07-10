@@ -178,7 +178,57 @@
       -moz-box-shadow: 0px 0px 30px -13px rgba(0, 0, 0, 0.75);
       box-shadow: 0px 0px 30px -13px rgba(0, 0, 0, 0.75);
     }
+    &__agregar-ticket {
+      margin-top: 15px;
+      width: auto;
+      display: flex;
+      justify-content: start;
+      &--ticket {
+        width: 80px;
+        padding: 2px 5px;
+        background: rgb(255, 255, 255);
+        -webkit-box-shadow: 0px 6px 13px -8px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 6px 13px -8px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 6px 13px -8px rgba(0, 0, 0, 0.75);
+        border-radius: 0px 15px 0px 0px;
+        -moz-border-radius: 0px 15px 0px 0px;
+        -webkit-border-radius: 0px 15px 0px 0px;
+        border: 1px soli rgb(172, 172, 172);
+        cursor: pointer;
+        transition: all ease 0.7s;
+        &:hover {
+          background-color: $color-brand-primary;
+          color: white;
+        }
+      }
+      span {
+        margin-left: 2px;
+        padding-top: 2px;
+        font-size: 20px;
+        width: 28px;
+        background: white;
+        cursor: pointer;
+        border: 1px soli rgb(172, 172, 172);
+        -webkit-box-shadow: 0px 6px 13px -8px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 6px 13px -8px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 6px 13px -8px rgba(0, 0, 0, 0.75);
+        border-radius: 5px 5px 0px 0px;
+        -moz-border-radius: 5px 5px 0px 0px;
+        -webkit-border-radius: 5px 5px 0px 0px;
+        transition: all ease 0.7s;
+        cursor: pointer;
+        &:hover {
+          background-color: $color-brand-primary;
+          color: white;
+        }
+      }
+    }
   }
+}
+
+.ticketSeleccionado {
+  background-color: $color-brand-primary;
+  color: white;
 }
 
 input {
