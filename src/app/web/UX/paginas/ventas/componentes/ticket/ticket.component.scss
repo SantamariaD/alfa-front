@@ -1,0 +1,223 @@
+@import "../../../../../../../styles.scss";
+
+.ticket {
+  width: 100%;
+  margin-top: 20px;
+  min-height: 67vh;
+  max-height: 67vh;
+  background-color: white;
+  display: grid;
+  grid-template-rows: 10% 10% 52% 8% 8% 12%;
+  -webkit-box-shadow: 0px 0px 30px -13px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 30px -13px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 30px -13px rgba(0, 0, 0, 0.75);
+  &__titulo {
+    padding: 5px 15px;
+    background: rgb(246, 246, 246);
+    font-size: 24px;
+    font-weight: 600;
+  }
+  &__informacion {
+    padding: 0px 15px;
+    background: rgb(246, 246, 246);
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    border-bottom: 1px solid rgb(194, 194, 194);
+    &--total-productos {
+      font-weight: 600;
+    }
+    &--fecha {
+      color: rgb(188, 188, 188);
+    }
+  }
+  &__productos {
+    overflow-y: auto;
+    transition: all ease 0.5s;
+    &--sin-productos {
+      text-align: center;
+      font-size: 20px;
+      color: #cfcfcf;
+      font-weight: 600;
+      &--img {
+        width: 150px;
+        height: 150px;
+        margin: 20px auto 0px auto;
+        img {
+          width: 150px;
+          height: 150px;
+          margin: auto;
+        }
+      }
+    }
+    &__producto {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid rgb(207, 207, 207);
+      margin-bottom: 10px;
+      padding: 5px 15px;
+      &--informacion {
+        text-align: center;
+        &--nombre {
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+      &--agregar {
+        margin: auto;
+        &__sumador {
+          width: 120px;
+          margin: auto;
+          border: 1px solid rgb(192, 192, 192);
+          display: grid;
+          grid-template-columns: 30% 40% 30%;
+          text-align: center;
+          font-size: 17px;
+          &--sumar,
+          &--restar {
+            color: rgb(33, 71, 242);
+            cursor: pointer;
+          }
+          &--cantidad {
+            margin-top: auto;
+          }
+          &--texto {
+            font-size: 12px;
+            text-align: center;
+            color: rgb(117, 117, 117);
+          }
+        }
+      }
+      &--precio-total {
+        text-align: center;
+        font-size: 16px;
+      }
+    }
+  }
+  &__subtotal {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px;
+    background: rgb(246, 246, 246);
+    border-top: 1px solid rgb(194, 194, 194);
+    &--text {
+      font-size: 16px;
+      color: rgb(188, 188, 188);
+      font-weight: 600;
+      margin: auto auto auto 0px;
+    }
+    &--value {
+      font-size: 16px;
+      color: rgb(188, 188, 188);
+      font-weight: 600;
+      margin: auto 0px auto auto;
+    }
+  }
+  &__iva {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 15px;
+    background: rgb(246, 246, 246);
+    border-top: 1px solid rgb(194, 194, 194);
+    &--text {
+      font-size: 16px;
+      color: rgb(188, 188, 188);
+      font-weight: 600;
+      margin: auto auto auto 0px;
+    }
+    &--value {
+      font-size: 16px;
+      color: rgb(188, 188, 188);
+      font-weight: 600;
+      margin: auto 0px auto auto;
+    }
+  }
+  &__total {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px;
+    background: $color-brand-primary;
+    border: 1px solid rgb(194, 194, 194);
+    color: white;
+    cursor: pointer;
+    &:hover {
+      background-color: #003b72;
+    }
+    &--text {
+      font-size: 24px;
+      font-weight: 600;
+      margin: auto auto auto 0px;
+    }
+    &--value {
+      font-size: 24px;
+      font-weight: 600;
+      margin: auto 0px auto auto;
+    }
+  }
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid rgb(200, 200, 200);
+}
+
+input:focus {
+  outline: none !important;
+  border: none !important;
+  border-bottom: 1px solid rgb(200, 200, 200) !important;
+}
+
+.menu-sidebar {
+  scrollbar-width: 3px; /* Ancho de la barra de desplazamiento */
+  scrollbar-color: #003e78 #dddddd !important; /* Color de la barra y del fondo */
+}
+
+/* Personalización de la barra de desplazamiento en WebKit (Safari, Chrome) */
+.menu-sidebar::-webkit-scrollbar {
+  width: 3px; /* Ancho de la barra de desplazamiento */
+  border-radius: 2px;
+  height: 3px;
+}
+
+.menu-sidebar::-webkit-scrollbar-track {
+  background-color: #dddddd; /* Color del fondo */
+}
+
+.menu-sidebar::-webkit-scrollbar-thumb {
+  background-color: #003e78; /* Color de la barra */
+}
+
+li {
+  font-size: 16px;
+}
+
+.desactivado {
+  background: #ffffff !important;
+  color: rgb(188, 188, 188) !important;
+  cursor: not-allowed;
+  border: 1px solid rgb(211, 211, 211);
+}
+
+.botonDesactivado {
+  background: #e7e7e7 !important;
+  color: rgb(188, 188, 188) !important;
+  cursor: not-allowed;
+  border: 1px solid rgb(211, 211, 211);
+}
+
+.selectBusqueda {
+  background: $color-brand-primary !important;
+  color: white !important;
+}
+
+.elemento {
+  height: 20px;
+}
+
+.productoSelect {
+  padding-top: 7px;
+  background: #edf6ff;
+}

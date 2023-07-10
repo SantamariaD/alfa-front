@@ -7,12 +7,17 @@ export interface Ticket extends InformacionFecha {
     idSucursal:string;
     idCliente: string;
     nombreEmpresa: string;
-    nombreSucursale:string;
+    nombreSucursal:string;
     nombreEmpleado: string;
-    metodoPago: string;
+    metodoPago: TipoPago[];
     subtotal: number;
     iva:number;
     total:number;
     imagen?: string;
     productosVenta: ProductoTicket[];
+}
+
+export interface TipoPago {
+    tipo: string;
+    monto: number;
 }

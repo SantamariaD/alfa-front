@@ -20,6 +20,7 @@ import { guardarCategoriasVentas } from 'src/app/web/informacion/state/categoria
 import { guardarProductosVentas } from 'src/app/web/informacion/state/stockVentas/stockVentas.actions';
 import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 import { IVA } from 'src/app/web/informacion/utils/variables-globales';
+import { TicketComponent } from './componentes/ticket/ticket.component';
 
 @Component({
   selector: 'app-ventas',
@@ -27,6 +28,8 @@ import { IVA } from 'src/app/web/informacion/utils/variables-globales';
   styleUrls: ['./ventas.component.scss'],
 })
 export class VentasComponent implements OnInit {
+  @ViewChild('ticketComponent') ticketComponent: TicketComponent | undefined;
+
   /**
    * @variable codigoBarras: Contiene el codigoBarrase a buscar
    */
@@ -58,31 +61,6 @@ export class VentasComponent implements OnInit {
   ticket: Ticket = {} as Ticket;
 
   /**
-   * @variable ticket: total del ticket
-   */
-  totalTicket: any;
-
-   /**
-   * @variable ticket: total de productos del ticket
-   */
-   totalProductos = 0;
-
-  /**
-   * @variable subtotalTicket: subtotal del ticket
-   */
-  subtotalTicket: any;
-
-  /**
-   * @variable iva: iva del ticket
-   */
-  iva = IVA;
-
-  /**
-   * @variable fecha: fecha del ticket
-   */
-  fecha = new Date();
-
-  /**
    * @variable categorias: contiene las categorias
    */
   categorias: Array<Categoria> = [];
@@ -102,9 +80,6 @@ export class VentasComponent implements OnInit {
   ngOnInit(): void {
     this.consultarCategorias();
     this.consultarProductos();
-    setInterval(() => {
-      this.fecha = new Date();
-    }, 1000);
   }
 
   /**
@@ -154,7 +129,7 @@ export class VentasComponent implements OnInit {
                 1
               )[0];
               this.ticket.productosVenta.unshift(objetoMover);
-              this.calculoTicket();
+              this.ticketComponent?.calculoTicket();
             }
           } else {
             this.ticket.productosVenta.unshift({
@@ -162,7 +137,7 @@ export class VentasComponent implements OnInit {
               cantidad: 1,
               total: productoSeleccionado.precioVenta,
             });
-            this.calculoTicket();
+            this.ticketComponent?.calculoTicket();
           }
         }
       } else {
@@ -191,7 +166,7 @@ export class VentasComponent implements OnInit {
         cantidad: 1,
         total: productoSeleccionado.precioVenta,
       });
-      this.calculoTicket();
+      this.ticketComponent?.calculoTicket();
     } else {
       const indiceObjeto = this.ticket.productosVenta.findIndex(
         (objeto) => objeto.codigoBarras == productoExistente.codigoBarras
@@ -209,7 +184,7 @@ export class VentasComponent implements OnInit {
           1
         )[0];
         this.ticket.productosVenta.unshift(objetoMover);
-        this.calculoTicket();
+        this.ticketComponent?.calculoTicket();
       }
     }
   }
@@ -315,15 +290,7 @@ export class VentasComponent implements OnInit {
     this.mostrarAgregarProducto = true;
   }
 
-  /**
-   * @Metodo Suma un producto
-   */
-  sumar(producto: any): void {}
-
-  /**
-   * @Metodo Resta un producto
-   */
-  restar(producto: any): void {}
+  
 
   /**
    * @Metodo quita los simbolos y parse a un numero
@@ -336,23 +303,7 @@ export class VentasComponent implements OnInit {
     });
   }
 
-  /**
-   * @Metodo Calcula el total y subtotal del ticket
-   */
-  private calculoTicket() {
-    this.totalTicket = 0;
-    this.totalProductos = 0;
-    this.ticket.productosVenta.forEach((producto: ProductoTicket) => {
-      this.totalTicket += parseFloat(
-        producto.total.replace('$', '').replace(',', '')
-      );
-      this.totalProductos += producto.cantidad;
-    });
-    this.subtotalTicket = formateoMoneda(
-      this.totalTicket - this.totalTicket * IVA
-    );
-    this.totalTicket = formateoMoneda(this.totalTicket);
-  }
+  
 
   /**
    * @Metodo llama a la api para consultar las categorias
