@@ -1,9 +1,224 @@
-<section class="proveedores contenedor-principal-pagina">
-    <header class="productos__secciones-cabecera">
-        <app-secciones-cabecera
-          [secciones]="secciones"
-          (seleccionadoClick)="selectSeccion($event)"
-        ></app-secciones-cabecera>
-      </header>
-      <router-outlet></router-outlet>
+<section class="punto-venta">
+  <div class="punto-venta__buscador">
+    <div class="punto-venta__buscador__codigo-barras">
+      <div class="punto-venta__buscador__codigo-barras__icono">
+        <span
+          (click)="selectNombreProducto()"
+          nz-icon
+          nz-tooltip
+          nzTooltipTitle="Buscar por Nombre"
+          nzType="font-colors"
+          nzTheme="outline"
+          [ngClass]="{ selectBusqueda: tipoBusqueda == 'Nombre del producto' }"
+        ></span>
+        <span
+          (click)="selectCodigoBarras()"
+          nz-icon
+          nz-tooltip
+          nzTooltipTitle="Buscar por Código"
+          nzType="barcode"
+          nzTheme="outline"
+          [ngClass]="{ selectBusqueda: tipoBusqueda == 'Código de barras' }"
+        ></span>
+      </div>
+      <input
+        *ngIf="tipoBusqueda == 'Nombre del producto'"
+        class="punto-venta__buscador__codigo-barras__input"
+        type="text"
+        [placeholder]="tipoBusqueda"
+        [formControl]="codigoBarrasForm"
+        (keyup)="buscarNombreProducto($event)"
+      />
+      <input
+        *ngIf="tipoBusqueda == 'Código de barras'"
+        class="punto-venta__buscador__codigo-barras__input"
+        type="text"
+        [placeholder]="tipoBusqueda"
+        [formControl]="codigoBarrasForm"
+        (keyup)="buscarCodigoBarras($event)"
+      />
+    </div>
+    <div class="punto-venta__buscador__boton">
+      <button
+        class="punto-venta__buscador__boton--buscar"
+        [disabled]="!codigoBarrasForm.valid"
+        (click)="buscarCodigoBarrasManual()"
+        [ngClass]="{ desactivado: !codigoBarrasForm.valid }"
+      >
+        Buscar producto
+      </button>
+      <button
+        class="punto-venta__buscador__boton--agregar"
+        (click)="abrirModalAgregarProducto()"
+      >
+        Agregar producto
+      </button>
+      <button
+        class="punto-venta__buscador__boton--ver"
+        (click)="verTodosProductos()"
+      >
+        Ver todos los productos
+      </button>
+    </div>
+  </div>
+  <div class="punto-venta__secciones">
+    <div class="punto-venta__secciones--info-ticket">
+      <p class="punto-venta__secciones--info-ticket--titulo">Ticket de venta</p>
+      <div class="punto-venta__secciones--info-ticket--informacion">
+        <p class="punto-venta__secciones--info-ticket--informacion--total-productos">
+          Total de productos: {{totalProductos}}
+        </p>
+        <p class="punto-venta__secciones--info-ticket--informacion--fecha">
+          Fecha: {{ fecha | date : "dd MMMM yyyy HH:mm:ss" }}
+        </p>
+      </div>
+      <div class="punto-venta__secciones--info-ticket--productos menu-sidebar">
+        <div *ngIf="ticket.productosVenta">
+          <div
+            class="punto-venta__secciones--info-ticket--productos__producto"
+            *ngFor="
+              let producto of ticket.productosVenta;
+              let ultimo = last;
+              let i = index
+            "
+            [ngClass]="{ productoSelect: i == 0 }"
+          >
+            <div
+              class="punto-venta__secciones--info-ticket--productos__producto--informacion"
+            >
+              <p
+                class="punto-venta__secciones--info-ticket--productos__producto--informacion--nombre"
+              >
+                {{ producto.nombreProducto }}
+              </p>
+              <p
+                class="punto-venta__secciones--info-ticket--productos__producto--informacion--precio"
+              >
+                {{ producto.precioVenta }}
+              </p>
+            </div>
+            <div
+              class="punto-venta__secciones--info-ticket--productos__producto--agregar"
+              [ngClass]="{ productoSelect: i == 0 }"
+            >
+              <div
+                class="punto-venta__secciones--info-ticket--productos__producto--agregar__sumador"
+              >
+                <div
+                  class="punto-venta__secciones--info-ticket--productos__producto--agregar__sumador--restar"
+                  [ngClass]="{ restar: producto.cantidad <= 1 }"
+                  (click)="restar(producto)"
+                >
+                  -
+                </div>
+                <div
+                  class="punto-venta__secciones--info-ticket--productos__producto--agregar__sumador--cantidad"
+                >
+                  {{ producto.cantidad }}
+                </div>
+                <div
+                  class="punto-venta__secciones--info-ticket--productos__producto--agregar__sumador--sumar"
+                  (click)="sumar(producto)"
+                >
+                  +
+                </div>
+              </div>
+              <p
+                class="punto-venta__secciones--info-ticket--productos__producto--agregar__sumador--texto"
+              >
+                Cantidad a comprar
+              </p>
+            </div>
+            <p
+              class="punto-venta__secciones--info-ticket--productos__producto--precio-total"
+            >
+              {{ producto.total }}
+            </p>
+          </div>
+        </div>
+        <div
+        *ngIf="!ticket.productosVenta"
+          class="punto-venta__secciones--info-ticket--productos--sin-productos"
+        >
+          <div
+            class="punto-venta__secciones--info-ticket--productos--sin-productos--img"
+          >
+            <img
+              src="../../../../../assets/imagenes/agregar-producto-ticket.png"
+              alt="add img"
+            />
+          </div>
+          No hay productos en el ticket
+        </div>
+      </div>
+      <div class="punto-venta__secciones--info-ticket--subtotal">
+        <p class="punto-venta__secciones--info-ticket--subtotal--text">
+          Subtotal:
+        </p>
+        <p class="punto-venta__secciones--info-ticket--subtotal--value">
+          {{ subtotalTicket || "$0.00" }}
+        </p>
+      </div>
+      <div class="punto-venta__secciones--info-ticket--iva">
+        <p class="punto-venta__secciones--info-ticket--iva--text">IVA:</p>
+        <p class="punto-venta__secciones--info-ticket--iva--value">
+          {{ iva * 100 }}%
+        </p>
+      </div>
+      <div class="punto-venta__secciones--info-ticket--total">
+        <p class="punto-venta__secciones--info-ticket--total--text">
+          Pagar total:
+        </p>
+        <p class="punto-venta__secciones--info-ticket--total--value">
+          {{ totalTicket || "$0.00" }}
+        </p>
+      </div>
+    </div>
+    <div class="punto-venta__secciones--lista-productos menu-sidebar">
+      <div
+        class="punto-venta__secciones--lista-productos__card"
+        *ngFor="let producto of productosVentaFiltrados"
+        (click)="clickAgregarProducto(producto)"
+      >
+        <div class="punto-venta__secciones--lista-productos__card--imagen">
+          <img
+            src="../../../../../assets/imagenes/agregar-producto.png"
+            alt="Producto"
+          />
+        </div>
+        <div class="punto-venta__secciones--lista-productos__card--informacion">
+          <p
+            class="punto-venta__secciones--lista-productos__card--informacion--nombre"
+          >
+            {{ producto.nombreProducto }}
+          </p>
+          <p
+            class="punto-venta__secciones--lista-productos__card--informacion--descripcion"
+          >
+            {{ producto.descripcion }}
+          </p>
+          <p
+            class="punto-venta__secciones--lista-productos__card--informacion--precio"
+          >
+            {{ producto.precioVenta }}
+          </p>
+        </div>
+        <div class="punto-venta__secciones--lista-productos__card--footer">
+          <p
+            class="punto-venta__secciones--lista-productos__card--footer--texto"
+          >
+            <span nz-icon nzType="barcode" nzTheme="outline"></span>
+            {{ producto.codigoBarras }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<app-agregar
+  *ngIf="mostrarAgregarProducto"
+  [categorias]="categorias"
+  (clickGuardarProducto)="clickGuardarProducto($event)"
+  (clickCerrar)="clickCerrarModalAgregarProducto()"
+></app-agregar>

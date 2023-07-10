@@ -22,7 +22,7 @@ import {
 import { guardarCategoriasVentas } from 'src/app/web/informacion/state/categoriasVentas/categoriasVentas.actions';
 import { guardarProductosCompraVenta } from 'src/app/web/informacion/state/productosCompraVenta/productosCompraVenta.actions';
 import { guardarProductosVentas } from 'src/app/web/informacion/state/stockVentas/stockVentas.actions';
-import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
+import { formateoMoneda, quitarMoneda } from 'src/app/web/informacion/utils/funciones';
 
 @Component({
   selector: 'app-stock-ventas',
@@ -352,7 +352,7 @@ export class ProductosVentaComponent implements OnInit {
           this.consultarProductosCompraVenta();
         } else {
           this.datosTabla = productosStore;
-          this.datosTabla = this.quitarMoneda(this.datosTabla);
+          this.datosTabla = quitarMoneda(this.datosTabla);
           this.informacionStock();
           this.ponerMoneda();
         }
@@ -378,27 +378,6 @@ export class ProductosVentaComponent implements OnInit {
     this.totalProductos = totalProductos.toString();
     this.valorProductosVendidos = formateoMoneda(valorProductosVendidos);
     this.valorStockProductos = formateoMoneda(valorStockProductos);
-  }
-
-  /**
-   * @Metodo quita los simbolos y parse a un numero
-   */
-  private quitarMoneda(datos: any): any {
-    return datos.map((producto: ProductoVenta) => {
-      if (
-        typeof producto.precioVenta == 'string' &&
-        typeof producto.precioCompra == 'string'
-      ) {
-        producto.precioCompra = producto.precioCompra
-          .replace('$', '')
-          .replace(',', '');
-        producto.precioVenta = producto.precioVenta
-          .replace('$', '')
-          .replace(',', '');
-      }
-
-      return producto;
-    });
   }
 
   /**

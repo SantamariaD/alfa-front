@@ -69,7 +69,6 @@ export class AgregarComponent implements OnInit {
     descripcion: new FormControl('', [Validators.required]),
     precioCompra: new FormControl('', [Validators.required]),
     descuento: new FormControl('', [Validators.required]),
-    sku: new FormControl('', [Validators.required]),
   });
 
   constructor() {}
@@ -79,11 +78,12 @@ export class AgregarComponent implements OnInit {
       (producto: Producto) => {
         return !this.productosVenta.some(
           (venta: ProductoVenta) =>
-            venta.sku == producto.sku && venta.stockCompras
+            (venta.codigoBarras == producto.codigoBarras ||
+              venta.sku == producto.sku) &&
+            venta.stockCompras
         );
       }
     );
-    console.log(this.productosCompraVenta)
   }
 
   /**
@@ -103,7 +103,6 @@ export class AgregarComponent implements OnInit {
         cantidadStock: this.productoSelect.cantidadStock,
         codigoBarras: this.productoSelect.codigoBarras,
         descripcion: this.productoSelect.descripcion,
-        sku: this.productoSelect.sku,
         idCategoria: parseInt(this.guardarForm.value.idCategoria),
         precioVenta: this.guardarForm.value.precioVenta,
         stockCompras: true,
@@ -129,7 +128,6 @@ export class AgregarComponent implements OnInit {
    */
   cambioPrecioVena(precio: any): void {
     if (this.productoCompra) {
-      console.log(precio);
       this.habilitarBotn = true;
     }
   }
@@ -145,17 +143,13 @@ export class AgregarComponent implements OnInit {
     this.productoSelect = producto;
     this.guardarForm.patchValue({
       cantidadStock: producto.cantidadStock,
-      sku: producto.sku,
       codigoBarras: producto.codigoBarras,
       descripcion: producto.descripcion,
       idCategoria: 1,
     });
 
     this.guardarForm.get('cantidadStock')?.disable();
-    this.guardarForm.get('sku')?.disable();
     this.guardarForm.get('codigoBarras')?.disable();
     this.guardarForm.get('descripcion')?.disable();
-
-    console.log(this.productoSelect);
   }
 }

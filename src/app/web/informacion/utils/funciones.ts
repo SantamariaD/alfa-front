@@ -11,3 +11,24 @@ export const formateoMoneda = (numeroInt: number) => {
 
   return formattedNumber;
 };
+
+  /**
+   * @Metodo quita los simbolos y parse a un numero
+   */
+export const quitarMoneda = (datos: any) => {
+    return datos.map((producto: any) => {
+      if (
+        typeof producto.precioVenta == 'string' &&
+        typeof producto.precioCompra == 'string'
+      ) {
+        producto.precioCompra = producto.precioCompra
+          .replace('$', '')
+          .replace(',', '');
+        producto.precioVenta = producto.precioVenta
+          .replace('$', '')
+          .replace(',', '');
+      }
+
+      return producto;
+    });
+  }

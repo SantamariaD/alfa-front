@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/web/informacion/utils/shared.module';
 import { ComponentesModule } from '../../componentes/componentes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VentasComponent } from './ventas.component';
+import { StockVentasModule } from '../productos-venta/productos-venta.module';
 
 @NgModule({
   declarations: [VentasComponent],
@@ -15,6 +16,7 @@ import { VentasComponent } from './ventas.component';
     ComponentesModule,
     FormsModule,
     ReactiveFormsModule,
+    StockVentasModule
   ],
 })
 export class VentasModule {}

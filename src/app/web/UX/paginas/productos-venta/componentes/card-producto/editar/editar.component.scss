@@ -4,7 +4,7 @@
   padding: 0px 15px;
   &--datos {
     &__nombre {
-      width: 180px;
+      width: 100%;
       margin: 0px auto 10px auto;
       font-size: 24px;
       height: 32px!important;
@@ -33,6 +33,7 @@
         }
         &--valor {
           height: 25px;
+          width: 100%;
           input {
             height: 20px;
           }
@@ -65,6 +66,7 @@ select,
 textarea {
   border: none;
   border-bottom: 1px solid rgb(200, 200, 200);
+  width: 100%;
 }
 
 .select {
@@ -97,4 +99,11 @@ option {
 
 .notificacion {
   margin: 10px auto;
+}
+
+
+input:focus {
+  outline: none!important;
+  border: none !important;
+  border-bottom: 1px solid rgb(200, 200, 200)!important;
 }

@@ -40,7 +40,6 @@
               <p class="agregar--datos__contenedor--texto--llave">Nombre</p>
               <p class="agregar--datos__contenedor--texto--valor">
                 <input
-                  nz-input
                   *ngIf="!productoCompra"
                   type="text"
                   formControlName="nombreProducto"
@@ -65,13 +64,7 @@
                 Código de barras
               </p>
               <p class="agregar--datos__contenedor--texto--valor">
-                <input nz-input formControlName="codigoBarras" />
-              </p>
-            </div>
-            <div class="agregar--datos__contenedor--texto">
-              <p class="agregar--datos__contenedor--texto--llave">SKU</p>
-              <p class="agregar--datos__contenedor--texto--valor">
-                <input nz-input formControlName="sku" />
+                <input formControlName="codigoBarras" />
               </p>
             </div>
             <div class="agregar--datos__contenedor--texto">
@@ -92,7 +85,7 @@
                 Cantidad en stock
               </p>
               <p class="agregar--datos__contenedor--texto--valor">
-                <input nz-input formControlName="cantidadStock" />
+                <input formControlName="cantidadStock" />
               </p>
             </div>
             <div class="agregar--datos__contenedor--texto">
@@ -100,7 +93,7 @@
                 Precio de venta
               </p>
               <p class="agregar--datos__contenedor--texto--valor">
-                <input nz-input formControlName="precioVenta" />
+                <input formControlName="precioVenta" />
               </p>
             </div>
             <div class="agregar--datos__contenedor--texto">
@@ -108,13 +101,13 @@
                 Precio de compra
               </p>
               <p class="agregar--datos__contenedor--texto--valor">
-                <input nz-input formControlName="precioCompra" />
+                <input formControlName="precioCompra" />
               </p>
             </div>
             <div class="agregar--datos__contenedor--texto">
               <p class="agregar--datos__contenedor--texto--llave">Descuento</p>
               <p class="agregar--datos__contenedor--texto--valor">
-                <input nz-input formControlName="descuento" />
+                <input formControlName="descuento" />
               </p>
             </div>
             <div class="agregar--datos__contenedor--texto">
@@ -122,11 +115,7 @@
                 Descripción
               </p>
               <p class="agregar--datos__contenedor--texto--valor">
-                <textarea
-                  rows="1"
-                  nz-input
-                  formControlName="descripcion"
-                ></textarea>
+                <textarea rows="2" formControlName="descripcion"></textarea>
               </p>
             </div>
           </div>
@@ -136,7 +125,11 @@
     <div class="modal__contenido--footer">
       <div class="modal__contenido--footer__contenedor-iconos">
         <div class="agregar--boton" (click)="guardarProducto()">
-          <button nz-button [disabled]="!guardarForm.valid">
+          <button
+            nz-button
+            [disabled]="!guardarForm.valid"
+            [ngClass]="{ desactivado: !guardarForm.valid }"
+          >
             <span nz-icon nzType="plus" nzTheme="outline"></span>
             Agregar producto
           </button>

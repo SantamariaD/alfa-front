@@ -31,3 +31,8 @@ export interface ProductoVenta extends InformacionFecha {
   eliminado: boolean;
   stockCompras: boolean;
 }
+
+export interface ProductoTicket extends ProductoVenta {
+  cantidad: number;
+  total: any;
+}

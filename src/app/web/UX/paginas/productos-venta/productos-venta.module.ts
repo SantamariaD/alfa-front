@@ -30,5 +30,8 @@ import { ProductosVentaComponent } from './productos-venta.component';
     FormsModule,
     ReactiveFormsModule,
   ],
+  exports: [
+    AgregarComponent
+  ]
 })
 export class StockVentasModule {}
