@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -9,17 +9,20 @@ import {
   ProductoTicket,
   ProductoVenta,
 } from 'src/app/web/informacion/interface/productos';
-import { Ticket } from 'src/app/web/informacion/interface/ticket';
+import { Ticket, TicketInfo } from 'src/app/web/informacion/interface/ticket';
 import { CategoriasVentasService } from 'src/app/web/informacion/servicios/categorias-ventas/categorias-ventas.service';
 import { StockVentasService } from 'src/app/web/informacion/servicios/stock-ventas/stock-ventas.service';
 import {
   selectCategoriasVentasStore,
+  selectSelectTicketInfoStore,
   selectStockVentasStore,
 } from 'src/app/web/informacion/state';
 import { guardarCategoriasVentas } from 'src/app/web/informacion/state/categoriasVentas/categoriasVentas.actions';
 import { guardarProductosVentas } from 'src/app/web/informacion/state/stockVentas/stockVentas.actions';
 import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
 import { TicketComponent } from './componentes/ticket/ticket.component';
+import { guardarTickets } from 'src/app/web/informacion/state/ticket/ticket.actions';
+import { IVA } from 'src/app/web/informacion/utils/variables-globales';
 
 @Component({
   selector: 'app-ventas',
@@ -27,7 +30,8 @@ import { TicketComponent } from './componentes/ticket/ticket.component';
   styleUrls: ['./ventas.component.scss'],
 })
 export class VentasComponent implements OnInit {
-  @ViewChild('ticketComponent') ticketComponent: TicketComponent | undefined;
+  @ViewChild(TicketComponent) ticketComponent: QueryList<TicketComponent> =
+    new QueryList();
 
   /**
    * @variable codigoBarras: Contiene el codigoBarrase a buscar
@@ -43,6 +47,26 @@ export class VentasComponent implements OnInit {
    * @variable mostrarAgregarProducto: Muestra el modal de agregar producto
    */
   mostrarAgregarProducto = false;
+
+  /**
+   * @variable ticket: total del ticket
+   */
+  totalTicket: any;
+
+  /**
+   * @variable ticket: total de productos del ticket
+   */
+  totalProductos = 0;
+
+  /**
+   * @variable subtotalTicket: subtotal del ticket
+   */
+  subtotalTicket: any;
+
+  /**
+   * @variable iva: iva del ticket
+   */
+  iva = IVA;
 
   /**
    * @variable productosVenta: info de los productos
@@ -84,7 +108,7 @@ export class VentasComponent implements OnInit {
   ngOnInit(): void {
     this.consultarCategorias();
     this.consultarProductos();
-    console.log(this.tickets);
+    this.consultarStoreTicket();
   }
 
   /**
@@ -139,7 +163,8 @@ export class VentasComponent implements OnInit {
               this.tickets[this.posicionTicket].productosVenta.unshift(
                 objetoMover
               );
-              this.ticketComponent?.calculoTicket();
+              this.store.dispatch(guardarTickets({ tickets: this.tickets }));
+              this.calculoTicket();
             }
           } else {
             this.tickets[this.posicionTicket].productosVenta.unshift({
@@ -147,7 +172,8 @@ export class VentasComponent implements OnInit {
               cantidad: 1,
               total: productoSeleccionado.precioVenta,
             });
-            this.ticketComponent?.calculoTicket();
+            this.store.dispatch(guardarTickets({ tickets: this.tickets }));
+            this.calculoTicket();
           }
         }
       } else {
@@ -178,7 +204,8 @@ export class VentasComponent implements OnInit {
         cantidad: 1,
         total: productoSeleccionado.precioVenta,
       });
-      this.ticketComponent?.calculoTicket();
+      this.store.dispatch(guardarTickets({ tickets: this.tickets }));
+      this.calculoTicket();
     } else {
       const indiceObjeto = this.tickets[
         this.posicionTicket
@@ -197,7 +224,8 @@ export class VentasComponent implements OnInit {
           this.posicionTicket
         ].productosVenta.splice(indiceObjeto, 1)[0];
         this.tickets[this.posicionTicket].productosVenta.unshift(objetoMover);
-        this.ticketComponent?.calculoTicket();
+        this.store.dispatch(guardarTickets({ tickets: this.tickets }));
+        this.calculoTicket();
       }
     }
   }
@@ -207,9 +235,10 @@ export class VentasComponent implements OnInit {
    */
   agregarTicket(): void {
     this.tickets.push({} as Ticket);
+    this.store.dispatch(guardarTickets({ tickets: this.tickets }));
   }
 
-/**
+  /**
    * @Metodo cambia la posición del ticket para ver otro
    */
   cambiarPosicionTicket(posicion: number): void {
@@ -318,6 +347,28 @@ export class VentasComponent implements OnInit {
   }
 
   /**
+   * @Metodo Calcula el total y subtotal del ticket
+   */
+  private calculoTicket() {
+    this.totalTicket = 0;
+    this.totalProductos = 0;
+    if (this.tickets[this.posicionTicket].productosVenta) {
+      this.tickets[this.posicionTicket].productosVenta.forEach(
+        (producto: ProductoTicket) => {
+          this.totalTicket += parseFloat(
+            producto.total.replace('$', '').replace(',', '')
+          );
+          this.totalProductos += producto.cantidad;
+        }
+      );
+      this.subtotalTicket = formateoMoneda(
+        this.totalTicket - this.totalTicket * IVA
+      );
+      this.totalTicket = formateoMoneda(this.totalTicket);
+    }
+  }
+
+  /**
    * @Metodo quita los simbolos y parse a un numero
    */
   private ponerMoneda(): void {
@@ -352,6 +403,22 @@ export class VentasComponent implements OnInit {
           });
         } else {
           this.categorias = categoriasStore;
+        }
+      });
+  }
+
+  /**
+   * @Metodo Consulta todos los productos
+   */
+  private consultarStoreTicket(): void {
+    this.store
+      .select(selectSelectTicketInfoStore)
+      .pipe(take(1))
+      .subscribe((respuestaStore: TicketInfo) => {
+        if (!respuestaStore.ticketsVenta) {
+          this.tickets = [{} as Ticket];
+        } else {
+          this.tickets = respuestaStore?.ticketsVenta;
         }
       });
   }

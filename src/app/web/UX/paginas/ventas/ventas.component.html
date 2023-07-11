@@ -77,14 +77,18 @@
           nz-icon
           nzType="plus"
           nzTheme="outline"
+          nz-tooltip
+          [nzTooltipTitle]="'Agregar Ticket'"
           (click)="agregarTicket()"
         ></span>
       </div>
       <div *ngFor="let ticket of tickets; let i = index">
         <app-ticket
           *ngIf="i == posicionTicket"
-          #ticketComponent
           [ticket]="ticket"
+          [totalProductos]="totalProductos"
+          [totalTicket]="totalTicket"
+          [subtotalTicket]="subtotalTicket"
         ></app-ticket>
       </div>
     </div>

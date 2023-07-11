@@ -1,4 +1,12 @@
-import { Component, Input, DoCheck, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  DoCheck,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable, distinctUntilChanged, of } from 'rxjs';
 import { ProductoTicket } from 'src/app/web/informacion/interface/productos';
 import { Ticket } from 'src/app/web/informacion/interface/ticket';
 import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
@@ -15,20 +23,22 @@ export class TicketComponent implements OnInit {
    */
   @Input() ticket: Ticket = {} as Ticket;
 
+  variableObservable: Observable<ProductoTicket[]>;
+
   /**
    * @variable ticket: total del ticket
    */
-  totalTicket: any;
+  @Input() totalTicket: any;
 
   /**
    * @variable ticket: total de productos del ticket
    */
-  totalProductos = 0;
+  @Input() totalProductos = 0;
 
   /**
    * @variable subtotalTicket: subtotal del ticket
    */
-  subtotalTicket: any;
+  @Input() subtotalTicket: any;
 
   /**
    * @variable iva: iva del ticket
@@ -36,16 +46,57 @@ export class TicketComponent implements OnInit {
   iva = IVA;
 
   /**
+   * @variable ticketEditarForm: información del ticket a editar
+   */
+  ticketEditarForm: FormGroup = new FormGroup({
+    precioVenta: new FormControl(),
+    cantidad: new FormControl(),
+    iva: new FormControl(),
+    observacion: new FormControl(),
+  });
+
+  /**
+   * @variable drawerAbierto: indica si se abre o cierra el drawer
+   */
+  drawerAbierto = false;
+
+  /**
    * @variable fecha: fecha del ticket
    */
   fecha = new Date();
 
-  constructor() {}
+  constructor() {
+    this.variableObservable = of(this.ticket.productosVenta).pipe(
+      distinctUntilChanged()
+    );
+  }
 
   ngOnInit(): void {
     setInterval(() => {
       this.fecha = new Date();
     }, 1000);
+    this.variableObservable.subscribe(() => this.calculoTicket());
+  }
+
+  /**
+   * @Metodo abre el drawer
+   */
+  abrirDrawer(posicion: number): void {
+    this.drawerAbierto = true;
+    this.ticketEditarForm.patchValue({
+      precioVenta: this.ticket.productosVenta[posicion].precioVenta,
+    cantidad: this.ticket.productosVenta[posicion].cantidad,
+    iva: IVA*100+'%',
+    observacion: '',
+    })
+    console.log(this.ticket.productosVenta[posicion]);
+  }
+
+  /**
+   * @Metodo cierra el drawer
+   */
+  cerrarDrawer(): void {
+    this.drawerAbierto = false;
   }
 
   /**
@@ -114,15 +165,17 @@ export class TicketComponent implements OnInit {
   calculoTicket() {
     this.totalTicket = 0;
     this.totalProductos = 0;
-    this.ticket.productosVenta.forEach((producto: ProductoTicket) => {
-      this.totalTicket += parseFloat(
-        producto.total.replace('$', '').replace(',', '')
+    if (this.ticket.productosVenta) {
+      this.ticket.productosVenta.forEach((producto: ProductoTicket) => {
+        this.totalTicket += parseFloat(
+          producto.total.replace('$', '').replace(',', '')
+        );
+        this.totalProductos += producto.cantidad;
+      });
+      this.subtotalTicket = formateoMoneda(
+        this.totalTicket - this.totalTicket * IVA
       );
-      this.totalProductos += producto.cantidad;
-    });
-    this.subtotalTicket = formateoMoneda(
-      this.totalTicket - this.totalTicket * IVA
-    );
-    this.totalTicket = formateoMoneda(this.totalTicket);
+      this.totalTicket = formateoMoneda(this.totalTicket);
+    }
   }
 }

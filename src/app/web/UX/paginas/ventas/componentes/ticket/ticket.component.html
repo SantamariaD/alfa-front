@@ -1,9 +1,7 @@
 <div class="ticket">
   <p class="ticket__titulo">Ticket de venta</p>
   <div class="ticket__informacion">
-    <p
-      class="ticket__informacion--total-productos"
-    >
+    <p class="ticket__informacion--total-productos">
       Total de productos: {{ totalProductos }}
     </p>
     <p class="ticket__informacion--fecha">
@@ -21,17 +19,30 @@
         "
         [ngClass]="{ productoSelect: i == 0 }"
       >
-        <div
-          class="ticket__productos__producto--informacion"
-        >
-          <p
-            class="ticket__productos__producto--informacion--nombre"
-          >
+        <div class="ticket__productos__producto--icono">
+          <span
+            class="ticket__productos__producto--icono--editar"
+            nz-icon
+            nz-tooltip
+            [nzTooltipTitle]="'Editar'"
+            nzType="edit"
+            nzTheme="outline"
+            (click)="abrirDrawer(i)"
+          ></span>
+          <span
+            class="ticket__productos__producto--icono--eliminar"
+            nz-icon
+            nz-tooltip
+            [nzTooltipTitle]="'Eliminar'"
+            nzType="delete"
+            nzTheme="outline"
+          ></span>
+        </div>
+        <div class="ticket__productos__producto--informacion">
+          <p class="ticket__productos__producto--informacion--nombre">
             {{ producto.nombreProducto }}
           </p>
-          <p
-            class="ticket__productos__producto--informacion--precio"
-          >
+          <p class="ticket__productos__producto--informacion--precio">
             {{ producto.precioVenta }}
           </p>
         </div>
@@ -39,9 +50,7 @@
           class="ticket__productos__producto--agregar"
           [ngClass]="{ productoSelect: i == 0 }"
         >
-          <div
-            class="ticket__productos__producto--agregar__sumador"
-          >
+          <div class="ticket__productos__producto--agregar__sumador">
             <div
               class="ticket__productos__producto--agregar__sumador--restar"
               [ngClass]="{ restar: producto.cantidad <= 1 }"
@@ -61,15 +70,11 @@
               +
             </div>
           </div>
-          <p
-            class="ticket__productos__producto--agregar__sumador--texto"
-          >
+          <p class="ticket__productos__producto--agregar__sumador--texto">
             Cantidad a comprar
           </p>
         </div>
-        <p
-          class="ticket__productos__producto--precio-total"
-        >
+        <p class="ticket__productos__producto--precio-total">
           {{ producto.total }}
         </p>
       </div>
@@ -78,9 +83,7 @@
       *ngIf="!ticket.productosVenta"
       class="ticket__productos--sin-productos"
     >
-      <div
-        class="ticket__productos--sin-productos--img"
-      >
+      <div class="ticket__productos--sin-productos--img">
         <img
           src="../../../../../assets/imagenes/agregar-producto-ticket.png"
           alt="add img"
@@ -97,9 +100,7 @@
   </div>
   <div class="ticket__iva">
     <p class="ticket__iva--text">IVA:</p>
-    <p class="ticket__iva--value">
-      {{ iva * 100 }}%
-    </p>
+    <p class="ticket__iva--value">{{ iva * 100 }}%</p>
   </div>
   <button
     class="ticket__total"
@@ -113,3 +114,19 @@
     </p>
   </button>
 </div>
+
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="drawerAbierto"
+  nzPlacement="right"
+  nzCloseIcon="edit"
+  [nzClosable]="true"
+  nzTitle="Editar producto del ticket"
+  (nzOnClose)="cerrarDrawer()"
+>
+  <ng-container *nzDrawerContent>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+    <p>Some contents...</p>
+  </ng-container>
+</nz-drawer>

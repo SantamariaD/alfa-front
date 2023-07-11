@@ -16,6 +16,7 @@ import * as fromSucursales from './sucursales/sucursales.reducer';
 import * as fromCategoriasVentas from './categoriasVentas/categoriasVentas.reducer';
 import * as fromStockVenta from './stockVentas/stockVentas.reducer';
 import * as fromProductosCompraVenta from './productosCompraVenta/productosCompraVenta.reducer';
+import * as fromTickets from './ticket/ticket.reducer';
 import { UsuarioInterface } from '../interface/usuario';
 import { CargandoPeticionInterface } from '../interface/httpService';
 import {
@@ -28,6 +29,7 @@ import { ProveedoresStore } from '../interface/proveedores';
 import { Categoria } from '../interface/categorias';
 import { EmpleadosStore } from '../interface/empleados';
 import { ConsultaSucursales } from '../interface/sucursales';
+import { TicketInfo } from '../interface/ticket';
 
 export interface AppState {
   usuario: UsuarioInterface;
@@ -43,6 +45,7 @@ export interface AppState {
   ordenesCompra: Array<ConsultaOrdenCompra>;
   sucursales: Array<ConsultaSucursales>;
   stockVenta: Array<ProductoVenta>;
+  ticketInfo: TicketInfo;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -59,6 +62,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   categoriasVentas: fromCategoriasVentas.reducer,
   stockVenta: fromStockVenta.reducer,
   productosCompraVenta: fromProductosCompraVenta.reducer,
+  ticketInfo: fromTickets.reducer
 };
 
 //*********SELECTORES******/
@@ -116,12 +120,16 @@ export const selectCategoriasVentas =
 export const selectSucursales =
   createFeatureSelector<Array<ConsultaSucursales>>('sucursales');
 
+//Tickets
+export const selectTicketInfo =
+  createFeatureSelector<TicketInfo>('ticketInfo');
+
+//****** Creando selectores*****/
 //Productos Compra Venta
 export const selectProductosCompraVenta = createFeatureSelector<
   Producto[]
 >('productosCompraVenta');
 
-//****** Creando selectores*****/
 export const selectBanderaCargandoPeticion = createSelector(
   selectCargandoPeticion,
   (state: CargandoPeticionInterface) => state.cargandoPeticion
@@ -203,3 +211,11 @@ export const selectProductosCompraVentaStore = createSelector(
   selectProductosCompraVenta,
   (state: Producto[]) => state
 );
+
+// Ticket
+export const selectSelectTicketInfoStore = createSelector(
+  selectTicketInfo,
+  (state: TicketInfo) => state
+);
+
+

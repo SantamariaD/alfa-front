@@ -21,3 +21,7 @@ export interface TipoPago {
     tipo: string;
     monto: number;
 }
+
+export interface TicketInfo {
+    ticketsVenta: Ticket[];
+}

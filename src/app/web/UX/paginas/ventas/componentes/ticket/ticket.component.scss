@@ -51,19 +51,26 @@ box-shadow: 0px 6px 13px -8px rgba(0,0,0,0.75);
     }
     &__producto {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 4% 32% 32% 32%;
       border-bottom: 1px solid rgb(207, 207, 207);
       margin-bottom: 10px;
       padding: 5px 15px;
+      &--icono{
+        &--editar {
+          color: rgb(0, 0, 0);
+        }
+        &--eliminar {
+          color: rgb(255, 37, 37);
+        }
+      }
       &--informacion {
-        text-align: center;
         &--nombre {
           font-size: 16px;
           font-weight: 600;
         }
       }
       &--agregar {
-        margin: auto;
+        margin: auto auto auto 0px;
         &__sumador {
           width: 120px;
           margin: auto;
@@ -71,7 +78,7 @@ box-shadow: 0px 6px 13px -8px rgba(0,0,0,0.75);
           display: grid;
           grid-template-columns: 30% 40% 30%;
           text-align: center;
-          font-size: 17px;
+          font-size: 14px;
           &--sumar,
           &--restar {
             color: rgb(33, 71, 242);
@@ -90,6 +97,7 @@ box-shadow: 0px 6px 13px -8px rgba(0,0,0,0.75);
       &--precio-total {
         text-align: center;
         font-size: 16px;
+        margin-top: 12px;
       }
     }
   }
