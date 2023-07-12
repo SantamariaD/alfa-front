@@ -1,12 +1,11 @@
 import {
   Component,
+  EventEmitter,
   Input,
-  DoCheck,
   OnInit,
-  SimpleChanges,
+  Output,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable, distinctUntilChanged, of } from 'rxjs';
 import { ProductoTicket } from 'src/app/web/informacion/interface/productos';
 import { Ticket } from 'src/app/web/informacion/interface/ticket';
 import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
@@ -18,12 +17,11 @@ import { IVA } from 'src/app/web/informacion/utils/variables-globales';
   styleUrls: ['./ticket.component.scss'],
 })
 export class TicketComponent implements OnInit {
+
   /**
    * @variable ticket: info de los productos que estan en el ticket
    */
   @Input() ticket: Ticket = {} as Ticket;
-
-  variableObservable: Observable<ProductoTicket[]>;
 
   /**
    * @variable ticket: total del ticket
@@ -65,17 +63,12 @@ export class TicketComponent implements OnInit {
    */
   fecha = new Date();
 
-  constructor() {
-    this.variableObservable = of(this.ticket.productosVenta).pipe(
-      distinctUntilChanged()
-    );
-  }
+  constructor() {}
 
   ngOnInit(): void {
     setInterval(() => {
       this.fecha = new Date();
     }, 1000);
-    this.variableObservable.subscribe(() => this.calculoTicket());
   }
 
   /**
@@ -85,10 +78,10 @@ export class TicketComponent implements OnInit {
     this.drawerAbierto = true;
     this.ticketEditarForm.patchValue({
       precioVenta: this.ticket.productosVenta[posicion].precioVenta,
-    cantidad: this.ticket.productosVenta[posicion].cantidad,
-    iva: IVA*100+'%',
-    observacion: '',
-    })
+      cantidad: this.ticket.productosVenta[posicion].cantidad,
+      iva: IVA * 100 + '%',
+      observacion: '',
+    });
     console.log(this.ticket.productosVenta[posicion]);
   }
 
@@ -162,7 +155,7 @@ export class TicketComponent implements OnInit {
   /**
    * @Metodo Calcula el total y subtotal del ticket
    */
-  calculoTicket() {
+  private calculoTicket() {
     this.totalTicket = 0;
     this.totalProductos = 0;
     if (this.ticket.productosVenta) {

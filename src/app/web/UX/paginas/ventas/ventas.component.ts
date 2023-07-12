@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -20,7 +20,6 @@ import {
 import { guardarCategoriasVentas } from 'src/app/web/informacion/state/categoriasVentas/categoriasVentas.actions';
 import { guardarProductosVentas } from 'src/app/web/informacion/state/stockVentas/stockVentas.actions';
 import { formateoMoneda } from 'src/app/web/informacion/utils/funciones';
-import { TicketComponent } from './componentes/ticket/ticket.component';
 import { guardarTickets } from 'src/app/web/informacion/state/ticket/ticket.actions';
 import { IVA } from 'src/app/web/informacion/utils/variables-globales';
 
@@ -29,9 +28,8 @@ import { IVA } from 'src/app/web/informacion/utils/variables-globales';
   templateUrl: './ventas.component.html',
   styleUrls: ['./ventas.component.scss'],
 })
-export class VentasComponent implements OnInit {
-  @ViewChild(TicketComponent) ticketComponent: QueryList<TicketComponent> =
-    new QueryList();
+export class VentasComponent implements OnInit, AfterViewInit {
+  @ViewChild('codigoBarras', { static: false }) myInput!: ElementRef;
 
   /**
    * @variable codigoBarras: Contiene el codigoBarrase a buscar
@@ -109,6 +107,10 @@ export class VentasComponent implements OnInit {
     this.consultarCategorias();
     this.consultarProductos();
     this.consultarStoreTicket();
+  }
+
+  ngAfterViewInit() {
+    this.myInput.nativeElement.focus();
   }
 
   /**
@@ -344,6 +346,13 @@ export class VentasComponent implements OnInit {
    */
   abrirModalAgregarProducto(): void {
     this.mostrarAgregarProducto = true;
+  }
+
+  /**
+   * @Metodo Deja el focus en el input de codigo de barras para que siempre pueda ser captado
+   */
+  focusCodigoBarras(): void {
+    this.myInput.nativeElement.focus();
   }
 
   /**

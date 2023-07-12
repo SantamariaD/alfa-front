@@ -96,7 +96,31 @@
   }
   &__secciones {
     display: grid;
-    grid-template-columns: 63% 37%;
+    grid-template-columns: 50% 50%;
+    @media (min-width: 1100px) {
+      display: grid;
+      grid-template-columns: 55% 45%;
+    }
+    @media (min-width: 1200px) {
+      display: grid;
+      grid-template-columns: 60% 40%;
+    }
+    @media (min-width: 1300px) {
+      display: grid;
+      grid-template-columns: 63% 37%;
+    }
+    @media (min-width: 1500px) {
+      display: grid;
+      grid-template-columns: 67% 33%;
+    }
+    @media (min-width: 1600px) {
+      display: grid;
+      grid-template-columns: 70% 30%;
+    }
+    @media (min-width: 1700px) {
+      display: grid;
+      grid-template-columns: 75% 25%;
+    }
     &--lista-productos {
       width: 100%;
       margin-top: 20px;

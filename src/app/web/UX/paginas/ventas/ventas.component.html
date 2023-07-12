@@ -1,4 +1,4 @@
-<section class="punto-venta">
+<section class="punto-venta" (click)="focusCodigoBarras()">
   <div class="punto-venta__buscador">
     <div class="punto-venta__buscador__codigo-barras">
       <div class="punto-venta__buscador__codigo-barras__icono">
@@ -30,6 +30,7 @@
         (keyup)="buscarNombreProducto($event)"
       />
       <input
+        #codigoBarras
         *ngIf="tipoBusqueda == 'Código de barras'"
         class="punto-venta__buscador__codigo-barras__input"
         type="text"
